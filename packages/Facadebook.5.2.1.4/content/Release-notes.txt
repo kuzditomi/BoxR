@@ -1,0 +1,14 @@
+Release notes
+=============
+
+Authors:	Daniel Saidi & Ludvig Dickman
+Website:	https://github.com/danielsaidi/Facadebook
+
+
+
+5.2.1.0    2011-09-23
+=====================
+
+This is the first version of the Facadebook library. It contains
+facade classes and abstractions, that can be used in combination
+with the Facebook C# SDK 5.2.1.0.

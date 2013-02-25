@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>BoxR</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+    
+
+    <!-- navigationexample references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/Scripts/navigator.js"></script>
+    
+    <!-- BoxR scripts -->
+
+    <script src="Scripts/settings.js"></script><!-- Private stuff -->
+    <script src="Scripts/jquery-1.7.1.js"></script>
+    <script src="Scripts/jquery.signalR-1.0.0-rc2.min.js"></script>
+    <script src="Scripts/hubs.js"></script>
+    <script src="js/functions_common.js"></script>
+    <script src="js/functions_self.js"></script>
+    
+    <!-- BoxR styles -->
+    <link href="css/Site.css" rel="stylesheet"/>
+</head>
+    <body>
+        <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/login/login.html'}" style="width: 100%;height: 100%;"></div>
+        <!--         <div id="appbar" data-win-control="WinJS.UI.AppBar">
+                         <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmd', label:'Command', icon:'placeholder'}" type="button"></button>
+                     </div> -->
+        <div id="blanket" style="display:none">
+            <div id="bg"></div>
+            <div id="outer">
+                <div id="middle">
+                    <div id="inner">
+                        <section class="invited" style="display:none;">
+                            <p>Figyelem! <span class="challenger"></span> kihívott téged. Elfogadod?</p>
+                            <a class="accept button" href="#" onclick="gameHub.server.inviteAccepted();close_popup();">Igen</a>
+                            <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Nem</a> 
+                        </section>
+                        <section class="wait" style="display:none;">
+                            <p>Kihívtad <span class="challenger"></span> játékost. Kérlek várj a visszajelzésére!</p>
+                            <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Nem</a> 
+                        </section>
+                        <section class="quit" style="display:none;">
+                            <p>Biztosan kilépsz? Ezzel elveszíted a játékot.</p>
+                            <a class="deny button" href="#" onclick="location.reload(true)">Igen</a> 
+                            <a class="accept button" href="#" onclick="close_popup()">Nem</a> 
+                        </section>
+                        <section class="disconnect" style="display:none;">
+                            <p>Sajnálom, az ellenfeled kilépett a játékból.</p>
+                            <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
+                        </section>
+                        <section class="win" style="display:none;">
+                            <p>Gratulálok, nyertél!</p>
+                            <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
+                        </section>
+                        <section class="lose" style="display:none;">
+                            <p>Sajnálom, vesztettél.</p>
+                            <a class="deny button" href="#" onclick="location.reload(true)">OK</a> 
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
