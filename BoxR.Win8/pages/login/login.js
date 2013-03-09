@@ -8,6 +8,20 @@
         // populates the page elements with the app's data.
         ready: function (element, options) {
             $('#regbtn').attr('href', localSettings.values.connectionURL + 'Account/Register');
+            $(".username").focus();
+
+            $(".username").keydown(function (event) {
+                hideError();
+                if (event.which == 13) {
+                    launchformauth($('.username').val(), $('.password').val());
+                }
+            });
+            $(".password").keydown(function (event) {
+                hideError();
+                if (event.which == 13) {
+                    launchformauth($('.username').val(), $('.password').val());
+                }
+            });
         },
 
         unload: function () {

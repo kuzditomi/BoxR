@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Security;
 using System.Net;
+using BoxR.Web.Filters;
 using BoxR.Web.Managers;
 using Facebook;
 using Microsoft.AspNet.SignalR;
@@ -220,13 +225,17 @@ namespace BoxR.Web.Hubs
         #endregion
 
         #region Login,Logout
-        public void Login(string username,string password)
+        public string Login(string username,string password)
         {
             if(UserManager.UserExists(Context.ConnectionId))
                 UserManager.RemoveUser(Context.ConnectionId);
             try
             {
-                if (WebSecurity.Login(username, password, false))
+                if (!WebSecurity.Initialized)
+                {
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                }
+                if (Membership.ValidateUser(username,password))
                 {
                     using (var db = new UsersContext())
                     {
@@ -241,10 +250,13 @@ namespace BoxR.Web.Hubs
                             UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
 
                             Clients.Others.receiveUser(profile, Context.ConnectionId); // Alert the other clients about the new user
+
+                            return profile.UserName;
                         }
                         else
                         {
                             Clients.Caller.alertDuplicate(); // Alert the client about his fail
+                            Logger.Error("Duplication login try from "+ profile.UserId+ ": " + profile.UserName);
                         }
                     }
                 }
@@ -253,6 +265,7 @@ namespace BoxR.Web.Hubs
             {
                 Logger.Error(e.Message,e);
             }
+            return string.Empty;
         }
 
         public string LoginExternal(string provider, string token)
@@ -303,6 +316,7 @@ namespace BoxR.Web.Hubs
                         }
                         else
                         {
+                            Logger.Error("Duplication login try from " + profile.UserId + ": " + profile.UserName);
                             Clients.Caller.alertDuplicate(); // Alert the client about his fail
                         }
 
@@ -397,6 +411,35 @@ namespace BoxR.Web.Hubs
                 {
                     Logger.Error(e.Message, e);
                     Clients.Caller.receive("hiba:" + e.Message);
+                }
+            }
+        }
+        #endregion
+
+        #region Membership initialize
+
+        private class SimpleMembershipInitializer
+        {
+            public SimpleMembershipInitializer()
+            {
+                Database.SetInitializer<UsersContext>(null);
+
+                try
+                {
+                    using (var context = new UsersContext())
+                    {
+                        if (!context.Database.Exists())
+                        {
+                            // Create the SimpleMembership database without Entity Framework migration schema
+                            ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
+                        }
+                    }
+
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
                 }
             }
         }

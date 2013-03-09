@@ -77,3 +77,6 @@ div.validation-summary-errors {
     cursor: pointer;
     display: inline-block;
 }
+#progressRing {
+    display: none;
+}

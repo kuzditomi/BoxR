@@ -23,13 +23,13 @@
         <div id="middle">
             <div id="inner">
                 <section class="invited" style="display:none;">
-                    <p>Figyelem! <span class="challenger"></span> kihívott téged. Elfogadod?</p>
-                    <a class="accept button" href="#" onclick="gameHub.server.inviteAccepted();close_popup();">Igen</a>
-                    <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Nem</a> 
+                    <p><span class="challenger"></span> has challanged you!</p>
+                    <a class="accept button" href="#" onclick="gameHub.server.inviteAccepted();close_popup();">Accept</a>
+                    <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Deny</a> 
                 </section>
                 <section class="wait" style="display:none;">
-                    <p>Kihívtad <span class="challenger"></span> játékost. Kérlek várj a visszajelzésére!</p>
-                    <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Nem</a> 
+                    <p>You have challanged <span class="challenger"></span>. Please wait for his response!</p>
+                    <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Suspend invite</a> 
                 </section>
                 <section class="quit" style="display:none;">
                     <p>Biztosan kilépsz? Ezzel elveszíted a játékot.</p>
@@ -37,15 +37,15 @@
                     <a class="accept button" href="#" onclick="close_popup()">Nem</a> 
                 </section>
                 <section class="disconnect" style="display:none;">
-                    <p>Sajnálom, az ellenfeled kilépett a játékból.</p>
+                    <p>Your opponent has quit the game.</p>
                     <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
                 </section>
                 <section class="win" style="display:none;">
-                    <p>Gratulálok, nyertél!</p>
+                    <p>Congratulation, you have won the game!</p>
                     <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
                 </section>
                 <section class="lose" style="display:none;">
-                    <p>Sajnálom, vesztettél.</p>
+                    <p>You have just lost the game.</p>
                     <a class="deny button" href="#" onclick="location.reload(true)">OK</a> 
                 </section>
             </div>

@@ -61,7 +61,6 @@
     <Content Include="Scripts\lib\jquery.signalR-1.0.0-rc2.js" />
     <Content Include="Scripts\lib\jquery.signalR-1.0.0-rc2.min.js" />
     <Content Include="Scripts\lib\modernizr-2.5.3.js" />
-    <Content Include="Scripts\login.js" />
     <None Include="Scripts\lib\jquery-1.7.1.intellisense.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

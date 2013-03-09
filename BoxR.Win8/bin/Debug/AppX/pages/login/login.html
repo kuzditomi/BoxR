@@ -12,7 +12,6 @@
     <link href="/css/Login.css" rel="stylesheet" />
         
     <!-- Scripts -->
-    <script src="/js/login.js"></script>
     <script src="/pages/login/login.js"></script>
 </head>
     <body>
@@ -21,7 +20,7 @@
                 <tr>
                     <td>
                         <div class="logincred">
-                            <h1>BoxR</h1>
+                            <h1>BoxR<progress id="progressRing" class="win-ring win-medium"></progress></h1>
                             <table>
                                 <tr>
                                     <td>Username</td>
@@ -41,6 +40,11 @@
                                     <td>
                                         <a href="#" class="btnfacebook" title="Log in using your Facebook account" onclick="launchFacebookWebAuth()">&nbsp;</a>   
                                         <a href="#" class="btnmicrosoft" title="Log in using your Microsoft account">&nbsp;</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="error">&nbsp;</div>
                                     </td>
                                 </tr>
                             </table>

@@ -100,3 +100,12 @@ function tabify() {
         });
     });
 }
+
+function displayError(error,logerror) {
+    $(".error").text(error);
+    console.log(logerror || error);
+}
+
+function hideError() {
+    $(".error").html("&nbsp;");
+}

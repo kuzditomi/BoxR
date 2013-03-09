@@ -1,4 +1,6 @@
-﻿(function () {
+﻿var msg;
+var selfUserName;
+(function () {
     "use strict";
 
     WinJS.Binding.optimizeBindingReferences = true;
@@ -50,10 +52,21 @@ $(function () {
     gameHub = $.connection.game;
 
     initHub();
-});
 
+    connection.start(function() {
+        console.log('connection started!');
+    });
+});
+/********* progress ring***************/
+function showProgressRing() {
+    $("#progressRing").show();
+}
+function hideProgressRing() {
+    $("#progressRing").hide();
+}
 /********* oauth ************/
 function launchFacebookWebAuth() {
+    showProgressRing();
     var facebookURL = "https://www.facebook.com/dialog/oauth?client_id=";
 
     var clientID = localSettings.values.fbclientid;
@@ -76,32 +89,46 @@ function launchFacebookWebAuth() {
                             new String("#access_token=").length,
                             fragment.indexOf("&expires_in="));
 
-                        connection.start(function () {
-                            console.log('connection started!');
-                        }).done(function () {
                             gameHub.server.loginExternal('facebook', token).done(function (success) {
-                                if(success) {
+                                if (success) {
+                                    selfUserName = success;
                                     WinJS.Navigation.navigate("/pages/main/main.html",success);
+                                } else {
+                                    displayError("Error with facebook authentication.");
                                 }
                             });
-                        });
                     }
                     else {
-                        $("#error").text("lofasz");
+                        displayError("Error with facebook authentication.");
                     }
                     break;
                 case Windows.Security.Authentication.Web.WebAuthenticationStatus.userCancel:
-                    $("#error").text("User cancelled the authentication to Facebook.");
+                    displayError("User cancelled the authentication to Facebook.");
                     break;
                 case Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp:
-                    $("#error").text("An error occurred while communicating with Facebook.");
+                    displayError("Error with facebook authentication..");
                     break;
             }
         }, function (err) {
-            //WinJS.log("Error returned by WebAuth broker: " + err, "Web Authentication SDK Sample", "error");
-            $("#error").text("Error returned: " + err.message);
+            displayError("Error with facebook authentication.",err.message);
         });
+    hideProgressRing();
 }
+/************ form auth ***************/
+function launchformauth(username, password) {
+
+    showProgressRing();
+    gameHub.server.login(username, password).done(function(success) {
+        if (success) {
+            selfUserName = success;
+            WinJS.Navigation.navigate("/pages/main/main.html", success);
+        } else {
+            displayError("Wrong password or username!");
+        }
+        hideProgressRing();
+    });
+}
+
 
 /************* game ***************/
 function startGame(selfStart, name, opponentname) {
@@ -111,33 +138,25 @@ function startGame(selfStart, name, opponentname) {
 /************* popups *************/
 
 function invited_popup(user) {
-    var el = $('#blanket');
-    if (el.css('display') == 'none') {
-        el.css('display', 'table');
-        $(".challenger").html(user.UserName);
-        $(el).find(".invited").show();
-        //$("#inner .accept").click(function () {
-        //    gameHub.server.inviteAccepted();
-        //    close_popup();
-        //});
-        //$("#inner .deny").click(function () {
-        //    gameHub.server.inviteDenied();
-        //    close_popup();
-        //});
-    }
+    msg = new Windows.UI.Popups.MessageDialog(user.UserName + " has challanged you!", "A wild challenger appears");
+    msg.commands.append(new Windows.UI.Popups.UICommand("Accept", 
+       function (command) {
+           gameHub.server.inviteAccepted();
+       }));
+    msg.commands.append(new Windows.UI.Popups.UICommand("Deny",
+        function (command) {
+            gameHub.server.inviteDenied();
+        }));
+    msg.showAsync();
 }
 
 function wait_popup(username) {
-    var el = $('#blanket');
-    if (el.css('display') == 'none') {
-        el.css('display', 'table');
-        $(".challenger").html(username);
-        $(el).find(".wait").show();
-        //$("#inner .deny").click(function () {
-        //    gameHub.server.inviteDenied();
-        //    close_popup();
-        //});
-    }
+    msg = new Windows.UI.Popups.MessageDialog("You have challanged" + username + ". Please wait for his response!","Invite sent");
+    msg.commands.append(new Windows.UI.Popups.UICommand("Suspend invite",
+        function (command) {
+            gameHub.server.inviteDenied();
+        }));
+    msg.showAsync();
 }
 
 function quit_popup() {
@@ -149,31 +168,32 @@ function quit_popup() {
 }
 
 function disconnect_popup() {
-    var el = $('#blanket');
-    if (el.css('display') == 'none') {
-        el.css('display', 'table');
-        $(el).find(".disconnect").show();
-    }
+    msg = new Windows.UI.Popups.MessageDialog("Your opponent has quit the game.");
+    msg.commands.append(new Windows.UI.Popups.UICommand("OK",
+        function (command) {
+            WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
+        }));
+    msg.showAsync();
 }
 
 function win_popup() {
-    var el = $('#blanket');
-    if (el.css('display') == 'none') {
-        el.css('display', 'table');
-        $(el).find(".win").show();
-    }
+    msg = new Windows.UI.Popups.MessageDialog("Congratulation, you have won the game!");
+    msg.commands.append(new Windows.UI.Popups.UICommand("OK",
+        function (command) {
+            WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
+        }));
+    msg.showAsync();
 }
 
 function lose_popup() {
-    var el = $('#blanket');
-    if (el.css('display') == 'none') {
-        el.css('display', 'table');
-        $(el).find(".lose").show();
-    }
+    msg = new Windows.UI.Popups.MessageDialog("You have just lost the game.");
+    msg.commands.append(new Windows.UI.Popups.UICommand("OK",
+        function (command) {
+            WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
+        }));
+    msg.showAsync();
 }
 
 function close_popup() {
-    var el = $('#blanket');
-    el.find("section").hide();
-    el.hide();
+    WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
 }

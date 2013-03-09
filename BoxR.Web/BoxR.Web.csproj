@@ -266,7 +266,9 @@
     <Content Include="Scripts\game.js" />
     <Content Include="Scripts\game.min.js" />
     <Content Include="Scripts\game.ts" />
-    <Content Include="appsettings.config" />
+    <Content Include="appsettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />

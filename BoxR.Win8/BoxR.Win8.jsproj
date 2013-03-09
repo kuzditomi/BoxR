@@ -74,7 +74,6 @@
     <Content Include="js\game.js" />
     <Content Include="js\game.min.js" />
     <Content Include="js\game.ts" />
-    <Content Include="js\login.js" />
     <Content Include="packages.config" />
     <Content Include="pages\game\game.html" />
     <Content Include="pages\game\game.js" />
