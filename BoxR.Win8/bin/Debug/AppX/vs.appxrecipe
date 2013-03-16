@@ -16,7 +16,7 @@
     <AppXManifest Include="D:\works\BoxR\BoxR.Win8\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-01T23:42:02.495</Modified>
+      <Modified>2013-03-16T18:48:39.711</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -34,11 +34,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\Site.css">
       <PackagePath>css\Site.css</PackagePath>
-      <Modified>2013-02-20T15:53:10.074</Modified>
+      <Modified>2013-03-10T18:50:28.216</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\default.css">
-      <PackagePath>css\default.css</PackagePath>
-      <Modified>2012-07-26T09:30:08.000</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\messagebox.css">
+      <PackagePath>css\messagebox.css</PackagePath>
+      <Modified>2013-03-16T18:48:19.845</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\micrososftlogin35.png">
       <PackagePath>css\micrososftlogin35.png</PackagePath>
@@ -74,11 +74,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\default.html">
       <PackagePath>default.html</PackagePath>
-      <Modified>2013-02-25T22:14:23.652</Modified>
+      <Modified>2013-03-16T19:08:23.923</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.html">
       <PackagePath>pages\game\game.html</PackagePath>
-      <Modified>2013-02-24T21:39:18.024</Modified>
+      <Modified>2013-03-10T10:24:27.738</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\main\main.html">
       <PackagePath>pages\main\main.html</PackagePath>
@@ -86,7 +86,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\login\login.html">
       <PackagePath>pages\login\login.html</PackagePath>
-      <Modified>2013-03-09T16:24:54.872</Modified>
+      <Modified>2013-03-16T19:03:52.007</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Images\nono.jpg">
       <PackagePath>Images\nono.jpg</PackagePath>
@@ -98,7 +98,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_self.js">
       <PackagePath>js\functions_self.js</PackagePath>
-      <Modified>2013-03-09T17:36:18.841</Modified>
+      <Modified>2013-03-16T20:09:31.341</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.js">
       <PackagePath>js\game.js</PackagePath>
@@ -108,13 +108,21 @@
       <PackagePath>js\game.min.js</PackagePath>
       <Modified>2013-02-16T21:33:46.090</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\PopupControl.js">
+      <PackagePath>js\PopupControl.js</PackagePath>
+      <Modified>2013-03-16T19:02:22.368</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\Popups.js">
+      <PackagePath>js\Popups.js</PackagePath>
+      <Modified>2013-03-16T20:09:01.804</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.js">
       <PackagePath>pages\game\game.js</PackagePath>
-      <Modified>2013-02-25T18:03:41.365</Modified>
+      <Modified>2013-03-16T19:53:28.053</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\main\main.js">
       <PackagePath>pages\main\main.js</PackagePath>
-      <Modified>2013-02-24T21:38:08.874</Modified>
+      <Modified>2013-03-10T10:25:04.248</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\login\login.js">
       <PackagePath>pages\login\login.js</PackagePath>
@@ -170,7 +178,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-03-01T23:42:02.395</Modified>
+      <Modified>2013-03-16T18:48:39.637</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

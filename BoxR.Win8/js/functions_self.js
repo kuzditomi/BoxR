@@ -1,5 +1,7 @@
 ﻿var msg;
 var selfUserName;
+var popup;
+var popupHelper;
 (function () {
     "use strict";
 
@@ -31,6 +33,9 @@ var selfUserName;
                 }
             }));
         }
+        var popupDiv = document.getElementById('popupdiv');
+        popup = new BoxR.UI.PopupControl(popupDiv);
+        popupHelper = new Popups();
     });
 
     app.oncheckpoint = function (args) {
@@ -92,7 +97,7 @@ function launchFacebookWebAuth() {
                             gameHub.server.loginExternal('facebook', token).done(function (success) {
                                 if (success) {
                                     selfUserName = success;
-                                    WinJS.Navigation.navigate("/pages/main/main.html",success);
+                                    WinJS.Navigation.navigate("/pages/main/main.html");
                                 } else {
                                     displayError("Error with facebook authentication.");
                                 }
@@ -116,12 +121,11 @@ function launchFacebookWebAuth() {
 }
 /************ form auth ***************/
 function launchformauth(username, password) {
-
     showProgressRing();
     gameHub.server.login(username, password).done(function(success) {
         if (success) {
             selfUserName = success;
-            WinJS.Navigation.navigate("/pages/main/main.html", success);
+            WinJS.Navigation.navigate("/pages/main/main.html");
         } else {
             displayError("Wrong password or username!");
         }
@@ -135,65 +139,49 @@ function startGame(selfStart, name, opponentname) {
     WinJS.Navigation.navigate("/pages/game/game.html", {selfStart:selfStart, name:name, opponentname:opponentname});
 }
 
-/************* popups *************/
-
+/************** Popups *******************/
 function invited_popup(user) {
-    msg = new Windows.UI.Popups.MessageDialog(user.UserName + " has challanged you!", "A wild challenger appears");
-    msg.commands.append(new Windows.UI.Popups.UICommand("Accept", 
-       function (command) {
-           gameHub.server.inviteAccepted();
-       }));
-    msg.commands.append(new Windows.UI.Popups.UICommand("Deny",
-        function (command) {
-            gameHub.server.inviteDenied();
-        }));
-    msg.showAsync();
+    var setting = popupHelper.Invited(user.UserName);
+    popup.SetBtn(setting.buttons);
+    popup.SetText(setting.text);
+    popup.Show();
 }
 
 function wait_popup(username) {
-    msg = new Windows.UI.Popups.MessageDialog("You have challanged" + username + ". Please wait for his response!","Invite sent");
-    msg.commands.append(new Windows.UI.Popups.UICommand("Suspend invite",
-        function (command) {
-            gameHub.server.inviteDenied();
-        }));
-    msg.showAsync();
+    var setting = popupHelper.Wait(username);
+    popup.SetBtn(setting.buttons);
+    popup.SetText(setting.text);
+    popup.Show();
 }
 
 function quit_popup() {
-    var el = $('#blanket');
-    if (el.css('display') == 'none') {
-        el.css('display', 'table');
-        $(el).find(".quit").show();
-    }
+    var setting = popupHelper.Quit();
+    popup.SetBtn(setting.buttons);
+    popup.SetText(setting.text);
+    popup.Show();
 }
 
 function disconnect_popup() {
-    msg = new Windows.UI.Popups.MessageDialog("Your opponent has quit the game.");
-    msg.commands.append(new Windows.UI.Popups.UICommand("OK",
-        function (command) {
-            WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
-        }));
-    msg.showAsync();
+    var setting = popupHelper.Disconnect();
+    popup.SetBtn(setting.buttons);
+    popup.SetText(setting.text);
+    popup.Show();
 }
 
 function win_popup() {
-    msg = new Windows.UI.Popups.MessageDialog("Congratulation, you have won the game!");
-    msg.commands.append(new Windows.UI.Popups.UICommand("OK",
-        function (command) {
-            WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
-        }));
-    msg.showAsync();
+    var setting = popupHelper.Win();
+    popup.SetBtn(setting.buttons);
+    popup.SetText(setting.text);
+    popup.Show();
 }
 
 function lose_popup() {
-    msg = new Windows.UI.Popups.MessageDialog("You have just lost the game.");
-    msg.commands.append(new Windows.UI.Popups.UICommand("OK",
-        function (command) {
-            WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
-        }));
-    msg.showAsync();
+    var setting = popupHelper.Lost();
+    popup.SetBtn(setting.buttons);
+    popup.SetText(setting.text);
+    popup.Show();
 }
 
 function close_popup() {
-    WinJS.Navigation.navigate("/pages/main/main.html", selfUserName);
+    popup.Hide();
 }

@@ -25,8 +25,8 @@
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\Site.css">
       <PackagePath>css\Site.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\default.css">
-      <PackagePath>css\default.css</PackagePath>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\messagebox.css">
+      <PackagePath>css\messagebox.css</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\micrososftlogin35.png">
       <PackagePath>css\micrososftlogin35.png</PackagePath>
@@ -79,6 +79,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.min.js">
       <PackagePath>js\game.min.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\PopupControl.js">
+      <PackagePath>js\PopupControl.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\Popups.js">
+      <PackagePath>js\Popups.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.js">
       <PackagePath>pages\game\game.js</PackagePath>

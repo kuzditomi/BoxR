@@ -68,12 +68,14 @@
     <Content Include="Images\smalllogo.png" />
     <Content Include="Images\splashscreen.png" />
     <Content Include="Images\storelogo.png" />
-    <Content Include="css\default.css" />
+    <Content Include="css\messagebox.css" />
     <Content Include="js\functions_common.js" />
     <Content Include="js\functions_self.js" />
     <Content Include="js\game.js" />
     <Content Include="js\game.min.js" />
     <Content Include="js\game.ts" />
+    <Content Include="js\PopupControl.js" />
+    <Content Include="js\Popups.js" />
     <Content Include="packages.config" />
     <Content Include="pages\game\game.html" />
     <Content Include="pages\game\game.js" />

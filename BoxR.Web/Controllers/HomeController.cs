@@ -9,9 +9,9 @@ using BoxR.Web.Models;
 
 namespace BoxR.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";

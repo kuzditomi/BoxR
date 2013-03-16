@@ -13,7 +13,7 @@ using BoxR.Web.Models;
 namespace BoxR.Controllers
 {
 
-    [InitializeSimpleMembership]
+    // [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //

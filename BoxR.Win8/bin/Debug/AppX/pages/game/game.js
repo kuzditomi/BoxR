@@ -7,7 +7,7 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
-            var height = $("#blanket").height();
+            var height = window.outerHeight;
             var newsize = height * 0.65;
 
             var canvas = $("#gameCanvas")[0];
@@ -21,6 +21,8 @@
             $(".selfname").html(options.name);
             $(".opponentname").html(options.opponentname);
             $("#roundcounter").html(options.selfstart ? "YOUR TURN COMES" : "PLEASE WAIT FOR THE OPPONENT");
+            
+            $("#welcome").html("Üdvözöllek, " + selfUserName + "!");
         },
 
         unload: function () {

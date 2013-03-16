@@ -8,7 +8,7 @@
         // populates the page elements with the app's data.
         ready: function (element, options) {
             gameHub.server.getUsers();
-            $("#welcome").html("Üdvözöllek, " + options + "!");
+            $("#welcome").html("Üdvözöllek, " + selfUserName + "!");
         },
 
         unload: function () {
