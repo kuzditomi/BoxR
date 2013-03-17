@@ -23,8 +23,8 @@ namespace BoxR.Web.Controllers
         {
             var model = new GameModel
                             {
-                                Name = selfstart ? name : opponent,
-                                OpponentName = selfstart ? opponent : name,
+                                Name = name,
+                                OpponentName = opponent,
                                 SelfStart = selfstart,
                                 CanvasWidth = cwidth
                             };

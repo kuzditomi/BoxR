@@ -140,7 +140,7 @@ namespace BoxR.Web.Hubs
             var opponent = UserManager.GetOtherUserInGroup(Context.ConnectionId, user.GroupId); // Get the inviter's profile
 
             Clients.Caller.startGame(true, user.UserName, opponent.UserName); // The invited start the game. This user puts first
-            Clients.Client(opponent.ConnectionId).startGame(false, user.UserName, opponent.UserName); // The inviter also starts the game
+            Clients.Client(opponent.ConnectionId).startGame(false, opponent.UserName, user.UserName); // The inviter also starts the game
 
             Clients.AllExcept(new[] {Context.ConnectionId,opponent.ConnectionId}).removeUser(Context.ConnectionId);
             Clients.AllExcept(new[] {Context.ConnectionId,opponent.ConnectionId}).removeUser(opponent.ConnectionId);
