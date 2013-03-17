@@ -281,6 +281,7 @@ var Game = (function () {
         updateSelfScore(this.selfScore);
         updateOpponentScore(this.opponentScore);
         if(this.selfScore + this.opponentScore == this.n * this.n) {
+            gameHub.server.finishGame();
             if(this.selfScore > this.opponentScore) {
                 win_popup();
             } else {

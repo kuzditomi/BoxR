@@ -16,9 +16,24 @@ var popupHelper;
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                 // TODO: This application has been newly launched. Initialize
                 // your application here.
+                connection = $.connection.hub;
+                connection.url = localSettings.values["connectionURL"] + 'signalr';
+
+                gameHub = $.connection.game;
+
+                initHub();
+
+                connection.start(function () {
+                    console.log('connection started!');
+                }).done(function () {
+                    gameHub.server.logout();
+                    WinJS.Navigation.navigate("/pages/login/login.html");
+                });
             } else {
                 // TODO: This application has been reactivated from suspension.
-                // Restore application state here.
+                // store logged in state?
+                gameHub.server.logout();
+                WinJS.Navigation.navigate("/pages/login/login.html");
             }
 
             if (app.sessionState.history) {
@@ -43,25 +58,12 @@ var popupHelper;
         // that needs to persist across suspensions here. If you need to 
         // complete an asynchronous operation before your application is 
         // suspended, call args.setPromise().
+        gameHub.server.logout();
         app.sessionState.history = nav.history;
     };
 
     app.start();
 })();
-
-/************* onload ******************/
-$(function () {
-    connection = $.connection.hub;
-    connection.url = localSettings.values["connectionURL"] + 'signalr';
-
-    gameHub = $.connection.game;
-
-    initHub();
-
-    connection.start(function() {
-        console.log('connection started!');
-    });
-});
 /********* progress ring***************/
 function showProgressRing() {
     $("#progressRing").show();

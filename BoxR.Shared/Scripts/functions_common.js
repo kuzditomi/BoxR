@@ -10,7 +10,7 @@ function initHub() {
 
     gameHub.client.receiveUsers = function(users) {
         for (var i in users) {
-            if (users[i].ConnectionId != connection.id) {
+            if (users[i].ConnectionId != gameHub.connection.id) {
                 var div = $('<div/>', {
                     id: users[i].ConnectionId,
                     class: "user",
@@ -26,9 +26,9 @@ function initHub() {
         }
     };
 
-    gameHub.client.receiveUser = function(user, connectionId) {
+    gameHub.client.receiveUser = function(user) {
         var div = $('<div/>', {
-            id: connectionId,
+            id: user.ConnectionId,
             class: "user",
             html: $('<span/>', { text: user.UserName })
         });

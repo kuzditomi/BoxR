@@ -49,7 +49,7 @@ namespace BoxR.Web.Hubs
                 profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
                 UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
                 
-                Clients.Others.receiveUser(profile, Context.ConnectionId); // Alert the other clients about the new user
+                Clients.Others.receiveUser(profile); // Alert the other clients about the new user
             }
             else
             {
@@ -141,6 +141,9 @@ namespace BoxR.Web.Hubs
 
             Clients.Caller.startGame(true, user.UserName, opponent.UserName); // The invited start the game. This user puts first
             Clients.Client(opponent.ConnectionId).startGame(false, user.UserName, opponent.UserName); // The inviter also starts the game
+
+            Clients.AllExcept(new[] {Context.ConnectionId,opponent.ConnectionId}).removeUser(Context.ConnectionId);
+            Clients.AllExcept(new[] {Context.ConnectionId,opponent.ConnectionId}).removeUser(opponent.ConnectionId);
         }
 
         /// <summary>
@@ -196,6 +199,29 @@ namespace BoxR.Web.Hubs
         {
             Clients.Caller.receiveUsers(UserManager.GetUsers());
         }
+
+        /// <summary>
+        /// Removes the users from group, adding them available in the main screen
+        /// TODO: store the results
+        /// </summary>
+        public void FinishGame()
+        {
+            if (!Authenticate()) // It's never too late to check 
+                return;
+
+            var user = UserManager.GetUser(Context.ConnectionId); // Get the current user
+
+            if (!user.IsInGroup) // If something went wrong between the invite and the accept
+                return;
+
+            var opponent = UserManager.GetOtherUserInGroup(Context.ConnectionId, user.GroupId); // Get the inviter's profile
+
+            UserManager.RemoveUserFromGroup(Context.ConnectionId);
+            UserManager.RemoveUserFromGroup(opponent.ConnectionId);
+            Clients.Others.receiveUser(opponent);
+            Clients.AllExcept(opponent.ConnectionId).receiveUser(user);
+        }
+
         #endregion
 
         #region Helpers
@@ -249,7 +275,7 @@ namespace BoxR.Web.Hubs
                             profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
                             UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
 
-                            Clients.Others.receiveUser(profile, Context.ConnectionId); // Alert the other clients about the new user
+                            Clients.Others.receiveUser(profile); // Alert the other clients about the new user
 
                             return profile.UserName;
                         }
@@ -311,7 +337,7 @@ namespace BoxR.Web.Hubs
                             profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
                             UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
 
-                            Clients.Others.receiveUser(profile, Context.ConnectionId); // Alert the other clients about the new user
+                            Clients.Others.receiveUser(profile); // Alert the other clients about the new user
                             return profile.UserName;
                         }
                         else
@@ -339,7 +365,7 @@ namespace BoxR.Web.Hubs
                         profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
                         UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
 
-                        Clients.Others.receiveUser(profile, Context.ConnectionId); // Alert the other clients about the new user
+                        Clients.Others.receiveUser(profile); // Alert the other clients about the new user
                         return profile.UserName;
                     }
                 }

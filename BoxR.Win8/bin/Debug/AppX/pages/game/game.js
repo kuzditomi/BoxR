@@ -20,7 +20,7 @@
             canvas.addEventListener("mousemove", function (e) { game.MouseMove(e); });
             $(".selfname").html(options.name);
             $(".opponentname").html(options.opponentname);
-            $("#roundcounter").html(options.selfstart ? "YOUR TURN COMES" : "PLEASE WAIT FOR THE OPPONENT");
+            $("#roundcounter").html(options.selfStart ? "YOUR TURN COMES" : "PLEASE WAIT FOR THE OPPONENT");
             
             $("#welcome").html("Üdvözöllek, " + selfUserName + "!");
         },

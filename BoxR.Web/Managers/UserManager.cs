@@ -37,8 +37,7 @@ namespace BoxR.Web.Managers
 
         public static Dictionary<string, UserProfile> GetUsers()
         {
-            // is it deep copy? should be
-            return new Dictionary<string, UserProfile>(Users);
+            return Users.Where(u => !u.Value.IsInGroup).ToDictionary(d => d.Key,d => d.Value);
         }
 
         public static void RemoveUser(string connectionId)

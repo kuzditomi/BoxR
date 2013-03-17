@@ -89,6 +89,11 @@
                 return proxies.game.invoke.apply(proxies.game, $.merge(["EdgeClicked"], $.makeArray(arguments)));
             },
 
+            finishGame: function () {
+                /// <summary>Calls the FinishGame method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
+                return proxies.game.invoke.apply(proxies.game, $.merge(["FinishGame"], $.makeArray(arguments)));
+            },
+
             getUsers: function () {
                 /// <summary>Calls the GetUsers method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["GetUsers"], $.makeArray(arguments)));
