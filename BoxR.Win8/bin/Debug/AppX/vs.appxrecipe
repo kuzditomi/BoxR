@@ -16,7 +16,7 @@
     <AppXManifest Include="D:\works\BoxR\BoxR.Win8\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-16T18:48:39.711</Modified>
+      <Modified>2013-03-17T11:02:38.395</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +74,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\default.html">
       <PackagePath>default.html</PackagePath>
-      <Modified>2013-03-16T19:08:23.923</Modified>
+      <Modified>2013-03-17T11:02:36.923</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.html">
       <PackagePath>pages\game\game.html</PackagePath>
@@ -94,7 +94,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_common.js">
       <PackagePath>js\functions_common.js</PackagePath>
-      <Modified>2013-03-17T10:35:26.808</Modified>
+      <Modified>2013-03-17T10:56:04.253</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_self.js">
       <PackagePath>js\functions_self.js</PackagePath>
@@ -144,13 +144,13 @@
       <PackagePath>Scripts\jquery-1.7.1.min.js</PackagePath>
       <Modified>2013-02-16T21:32:50.209</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery.signalR-1.0.0-rc2.js">
-      <PackagePath>Scripts\jquery.signalR-1.0.0-rc2.js</PackagePath>
-      <Modified>2013-02-16T21:32:50.233</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery.signalR-1.0.1.js">
+      <PackagePath>Scripts\jquery.signalR-1.0.1.js</PackagePath>
+      <Modified>2013-03-17T10:58:51.185</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery.signalR-1.0.0-rc2.min.js">
-      <PackagePath>Scripts\jquery.signalR-1.0.0-rc2.min.js</PackagePath>
-      <Modified>2013-02-16T21:32:50.260</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery.signalR-1.0.1.min.js">
+      <PackagePath>Scripts\jquery.signalR-1.0.1.min.js</PackagePath>
+      <Modified>2013-03-17T10:58:55.132</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\modernizr-2.5.3.js">
       <PackagePath>Scripts\modernizr-2.5.3.js</PackagePath>
@@ -178,7 +178,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-03-16T18:48:39.637</Modified>
+      <Modified>2013-03-17T11:02:38.298</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
