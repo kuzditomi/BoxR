@@ -298,8 +298,24 @@ namespace BoxR.Web.Hubs
         {
             // If the user is already logged in, remove him from the users
             // then refresh the authentication
-            if(UserManager.UserExists(Context.ConnectionId))
+            if(Authenticate(Context.ConnectionId))
             {
+                var user = UserManager.GetUser(Context.ConnectionId);
+                if (user.IsInGroup)
+                {
+                    Clients.OthersInGroup(user.GroupId).quitGame();
+
+                    Groups.Remove(Context.ConnectionId, user.GroupId); // Remove user from the SignalR group
+
+                    var otherUserinGroup = UserManager.GetOtherUserInGroup(Context.ConnectionId, user.GroupId); // Find the opponent user
+                    if (otherUserinGroup != null)
+                    {
+                        Groups.Remove(otherUserinGroup.ConnectionId, otherUserinGroup.GroupId); // Remove opponent from signalR group
+                        UserManager.RemoveUserFromGroup(otherUserinGroup.ConnectionId); // Remove opponent's group
+
+                        Clients.Client(otherUserinGroup.ConnectionId).alertDisconnect(); // Alert the opponent about the disconnect :(
+                    }
+                }
                 UserManager.RemoveUser(Context.ConnectionId);
             }
             switch (provider)
@@ -373,17 +389,30 @@ namespace BoxR.Web.Hubs
             catch (Exception e)
             {
                 Logger.Error(e.Message, e);
-                //Clients.Caller.receive("hiba:" + e.Message); //Debug
             }
             return string.Empty;
         }
 
         public void Logout()
         {
-            // If the user is already logged in, remove him from the users
-            // then refresh the authentication
-            if (UserManager.UserExists(Context.ConnectionId))
+            if (Authenticate(Context.ConnectionId))
             {
+                var user = UserManager.GetUser(Context.ConnectionId);
+                if (user.IsInGroup)
+                {
+                    Clients.OthersInGroup(user.GroupId).quitGame();
+
+                    Groups.Remove(Context.ConnectionId, user.GroupId); // Remove user from the SignalR group
+
+                    var otherUserinGroup = UserManager.GetOtherUserInGroup(Context.ConnectionId, user.GroupId); // Find the opponent user
+                    if (otherUserinGroup != null)
+                    {
+                        Groups.Remove(otherUserinGroup.ConnectionId, otherUserinGroup.GroupId); // Remove opponent from signalR group
+                        UserManager.RemoveUserFromGroup(otherUserinGroup.ConnectionId); // Remove opponent's group
+
+                        Clients.Client(otherUserinGroup.ConnectionId).alertDisconnect(); // Alert the opponent about the disconnect :(
+                    }
+                }
                 UserManager.RemoveUser(Context.ConnectionId);
                 WebSecurity.Logout();
             }

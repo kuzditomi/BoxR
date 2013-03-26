@@ -1,0 +1,120 @@
+*,body{
+	margin:0px;
+	padding:0px;
+	height:100%;
+}
+
+body,.well{
+	background-color: #483D8B;
+	color: #fff;
+	font-family: "Segoe UI Light","Segoe WP","Helvetica Neue",sans-serif;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+.footer {
+  position: relative;
+  margin-top: -50px;
+  height: 20px;
+  clear:both;
+  text-align:center;
+} 
+.form-horizontal .control-group {
+	margin-bottom: 10px;
+}
+.something-semantic {
+   display: table;
+   width: 100%;
+   height:100%;
+   min-height: 100%;
+}
+.something-else-semantic {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	padding-bottom: 40px;
+}
+input[type="submit"]{
+	height:45px;
+}
+.well{
+	margin-bottom: 0px;
+}
+form{
+	margin: 0;
+}
+.largefont{
+	font-size: 24px;
+}
+.control-group{
+	margin-top: 5px;
+}
+
+@media (max-width: 979px) and (min-width: 768px){
+	.span6 {
+		width: 460px;
+	}
+}
+h1{
+	color: #fff;
+	text-transform: none;
+}
+
+.container{
+	height: auto;
+}
+
+.btn.reg{
+	float:left;
+	width: 160px;
+}
+
+#btnfacebook{
+	background: url('fbbutton35.png') no-repeat center;
+	background-color: #3a5791;
+	font-size: 0px;
+}
+
+#btnmicrosoft{
+	background: url('micrososftlogin35.png') no-repeat center;
+	background-color: #fff;
+	font-size: 0px;
+}
+
+.controls .btn.input-medium{
+	width:49%;
+}
+@media (max-width: 480px){
+	.btn.input-medium {
+		width: 100% !important;
+	}
+	.container{
+		width: auto !important;
+	}
+}
+@media (max-width: 600px){
+	.container{
+		width: 470px;
+	}
+}
+@media (min-width:600px) and (max-width:1200px){
+	.span5{
+		width:405px;
+	}
+	.container{
+		width: 470px;
+	}
+}
+@media (min-width: 1200px){
+	.span5{
+		width:530px;
+	}
+	.input-large{
+		width: 95%;
+	}
+	.container{
+		width:600px;
+	}
+}
