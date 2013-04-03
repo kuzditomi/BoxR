@@ -48,6 +48,27 @@
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
+    <TypeScriptCompile Include="Scripts\BoxR.IClient.ts" />
+    <Content Include="Scripts\BoxR.IClient.js">
+      <DependentUpon>BoxR.IClient.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\BoxR.IClient.min.js">
+      <DependentUpon>BoxR.IClient.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Scripts\BoxR.Server.ts" />
+    <TypeScriptCompile Include="Scripts\BoxR.Game.ts" />
+    <Content Include="Scripts\BoxR.Game.js">
+      <DependentUpon>BoxR.Game.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\BoxR.Game.min.js">
+      <DependentUpon>BoxR.Game.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\BoxR.Server.js">
+      <DependentUpon>BoxR.Server.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\BoxR.Server.min.js">
+      <DependentUpon>BoxR.Server.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\functions_common.js" />
     <Content Include="Scripts\game.js">
       <DependentUpon>game.ts</DependentUpon>
@@ -58,6 +79,7 @@
     <Content Include="Scripts\game.ts" />
     <Content Include="Scripts\lib\jquery-1.7.1.js" />
     <Content Include="Scripts\lib\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\lib\jquery.d.ts" />
     <Content Include="Scripts\lib\jquery.signalR-1.0.1.js" />
     <Content Include="Scripts\lib\jquery.signalR-1.0.1.min.js" />
     <Content Include="Scripts\lib\modernizr-2.5.3.js" />

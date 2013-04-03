@@ -7,7 +7,7 @@
     @Scripts.Render("~/bundles/game")
     <script src="~/signalr/hubs"></script>
 }
-<header>
+<header id="header">
     <h1>BoxR</h1>
     <span>Üdvözöllek, @Context.User.Identity.Name !</span>
 </header>
@@ -22,29 +22,29 @@
     <div id="outer">
         <div id="middle">
             <div id="inner">
-                <section class="invited" style="display:none;">
-                    <p><span class="challenger"></span> has challanged you!</p>
-                    <a class="accept button" href="#" onclick="gameHub.server.inviteAccepted();close_popup();">Accept</a>
-                    <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Deny</a> 
+                <section id="invitedPopup" style="display:none;">
+                    <p><span id="inviterName" class="challenger"></span> has challanged you!</p>
+                    <a class="accept button" href="#" onclick="BoxRHub.server.inviteAccepted();BoxRClient.ClosePopup();">Accept</a>
+                    <a class="deny button" href="#" onclick="BoxRHub.server.inviteDenied();BoxRClient.ClosePopup();">Deny</a> 
                 </section>
-                <section class="wait" style="display:none;">
-                    <p>You have challanged <span class="challenger"></span>. Please wait for his response!</p>
-                    <a class="deny button" href="#" onclick="gameHub.server.inviteDenied();close_popup();">Suspend invite</a> 
+                <section id="waitPopup" style="display:none;">
+                    <p>You have challanged <span id="invitedName" class="challenger"></span>. Please wait for his response!</p>
+                    <a class="deny button" href="#" onclick="BoxRHub.server.inviteDenied();BoxRClient.ClosePopup();">Suspend invite</a> 
                 </section>
-                <section class="quit" style="display:none;">
+                <section id="quitPopup" style="display:none;">
                     <p>Are you sure? By quiting the game, your opponent will win.</p>
                     <a class="deny button" href="#" onclick="location.reload(true)">Quit</a> 
-                    <a class="accept button" href="#" onclick="close_popup()">Cancel</a> 
+                    <a class="accept button" href="#" onclick="BoxRClient.ClosePopup()">Cancel</a> 
                 </section>
-                <section class="disconnect" style="display:none;">
+                <section id="disconnectPopup" style="display:none;">
                     <p>Your opponent has quit the game.</p>
                     <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
                 </section>
-                <section class="win" style="display:none;">
+                <section id="winPopup" style="display:none;">
                     <p>Congratulation, you have won the game!</p>
                     <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
                 </section>
-                <section class="lose" style="display:none;">
+                <section id="losePopup" style="display:none;">
                     <p>You have just lost the game.</p>
                     <a class="deny button" href="#" onclick="location.reload(true)">OK</a> 
                 </section>
@@ -69,3 +69,17 @@
         }
     }
 </div>
+<script>
+    $(function () {
+        "use strict";
+        window.BoxRHub = $.connection.game;
+
+        window.BoxRClient = new BoxR.WebClient();
+        window.BoxRServer = new BoxR.Server(BoxRHub, BoxRClient);
+        BoxRClient.SetServer(BoxRServer);
+
+        $.connection.hub.start().done(function () {
+            BoxRServer.UpdateUsers();
+        });
+    });
+</script>

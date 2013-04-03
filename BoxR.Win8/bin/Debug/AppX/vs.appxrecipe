@@ -16,7 +16,7 @@
     <AppXManifest Include="D:\works\BoxR\BoxR.Win8\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-17T12:16:51.524</Modified>
+      <Modified>2013-03-18T18:22:51.775</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -98,7 +98,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_self.js">
       <PackagePath>js\functions_self.js</PackagePath>
-      <Modified>2013-03-16T20:52:25.784</Modified>
+      <Modified>2013-03-17T13:39:24.127</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.js">
       <PackagePath>js\game.js</PackagePath>
@@ -158,7 +158,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\navigator.js">
       <PackagePath>Scripts\navigator.js</PackagePath>
-      <Modified>2013-02-24T16:20:26.219</Modified>
+      <Modified>2013-03-17T13:38:23.551</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\settings.js">
       <PackagePath>Scripts\settings.js</PackagePath>
