@@ -8,10 +8,10 @@ var BoxR;
     "use strict";
     var WinRTClient = (function (_super) {
         __extends(WinRTClient, _super);
-        function WinRTClient(popupControl, gameHub) {
+        function WinRTClient(popupControl) {
                 _super.call(this);
             this.popupControl = popupControl;
-            this.popupHelper = new BoxR.Popups(gameHub, popupControl);
+            this.popupHelper = new BoxR.Popups(popupControl);
         }
         WinRTClient.prototype.StartGame = function (selfStart, name, opponentName) {
             var _this = this;
@@ -24,8 +24,8 @@ var BoxR;
                 var newsize = height * 0.65;
                 var canvas = document.getElementById("gameCanvas");
                 canvas.width = canvas.height = newsize;
-                var game = new BoxR.Game(canvas, _this.Server, _this);
-                _this.Server.SetGame(game);
+                var game = new BoxR.Game(canvas);
+                BoxR.Manager.Game = game;
                 game.Init(3, selfStart);
                 game.Draw();
                 canvas.addEventListener("click", function (e) {

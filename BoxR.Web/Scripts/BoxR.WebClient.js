@@ -30,7 +30,8 @@ var BoxR;
             }).done(function (res) {
                 container.innerHTML = res;
                 var canvas = container.getElementsByTagName("canvas")[0];
-                game = new BoxR.Game(canvas, _this.Server, _this);
+                game = new BoxR.Game(canvas);
+                BoxR.Manager.Game = game;
                 game.Init(3, selfStart);
                 game.Draw();
                 canvas.addEventListener("click", function (e) {
@@ -42,7 +43,6 @@ var BoxR;
                 document.getElementById("quitBtn").onclick = function () {
                     return _this.QuitPopup();
                 };
-                _this.Server.SetGame(game);
             });
         };
         WebClient.prototype.InvitedPopup = function (user) {

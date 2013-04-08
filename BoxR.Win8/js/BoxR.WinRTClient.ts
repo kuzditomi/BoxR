@@ -2,6 +2,7 @@
 /// <reference path="BoxR.Game.ts"/>
 /// <reference path="BoxR.Server.ts"/>
 /// <reference path="BoxR.Popups.ts"/>
+/// <reference path="BoxR.Manager.ts"/>
 
 module BoxR {
     "use strict";
@@ -10,10 +11,10 @@ module BoxR {
         private popupHelper: BoxR.Popups;
         private popupControl: any;
 
-        constructor(popupControl : any,gameHub:any) {
+        constructor(popupControl : any) {
             super();
             this.popupControl = popupControl;
-            this.popupHelper = new BoxR.Popups(gameHub,popupControl);
+            this.popupHelper = new BoxR.Popups(popupControl);
         }
 
         StartGame(selfStart: bool, name: string, opponentName: string) {
@@ -25,8 +26,8 @@ module BoxR {
 
                     var canvas = <HTMLCanvasElement>document.getElementById("gameCanvas");
                     canvas.width = canvas.height = newsize;
-                    var game = new BoxR.Game(canvas,_this.Server,_this);
-                    _this.Server.SetGame(game);
+                    var game = new BoxR.Game(canvas);
+                    BoxR.Manager.Game = game;
                     game.Init(3, selfStart);
                     game.Draw();
 

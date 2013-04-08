@@ -7,10 +7,6 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
-            gameHub = options.gameHub;
-            client = options.client;
-            server = options.server;
-            
             $('#regbtn').attr('href', localSettings.values.connectionURL + 'Account/Register');
             $(".username").focus();
 
@@ -66,9 +62,9 @@
                                 new String("#access_token=").length,
                                 fragment.indexOf("&expires_in="));
 
-                            gameHub.server.loginExternal('facebook', token).done(function (success) {
+                            BoxR.Manager.Hub.server.loginExternal('facebook', token).done(function (success) {
                                 if (success) {
-                                    selfUserName = success;
+                                    BoxR.Manager.UserName = success; // should I write a WinRTManager?
                                     WinJS.Navigation.navigate("/pages/main/main.html");
                                 } else {
                                     displayError("Error with facebook authentication.");
@@ -94,9 +90,10 @@
     /************ form auth ***************/
     function launchformauth(username, password) {
         $("#progressRing").show();
-        gameHub.server.login(username, password).done(function (success) {
+        BoxR.Manager.Hub.server.login(username, password).done(function (success) {
             if (success) {
-                WinJS.Navigation.navigate("/pages/main/main.html", { username: success, client:client,server:server });
+                BoxR.Manager.UserName = success; // should I write a WinRTManager?
+                WinJS.Navigation.navigate("/pages/main/main.html");
             } else {
                 displayError("Wrong password or username!");
             }

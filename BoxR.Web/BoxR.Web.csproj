@@ -279,6 +279,9 @@
       <DependentUpon>BoxR.IClient.ts</DependentUpon>
     </Content>
     <Content Include="Scripts\BoxR.IClient.ts" />
+    <Content Include="Scripts\BoxR.Manager.js" />
+    <Content Include="Scripts\BoxR.Manager.min.js" />
+    <Content Include="Scripts\BoxR.Manager.ts" />
     <Content Include="Scripts\BoxR.Server.js">
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>

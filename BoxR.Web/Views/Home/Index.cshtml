@@ -24,17 +24,17 @@
             <div id="inner">
                 <section id="invitedPopup" style="display:none;">
                     <p><span id="inviterName" class="challenger"></span> has challanged you!</p>
-                    <a class="accept button" href="#" onclick="BoxRHub.server.inviteAccepted();BoxRClient.ClosePopup();">Accept</a>
-                    <a class="deny button" href="#" onclick="BoxRHub.server.inviteDenied();BoxRClient.ClosePopup();">Deny</a> 
+                    <a class="accept button" href="#" onclick="BoxR.Manager.Hub.server.inviteAccepted();BoxR.Manager.Client.ClosePopup();">Accept</a>
+                    <a class="deny button" href="#" onclick="BoxR.Manager.Hub.server.inviteDenied();BoxR.Manager.Client.ClosePopup();">Deny</a> 
                 </section>
                 <section id="waitPopup" style="display:none;">
                     <p>You have challanged <span id="invitedName" class="challenger"></span>. Please wait for his response!</p>
-                    <a class="deny button" href="#" onclick="BoxRHub.server.inviteDenied();BoxRClient.ClosePopup();">Suspend invite</a> 
+                    <a class="deny button" href="#" onclick="BoxR.Manager.Hub.server.inviteDenied();BoxR.Manager.Client.ClosePopup();">Suspend invite</a> 
                 </section>
                 <section id="quitPopup" style="display:none;">
                     <p>Are you sure? By quiting the game, your opponent will win.</p>
                     <a class="deny button" href="#" onclick="location.reload(true)">Quit</a> 
-                    <a class="accept button" href="#" onclick="BoxRClient.ClosePopup()">Cancel</a> 
+                    <a class="accept button" href="#" onclick="BoxR.Manager.Hub.ClosePopup()">Cancel</a> 
                 </section>
                 <section id="disconnectPopup" style="display:none;">
                     <p>Your opponent has quit the game.</p>
@@ -72,14 +72,13 @@
 <script>
     $(function () {
         "use strict";
-        window.BoxRHub = $.connection.game;
+        BoxR.Manager.Hub = $.connection.game;
 
-        window.BoxRClient = new BoxR.WebClient();
-        window.BoxRServer = new BoxR.Server(BoxRHub, BoxRClient);
-        BoxRClient.SetServer(BoxRServer);
+        BoxR.Manager.Client = new BoxR.WebClient();
+        BoxR.Manager.Server = new BoxR.Server();
 
         $.connection.hub.start().done(function () {
-            BoxRServer.UpdateUsers();
+            BoxR.Manager.Server.UpdateUsers();
         });
     });
 </script>

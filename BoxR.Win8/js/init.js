@@ -18,17 +18,23 @@
                 var popupDiv = document.getElementById('popupdiv');
                 var popupControl = new BoxR.UI.PopupControl(popupDiv);
                 
-                var gameHub = $.connection.game;
+                //create hub and set the static Hub
+                var hub = $.connection.game;
+                BoxR.Manager.Hub = hub;
+                
+                //create client and set the static Client
+                var client = new BoxR.WinRTClient(popupControl);
+                BoxR.Manager.Client = client;
 
-                var client = new BoxR.WinRTClient(popupControl,gameHub);
-                var server = new BoxR.Server(gameHub, client);
-                client.SetServer(server);
+                //create server and set the static Server
+                var server = new BoxR.Server();
+                BoxR.Manager.Server = server;
 
                 connection.start(function () {
                     console.log('connection started!');
                 }).done(function () {
                     setTimeout(function (){
-                        WinJS.Navigation.navigate("/pages/login/login.html",{gameHub: gameHub,server:server,client:client});
+                        WinJS.Navigation.navigate("/pages/login/login.html");
                     },3000);
                 });
             } else {

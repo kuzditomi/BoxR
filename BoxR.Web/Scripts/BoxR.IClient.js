@@ -3,9 +3,6 @@ var BoxR;
     "use strict";
     var ClientBase = (function () {
         function ClientBase() { }
-        ClientBase.prototype.SetServer = function (server) {
-            this.Server = server;
-        };
         ClientBase.prototype.StartGame = function (selfStart, name, opponentName) {
             throw new Error('abstract method, override in derived class');
         };

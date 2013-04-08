@@ -1,13 +1,13 @@
+/// <reference path="BoxR.Manager.ts"/>
 declare var WinJS;
 module BoxR {
     export class Popups {
         private greenColor: string;
         private redColor: string;
-        private gameHub: any;
+
         private popupControl: any;
 
-        constructor(gameHub, popupControl) {
-            this.gameHub = gameHub;
+        constructor(popupControl) {
             this.popupControl = popupControl;
             this.greenColor = "#77B900";
             this.redColor = "#AD103C";
@@ -20,7 +20,7 @@ module BoxR {
                         text: "Accept",
                         background: this.greenColor,
                         click: () => {
-                            this.gameHub.server.inviteAccepted();
+                            BoxR.Manager.Hub.server.inviteAccepted();
                             this.popupControl.Hide();
                         }
                     },
@@ -28,7 +28,7 @@ module BoxR {
                         text: "Deny",
                         background: this.redColor,
                         click: () => {
-                            this.gameHub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.inviteDenied();
                             this.popupControl.Hide();
                         }
                     }],
@@ -43,7 +43,7 @@ module BoxR {
                         text: "Suspend invite",
                         background: this.redColor,
                         click: () => {
-                            this.gameHub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.inviteDenied();
                             this.popupControl.Hide();
                         }
                     }],
@@ -58,7 +58,7 @@ module BoxR {
                         text: "Quit",
                         background: this.redColor,
                         click: () => {
-                            this.gameHub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.inviteDenied();
                             this.popupControl.Hide();
                             WinJS.Navigation.navigate("/pages/main/main.html");
                         }

@@ -4,6 +4,7 @@
 
 module BoxR {
     export module Manager {
+        export var Hub: any;
         export var Server: BoxR.Server;
         export var Client: BoxR.IClient;
         export var Game: BoxR.Game;

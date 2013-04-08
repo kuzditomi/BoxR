@@ -1,13 +1,13 @@
 /// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Game.ts"/>
 /// <reference path="BoxR.Server.ts"/>
+/// <reference path="BoxR.Manager.ts"/>
 /// <reference path="lib/jquery.d.ts"/>
 
 module BoxR {
     "use strict";
     export class WebClient extends ClientBase {
         private Blanket: HTMLElement;
-        private Server: BoxR.Server;
 
         constructor() {
             super();
@@ -35,15 +35,14 @@ module BoxR {
             }).done(function (res) {
                 container.innerHTML = res;
                 var canvas = <HTMLCanvasElement>container.getElementsByTagName("canvas")[0];
-                game = new BoxR.Game(canvas,_this.Server,_this);
+                game = new BoxR.Game(canvas);
+                BoxR.Manager.Game = game;
                 game.Init(3, selfStart);
                 game.Draw();
 
                 canvas.addEventListener("click", function (e) { game.Click(<MouseEvent>e); }, true);
                 canvas.addEventListener("mousemove", function (e) { game.MouseMove(<MouseEvent>e); });
                 document.getElementById("quitBtn").onclick = () => _this.QuitPopup();
-
-                _this.Server.SetGame(game);
             });
         }
         public InvitedPopup(user) {

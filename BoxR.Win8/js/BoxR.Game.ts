@@ -201,8 +201,6 @@ module BoxR {
         ctx: CanvasRenderingContext2D;
         private edges: Edge[][];
         private squares: Squere[];
-        private client: BoxR.IClient;
-        private server: BoxR.Server;
 
         n: number;
         LeftOffset: number;
@@ -212,13 +210,11 @@ module BoxR {
         opponentScore: number;
 
 
-        constructor(canvas: HTMLElement,server: BoxR.Server,client: BoxR.IClient) {
+        constructor(canvas: HTMLElement) {
             this.ctx = (<HTMLCanvasElement>canvas).getContext('2d');
             this.LeftOffset = canvas.getBoundingClientRect().left;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
-            this.server = server;
-            this.client = client;
         }
 
         public Init(n: number, selfstart: bool) {
@@ -266,7 +262,7 @@ module BoxR {
             IsSelfRound = selfstart;
             this.selfScore = 0;
             this.opponentScore = 0;
-            this.server.UpdateRound(IsSelfRound);
+             BoxR.Manager.Server.UpdateRound(IsSelfRound);
         }
         public Draw() {
             this.Clear();
@@ -301,7 +297,7 @@ module BoxR {
                 row.forEach(function (edge, j) {
                     var response = edge.Click(click_X, click_Y);
                     if (response.EdgeActivated) {
-                        _this.server.gameHub.server.edgeClicked(i, j);
+                         BoxR.Manager.Hub.server.edgeClicked(i, j);
                         _this.selfScore += response.SquereActivated;
                         if (response.SquereActivated == 0)
                             _this.NextRound();
@@ -341,21 +337,21 @@ module BoxR {
         }
 
         private UpdateScore() {
-            this.server.UpdateSelfScore(this.selfScore);
-            this.server.UpdateOpponentScore(this.opponentScore);
+            BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
+            BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
             if (this.selfScore + this.opponentScore == this.n * this.n) {
-                this.server.gameHub.server.finishGame();
+                BoxR.Manager.Hub.server.finishGame();
                 if (this.selfScore > this.opponentScore)
-                    this.client.WinPopup();
+                    BoxR.Manager.Client.WinPopup();
                 else
-                    this.client.LosePopup();
+                    BoxR.Manager.Client.LosePopup();
                 return;
             }
         }
 
         private NextRound() {
             IsSelfRound ^= true;
-            this.server.UpdateRound(IsSelfRound);
+            BoxR.Manager.Server.UpdateRound(IsSelfRound);
         }
     }
 }

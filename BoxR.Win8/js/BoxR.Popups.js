@@ -1,8 +1,7 @@
 var BoxR;
 (function (BoxR) {
     var Popups = (function () {
-        function Popups(gameHub, popupControl) {
-            this.gameHub = gameHub;
+        function Popups(popupControl) {
             this.popupControl = popupControl;
             this.greenColor = "#77B900";
             this.redColor = "#AD103C";
@@ -15,7 +14,7 @@ var BoxR;
                         text: "Accept",
                         background: this.greenColor,
                         click: function () {
-                            _this.gameHub.server.inviteAccepted();
+                            BoxR.Manager.Hub.server.inviteAccepted();
                             _this.popupControl.Hide();
                         }
                     }, 
@@ -23,7 +22,7 @@ var BoxR;
                         text: "Deny",
                         background: this.redColor,
                         click: function () {
-                            _this.gameHub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.inviteDenied();
                             _this.popupControl.Hide();
                         }
                     }
@@ -39,7 +38,7 @@ var BoxR;
                         text: "Suspend invite",
                         background: this.redColor,
                         click: function () {
-                            _this.gameHub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.inviteDenied();
                             _this.popupControl.Hide();
                         }
                     }
@@ -55,7 +54,7 @@ var BoxR;
                         text: "Quit",
                         background: this.redColor,
                         click: function () {
-                            _this.gameHub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.inviteDenied();
                             _this.popupControl.Hide();
                             WinJS.Navigation.navigate("/pages/main/main.html");
                         }

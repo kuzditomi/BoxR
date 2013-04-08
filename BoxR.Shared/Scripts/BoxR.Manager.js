@@ -1,6 +1,7 @@
 var BoxR;
 (function (BoxR) {
     (function (Manager) {
+        Manager.Hub;
         Manager.Server;
         Manager.Client;
         Manager.Game;

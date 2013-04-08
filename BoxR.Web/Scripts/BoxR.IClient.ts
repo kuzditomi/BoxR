@@ -7,7 +7,6 @@ module BoxR {
 
     export interface IClient {
         StartGame(selfStart: bool, name: string, opponentName: string);
-        SetServer(server: BoxR.Server);
         InvitedPopup(user);
         WaitPopup(username:string);
         QuitPopup();
@@ -18,10 +17,6 @@ module BoxR {
     }
 
     export class ClientBase implements IClient {
-        Server: BoxR.Server;
-        SetServer(server: BoxR.Server) {
-            this.Server = server;
-        }
         StartGame(selfStart: bool, name: string, opponentName: string) { 
             throw new Error('abstract method, override in derived class');
         }

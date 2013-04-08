@@ -166,13 +166,11 @@ var BoxR;
     })(Drawable);
     BoxR.Squere = Squere;    
     var Game = (function () {
-        function Game(canvas, server, client) {
+        function Game(canvas) {
             this.ctx = (canvas).getContext('2d');
             this.LeftOffset = canvas.getBoundingClientRect().left;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
-            this.server = server;
-            this.client = client;
         }
         Game.prototype.Init = function (n, selfstart) {
             this.n = n;
@@ -217,7 +215,7 @@ var BoxR;
             IsSelfRound = selfstart;
             this.selfScore = 0;
             this.opponentScore = 0;
-            this.server.UpdateRound(IsSelfRound);
+            BoxR.Manager.Server.UpdateRound(IsSelfRound);
         };
         Game.prototype.Draw = function () {
             this.Clear();
@@ -248,7 +246,7 @@ var BoxR;
                 row.forEach(function (edge, j) {
                     var response = edge.Click(click_X, click_Y);
                     if(response.EdgeActivated) {
-                        _this.server.gameHub.server.edgeClicked(i, j);
+                        BoxR.Manager.Hub.server.edgeClicked(i, j);
                         _this.selfScore += response.SquereActivated;
                         if(response.SquereActivated == 0) {
                             _this.NextRound();
@@ -287,21 +285,21 @@ var BoxR;
             }
         };
         Game.prototype.UpdateScore = function () {
-            this.server.UpdateSelfScore(this.selfScore);
-            this.server.UpdateOpponentScore(this.opponentScore);
+            BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
+            BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
             if(this.selfScore + this.opponentScore == this.n * this.n) {
-                this.server.gameHub.server.finishGame();
+                BoxR.Manager.Hub.server.finishGame();
                 if(this.selfScore > this.opponentScore) {
-                    this.client.WinPopup();
+                    BoxR.Manager.Client.WinPopup();
                 } else {
-                    this.client.LosePopup();
+                    BoxR.Manager.Client.LosePopup();
                 }
                 return;
             }
         };
         Game.prototype.NextRound = function () {
             IsSelfRound ^= true;
-            this.server.UpdateRound(IsSelfRound);
+            BoxR.Manager.Server.UpdateRound(IsSelfRound);
         };
         return Game;
     })();

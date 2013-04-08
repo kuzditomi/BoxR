@@ -6,9 +6,9 @@
     WinJS.UI.Pages.define("/pages/main/main.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
-        ready: function (element, options) {
-            options.server.UpdateUsers();
-            $("#welcome").html("Üdvözöllek, " + options.username + "!");
+        ready: function (element) {
+            BoxR.Manager.Server.UpdateUsers();
+            $("#welcome").html("Üdvözöllek, " + BoxR.Manager.UserName + "!");
         },
 
         unload: function () {
