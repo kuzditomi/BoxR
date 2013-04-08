@@ -5,19 +5,16 @@
 
 module BoxR {
     "use strict";
-    export class WebClient implements IClient {
+    export class WebClient extends ClientBase {
         private Blanket: HTMLElement;
         private Server: BoxR.Server;
 
         constructor() {
+            super();
             this.Blanket = document.getElementById("blanket");
         }
-        
-        public SetServer(server: BoxR.Server) {
-            this.Server = server;
-        }
 
-        public StartGame(selfStart: bool, name: string, opponentName: string): Game {
+        public StartGame(selfStart: bool, name: string, opponentName: string) {
             var _this = this;
             var game;
             this.ClosePopup();
@@ -44,10 +41,10 @@ module BoxR {
 
                 canvas.addEventListener("click", function (e) { game.Click(<MouseEvent>e); }, true);
                 canvas.addEventListener("mousemove", function (e) { game.MouseMove(<MouseEvent>e); });
+                document.getElementById("quitBtn").onclick = () => _this.QuitPopup();
 
                 _this.Server.SetGame(game);
             });
-            return game; // TODO: ez nem biztos hogy jó itt
         }
         public InvitedPopup(user) {
             if (this.Blanket.style.display == "none") {
@@ -88,6 +85,11 @@ module BoxR {
             }
         }
         public ClosePopup() {
+            var inner = document.getElementById("inner");
+            var popupSections = inner.getElementsByTagName("section");
+            for (var i = 0; i < popupSections.length; i++) {
+                (<HTMLElement>popupSections[i]).style.display = "none";
+            }
             this.Blanket.style.display = "none";
         }
     }

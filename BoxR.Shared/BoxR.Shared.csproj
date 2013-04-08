@@ -63,20 +63,19 @@
     <Content Include="Scripts\BoxR.Game.min.js">
       <DependentUpon>BoxR.Game.ts</DependentUpon>
     </Content>
+    <TypeScriptCompile Include="Scripts\BoxR.Manager.ts" />
+    <Content Include="Scripts\BoxR.Manager.js">
+      <DependentUpon>BoxR.Manager.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\BoxR.Manager.min.js">
+      <DependentUpon>BoxR.Manager.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\BoxR.Server.js">
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>
     <Content Include="Scripts\BoxR.Server.min.js">
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\functions_common.js" />
-    <Content Include="Scripts\game.js">
-      <DependentUpon>game.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\game.min.js">
-      <DependentUpon>game.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\game.ts" />
     <Content Include="Scripts\lib\jquery-1.7.1.js" />
     <Content Include="Scripts\lib\jquery-1.7.1.min.js" />
     <Content Include="Scripts\lib\jquery.d.ts" />

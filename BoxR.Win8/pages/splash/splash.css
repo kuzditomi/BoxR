@@ -1,0 +1,14 @@
+﻿* {
+    margin: 0;
+    padding: 0;   
+}
+.splash p {
+    margin-left: 120px;
+}
+.ms-flexbox {
+    width: 100%; 
+    height: 100%;
+    -ms-flex-direction: column;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+}

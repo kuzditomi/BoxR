@@ -1,13 +1,17 @@
+var __extends = this.__extends || function (d, b) {
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var BoxR;
 (function (BoxR) {
     "use strict";
-    var WebClient = (function () {
+    var WebClient = (function (_super) {
+        __extends(WebClient, _super);
         function WebClient() {
+                _super.call(this);
             this.Blanket = document.getElementById("blanket");
         }
-        WebClient.prototype.SetServer = function (server) {
-            this.Server = server;
-        };
         WebClient.prototype.StartGame = function (selfStart, name, opponentName) {
             var _this = this;
             var game;
@@ -35,9 +39,11 @@ var BoxR;
                 canvas.addEventListener("mousemove", function (e) {
                     game.MouseMove(e);
                 });
+                document.getElementById("quitBtn").onclick = function () {
+                    return _this.QuitPopup();
+                };
                 _this.Server.SetGame(game);
             });
-            return game;
         };
         WebClient.prototype.InvitedPopup = function (user) {
             if(this.Blanket.style.display == "none") {
@@ -78,9 +84,14 @@ var BoxR;
             }
         };
         WebClient.prototype.ClosePopup = function () {
+            var inner = document.getElementById("inner");
+            var popupSections = inner.getElementsByTagName("section");
+            for(var i = 0; i < popupSections.length; i++) {
+                (popupSections[i]).style.display = "none";
+            }
             this.Blanket.style.display = "none";
         };
         return WebClient;
-    })();
+    })(BoxR.ClientBase);
     BoxR.WebClient = WebClient;    
 })(BoxR || (BoxR = {}));

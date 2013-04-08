@@ -26,7 +26,7 @@ namespace BoxR.Web
                         "~/Scripts/modernizr-*"));
 
 
-            bundles.Add(new ScriptBundle("~/bundles/game").Include("~/Scripts/BoxR.Server.js","~/Scripts/BoxR.WebClient.js", "~/Scripts/BoxR.Game.js"));
+            bundles.Add(new ScriptBundle("~/bundles/game").Include("~/Scripts/BoxR.Server.js","~/Scripts/BoxR.IClient.js","~/Scripts/BoxR.WebClient.js", "~/Scripts/BoxR.Game.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/Site.css"));
 
             bundles.Add(new StyleBundle("~/Content/login").Include("~/Content/Login.css"));

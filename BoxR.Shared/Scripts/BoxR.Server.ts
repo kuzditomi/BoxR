@@ -12,8 +12,6 @@ module BoxR {
             var _this = this;
             this.client = client;
             this.gameHub = gameHub;
-            
-            var userList = document.getElementById("userList");
 
             gameHub.client.alertDuplicate = function () {
                 var header = document.getElementById('header');
@@ -24,16 +22,25 @@ module BoxR {
             }
 
             gameHub.client.receiveUsers = function (users) {
+                var userList = document.getElementById("userList");
+                if(!userList)
+                    return;
                 for (var i in users) {
                     userList.appendChild(_this.createDivFromUser(users[i])); // TODO: eleg csunya... vagy nem?
                 }
             };
 
             gameHub.client.receiveUser = function (user) {
-                userList.appendChild(BoxR.Server.prototype.createDivFromUser(user));
+                var userList = document.getElementById("userList");
+                if(!userList)
+                    return;
+                userList.appendChild(_this.createDivFromUser(user));
             };
 
             gameHub.client.removeUser = function (connectionId) {
+                var userList = document.getElementById("userList");
+                if(!userList)
+                    return;
                 var user = document.getElementById(connectionId);
                 userList.removeChild(user);
             };

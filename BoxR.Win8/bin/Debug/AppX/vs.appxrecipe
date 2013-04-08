@@ -16,7 +16,7 @@
     <AppXManifest Include="D:\works\BoxR\BoxR.Win8\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-18T18:22:51.775</Modified>
+      <Modified>2013-04-08T00:20:46.965</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +39,10 @@
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\messagebox.css">
       <PackagePath>css\messagebox.css</PackagePath>
       <Modified>2013-03-16T18:48:19.845</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\splash.css">
+      <PackagePath>pages\splash\splash.css</PackagePath>
+      <Modified>2013-04-08T00:29:12.441</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\micrososftlogin35.png">
       <PackagePath>css\micrososftlogin35.png</PackagePath>
@@ -72,61 +76,97 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-07-26T09:30:08.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\boxr.png">
+      <PackagePath>pages\splash\boxr.png</PackagePath>
+      <Modified>2013-04-08T00:20:09.078</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\default.html">
       <PackagePath>default.html</PackagePath>
-      <Modified>2013-03-17T13:13:29.753</Modified>
+      <Modified>2013-04-07T19:02:13.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.html">
       <PackagePath>pages\game\game.html</PackagePath>
-      <Modified>2013-03-10T10:24:27.738</Modified>
+      <Modified>2013-04-07T19:07:01.973</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\main\main.html">
       <PackagePath>pages\main\main.html</PackagePath>
-      <Modified>2013-02-24T21:39:42.280</Modified>
+      <Modified>2013-04-07T15:17:54.659</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\login\login.html">
       <PackagePath>pages\login\login.html</PackagePath>
-      <Modified>2013-03-16T19:03:52.007</Modified>
+      <Modified>2013-04-07T12:41:12.287</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\splash.html">
+      <PackagePath>pages\splash\splash.html</PackagePath>
+      <Modified>2013-04-08T00:32:22.016</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Images\nono.jpg">
       <PackagePath>Images\nono.jpg</PackagePath>
       <Modified>2013-02-17T00:25:44.470</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_common.js">
-      <PackagePath>js\functions_common.js</PackagePath>
-      <Modified>2013-03-17T10:56:04.253</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.js">
+      <PackagePath>js\BoxR.Game.js</PackagePath>
+      <Modified>2013-04-07T19:28:13.834</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_self.js">
-      <PackagePath>js\functions_self.js</PackagePath>
-      <Modified>2013-03-17T13:39:24.127</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.min.js">
+      <PackagePath>js\BoxR.Game.min.js</PackagePath>
+      <Modified>2013-04-07T19:28:13.944</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.js">
-      <PackagePath>js\game.js</PackagePath>
-      <Modified>2013-03-17T09:20:00.970</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Popups.js">
+      <PackagePath>js\BoxR.Popups.js</PackagePath>
+      <Modified>2013-04-07T19:21:45.240</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.min.js">
-      <PackagePath>js\game.min.js</PackagePath>
-      <Modified>2013-03-17T09:20:01.245</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Popups.min.js">
+      <PackagePath>js\BoxR.Popups.min.js</PackagePath>
+      <Modified>2013-04-04T08:17:05.758</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.js">
+      <PackagePath>js\BoxR.WinRTClient.js</PackagePath>
+      <Modified>2013-04-07T19:21:45.242</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.min.js">
+      <PackagePath>js\BoxR.WinRTClient.min.js</PackagePath>
+      <Modified>2013-04-07T19:21:45.336</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.IClient.js">
+      <PackagePath>js\BoxR.IClient.js</PackagePath>
+      <Modified>2013-04-07T19:22:03.014</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.IClient.min.js">
+      <PackagePath>js\BoxR.IClient.min.js</PackagePath>
+      <Modified>2013-04-04T07:42:51.481</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.js">
+      <PackagePath>js\BoxR.Server.js</PackagePath>
+      <Modified>2013-04-07T19:22:03.016</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.min.js">
+      <PackagePath>js\BoxR.Server.min.js</PackagePath>
+      <Modified>2013-04-07T19:22:03.088</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\init.js">
+      <PackagePath>js\init.js</PackagePath>
+      <Modified>2013-04-08T00:30:00.395</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\PopupControl.js">
       <PackagePath>js\PopupControl.js</PackagePath>
       <Modified>2013-03-16T20:11:31.404</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\Popups.js">
-      <PackagePath>js\Popups.js</PackagePath>
-      <Modified>2013-03-16T20:09:01.804</Modified>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.js">
       <PackagePath>pages\game\game.js</PackagePath>
-      <Modified>2013-03-17T13:27:06.547</Modified>
+      <Modified>2013-04-07T16:06:20.507</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\main\main.js">
       <PackagePath>pages\main\main.js</PackagePath>
-      <Modified>2013-03-10T10:25:04.248</Modified>
+      <Modified>2013-04-07T15:12:02.564</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\login\login.js">
       <PackagePath>pages\login\login.js</PackagePath>
-      <Modified>2013-03-09T16:21:47.338</Modified>
+      <Modified>2013-04-07T15:14:28.018</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\splash.js">
+      <PackagePath>pages\splash\splash.js</PackagePath>
+      <Modified>2013-04-07T14:04:58.374</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\hubs.js">
       <PackagePath>Scripts\hubs.js</PackagePath>
@@ -164,21 +204,49 @@
       <PackagePath>Scripts\settings.js</PackagePath>
       <Modified>2013-02-25T22:32:17.753</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.ts">
-      <PackagePath>js\game.ts</PackagePath>
-      <Modified>2013-03-17T09:20:00.457</Modified>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.min.js.map">
+      <PackagePath>js\BoxR.Game.min.js.map</PackagePath>
+      <Modified>2013-04-07T19:28:13.963</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.min.js.map">
+      <PackagePath>js\BoxR.Server.min.js.map</PackagePath>
+      <Modified>2013-04-07T14:07:43.078</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.min.js.map">
+      <PackagePath>js\BoxR.WinRTClient.min.js.map</PackagePath>
+      <Modified>2013-04-07T18:57:44.980</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.ts">
+      <PackagePath>js\BoxR.Game.ts</PackagePath>
+      <Modified>2013-04-03T13:39:55.978</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Popups.ts">
+      <PackagePath>js\BoxR.Popups.ts</PackagePath>
+      <Modified>2013-04-04T08:17:05.292</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.ts">
+      <PackagePath>js\BoxR.WinRTClient.ts</PackagePath>
+      <Modified>2013-04-07T19:21:44.781</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.IClient.ts">
+      <PackagePath>js\BoxR.IClient.ts</PackagePath>
+      <Modified>2013-04-04T07:42:51.011</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.ts">
+      <PackagePath>js\BoxR.Server.ts</PackagePath>
+      <Modified>2013-04-07T19:22:02.542</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery.d.ts">
+      <PackagePath>Scripts\jquery.d.ts</PackagePath>
+      <Modified>2013-04-03T10:13:08.817</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\packages.config">
       <PackagePath>packages.config</PackagePath>
       <Modified>2013-02-25T22:03:19.177</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery-1.7.1.min.js.map">
-      <PackagePath>Scripts\jquery-1.7.1.min.js.map</PackagePath>
-      <Modified>2013-02-25T22:28:48.689</Modified>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-03-17T11:02:38.298</Modified>
+      <Modified>2013-04-08T00:20:46.885</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

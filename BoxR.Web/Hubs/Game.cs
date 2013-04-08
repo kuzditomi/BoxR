@@ -51,7 +51,7 @@ namespace BoxR.Web.Hubs
                 
                 Clients.Others.receiveUser(profile); // Alert the other clients about the new user
             }
-            else
+            else if(profile != null)
             {
                 Clients.Caller.alertDuplicate(); // Alert the client about his fail
             }

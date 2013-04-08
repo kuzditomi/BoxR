@@ -28,6 +28,9 @@
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\messagebox.css">
       <PackagePath>css\messagebox.css</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\splash.css">
+      <PackagePath>pages\splash\splash.css</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\css\micrososftlogin35.png">
       <PackagePath>css\micrososftlogin35.png</PackagePath>
     </AppxPackagedFile>
@@ -53,6 +56,9 @@
       <PackagePath>Images\storelogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\boxr.png">
+      <PackagePath>pages\splash\boxr.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\default.html">
       <PackagePath>default.html</PackagePath>
     </AppxPackagedFile>
@@ -65,6 +71,9 @@
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\login\login.html">
       <PackagePath>pages\login\login.html</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\splash.html">
+      <PackagePath>pages\splash\splash.html</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Images\nono.jpg">
       <PackagePath>Images\nono.jpg</PackagePath>
     </AppxPackagedFile>
@@ -73,6 +82,24 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.min.js">
       <PackagePath>js\BoxR.Game.min.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Manager.js">
+      <PackagePath>js\BoxR.Manager.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Manager.min.js">
+      <PackagePath>js\BoxR.Manager.min.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Popups.js">
+      <PackagePath>js\BoxR.Popups.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Popups.min.js">
+      <PackagePath>js\BoxR.Popups.min.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.js">
+      <PackagePath>js\BoxR.WinRTClient.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.min.js">
+      <PackagePath>js\BoxR.WinRTClient.min.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.IClient.js">
       <PackagePath>js\BoxR.IClient.js</PackagePath>
@@ -86,23 +113,11 @@
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.min.js">
       <PackagePath>js\BoxR.Server.min.js</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_common.js">
-      <PackagePath>js\functions_common.js</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\functions_self.js">
-      <PackagePath>js\functions_self.js</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.js">
-      <PackagePath>js\game.js</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.min.js">
-      <PackagePath>js\game.min.js</PackagePath>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\init.js">
+      <PackagePath>js\init.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\PopupControl.js">
       <PackagePath>js\PopupControl.js</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\Popups.js">
-      <PackagePath>js\Popups.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\game\game.js">
       <PackagePath>pages\game\game.js</PackagePath>
@@ -112,6 +127,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\login\login.js">
       <PackagePath>pages\login\login.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\pages\splash\splash.js">
+      <PackagePath>pages\splash\splash.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\hubs.js">
       <PackagePath>Scripts\hubs.js</PackagePath>
@@ -140,17 +158,32 @@
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\settings.js">
       <PackagePath>Scripts\settings.js</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.min.js.map">
+      <PackagePath>js\BoxR.Game.min.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.min.js.map">
+      <PackagePath>js\BoxR.Server.min.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.min.js.map">
+      <PackagePath>js\BoxR.WinRTClient.min.js.map</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Game.ts">
       <PackagePath>js\BoxR.Game.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Manager.ts">
+      <PackagePath>js\BoxR.Manager.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Popups.ts">
+      <PackagePath>js\BoxR.Popups.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.WinRTClient.ts">
+      <PackagePath>js\BoxR.WinRTClient.ts</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.IClient.ts">
       <PackagePath>js\BoxR.IClient.ts</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\BoxR.Server.ts">
       <PackagePath>js\BoxR.Server.ts</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\js\game.ts">
-      <PackagePath>js\game.ts</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\works\BoxR\BoxR.Win8\Scripts\jquery.d.ts">
       <PackagePath>Scripts\jquery.d.ts</PackagePath>
