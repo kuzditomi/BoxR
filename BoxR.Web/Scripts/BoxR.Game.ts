@@ -212,7 +212,7 @@ module BoxR {
 
         constructor(canvas: HTMLElement) {
             this.ctx = (<HTMLCanvasElement>canvas).getContext('2d');
-            this.LeftOffset = canvas.getBoundingClientRect().left;
+            this.LeftOffset = canvas.offsetLeft; //canvas.getBoundingClientRect().left;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
         }

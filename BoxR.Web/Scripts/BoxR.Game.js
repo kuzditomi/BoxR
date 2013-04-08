@@ -168,7 +168,7 @@ var BoxR;
     var Game = (function () {
         function Game(canvas) {
             this.ctx = (canvas).getContext('2d');
-            this.LeftOffset = canvas.getBoundingClientRect().left;
+            this.LeftOffset = canvas.offsetLeft;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
         }
