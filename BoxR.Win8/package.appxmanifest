@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="c4c63ba0-8af0-470c-b005-a22d4b4442e4" Version="1.0.0.0" Publisher="CN=kuzditomi" />
+  <Identity Name="18600TamasKuzdi.BoxR" Version="1.0.0.0" Publisher="CN=B3A87959-53F5-4E4A-ACA2-4B4F24BB4A58" />
   <Properties>
-    <DisplayName>BoxR.Win8</DisplayName>
-    <PublisherDisplayName>kuzditomi</PublisherDisplayName>
+    <DisplayName>BoxR</DisplayName>
+    <PublisherDisplayName>Tamas Kuzdi</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="BoxR.Win8" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="BoxR.Win8" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="BoxR" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="BoxR.Win8" ForegroundText="light" BackgroundColor="#464646">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="images\splashscreen.png" />
       </VisualElements>

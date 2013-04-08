@@ -299,6 +299,8 @@
     <Content Include="appsettings.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\boxr - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\boxr - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />

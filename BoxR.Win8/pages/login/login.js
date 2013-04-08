@@ -1,8 +1,7 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
+﻿/// <reference path="///LiveSDKHTML/js/wl.js" />
+
 (function () {
     "use strict";
-    var client, gameHub, server;
     WinJS.UI.Pages.define("/pages/login/login.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
@@ -24,6 +23,10 @@
             });
             $(".btnfacebook").click(function() {
                 launchFacebookWebAuth();
+            });
+            $(".btnmicrosoft").click(function () {
+                WL.init();
+                authenticate();
             });
         },
 
@@ -104,5 +107,56 @@
     function displayError(error, logerror) {
         $(".error").text(error);
         console.log(logerror || error);
+    }
+    
+    /********** live auth *************/
+    var session = null;
+    
+    function logout() {
+        return new WinJS.Promise(function (complete) {
+            WL.getLoginStatus().then(function () {
+                if (WL.canLogout()) {
+                    WL.logout(complete);
+                }
+                else {
+                    complete();
+                }
+            });
+        });
+    };
+
+
+    function login() {
+        return new WinJS.Promise(function (complete) {
+            WL.login({ scope: "wl.signin" }).then(function (result) {
+                var token = result.session.access_token;
+                BoxR.Manager.Hub.server.loginExternal('microsoft', token).done(function (success) {
+                    if (success) {
+                        BoxR.Manager.UserName = success; // should I write a WinRTManager?
+                        WinJS.Navigation.navigate("/pages/main/main.html");
+                    } else {
+                        displayError("Error with microsoft authentication.");
+                    }
+                });
+
+            }, function (error) {
+                session = null;
+                var dialog = new Windows.UI.Popups.MessageDialog("You must log in.", "Login Required");
+                dialog.showAsync().done(complete);
+            });
+        });
+
+
+    }
+
+
+    function authenticate() {
+        // Force a logout to make it easier to test with multiple Microsoft Accounts
+        logout().then(login).then(function () {
+            if (session === null) {
+                // Authentication failed, try again.
+                authenticate();
+            }
+        });
     }
 })();

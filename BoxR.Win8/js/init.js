@@ -35,7 +35,7 @@
                 }).done(function () {
                     setTimeout(function (){
                         WinJS.Navigation.navigate("/pages/login/login.html");
-                    },3000);
+                    },1500);
                 });
             } else {
                 // TODO: This application has been reactivated from suspension.

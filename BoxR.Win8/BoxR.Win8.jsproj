@@ -47,7 +47,8 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>BoxR.Win8_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>BoxR.Win8_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>29A7B0F9A91E5280D4040CFEFC61387DF8F8786D</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -56,6 +57,7 @@
     <Content Include="..\BoxR.Web\Content\themes\base\jquery.ui.all.css">
       <Link>css\jquery.ui.all.css</Link>
     </Content>
+    <None Include="BoxR.Win8_StoreKey.pfx" />
     <Content Include="css\Error.css" />
     <Content Include="css\Login.css" />
     <Content Include="css\micrososftlogin35.png" />
@@ -92,17 +94,18 @@
     <Content Include="js\BoxR.Server.ts" />
     <Content Include="js\init.js" />
     <Content Include="js\PopupControl.js" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="packages.config" />
+    <Content Include="pages\splash\boxr.png" />
+    <Content Include="pages\splash\splash.html" />
+    <Content Include="pages\splash\splash.css" />
+    <Content Include="pages\splash\splash.js" />
     <Content Include="pages\game\game.html" />
     <Content Include="pages\game\game.js" />
     <Content Include="pages\main\main.html" />
     <Content Include="pages\main\main.js" />
     <Content Include="pages\login\login.html" />
     <Content Include="pages\login\login.js" />
-    <Content Include="pages\splash\boxr.png" />
-    <Content Include="pages\splash\splash.css" />
-    <Content Include="pages\splash\splash.html" />
-    <Content Include="pages\splash\splash.js" />
     <Content Include="Scripts\hubs.js" />
     <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -116,6 +119,7 @@
     <None Include="BoxR.Win8_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="LiveSDKHTML, Version=5.0" />
     <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
