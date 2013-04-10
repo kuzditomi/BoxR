@@ -11,11 +11,16 @@ namespace BoxR.Web.Managers
         #region Properties
 
         private static Dictionary<string, UserProfile> _users;
-
         private static Dictionary<string, UserProfile> Users
         {
             get { return _users ?? (_users = new Dictionary<string, UserProfile>()); }
         }
+
+        private static Dictionary<string, PendingUser> _reqisterQueue;
+        private static Dictionary<string, PendingUser> ReqisterQueue
+        {
+            get { return _reqisterQueue ?? (_reqisterQueue = new Dictionary<string, PendingUser>()); }
+        } 
         #endregion
 
         #region User handling
@@ -28,6 +33,20 @@ namespace BoxR.Web.Managers
         public static void AddUser(string connectionId, UserProfile userProfile)
         {
             Users.Add(connectionId, userProfile);
+        }
+
+        public static void AddUserToRegisterQueue(string connectionId,PendingUser userprofile)
+        {
+            ReqisterQueue.Add(connectionId,userprofile);
+        }
+
+        public static PendingUser GetPendingUser(string connectionId)
+        {
+            if(ReqisterQueue.ContainsKey(connectionId))
+            {
+                return ReqisterQueue[connectionId];
+            }
+            return null;
         }
 
         public static UserProfile GetUser(string connectionId)
@@ -78,5 +97,11 @@ namespace BoxR.Web.Managers
                 .FirstOrDefault();
         }
         #endregion
+
+        public static void RemovePendingUserFromQueue(string connectionId)
+        {
+            if(ReqisterQueue.ContainsKey(connectionId))
+                ReqisterQueue.Remove(connectionId);
+        }
     }
 }

@@ -17,28 +17,6 @@ using WebMatrix.WebData;
 
 namespace BoxR.Web.Hubs
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class LiveUser
-    {
-        [JsonProperty(PropertyName = "id")] 
-        public string Id { get; set; }
-
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        [JsonProperty(PropertyName = "first_name")]
-        public string FirstName { get; set; }
-
-        [JsonProperty(PropertyName = "last_name")]
-        public string LastName { get; set; }
-
-        [JsonProperty(PropertyName = "gender")]
-        public string Gender { get; set; }
-
-        [JsonProperty(PropertyName = "locale")]
-        public string Locale { get; set; }
-    }
-
     public class Game : Hub
     {
         private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger("game");
@@ -312,7 +290,7 @@ namespace BoxR.Web.Hubs
             return string.Empty;
         }
 
-        public string LoginExternal(string provider, string token)
+        public LoginResponse LoginExternal(string provider, string token)
         {
             // If the user is already logged in, remove him from the users
             // then refresh the authentication
@@ -340,99 +318,47 @@ namespace BoxR.Web.Hubs
             {
                 case "facebook":
                     return FacebookLogin(token);
-                    break;
                 case "microsoft":
                     return LiveLogin(token);
-                    break;
             }
-            return string.Empty;
+            return new LoginResponse { Result = ResponseType.Error };
         }
-
-        private string FacebookLogin(string token)
+        
+        public string RegisterUserNameToOAuth(string newUserName)
         {
-            var client = new FacebookClient(token);
-            try
+            var pendingUser = UserManager.GetPendingUser(Context.ConnectionId);
+            if(pendingUser != null)
             {
-                dynamic fbresult = client.Get("me");
-                FacebookUserModel fbuser = Newtonsoft.Json.JsonConvert.DeserializeObject<FacebookUserModel>(fbresult.ToString());
-
-                return LoginOrCreateOAuthUser("facebook", fbuser.id, fbuser.username);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e.Message, e);
-            }
-            return string.Empty;
-        }
-
-        private string LiveLogin(string token)
-        {
-            var uri = String.Format("https://apis.live.net/v5.0/me/?access_token={0}", token);
-            var webClient = new WebClient();
-            var respose = webClient.DownloadString(uri);
-            
-            var user = JsonConvert.DeserializeObject<LiveUser>(respose);
-            return LoginOrCreateOAuthUser("microsoft", user.Id, user.Name);
-        }
-
-        private string LoginOrCreateOAuthUser(string provider,string userId,string userName)
-        {
-            using (var db = new UsersContext())
-            {
-                if (!WebSecurity.Initialized)
-                {
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
-                }
-                var oauthuser = OAuthWebSecurity.GetUserName("facebook", userId);
-                if (!String.IsNullOrEmpty(oauthuser))
-                {
-                    UserProfile profile = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == oauthuser.ToLower());
-                    if (profile != null && !UserManager.IsUserLoggedIn(profile.UserName)) // If the userprofile exists, and the user is not logged in with other windows/browser
-                    {
-                        Logger.Info(String.Format("Logged in, connectionid:{0}, username:{1}", Context.ConnectionId, profile.UserName));
-
-                        //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
-
-                        profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
-                        UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
-
-                        Clients.Others.receiveUser(profile); // Alert the other clients about the new user
-                        return profile.UserName;
-                    }
-                    if (profile != null)
-                    {
-                        Logger.Error("Duplication login try from " + profile.UserId + ": " + profile.UserName);
-                        Clients.Caller.alertDuplicate(); // Alert the client about his fail
-                        return string.Empty;
-                    }
-                    else
-                    {
-                        Logger.Error(String.Format("Inconsistend database state, oauth {0} exists but no UserProfile.",oauthuser));
-                        return string.Empty;
-                    }
-                }
-                else
+                using (var db = new UsersContext())
                 {
                     var profile = new UserProfile
                     {
-                        UserName = userName
+                        UserName = newUserName
                     };
                     db.UserProfiles.Add(profile);
                     db.SaveChanges();
 
-                    OAuthWebSecurity.CreateOrUpdateAccount(provider, userId, userName);
+                    OAuthWebSecurity.CreateOrUpdateAccount(pendingUser.Provider, pendingUser.UserId, newUserName);
 
-                    Logger.Info(String.Format("{0} registered, and logged in, connectionid:{1}, username:{2}",provider, Context.ConnectionId, profile.UserName));
+                    Logger.Info(String.Format("{0} registered, and logged in, connectionid:{1}, username:{2}", pendingUser.Provider,
+                                              Context.ConnectionId, profile.UserName));
 
                     //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
 
-                    profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
+                    profile.ConnectionId = Context.ConnectionId;
+                    // Store the connectionid in the userprofile (not mapped) for performance
                     UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
 
                     Clients.Others.receiveUser(profile); // Alert the other clients about the new user
                     return profile.UserName;
                 }
             }
+            return string.Empty; // TODO: error handling
+        }
+
+        public void SkipRegistration()
+        {
+            UserManager.RemovePendingUserFromQueue(Context.ConnectionId);
         }
 
         public void Logout()
@@ -459,6 +385,87 @@ namespace BoxR.Web.Hubs
                 WebSecurity.Logout();
             }
         }
+
+        
+        #region Login helpers
+        private LoginResponse FacebookLogin(string token)
+        {
+            var client = new FacebookClient(token);
+            try
+            {
+                dynamic fbresult = client.Get("me");
+                FacebookUserModel fbuser = Newtonsoft.Json.JsonConvert.DeserializeObject<FacebookUserModel>(fbresult.ToString());
+
+                return LoginOrCreateOAuthUser("facebook", fbuser.id, fbuser.username);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message, e);
+            }
+            return new LoginResponse { Result = ResponseType.Error };
+        }
+
+        private LoginResponse LiveLogin(string token)
+        {
+            var uri = String.Format("https://apis.live.net/v5.0/me/?access_token={0}", token);
+            var webClient = new WebClient();
+            var respose = webClient.DownloadString(uri);
+
+            var user = JsonConvert.DeserializeObject<LiveUser>(respose);
+            return LoginOrCreateOAuthUser("microsoft", user.Id, user.Name);
+        }
+
+        private LoginResponse LoginOrCreateOAuthUser(string provider, string userId, string userName)
+        {
+            using (var db = new UsersContext())
+            {
+                if (!WebSecurity.Initialized)
+                {
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                }
+                var oauthuser = OAuthWebSecurity.GetUserName(provider, userId);
+                if (!String.IsNullOrEmpty(oauthuser))
+                {
+                    UserProfile profile = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == oauthuser.ToLower());
+                    if (profile != null && !UserManager.IsUserLoggedIn(profile.UserName)) // If the userprofile exists, and the user is not logged in with other windows/browser
+                    {
+                        Logger.Info(String.Format("Logged in, connectionid:{0}, username:{1}", Context.ConnectionId, profile.UserName));
+
+                        //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
+
+                        profile.ConnectionId = Context.ConnectionId; // Store the connectionid in the userprofile (not mapped) for performance
+                        UserManager.AddUser(Context.ConnectionId, profile); // Add the user to the static userlist
+
+                        Clients.Others.receiveUser(profile); // Alert the other clients about the new user
+                        return new LoginResponse { Result = ResponseType.Success, UserName = profile.UserName };
+                    }
+                    if (profile != null)
+                    {
+                        Logger.Error("Duplication login try from " + profile.UserId + ": " + profile.UserName);
+                        Clients.Caller.alertDuplicate(); // Alert the client about his fail
+                        return new LoginResponse { Result = ResponseType.Error };
+                    }
+                    else
+                    {
+                        Logger.Error(String.Format("Inconsistend database state, oauth {0} exists but no UserProfile.", oauthuser));
+                        return new LoginResponse { Result = ResponseType.Error };
+                    }
+                }
+                else
+                {
+                    var pendingUser = new PendingUser
+                                          {
+                                              Provider = provider,
+                                              UserName = userName,
+                                              UserId = userId
+                                          };
+                    UserManager.AddUserToRegisterQueue(Context.ConnectionId, pendingUser);
+                    return new LoginResponse { Result = ResponseType.ChooseNick };
+                }
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Test

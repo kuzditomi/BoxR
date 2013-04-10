@@ -55,6 +55,9 @@ var BoxR;
             BoxR.Manager.Hub.client.alertDisconnect = function () {
                 BoxR.Manager.Client.DisconnectPopup();
             };
+            BoxR.Manager.Hub.client.chooseLoginName = function () {
+                return "mivan";
+            };
         }
         Server.prototype.UpdateUsers = function () {
             BoxR.Manager.Hub.server.getUsers();

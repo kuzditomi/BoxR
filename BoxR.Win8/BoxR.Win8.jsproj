@@ -96,6 +96,8 @@
     <Content Include="js\PopupControl.js" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="packages.config" />
+    <Content Include="pages\choosenick\choosenick.html" />
+    <Content Include="pages\choosenick\choosenick.js" />
     <Content Include="pages\splash\boxr.png" />
     <Content Include="pages\splash\splash.html" />
     <Content Include="pages\splash\splash.css" />

@@ -199,6 +199,9 @@
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\GameModel.cs" />
+    <Compile Include="Models\LiveUser.cs" />
+    <Compile Include="Models\LoginResponse.cs" />
+    <Compile Include="Models\PendingUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

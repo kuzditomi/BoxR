@@ -1,5 +1,5 @@
 ﻿/*!
- * ASP.NET SignalR JavaScript Library v1.0.0
+ * ASP.NET SignalR JavaScript Library v1.0.1
  * http://signalr.net/
  *
  * Copyright Microsoft Open Technologies, Inc. All rights reserved.
@@ -83,60 +83,50 @@
         proxies.game.client = {};
         proxies.game.server = {
             edgeClicked: function (i, j) {
-                /// <summary>Calls the EdgeClicked method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
-                /// <param name=\"i\" type=\"Number\">Server side type is System.Int32</param>
-                /// <param name=\"j\" type=\"Number\">Server side type is System.Int32</param>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["EdgeClicked"], $.makeArray(arguments)));
             },
 
             finishGame: function () {
-                /// <summary>Calls the FinishGame method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["FinishGame"], $.makeArray(arguments)));
             },
 
             getUsers: function () {
-                /// <summary>Calls the GetUsers method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["GetUsers"], $.makeArray(arguments)));
             },
 
             invite: function (invited) {
-                /// <summary>Calls the Invite method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
-                /// <param name=\"invited\" type=\"String\">Server side type is System.String</param>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["Invite"], $.makeArray(arguments)));
             },
 
             inviteAccepted: function () {
-                /// <summary>Calls the InviteAccepted method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["InviteAccepted"], $.makeArray(arguments)));
             },
 
             inviteDenied: function () {
-                /// <summary>Calls the InviteDenied method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["InviteDenied"], $.makeArray(arguments)));
             },
 
             login: function (username, password) {
-                /// <summary>Calls the Login method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
-                /// <param name=\"username\" type=\"String\">Server side type is System.String</param>
-                /// <param name=\"password\" type=\"String\">Server side type is System.String</param>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["Login"], $.makeArray(arguments)));
             },
 
             loginExternal: function (provider, token) {
-                /// <summary>Calls the LoginExternal method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
-                /// <param name=\"provider\" type=\"String\">Server side type is System.String</param>
-                /// <param name=\"token\" type=\"String\">Server side type is System.String</param>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["LoginExternal"], $.makeArray(arguments)));
             },
 
             logout: function () {
-                /// <summary>Calls the Logout method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["Logout"], $.makeArray(arguments)));
             },
 
+            registerUserNameToOAuth: function (newUserName) {
+                return proxies.game.invoke.apply(proxies.game, $.merge(["RegisterUserNameToOAuth"], $.makeArray(arguments)));
+            },
+
+            skipRegistration: function () {
+                return proxies.game.invoke.apply(proxies.game, $.merge(["SkipRegistration"], $.makeArray(arguments)));
+            },
+
             test: function (token) {
-                /// <summary>Calls the Test method on the server-side Game hub.&#10;Returns a jQuery.Deferred() promise.</summary>
-                /// <param name=\"token\" type=\"String\">Server side type is System.String</param>
                 return proxies.game.invoke.apply(proxies.game, $.merge(["Test"], $.makeArray(arguments)));
             }
         };

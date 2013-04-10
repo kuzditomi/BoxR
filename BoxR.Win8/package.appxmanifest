@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="BoxR" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="BoxR.Win8" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="BoxR" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="BoxR.Win8" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="images\splashscreen.png" />
       </VisualElements>

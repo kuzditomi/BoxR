@@ -65,12 +65,18 @@
                                 new String("#access_token=").length,
                                 fragment.indexOf("&expires_in="));
 
-                            BoxR.Manager.Hub.server.loginExternal('facebook', token).done(function (success) {
-                                if (success) {
-                                    BoxR.Manager.UserName = success; // should I write a WinRTManager?
-                                    WinJS.Navigation.navigate("/pages/main/main.html");
-                                } else {
-                                    displayError("Error with facebook authentication.");
+                            BoxR.Manager.Hub.server.loginExternal('facebook', token).done(function (loginresult) {
+                                switch (loginresult.Result) {
+                                    case 0: // Success
+                                        BoxR.Manager.UserName = loginresult.UserName;
+                                        WinJS.Navigation.navigate("/pages/main/main.html");
+                                        break;
+                                    case 1: // Need to choose nickname
+                                        WinJS.Navigation.navigate("/pages/choosenick/choosenick.html",{ provider:"facebook" });
+                                        break;
+                                    case 2: // Error
+                                        displayError("Error with facebook authentication.");
+                                        break;
                                 }
                             });
                         }
@@ -93,12 +99,18 @@
     /************ form auth ***************/
     function launchformauth(username, password) {
         $("#progressRing").show();
-        BoxR.Manager.Hub.server.login(username, password).done(function (success) {
-            if (success) {
-                BoxR.Manager.UserName = success; // should I write a WinRTManager?
-                WinJS.Navigation.navigate("/pages/main/main.html");
-            } else {
-                displayError("Wrong password or username!");
+        BoxR.Manager.Hub.server.login(username, password).done(function (loginresult) {
+            switch (loginresult.Result) {
+                case 0: // Success
+                    BoxR.Manager.UserName = loginresult.UserName;
+                    WinJS.Navigation.navigate("/pages/main/main.html");
+                    break;
+                case 1: // Need to choose nickname
+                    WinJS.Navigation.navigate("/pages/choosenick/choosenick.html", { provider: "microsoft" });
+                    break;
+                case 2: // Error
+                    displayError("Error with microsoft authentication.");
+                    break;
             }
             $("#progressRing").hide();
         });
@@ -148,7 +160,6 @@
 
 
     }
-
 
     function authenticate() {
         // Force a logout to make it easier to test with multiple Microsoft Accounts
