@@ -1,14 +1,50 @@
 ﻿@model BoxR.Web.Models.RegisterExternalLoginModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Associate your account";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Associate your @ViewBag.ProviderDisplayName account.</h2>
-</hgroup>
+<section class="centersection" >
+    <table>
+        <tr>
+            <td>
+                <div class="logincred">
+                    <h1>BoxR</h1>
+                    <h2>Associate your @ViewBag.ProviderDisplayName account.</h2>
+                    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        You've successfully authenticated with <strong>@ViewBag.ProviderDisplayName</strong>.
+                                        Please enter a user name for this site below and click the Confirm button to finish
+                                        logging in.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(m => m.UserName)</td>
+                                <td> @Html.TextBoxFor(m => m.UserName, new {@class = "username"})</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.ActionLink("Back to login", "Login", null, new {@class = "btn"})</td>
+                                <td><input type="submit" value="Register" class="btn"/></td>
+                            </tr>
+                        </table>
+                        <div>
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.ExternalLoginData)
+                        </div>
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
 
-@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
+
+@*@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -29,8 +65,10 @@
         @Html.HiddenFor(m => m.ExternalLoginData)
         <input type="submit" value="Register" />
     </fieldset>
-}
+}*@
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/login")
 }

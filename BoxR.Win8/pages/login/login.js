@@ -128,7 +128,7 @@
 
     function login() {
         return new WinJS.Promise(function (complete) {
-            WL.login({ scope: "wl.signin" }).then(function (result) {
+            WL.login({ scope: "wl.basic" }).then(function (result) {
                 var token = result.session.access_token;
                 BoxR.Manager.Hub.server.loginExternal('microsoft', token).done(function (success) {
                     if (success) {

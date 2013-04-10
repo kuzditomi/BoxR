@@ -20,7 +20,7 @@ namespace BoxR.Web.Hubs
     [JsonObject(MemberSerialization.OptIn)]
     public class LiveUser
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = "id")] 
         public string Id { get; set; }
 
         [JsonProperty(PropertyName = "name")]
@@ -367,19 +367,12 @@ namespace BoxR.Web.Hubs
 
         private string LiveLogin(string token)
         {
-            var requestUri = new StringBuilder("https://apis.live.net/v5.0/me");
-            requestUri.AppendFormat("?access_token={0}", token);
-            var request = (HttpWebRequest)WebRequest.Create(requestUri.ToString());
-            request.Method = "GET";
-
-            var response = (HttpWebResponse)request.GetResponse();
-            using (var reader = new StreamReader(response.GetResponseStream()))
-            {
-                var json = reader.ReadToEnd();
-
-                var user = JsonConvert.DeserializeObject<LiveUser>(json);
-                return LoginOrCreateOAuthUser("microsoft", user.Id, user.Name);
-            }
+            var uri = String.Format("https://apis.live.net/v5.0/me/?access_token={0}", token);
+            var webClient = new WebClient();
+            var respose = webClient.DownloadString(uri);
+            
+            var user = JsonConvert.DeserializeObject<LiveUser>(respose);
+            return LoginOrCreateOAuthUser("microsoft", user.Id, user.Name);
         }
 
         private string LoginOrCreateOAuthUser(string provider,string userId,string userName)
