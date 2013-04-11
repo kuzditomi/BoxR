@@ -45,6 +45,7 @@
     <Content Include="Css\Error.css" />
     <Content Include="Css\Login.css" />
     <Content Include="Css\Site.css" />
+    <Content Include="Images\boxr.png" />
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
