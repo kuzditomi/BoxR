@@ -218,6 +218,29 @@ namespace BoxR.Web.Hubs
             Clients.AllExcept(opponent.ConnectionId).receiveUser(user);
         }
 
+        public void QuitGame()
+        {
+            if (!Authenticate()) // It's never too late to check 
+                return;
+
+            var user = UserManager.GetUser(Context.ConnectionId); // Get the current user
+
+            if (!user.IsInGroup) // If something went wrong
+                return;
+
+            var opponent = UserManager.GetOtherUserInGroup(Context.ConnectionId, user.GroupId); // Get the inviter's profile
+
+            Groups.Remove(user.ConnectionId, user.GroupId); // remove from SignalR group
+            Groups.Remove(opponent.ConnectionId, user.GroupId);
+
+            UserManager.RemoveUserFromGroup(Context.ConnectionId); // remove from local group
+            UserManager.RemoveUserFromGroup(opponent.ConnectionId);
+            
+            Clients.Client(opponent.ConnectionId).alertDisconnect(); // Alert the opponent about the disconnect :(
+            Clients.Others.receiveUser(opponent);
+            Clients.AllExcept(opponent.ConnectionId).receiveUser(user);
+        }
+
         #endregion
 
         #region Helpers

@@ -7,7 +7,9 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
-            
+            document.getElementById("quitBtn").onclick = function() {
+                BoxR.Manager.Client.QuitPopup();
+            };
         },
 
         unload: function () {

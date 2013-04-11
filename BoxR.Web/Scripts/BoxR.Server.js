@@ -26,7 +26,9 @@ var BoxR;
                 if(!userList) {
                     return;
                 }
-                userList.appendChild(_this.createDivFromUser(user));
+                if(user.ConnectionId != BoxR.Manager.Hub.connection.id) {
+                    userList.appendChild(_this.createDivFromUser(user));
+                }
             };
             BoxR.Manager.Hub.client.removeUser = function (connectionId) {
                 var userList = document.getElementById("userList");
@@ -54,9 +56,6 @@ var BoxR;
             };
             BoxR.Manager.Hub.client.alertDisconnect = function () {
                 BoxR.Manager.Client.DisconnectPopup();
-            };
-            BoxR.Manager.Hub.client.chooseLoginName = function () {
-                return "mivan";
             };
         }
         Server.prototype.UpdateUsers = function () {

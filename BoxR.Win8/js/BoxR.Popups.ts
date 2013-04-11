@@ -58,7 +58,7 @@ module BoxR {
                         text: "Quit",
                         background: this.redColor,
                         click: () => {
-                            BoxR.Manager.Hub.server.inviteDenied();
+                            BoxR.Manager.Hub.server.quitGame();
                             this.popupControl.Hide();
                             WinJS.Navigation.navigate("/pages/main/main.html");
                         }

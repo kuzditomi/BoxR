@@ -80,6 +80,7 @@
     <Content Include="js\BoxR.Manager.ts" />
     <Content Include="js\BoxR.Popups.js" />
     <Content Include="js\BoxR.Popups.min.js" />
+    <Content Include="js\BoxR.Popups.min.js.map" />
     <Content Include="js\BoxR.Popups.ts" />
     <Content Include="js\BoxR.Server.min.js.map" />
     <Content Include="js\BoxR.WinRTClient.js" />
