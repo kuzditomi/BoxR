@@ -68,10 +68,11 @@
     <Content Include="Images\logo.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
+    <Content Include="css\messagebox.css" />
     <Content Include="Images\smalllogo.png" />
     <Content Include="Images\splashscreen.png" />
     <Content Include="Images\storelogo.png" />
-    <Content Include="css\messagebox.css" />
+    <Content Include="Images\widelogo.png" />
     <Content Include="js\BoxR.Game.js" />
     <Content Include="js\BoxR.Game.min.js" />
     <Content Include="js\BoxR.Game.min.js.map" />

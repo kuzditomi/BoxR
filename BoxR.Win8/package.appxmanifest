@@ -4,7 +4,7 @@
   <Properties>
     <DisplayName>BoxR</DisplayName>
     <PublisherDisplayName>Tamas Kuzdi</PublisherDisplayName>
-    <Logo>images\storelogo.png</Logo>
+    <Logo>Images\storelogo.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.2.1</OSMinVersion>
@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="BoxR" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="BoxR.Win8" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
-        <DefaultTile ShowName="allLogos" />
+      <VisualElements DisplayName="BoxR" Logo="Images\logo.png" SmallLogo="Images\smalllogo.png" Description="BoxR is an implementation of the game known as dots and boxes." ForegroundText="light" BackgroundColor="darkSlateBlue" ToastCapable="true">
+        <DefaultTile ShowName="allLogos" WideLogo="Images\widelogo.png" ShortName="BoxR" />
         <SplashScreen Image="Images\splashscreen.png" BackgroundColor="darkSlateBlue" />
       </VisualElements>
     </Application>
