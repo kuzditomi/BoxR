@@ -49,6 +49,18 @@
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
+    <None Include="Scripts\BoxR.Game.min.js.map">
+      <DependentUpon>BoxR.Game.js</DependentUpon>
+    </None>
+    <None Include="Scripts\BoxR.IClient.min.js.map">
+      <DependentUpon>BoxR.IClient.js</DependentUpon>
+    </None>
+    <None Include="Scripts\BoxR.Manager.min.js.map">
+      <DependentUpon>BoxR.Manager.js</DependentUpon>
+    </None>
+    <None Include="Scripts\BoxR.Server.min.js.map">
+      <DependentUpon>BoxR.Server.js</DependentUpon>
+    </None>
     <None Include="Scripts\lib\jquery-1.7.1.min.js.map">
       <DependentUpon>jquery-1.7.1.js</DependentUpon>
     </None>
