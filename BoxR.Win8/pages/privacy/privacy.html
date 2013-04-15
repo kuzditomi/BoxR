@@ -5,12 +5,18 @@
     <title>Privacy Policy</title>
     <style>
         h2 {
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-family: 'Segoe UI Semibold';
+            margin-bottom: 5px;
         }
         li {
             list-style: none;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .win-settings-section {
+            font-size: 12pt;
+        }
+        .win-settings-section h2{
+            font-size: 14pt;
         }
     </style>
 </head>
@@ -20,21 +26,33 @@
         <div class="win-ui-dark win-header" style="background-color:darkslateblue"> <!-- Background color reflects app's personality -->
             <button type="button" onclick="WinJS.UI.SettingsFlyout.show()" class="win-backbutton"></button>
             <div class="win-label">Privacy Policy</div>
-            <img src="/Images/boxr.png" width="40" height="40" style="position: absolute; right: 40px;"/>
+            <img src="/Images/logo.png" width="40" height="40" style="position: absolute; right: 40px;"/>
         </div>
         <div class="win-content ">
             <div class="win-settings-section" style="color: darkslateblue">
                 <ul>
-                    <li>We collect but do not link personal and activity data.</li>
-                    <li>We do not store or share your precise location.</li>
-                    <li>You can request to see your personal data.</li>
-                    <li>We may keep data indefinitely.</li>
-                    <li>We don't share your personal data with other companies.</li>
-                    <li>No ad companies collect data through our service.</li>
-                    <li>You can ask privacy questions by sending an email to kuzditomi@gmail.com.</li>
-                    <li>Service providers access data on our behalf.</li>
-                    <li>We take steps to protect personal information.</li>
-                    <li>Special situations may require disclosure of your data.</li>
+                    <li>
+                        <h2>Personal data collection</h2>
+                        We collect but do not link personal and activity data.
+                        You can request to see your personal data.
+                        We may keep data indefinitely.
+                    </li>
+                    <li>
+                        <h2>Share of personal data</h2>
+                        We don't share your personal data with other companies.
+                        No ad companies collect data through our service.
+                        Service providers access data on our behalf.
+                        We take steps to protect personal information.
+                        Special situations may require disclosure of your data.
+                    </li>
+                    <li>
+                        <h2>Locations</h2>
+                        We do not store or share your precise location.
+                    </li>
+                    <li>
+                        <h2>Questions</h2>
+                        You can ask privacy questions by sending an email to kuzditomi@gmail.com.
+                    </li>
                 </ul>
             </div>
         </div>
