@@ -1,4 +1,4 @@
-/// <reference path="BoxR.IClient.ts"/>
+﻿/// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Game.ts"/>
 /// <reference path="BoxR.Manager.ts"/>
 

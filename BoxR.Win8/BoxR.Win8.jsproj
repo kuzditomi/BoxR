@@ -49,6 +49,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>BoxR.Win8_StoreKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>29A7B0F9A91E5280D4040CFEFC61387DF8F8786D</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">

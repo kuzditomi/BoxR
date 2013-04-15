@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * Documentation Content
  * Copyright (c) 2009 Packt Publishing, http://packtpub.com/
  * Copyright (c) 2012 jQuery Foundation, http://jquery.org/

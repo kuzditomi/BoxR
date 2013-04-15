@@ -49,6 +49,12 @@
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
+    <None Include="Scripts\lib\jquery-1.7.1.min.js.map">
+      <DependentUpon>jquery-1.7.1.js</DependentUpon>
+    </None>
+    <None Include="Scripts\lib\jquery.signalR-1.0.1.min.js.map">
+      <DependentUpon>jquery.signalR-1.0.1.js</DependentUpon>
+    </None>
     <TypeScriptCompile Include="Scripts\BoxR.IClient.ts" />
     <Content Include="Scripts\BoxR.IClient.js">
       <DependentUpon>BoxR.IClient.ts</DependentUpon>

@@ -1,4 +1,4 @@
-/// <reference path="BoxR.IClient.ts"/>
+﻿/// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Server.ts"/>
 
 module BoxR {
