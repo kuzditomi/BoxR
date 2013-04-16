@@ -1,4 +1,4 @@
-/// <reference path="BoxR.Manager.ts"/>
+﻿/// <reference path="BoxR.Manager.ts"/>
 declare var WinJS;
 module BoxR {
     export class Popups {

@@ -1,4 +1,4 @@
-var BoxR;
+﻿var BoxR;
 (function (BoxR) {
     var Popups = (function () {
         function Popups(popupControl) {
