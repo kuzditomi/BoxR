@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="18600TamasKuzdi.BoxR" Version="1.0.0.6" Publisher="CN=B3A87959-53F5-4E4A-ACA2-4B4F24BB4A58" />
+  <Identity Name="18600TamasKuzdi.BoxR" Version="1.0.0.10" Publisher="CN=B3A87959-53F5-4E4A-ACA2-4B4F24BB4A58" />
   <Properties>
     <DisplayName>BoxR</DisplayName>
     <PublisherDisplayName>Tamas Kuzdi</PublisherDisplayName>

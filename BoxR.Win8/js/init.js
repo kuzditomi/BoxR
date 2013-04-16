@@ -1,4 +1,7 @@
-﻿(function () {
+﻿/// <reference path="BoxR.Manager.js"/>
+/// <reference path="setting.js"/>
+
+(function () {
     "use strict";
 
     WinJS.Binding.optimizeBindingReferences = true;
@@ -27,7 +30,7 @@
                 
                 // connect to Hub and set the static Hub and static Connection
                 initConnection();
-
+                initAds();
                 // create the populcontrol for the Client
                 var popupDiv = document.getElementById('popupdiv');
                 var popupControl = new BoxR.UI.PopupControl(popupDiv);
@@ -55,6 +58,7 @@
                 // TODO: This application has been reactivated from suspension.
                 // store logged in state?
                 WinJS.Navigation.navigate("/pages/login/login.html");
+                initConnection();
             }
 
             if (app.sessionState.history) {
@@ -77,7 +81,8 @@
         // complete an asynchronous operation before your application is 
         // suspended, call args.setPromise().
 
-        BoxR.Manager.Hub.server.logout();
+        if(BoxR.Manager.Hub)
+            BoxR.Manager.Hub.server.logout();
         app.sessionState.history = nav.history;
     };
 
@@ -144,4 +149,19 @@ function initConnection() {
     // create hub and set the static Hub
     var hub = $.connection.game;
     BoxR.Manager.Hub = hub;
+}
+
+function initAds() {
+    var currentApp = Windows.ApplicationModel.Store.CurrentAppSimulator;
+    // Get the license info
+    var licenseInformation = currentApp.licenseInformation;
+    if (licenseInformation.isTrial) {
+        var adDiv = document.getElementById("myAd");
+        var myAdControl = new MicrosoftNSJS.Advertising.AdControl(adDiv,
+            {
+                applicationId: 'c7d93e9f-0ef7-4436-8bf3-59368e6c5034',
+                adUnitId: '126195'
+            });
+        myAdControl.isAutoRefreshEnabled = true;
+    }
 }
