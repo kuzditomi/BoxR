@@ -1,10 +1,11 @@
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 var BoxR;
 (function (BoxR) {
+    var dummychars = "Ù";
     var IsSelfRound = false;
     "use strict";
     var Drawable = (function () {

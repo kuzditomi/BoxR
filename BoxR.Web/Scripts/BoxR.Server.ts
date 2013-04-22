@@ -3,7 +3,7 @@
 /// <reference path="BoxR.Manager.ts"/>
 
 module BoxR {
-
+    var dummychars = "Ù";
     export class Server {
         constructor() {
             var _this = this;

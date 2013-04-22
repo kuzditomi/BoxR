@@ -1,8 +1,7 @@
 ﻿/// <reference path="BoxR.Game.ts"/>
 /// <reference path="BoxR.Server.ts"/>
-
-
 module BoxR {
+    var dummychars = "Ù";
     "use strict";
 
     export interface IClient {

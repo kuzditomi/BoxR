@@ -3,6 +3,7 @@
 /// <reference path="BoxR.IClient.ts"/>
 
 module BoxR {
+    var dummychars = "Ù";
     export module Manager {
         export var Connection: any;
         export var Hub: any;

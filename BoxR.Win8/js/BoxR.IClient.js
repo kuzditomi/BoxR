@@ -1,5 +1,6 @@
-var BoxR;
+﻿var BoxR;
 (function (BoxR) {
+    var dummychars = "Ù";
     "use strict";
     var ClientBase = (function () {
         function ClientBase() { }

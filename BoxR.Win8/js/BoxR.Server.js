@@ -1,5 +1,6 @@
-var BoxR;
+﻿var BoxR;
 (function (BoxR) {
+    var dummychars = "Ù";
     var Server = (function () {
         function Server() {
             var _this = this;

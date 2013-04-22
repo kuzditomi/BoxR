@@ -1,7 +1,7 @@
 ﻿/// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Server.ts"/>
-
 module BoxR {
+    var dummychars = "Ù";
     var IsSelfRound :bool = false;
     "use strict";
     export class Drawable {
@@ -9,10 +9,9 @@ module BoxR {
         ctx: CanvasRenderingContext2D;
         x: number;
         y: number;
-
+         
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number) {
             this.active = false;
-
             this.ctx = ctx;
             this.x = x;
             this.y = y;

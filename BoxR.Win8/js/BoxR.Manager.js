@@ -1,5 +1,6 @@
-var BoxR;
+﻿var BoxR;
 (function (BoxR) {
+    var dummychars = "Ù";
     (function (Manager) {
         Manager.Connection;
         Manager.Hub;
