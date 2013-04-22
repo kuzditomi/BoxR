@@ -19,7 +19,8 @@ namespace BoxR.Web.Hubs
 {
     public class Game : Hub
     {
-        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger("game");
+        private static readonly log4net.ILog BoxRLogger = log4net.LogManager.GetLogger("LogFileAppender");
+        private static readonly log4net.ILog ReportLogger = log4net.LogManager.GetLogger("ReportFileAppender");
 
         #region Connect and Disconnect
         /// <summary>
@@ -28,7 +29,7 @@ namespace BoxR.Web.Hubs
         /// <returns></returns>
         public override Task OnConnected()
         {
-            Logger.Info("New connection, id:" + Context.ConnectionId);
+            BoxRLogger.Info("New connection, id:" + Context.ConnectionId);
             
             var username = Context.User.Identity.Name; // Get the logged in username
             var context = new UsersContext();
@@ -38,7 +39,7 @@ namespace BoxR.Web.Hubs
 
             if(profile != null && !UserManager.IsUserLoggedIn(profile.UserName)) // If the userprofile exists, and the user is not logged in with other windows/browser
             {
-                Logger.Info(String.Format("Logged in, connectionid:{0}, username:{1}",Context.ConnectionId,profile.UserName));
+                BoxRLogger.Info(String.Format("Logged in, connectionid:{0}, username:{1}",Context.ConnectionId,profile.UserName));
 
                 //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
 
@@ -60,7 +61,7 @@ namespace BoxR.Web.Hubs
         /// <returns></returns>
         public override Task OnDisconnected()
         {
-            Logger.Info("Disconnected, id:" + Context.ConnectionId);
+            BoxRLogger.Info("Disconnected, id:" + Context.ConnectionId);
 
             if (UserManager.UserExists(Context.ConnectionId)) // If the user is on the users' list ( is not duplicate, or any error)
             {
@@ -243,6 +244,13 @@ namespace BoxR.Web.Hubs
 
         #endregion
 
+        #region Report
+        public void Report(string error)
+        {
+            ReportLogger.Error(error);
+        }
+        #endregion
+
         #region Helpers
 
         /// <summary>
@@ -287,7 +295,7 @@ namespace BoxR.Web.Hubs
                         var profile = db.UserProfiles.SingleOrDefault(u => u.UserName == username);
                         if (profile != null && !UserManager.IsUserLoggedIn(profile.UserName)) // If the userprofile exists, and the user is not logged in with other windows/browser
                         {
-                            Logger.Info(String.Format("Logged in, connectionid:{0}, username:{1}", Context.ConnectionId, profile.UserName));
+                            BoxRLogger.Info(String.Format("Logged in, connectionid:{0}, username:{1}", Context.ConnectionId, profile.UserName));
 
                             //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
 
@@ -301,14 +309,14 @@ namespace BoxR.Web.Hubs
                         else
                         {
                             Clients.Caller.alertDuplicate(); // Alert the client about his fail
-                            Logger.Error("Duplication login try from "+ profile.UserId+ ": " + profile.UserName);
+                            BoxRLogger.Error("Duplication login try from "+ profile.UserId+ ": " + profile.UserName);
                         }
                     }
                 }
             }
             catch(Exception e)
             {
-                Logger.Error(e.Message,e);
+                BoxRLogger.Error(e.Message,e);
             }
             return string.Empty;
         }
@@ -363,7 +371,7 @@ namespace BoxR.Web.Hubs
 
                     OAuthWebSecurity.CreateOrUpdateAccount(pendingUser.Provider, pendingUser.UserId, newUserName);
 
-                    Logger.Info(String.Format("{0} registered, and logged in, connectionid:{1}, username:{2}", pendingUser.Provider,
+                    BoxRLogger.Info(String.Format("{0} registered, and logged in, connectionid:{1}, username:{2}", pendingUser.Provider,
                                               Context.ConnectionId, profile.UserName));
 
                     //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
@@ -423,7 +431,7 @@ namespace BoxR.Web.Hubs
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message, e);
+                BoxRLogger.Error(e.Message, e);
             }
             return new LoginResponse { Result = ResponseType.Error };
         }
@@ -452,7 +460,7 @@ namespace BoxR.Web.Hubs
                     UserProfile profile = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == oauthuser.ToLower());
                     if (profile != null && !UserManager.IsUserLoggedIn(profile.UserName)) // If the userprofile exists, and the user is not logged in with other windows/browser
                     {
-                        Logger.Info(String.Format("Logged in, connectionid:{0}, username:{1}", Context.ConnectionId, profile.UserName));
+                        BoxRLogger.Info(String.Format("Logged in, connectionid:{0}, username:{1}", Context.ConnectionId, profile.UserName));
 
                         //Clients.Caller.receiveUsers(UserManager.GetUsers()); // Send the client the users currently logged in TODO: and not in game(or currently invited?)
 
@@ -464,13 +472,13 @@ namespace BoxR.Web.Hubs
                     }
                     if (profile != null)
                     {
-                        Logger.Error("Duplication login try from " + profile.UserId + ": " + profile.UserName);
+                        BoxRLogger.Error("Duplication login try from " + profile.UserId + ": " + profile.UserName);
                         Clients.Caller.alertDuplicate(); // Alert the client about his fail
                         return new LoginResponse { Result = ResponseType.Error };
                     }
                     else
                     {
-                        Logger.Error(String.Format("Inconsistend database state, oauth {0} exists but no UserProfile.", oauthuser));
+                        BoxRLogger.Error(String.Format("Inconsistend database state, oauth {0} exists but no UserProfile.", oauthuser));
                         return new LoginResponse { Result = ResponseType.Error };
                     }
                 }
@@ -536,7 +544,7 @@ namespace BoxR.Web.Hubs
                 }
                 catch (Exception e)
                 {
-                    Logger.Error(e.Message, e);
+                    BoxRLogger.Error(e.Message, e);
                     Clients.Caller.receive("hiba:" + e.Message);
                 }
             }

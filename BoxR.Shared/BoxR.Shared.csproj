@@ -112,7 +112,9 @@ copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Win8\Images\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\Scripts\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Win8\js\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Web\Scripts\lib\"
-copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Win8\Scripts\"</PostBuildEvent>
+copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Win8\Scripts\"
+del "$(SolutionDir)BoxR.Win8\Scripts\*.map"
+del "$(SolutionDir)BoxR.Win8\js\*.map"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

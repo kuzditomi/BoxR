@@ -1,4 +1,4 @@
-﻿var BoxR;
+var BoxR;
 (function (BoxR) {
     "use strict";
     var ClientBase = (function () {

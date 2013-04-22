@@ -85,7 +85,7 @@
                         }
                         break;
                     case Windows.Security.Authentication.Web.WebAuthenticationStatus.userCancel:
-                        displayError("User cancelled the authentication to Facebook.");
+                        //displayError("User cancelled the authentication to Facebook.");
                         break;
                     case Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp:
                         displayError("Error with facebook authentication..");
@@ -104,7 +104,7 @@
                 BoxR.Manager.UserName = success;
                 WinJS.Navigation.navigate("/pages/main/main.html");
             } else {
-                displayError("Error with microsoft authentication.");
+                displayError("Error with authentication.");
             }
             
             $("#progressRing").hide();

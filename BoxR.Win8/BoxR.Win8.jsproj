@@ -97,6 +97,8 @@
     <Content Include="pages\choosenick\choosenick.html" />
     <Content Include="pages\choosenick\choosenick.js" />
     <Content Include="pages\privacy\privacy.html" />
+    <Content Include="pages\report\report.html" />
+    <Content Include="pages\report\report.js" />
     <Content Include="pages\splash\splash.html" />
     <Content Include="pages\splash\splash.css" />
     <Content Include="pages\splash\splash.js" />

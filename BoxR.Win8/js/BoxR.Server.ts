@@ -13,7 +13,9 @@ module BoxR {
                 var span = document.createElement("span");
                 span.textContent = "You are already logged in with another window.";
                 span.className = "error";
-                header.appendChild(span);
+                if (header) {
+                    header.appendChild(span);
+                }
             }
 
             BoxR.Manager.Hub.client.receiveUsers = function (users) {
