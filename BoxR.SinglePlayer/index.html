@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>BoxR Singleplayer</title>
+    <link rel="stylesheet" href="css/boxr.css"/>
+</head>
+    <body>
+        <header id="header">
+            <h1>BoxR</h1>
+        </header>
+        <div id="container"> 
+            How can I call You?
+            <input type="text" id="name"/>
+            <input type="button" onclick="window.StartGame();" value="Start Game!"/>
+        </div>
+        <footer>
+            Copyright © 2013 - Küzdi Tamás
+        </footer>
+        <script>
+            window.StartGame = function () {
+                var name = document.getElementById('name').value;
+                window.location.href = "game.html?name=" + name;
+            }
+    </script>
+    </body>
+</html>
