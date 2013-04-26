@@ -9,7 +9,7 @@ In the project you can find two versions of the game, one written for ASP.NET 4.
 
 [Windows Store application](http://apps.microsoft.com/windows/hu-HU/app/boxr/eecf0832-e2e4-4cb8-8ac2-92348a3d4e97)
 
-## Lates Release
+## Latest Release
 BoxR v1.0 - 2013.04.25 - contains
 
 * ASP.NET 4.5 project
