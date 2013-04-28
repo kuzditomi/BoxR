@@ -1,6 +1,7 @@
 ﻿/// <reference path="BoxR.Manager.ts"/>
 declare var WinJS;
 module BoxR {
+    var dummychars = "Ù";
     export class Popups {
         private greenColor: string;
         private redColor: string;

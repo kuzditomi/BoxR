@@ -6,7 +6,7 @@
 
 module BoxR {
     "use strict";
-
+    var dummychars = "Ù";
     export class WinRTClient extends ClientBase {
         private popupHelper: BoxR.Popups;
         private popupControl: any;
@@ -35,7 +35,6 @@ module BoxR {
                     canvas.addEventListener("mousemove", function (e) { game.MouseMove(<MouseEvent>e); });
                     document.getElementById("selfname").innerHTML = name;
                     document.getElementById("opponentname").innerHTML = opponentName;
-                    document.getElementById("roundcounter").innerHTML = selfStart ? "YOUR TURN COMES" : "PLEASE WAIT FOR THE OPPONENT"; 
                     document.getElementById("welcome").innerHTML = "Welcome " + name;
                 });          
         }

@@ -6,6 +6,7 @@
 var BoxR;
 (function (BoxR) {
     "use strict";
+    var dummychars = "Ù";
     var WinRTClient = (function (_super) {
         __extends(WinRTClient, _super);
         function WinRTClient(popupControl) {

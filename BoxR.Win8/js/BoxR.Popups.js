@@ -1,5 +1,6 @@
 ﻿var BoxR;
 (function (BoxR) {
+    var dummychars = "Ù";
     var Popups = (function () {
         function Popups(popupControl) {
             this.popupControl = popupControl;

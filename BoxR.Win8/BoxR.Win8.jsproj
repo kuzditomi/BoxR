@@ -64,6 +64,7 @@
     <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
     <Content Include="Images\fbbutton35.png" />
+    <Content Include="Images\header_widelogo.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
@@ -84,7 +85,6 @@
     <Content Include="js\BoxR.Popups.ts" />
     <Content Include="js\BoxR.WinRTClient.js" />
     <Content Include="js\BoxR.WinRTClient.min.js" />
-    <Content Include="js\BoxR.WinRTClient.min.js.map" />
     <Content Include="js\BoxR.WinRTClient.ts" />
     <Content Include="js\BoxR.IClient.js" />
     <Content Include="js\BoxR.IClient.min.js" />

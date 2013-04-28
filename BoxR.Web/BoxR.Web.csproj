@@ -217,6 +217,7 @@
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
     <Content Include="Images\redturn.png" />
+    <Content Include="Images\header_widelogo.png" />
     <Content Include="Scripts\BoxR.Game.js">
       <DependentUpon>BoxR.Game.ts</DependentUpon>
     </Content>
