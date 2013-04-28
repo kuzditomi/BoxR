@@ -45,6 +45,7 @@
     <Content Include="Css\Error.css" />
     <Content Include="Css\Login.css" />
     <Content Include="Css\Site.css" />
+    <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\micrososftlogin35.png" />
@@ -68,6 +69,7 @@
       <DependentUpon>jquery.signalR-1.0.1.js</DependentUpon>
     </None>
     <TypeScriptCompile Include="Scripts\BoxR.IClient.ts" />
+    <Content Include="Images\redturn.png" />
     <Content Include="Scripts\BoxR.IClient.js">
       <DependentUpon>BoxR.IClient.ts</DependentUpon>
     </Content>
@@ -112,9 +114,9 @@ copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Win8\Images\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\Scripts\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Win8\js\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Web\Scripts\lib\"
-copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Win8\Scripts\"
-del "$(SolutionDir)BoxR.Win8\Scripts\*.map"
-del "$(SolutionDir)BoxR.Win8\js\*.map"</PostBuildEvent>
+copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Win8\js\lib\"
+del "$(SolutionDir)BoxR.Win8\js\*.map"
+del "$(SolutionDir)BoxR.Win8\js\lib\*.map"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,24 +3,54 @@
 <head>
     <title>BoxR Singleplayer</title>
     <link rel="stylesheet" href="css/boxr.css"/>
+    <script src="js/BoxR.Init.js"></script>
+    <script src="js/BoxR.Game.js"></script>
+    <script src="js/jquery-1.7.1.js"></script>
 </head>
     <body>
         <header id="header">
             <h1>BoxR</h1>
         </header>
-        <div id="container"> 
-            How can I call You?
-            <input type="text" id="name"/>
-            <input type="button" onclick="window.StartGame();" value="Start Game!"/>
+        <div id="blanket" style="display:none">
+            <div id="bg"></div>
+            <div id="outer">
+                <div id="middle">
+                    <div id="inner">
+                        <section id="winPopup" style="display:none;">
+                            <p>Congratulation, you have won the game!</p>
+                            <a class="accept button" href="#" onclick="window.location.reload();">OK</a> 
+                        </section>
+                        <section id="losePopup" style="display:none;">
+                            <p>You have just lost the game.</p>
+                            <a class="deny button" href="#" onclick="window.location.reload();">OK</a> 
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container">
+            <canvas id="gameCanvas"></canvas>
+            <aside>
+                <div class="selfcounter">
+                    <div>
+                        <div id="selfname" class="selfname">You</div>
+                    </div>
+                    <div class="selfscore" id="selfscore">0</div>
+                    <img src="css/blueturn.png" width="0" height="120" id="blueturn"/>
+                </div>
+            </aside>
+            <aside >
+                <div class="opponentcounter">
+                    <div>
+                        <div class="opponentname">Bob</div>
+                    </div>
+                    <div class="opponentscore" id="opponentscore">0</div>
+                    <img src="css/redturn.png" width="0" height="120" id="redturn"/>
+                </div>
+            </aside>
         </div>
         <footer>
             Copyright © 2013 - Küzdi Tamás
         </footer>
-        <script>
-            window.StartGame = function () {
-                var name = document.getElementById('name').value;
-                window.location.href = "game.html?name=" + name;
-            }
-    </script>
     </body>
 </html>

@@ -189,7 +189,7 @@ function initAds() {
         var myAdControl = new MicrosoftNSJS.Advertising.AdControl(adDiv,
             {
                 applicationId: 'c7d93e9f-0ef7-4436-8bf3-59368e6c5034',
-                adUnitId: '126195'
+                adUnitId: '127760'
             });
         myAdControl.isAutoRefreshEnabled = true;
     }

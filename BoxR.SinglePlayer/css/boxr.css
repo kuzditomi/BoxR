@@ -154,25 +154,31 @@ div.user span {
     font-size: 20pt;
     color: red;   
 }
+
 aside {
-    width: 120px;
-    height: 120px;
     color: white;
     text-align: center;
 }
 
-aside.selfcounter {
+aside .selfcounter {
+    width: 120px;
+    height: 120px;
     position: absolute;
     left: 20px;
     top: 150px;
     background: #1BA1E2;
 }
 
-aside.opponentcounter {
+aside .opponentcounter {
+    width: 120px;
+    height: 120px;
     position: absolute;
     right: 20px;
     top: 150px;
     background: #E51400;
+}
+aside img {
+    margin-top: 10px;
 }
 
 .selfscore, .opponentscore {

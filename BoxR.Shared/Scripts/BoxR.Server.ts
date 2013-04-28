@@ -1,6 +1,7 @@
 ﻿/// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Game.ts"/>
 /// <reference path="BoxR.Manager.ts"/>
+/// <reference path="lib/jquery.d.ts"/>
 
 module BoxR {
     var dummychars = "Ù";
@@ -76,9 +77,15 @@ module BoxR {
         }
 
         UpdateRound(selfround) {
-            var counterdiv = document.getElementById('roundcounter');
-            counterdiv.innerHTML = selfround ? 'YOUR TURN' : "OPPONENT'S TURN!";
-        }
+            if(!selfround){
+                $("#redturn").animate({width:"120px",marginLeft:"0px"});
+                $("#blueturn").animate({width:"0px",marginLeft:"0px"});
+            }
+            else{
+                $("#blueturn").animate({width:"120px",marginLeft:"0px"});
+                $("#redturn").animate({width:"0px",marginLeft:"0px"});
+            }
+       }
 
         UpdateSelfScore(score) {
             var selfScoreDiv = document.getElementById('selfscore');

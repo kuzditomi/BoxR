@@ -65,8 +65,25 @@
             BoxR.Manager.Hub.server.getUsers();
         };
         Server.prototype.UpdateRound = function (selfround) {
-            var counterdiv = document.getElementById('roundcounter');
-            counterdiv.innerHTML = selfround ? 'YOUR TURN' : "OPPONENT'S TURN!";
+            if(!selfround) {
+                $("#redturn").animate({
+                    width: "120px",
+                    marginLeft: "0px"
+                });
+                $("#blueturn").animate({
+                    width: "0px",
+                    marginLeft: "0px"
+                });
+            } else {
+                $("#blueturn").animate({
+                    width: "120px",
+                    marginLeft: "0px"
+                });
+                $("#redturn").animate({
+                    width: "0px",
+                    marginLeft: "0px"
+                });
+            }
         };
         Server.prototype.UpdateSelfScore = function (score) {
             var selfScoreDiv = document.getElementById('selfscore');

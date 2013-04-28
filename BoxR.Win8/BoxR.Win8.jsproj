@@ -61,12 +61,14 @@
     <Content Include="css\micrososftlogin35.png" />
     <Content Include="css\Site.css" />
     <Content Include="default.html" />
+    <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
     <Content Include="css\messagebox.css" />
+    <Content Include="Images\redturn.png" />
     <Content Include="Images\smalllogo.png" />
     <Content Include="Images\splashscreen.png" />
     <Content Include="Images\storelogo.png" />
@@ -82,6 +84,7 @@
     <Content Include="js\BoxR.Popups.ts" />
     <Content Include="js\BoxR.WinRTClient.js" />
     <Content Include="js\BoxR.WinRTClient.min.js" />
+    <Content Include="js\BoxR.WinRTClient.min.js.map" />
     <Content Include="js\BoxR.WinRTClient.ts" />
     <Content Include="js\BoxR.IClient.js" />
     <Content Include="js\BoxR.IClient.min.js" />
@@ -90,6 +93,16 @@
     <Content Include="js\BoxR.Server.min.js" />
     <Content Include="js\BoxR.Server.ts" />
     <Content Include="js\init.js" />
+    <Content Include="js\lib\hubs.js" />
+    <Content Include="js\lib\jquery-1.7.1.intellisense.js" />
+    <Content Include="js\lib\jquery-1.7.1.js" />
+    <Content Include="js\lib\jquery-1.7.1.min.js" />
+    <Content Include="js\lib\jquery.d.ts" />
+    <Content Include="js\lib\jquery.signalR-1.0.1.js" />
+    <Content Include="js\lib\jquery.signalR-1.0.1.min.js" />
+    <Content Include="js\lib\modernizr-2.5.3.js" />
+    <Content Include="js\lib\navigator.js" />
+    <Content Include="js\lib\settings.js" />
     <Content Include="js\PopupControl.js" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="packages.config" />
@@ -108,16 +121,6 @@
     <Content Include="pages\main\main.js" />
     <Content Include="pages\login\login.html" />
     <Content Include="pages\login\login.js" />
-    <Content Include="Scripts\hubs.js" />
-    <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\jquery.d.ts" />
-    <Content Include="Scripts\jquery.signalR-1.0.1.js" />
-    <Content Include="Scripts\jquery.signalR-1.0.1.min.js" />
-    <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\navigator.js" />
-    <Content Include="Scripts\settings.js" />
     <None Include="BoxR.Win8_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

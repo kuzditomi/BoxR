@@ -55,7 +55,7 @@
 
 <div id="quitGame" style="display: none">
     <div class="inner">
-        <a href="#" id="quitBtn">Kilépés</a>
+        <a href="#" id="quitBtn">Quit game</a>
     </div>
 </div>
 
@@ -68,7 +68,7 @@
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
         {
             @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Kijelentkezés</a>
+            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
         }
     }
 </div>

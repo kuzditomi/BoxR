@@ -183,8 +183,22 @@ var BoxR;
         Game.prototype.Init = function (n, selfstart) {
             this.n = n;
             this.Clear();
+            this.selfScore = 0;
+            this.opponentScore = 0;
+            this.UpdateScore();
             this.edges = new Array();
             this.squares = new Array();
+            if(selfstart) {
+                $("#blueturn").animate({
+                    width: "120px",
+                    marginLeft: "0px"
+                });
+            } else {
+                $("#redturn").animate({
+                    width: "120px",
+                    marginLeft: "0px"
+                });
+            }
             var squereWidthToUnit = 7;
             var unit = this.Width / ((n * squereWidthToUnit) + (n + 1) + 2);
             var verticalOffset = [
@@ -206,14 +220,14 @@ var BoxR;
             ];
             for(var i = 0; i < 2 * n + 1; i++) {
                 this.edges[i] = new Array();
-                this.squares[i] = new Array();
+                this.squares[i / 2 - 1] = new Array();
                 var isAlternateRow = i % 2;
                 var m = isAlternateRow == 0 ? n : n + 1;
                 for(var j = 0; j < m; j++) {
                     this.edges[i][j] = new Edge(this.ctx, horizontalOffset[isAlternateRow] + j * (squereEdge + unit), verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit), width[isAlternateRow], height[isAlternateRow], isAlternateRow == 0);
                     if(isAlternateRow == 0 && i > 0) {
                         var sq = new Squere(this.ctx, horizontalOffset[0] + j * (unit + squereEdge) + unit / 2, verticalOffset[1] + (i - 2) / 2 * (squereEdge + unit) + unit / 2, squereEdge - unit);
-                        this.squares[i][j] = sq;
+                        this.squares[i / 2 - 1][j] = sq;
                         this.edges[i][j].AddSquere(sq);
                         this.edges[i - 1][j + 1].AddSquere(sq);
                         this.edges[i - 2][j].AddSquere(sq);
@@ -320,7 +334,24 @@ var BoxR;
         Game.prototype.NextRound = function () {
             IsSelfRound ^= true;
             if(!IsSelfRound) {
+                $("#redturn").animate({
+                    width: "120px",
+                    marginLeft: "0px"
+                });
+                $("#blueturn").animate({
+                    width: "0px",
+                    marginLeft: "0px"
+                });
                 this.MachineClick();
+            } else {
+                $("#blueturn").animate({
+                    width: "120px",
+                    marginLeft: "0px"
+                });
+                $("#redturn").animate({
+                    width: "0px",
+                    marginLeft: "0px"
+                });
             }
         };
         Game.prototype.MachineClick = function () {
@@ -333,7 +364,7 @@ var BoxR;
                 } else {
                     _this.NextRound();
                 }
-            }, 500);
+            }, 1500);
         };
         Game.prototype.CleverClick = function (activeEdges) {
             var clicked = false;
@@ -389,31 +420,95 @@ var BoxR;
                 ; ;
             }));
         };
-        Game.prototype.minimax = function (game, depth) {
+        Game.prototype.minimax = function (gameState, depth, click) {
             console.log("minimax start, depth: " + depth);
-            if(game.finished || depth == 0) {
-                console.log("return " + this.valueOf(game));
-                return this.valueOf(game);
+            if(gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
+                console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
+                return this.valueOf(gameState);
             } else {
-                var alpha = Number.MIN_VALUE;
+                var alpha = -this.n * this.n - 1;
                 var available = new Array();
-                for(var i = 0; i < this.edges.length; i++) {
-                    for(var j = 0; j < this.edges[i].length; j++) {
-                        if(!this.edges[i][j].active) {
-                            available.push(this.edges[i][j]);
+                for(var i = 0; i < gameState["edges"].length; i++) {
+                    for(var j = 0; j < gameState["edges"][i].length; j++) {
+                        if(!gameState["edges"][i][j]) {
+                            available.push({
+                                i: i,
+                                j: j
+                            });
                         }
                     }
                 }
                 for(var i = 0; i < available.length; i++) {
-                    var gameCopy = this.Clone();
-                    gameCopy.EdgeClickFromServer(available[i]);
-                    alpha = Math.max(alpha, -this.minimax(gameCopy, depth - 1));
+                    var gameCopy = JSON.parse(JSON.stringify(gameState));
+                    console.log("click: " + available[i].i + ":" + available[i].j);
+                    this.EmulateClick(gameCopy, available[i]);
+                    var bestclick = {
+                    };
+                    var res = this.minimax(gameCopy, depth - 1, bestclick);
+                    if(res > alpha) {
+                        alpha = res;
+                        click.i = available[i].i;
+                        click.j = available[i].j;
+                    }
                 }
                 return alpha;
             }
         };
         Game.prototype.valueOf = function (gameState) {
             return gameState.opponentScore - gameState.selfScore;
+        };
+        Game.prototype.getGameState = function () {
+            var gameState = {
+            };
+            gameState["edges"] = new Array();
+            for(var i = 0; i < this.edges.length; i++) {
+                gameState["edges"][i] = new Array();
+                for(var j = 0; j < this.edges[i].length; j++) {
+                    gameState["edges"][i][j] = this.edges[i][j].active;
+                }
+            }
+            gameState["squares"] = new Array();
+            for(var i = 0; i < this.squares.length; i++) {
+                gameState["squares"][i] = new Array();
+                for(var j = 0; j < this.squares[i].length; j++) {
+                    gameState["squares"][i][j] = this.squares[i][j].EdgesChecked();
+                }
+            }
+            gameState["opponentScore"] = this.opponentScore;
+            gameState["selfScore"] = this.selfScore;
+            gameState["n"] = this.n;
+            gameState["turn"] = IsSelfRound;
+            return gameState;
+        };
+        Game.prototype.EmulateClick = function (gameState, move) {
+            gameState["edges"][move.i][move.j] = true;
+            if(move.i % 2 == 0) {
+                if(move.i * 2 < move.n) {
+                    gameState["squares"][2 * move.i][move.j] += 1;
+                    if(gameState["squares"][2 * move.i][move.j] == 3) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                    }
+                }
+                if(move.i * 2 < move.n) {
+                    gameState["squares"][2 * move.i + 2][move.j] += 1;
+                    if(gameState["squares"][2 * move.i + 2][move.j] == 3) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                    }
+                }
+            } else {
+                if(move.i > 0 && move.j > 0 && gameState["squares"][(move.i - 1) / 2][move.j - 1] == 3) {
+                    gameState["squares"][(move.i - 1) / 2][move.j - 1] += 1;
+                    gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                    gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                }
+                if(move.i > 0 && gameState["squares"][(move.i - 1) / 2][move.j] == 4) {
+                    gameState["squares"][(move.i - 1) / 2][move.j] += 1;
+                    gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                    gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                }
+            }
         };
         return Game;
     })();

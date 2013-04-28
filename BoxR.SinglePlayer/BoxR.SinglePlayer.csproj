@@ -57,13 +57,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\blueturn.png" />
     <Content Include="css\boxr.css" />
-    <Content Include="game.html" />
+    <Content Include="css\redturn.png" />
     <Content Include="index.html" />
     <Content Include="js\BoxR.Game.js" />
     <Content Include="js\BoxR.Game.min.js" />
     <Content Include="js\BoxR.Game.ts" />
-    <Content Include="js\Init.js" />
+    <Content Include="js\BoxR.Init.js" />
+    <Content Include="js\jquery-1.7.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

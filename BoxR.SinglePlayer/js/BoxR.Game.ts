@@ -1,4 +1,5 @@
-﻿module BoxR {
+﻿declare var $;
+module BoxR {
     var dummychars = "Ù";
     var IsSelfRound :bool = false;
     "use strict";
@@ -225,8 +226,16 @@
         public Init(n: number, selfstart: bool) {
             this.n = n;
             this.Clear();
+            this.selfScore = 0;
+            this.opponentScore = 0;
+            this.UpdateScore();
             this.edges = new Edge[][];
             this.squares = new Squere[][];
+
+            if(selfstart)
+                $("#blueturn").animate({width:"120px",marginLeft:"0px"});
+            else
+                $("#redturn").animate({ width: "120px", marginLeft: "0px" });
 
             var squereWidthToUnit = 7; // means 7:1
             //unit is the width of a 'corner' which is actually not drawn
@@ -248,7 +257,7 @@
 
             for (var i = 0; i < 2 * n + 1; i++) {
                 this.edges[i] = new Edge[];
-                this.squares[i] = new Squere[];
+                this.squares[i/2 - 1] = new Squere[];
                 var isAlternateRow = i % 2; // 0,2,4 is alternative, these are for the horizontal edges
                 var m = isAlternateRow == 0 ? n : n + 1;
                 for (var j = 0; j < m; j++) {
@@ -256,7 +265,7 @@
 
                     if (isAlternateRow == 0 && i > 0) {
                         var sq = new Squere(this.ctx, horizontalOffset[0] + j * (unit + squereEdge) + unit / 2, verticalOffset[1] + (i - 2) / 2 * (squereEdge + unit) + unit / 2, squereEdge - unit);
-                        this.squares[i][j] = sq;
+                        this.squares[i/2 - 1][j] = sq;
                         this.edges[i][j].AddSquere(sq);
                         this.edges[i - 1][j + 1].AddSquere(sq);
                         this.edges[i - 2][j].AddSquere(sq);
@@ -380,21 +389,34 @@
         private NextRound() {
             IsSelfRound ^= true;
             if(!IsSelfRound){
+                $("#redturn").animate({width:"120px",marginLeft:"0px"});
+                $("#blueturn").animate({width:"0px",marginLeft:"0px"});
                 this.MachineClick();
+            }
+            else{
+                $("#blueturn").animate({width:"120px",marginLeft:"0px"});
+                $("#redturn").animate({width:"0px",marginLeft:"0px"});
             }
         }
 
         // AI clicks now
         private MachineClick() {
-            //this.minimax(this, 2);
+            //var gameState = this.getGameState();
+            //var clickResult = {};
+            //var a = this.minimax(gameState, 3,clickResult);
+            //var needContinue = this.EdgeClickFromServer(this.edges[clickResult.i][clickResult.j]);
+            //    if (needContinue)
+            //        this.MachineClick();
+            //    else
+            //        this.NextRound();
             setTimeout(() => {
-                var edge = _this.FourthClick() || this.CleverClick(0);
+                var edge = this.FourthClick() || this.CleverClick(0);
                 var needContinue = this.EdgeClickFromServer(edge);
                 if (needContinue)
                     this.MachineClick();
                 else
                     this.NextRound();
-            }, 500);
+            }, 1500);
         }
 
         // finds the squere with the lowest possible surrounding edge activated
@@ -458,36 +480,112 @@
             }));
         }
 
-        private minimax(game:Game, depth):number{
+        //minimax algorithm
+        private minimax(gameState: any, depth, click: any):number{
             console.log("minimax start, depth: " + depth);
-            if (game.finished || depth == 0) {
-                console.log("return " + this.valueOf(game))
-                return this.valueOf(game);
+            // if the game is finished, or max depth reached
+            if (gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
+                console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
+                return this.valueOf(gameState);
             }
             else {
-
-                var alpha = Number.MIN_VALUE;
-
-                var available = new Edge[];
-                for (var i = 0; i < this.edges.length; i++) {
-                    for (var j = 0; j < this.edges[i].length; j++) {
-                        if (!this.edges[i][j].active) {
-                            available.push(this.edges[i][j]);
+                var alpha = -this.n * this.n - 1;
+                // available edges to click next
+                var available = new any[];
+                for (var i = 0; i < gameState["edges"].length; i++) {
+                    for (var j = 0; j < gameState["edges"][i].length; j++) {
+                        if (!gameState["edges"][i][j]) {
+                            available.push({ i: i, j: j });
                         }
                     }
                 }
 
                 for (var i = 0; i < available.length ; i++) {
-                    var gameCopy = this.Clone();
-                    gameCopy.EdgeClickFromServer(available[i])
-                    alpha = Math.max(alpha, -this.minimax(gameCopy, depth - 1));
+                    var gameCopy = JSON.parse(JSON.stringify(gameState));
+                    console.log("click: " + available[i].i + ":" +  available[i].j);
+                    this.EmulateClick(gameCopy, available[i]);
+                    var bestclick = {};
+                    var res = this.minimax(gameCopy, depth - 1, bestclick);
+                    if(res > alpha){
+                        alpha = res;
+                        click.i = available[i].i;
+                        click.j = available[i].j;
+                    }
                 }
-                return alpha
+                return alpha;
             }
         }
 
-        private valueOf(gameState:Game):number {
-            return gameState.opponentScore - gameState.selfScore;
+        private valueOf(gameState:any):number {
+            return gameState.opponentScore - gameState.selfScore ; // AI's advantage
+        }
+
+        // create gameState object
+        private getGameState(){
+            var gameState = {};
+            // add edges as booleans
+            gameState["edges"] = new bool[][];
+            for (var i = 0; i < this.edges.length;i++){
+                gameState["edges"][i] = new bool[];
+                for (var j = 0; j < this.edges[i].length; j++) {
+                    gameState["edges"][i][j] = this.edges[i][j].active;
+                }
+            }
+
+            // add squares as booleans
+            gameState["squares"] = new number[][];
+            for (var i = 0; i < this.squares.length;i++){
+                gameState["squares"][i] = new bool[];
+                for (var j = 0; j < this.squares[i].length; j++) {
+                    gameState["squares"][i][j] = this.squares[i][j].EdgesChecked();
+                }
+            }
+
+            // add the scores
+            gameState["opponentScore"] = this.opponentScore;
+            gameState["selfScore"] = this.selfScore;
+            gameState["n"] = this.n;
+
+            // who has the turn? false - AI, true - Player
+            gameState["turn"] = IsSelfRound;
+
+            return gameState;
+        }
+
+        private EmulateClick(gameState: any,move:any){
+            gameState["edges"][move.i][move.j] = true;
+            // ha [i][j] vizszintes, akkor a szomszedos negyzetek:
+            // [2*i][j] es [2*i + 2][j]
+            if (move.i % 2 == 0) { // vizszintes 
+                if (move.i * 2 < move.n) {
+                    gameState["squares"][2 * move.i][move.j] += 1;
+                    if (gameState["squares"][2 * move.i][move.j] == 3) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                    }
+                }
+                if (move.i * 2 < move.n) {
+                    gameState["squares"][2 * move.i + 2][move.j] += 1;
+                    if (gameState["squares"][2 * move.i + 2][move.j] == 3) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                    }
+                }
+            }
+            // ha [i][j] fuggoleges, akkor a szomszedos negyzetek:
+            // [(i-1) / 2][j -1] es [(i-1) / 2][j]
+            else{
+                if ( move.i > 0 && move.j > 0 && gameState["squares"][(move.i - 1) / 2][move.j - 1] == 3){
+                    gameState["squares"][(move.i - 1) / 2][move.j - 1] += 1;
+                    gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                    gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                } 
+                if ( move.i > 0 && gameState["squares"][(move.i - 1) / 2][move.j] == 4){
+                    gameState["squares"][(move.i - 1) / 2][move.j] += 1;
+                    gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                    gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                }
+            }           
         }
     }
 }

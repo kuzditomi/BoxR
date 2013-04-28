@@ -15,13 +15,13 @@
     <link href="/css/messagebox.css" rel="stylesheet" />
 
     <!-- navigationexample references -->
-    <script src="/Scripts/navigator.js"></script>
+    <script src="/js/lib/navigator.js"></script>
     
     <!-- BoxR scripts -->
-    <script src="Scripts/settings.js"></script><!-- Private stuff -->
-    <script src="Scripts/jquery-1.7.1.js"></script>
-    <script src="Scripts/jquery.signalR-1.0.1.min.js"></script>
-    <script src="Scripts/hubs.js"></script>
+    <script src="/js/lib/settings.js"></script><!-- Private stuff -->
+    <script src="/js/lib/jquery-1.7.1.js"></script>
+    <script src="/js/lib/jquery.signalR-1.0.1.min.js"></script>
+    <script src="/js/lib/hubs.js"></script>
     <script src="js/PopupControl.js" defer="defer"></script>
     <script src="js/BoxR.Server.js" defer="defer"></script>
     <script src="js/BoxR.IClient.js" defer="defer"></script>
@@ -30,7 +30,7 @@
     <script src="js/BoxR.Popups.js" defer="defer"></script>
     <script src="js/BoxR.Manager.js" ></script>
     <script src="js/init.js"></script>
-    <script src="/MSAdvertisingJS/ads/ad.js" defer="defer"></script>
+    <script src="/MSAdvertisingJS/ads/ad.js"></script>
     <script>    
     </script>
 </head>
@@ -40,7 +40,9 @@
                          <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmd', label:'Command', icon:'placeholder'}" type="button"></button>
                      </div> -->
         <div id="popupdiv" style="display:none"></div>
-        <div id="myAd" style="position: absolute; bottom: 0px; right: 0px; width: 250px; height: 250px; z-index: 1" >
+        
+        <div id="adContainer">
+            <div id="myAd" style="width: 728px;height: 90px;"></div>
         </div>
     </body>
 </html>
