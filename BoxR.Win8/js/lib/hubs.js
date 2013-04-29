@@ -122,6 +122,10 @@
                 return proxies.game.invoke.apply(proxies.game, $.merge(["QuitGame"], $.makeArray(arguments)));
             },
 
+            register: function (username, password) {
+                return proxies.game.invoke.apply(proxies.game, $.merge(["Register"], $.makeArray(arguments)));
+            },
+
             registerUserNameToOAuth: function (newUserName) {
                 return proxies.game.invoke.apply(proxies.game, $.merge(["RegisterUserNameToOAuth"], $.makeArray(arguments)));
             },

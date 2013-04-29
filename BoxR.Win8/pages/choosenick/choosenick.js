@@ -12,7 +12,7 @@
 
             document.getElementById("btnBackToLogin").onclick = function () {
                 BoxR.Manager.Hub.server.skipRegistration();
-                WinJS.Navigation.navigate("/pages/login/login.html", { provider: "facebook" });
+                WinJS.Navigation.navigate("/pages/login/login.html");
             };
 
             document.getElementById("btnRegister").onclick = function () {

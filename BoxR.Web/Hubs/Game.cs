@@ -277,7 +277,7 @@ namespace BoxR.Web.Hubs
         }
         #endregion
 
-        #region Login,Logout
+        #region Login,Logout, Register
         public string Login(string username,string password)
         {
             if(UserManager.UserExists(Context.ConnectionId))
@@ -390,6 +390,29 @@ namespace BoxR.Web.Hubs
         public void SkipRegistration()
         {
             UserManager.RemovePendingUserFromQueue(Context.ConnectionId);
+        }
+
+        public string Register(string username,string password)
+        {
+            if (Authenticate(Context.ConnectionId))
+            {
+                Logout();
+            }
+            try
+            {
+                if (WebSecurity.UserExists(username))
+                {
+                    return "Username already exists";
+                }
+
+                WebSecurity.CreateUserAndAccount(username, password);
+                return "true";    
+            }
+            catch(Exception e)
+            {
+                BoxRLogger.Error(e.Message);
+                return "Error with the registration, please try again later.";
+            }
         }
 
         public void Logout()
