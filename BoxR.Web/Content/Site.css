@@ -21,6 +21,7 @@ input {
     font-size: 14pt;
     background: white;
     color: slateblue;
+    text-decoration: none;
 }
 .btn:hover {
     background: #B9B9D9;

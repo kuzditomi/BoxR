@@ -61,7 +61,7 @@ namespace BoxR.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Main", "Home");
         }
 
         //
@@ -88,7 +88,7 @@ namespace BoxR.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Main", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -344,7 +344,7 @@ namespace BoxR.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Main", "Home");
             }
         }
 

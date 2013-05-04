@@ -24,14 +24,6 @@ var BoxR;
     })();
     BoxR.Drawable = Drawable;    
     ; ;
-    var ClickResponse = (function () {
-        function ClickResponse(edgeActivated, squereActivated) {
-            this.EdgeActivated = edgeActivated;
-            this.SquereActivated = squereActivated;
-        }
-        return ClickResponse;
-    })();
-    BoxR.ClickResponse = ClickResponse;    
     var Edge = (function (_super) {
         __extends(Edge, _super);
         function Edge(ctx, x, y, width, height, isHorizontal) {
@@ -118,17 +110,24 @@ var BoxR;
         __extends(Squere, _super);
         function Squere(ctx, x, y, width) {
                 _super.call(this, ctx, x, y);
-            this.edgesChecked = 0;
             this.width = width;
             this.animated = false;
+            this.Edges = new Array();
         }
         Squere.prototype.EdgeChecked = function () {
-            this.edgesChecked++;
-            if(this.edgesChecked == 4) {
+            if(this.EdgesChecked() == 4) {
                 this.active = true;
+                this.color = IsSelfRound ? '27,161,226,' : '290,20,0,';
                 return true;
             }
             return false;
+        };
+        Squere.prototype.EdgesChecked = function () {
+            var count = 0;
+            for(var i = 0; i < this.Edges.length; i++) {
+                count += this.Edges[i].active ? 1 : 0;
+            }
+            return count;
         };
         Squere.prototype.Draw = function () {
             if(!this.active) {
@@ -166,18 +165,36 @@ var BoxR;
         return Squere;
     })(Drawable);
     BoxR.Squere = Squere;    
+    var ClickResponse = (function () {
+        function ClickResponse(edgeActivated, squereActivated) {
+            this.EdgeActivated = edgeActivated;
+            this.SquereActivated = squereActivated;
+        }
+        return ClickResponse;
+    })();
+    BoxR.ClickResponse = ClickResponse;    
+    var Coordinate = (function () {
+        function Coordinate(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+        return Coordinate;
+    })();
+    BoxR.Coordinate = Coordinate;    
     var Game = (function () {
-        function Game(canvas) {
+        function Game(canvas, issingleplayer) {
+            if (typeof issingleplayer === "undefined") { issingleplayer = false; }
             this.ctx = (canvas).getContext('2d');
             this.LeftOffset = canvas.offsetLeft;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
+            this.IsSinglePlayer = issingleplayer;
         }
         Game.prototype.Init = function (n, selfstart) {
             this.n = n;
             this.Clear();
-            this.edges = new Array();
-            this.squares = new Array();
+            this.Edges = new Array();
+            this.Squares = new Array();
             var squereWidthToUnit = 7;
             var unit = this.Width / ((n * squereWidthToUnit) + (n + 1) + 2);
             var verticalOffset = [
@@ -198,35 +215,44 @@ var BoxR;
                 squereEdge
             ];
             for(var i = 0; i < 2 * n + 1; i++) {
-                this.edges[i] = new Array();
+                this.Edges[i] = new Array();
+                this.Squares[i / 2 - 1] = new Array();
                 var isAlternateRow = i % 2;
                 var m = isAlternateRow == 0 ? n : n + 1;
                 for(var j = 0; j < m; j++) {
-                    this.edges[i][j] = new Edge(this.ctx, horizontalOffset[isAlternateRow] + j * (squereEdge + unit), verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit), width[isAlternateRow], height[isAlternateRow], isAlternateRow == 0);
+                    this.Edges[i][j] = new Edge(this.ctx, horizontalOffset[isAlternateRow] + j * (squereEdge + unit), verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit), width[isAlternateRow], height[isAlternateRow], isAlternateRow == 0);
                     if(isAlternateRow == 0 && i > 0) {
                         var sq = new Squere(this.ctx, horizontalOffset[0] + j * (unit + squereEdge) + unit / 2, verticalOffset[1] + (i - 2) / 2 * (squereEdge + unit) + unit / 2, squereEdge - unit);
-                        this.squares.push(sq);
-                        this.edges[i][j].AddSquere(sq);
-                        this.edges[i - 1][j + 1].AddSquere(sq);
-                        this.edges[i - 2][j].AddSquere(sq);
-                        this.edges[i - 1][j].AddSquere(sq);
+                        this.Squares[i / 2 - 1][j] = sq;
+                        this.Edges[i][j].AddSquere(sq);
+                        this.Edges[i - 1][j + 1].AddSquere(sq);
+                        this.Edges[i - 2][j].AddSquere(sq);
+                        this.Edges[i - 1][j].AddSquere(sq);
+                        sq.Edges.push(this.Edges[i][j]);
+                        sq.Edges.push(this.Edges[i - 1][j + 1]);
+                        sq.Edges.push(this.Edges[i - 2][j]);
+                        sq.Edges.push(this.Edges[i - 1][j]);
                     }
                 }
             }
             IsSelfRound = selfstart;
             this.selfScore = 0;
             this.opponentScore = 0;
-            BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            if(!this.IsSinglePlayer) {
+                BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            }
         };
         Game.prototype.Draw = function () {
             this.Clear();
-            this.edges.forEach(function (row) {
+            this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.Draw();
                 });
             });
-            this.squares.forEach(function (sq) {
-                sq.Draw();
+            this.Squares.forEach(function (row) {
+                row.forEach(function (sq) {
+                    sq.Draw();
+                });
             });
         };
         Game.prototype.Clear = function () {
@@ -243,11 +269,13 @@ var BoxR;
                 click_Y = e.y - this.TopOffset;
             }
             var _this = this;
-            this.edges.forEach(function (row, i) {
+            this.Edges.forEach(function (row, i) {
                 row.forEach(function (edge, j) {
                     var response = edge.Click(click_X, click_Y);
                     if(response.EdgeActivated) {
-                        BoxR.Manager.Hub.server.edgeClicked(i, j);
+                        if(!_this.IsSinglePlayer) {
+                            BoxR.Manager.Hub.server.edgeClicked(i, j);
+                        }
                         _this.selfScore += response.SquereActivated;
                         if(response.SquereActivated == 0) {
                             _this.NextRound();
@@ -266,16 +294,16 @@ var BoxR;
             }
             var x = e.clientX - this.LeftOffset;
             var y = e.clientY - this.TopOffset;
-            this.edges.forEach(function (row) {
+            this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.MouseOver(x, y);
                 });
             });
             this.Draw();
         };
-        Game.prototype.EdgeClickFromServer = function (i, j) {
-            if(!this.edges[i][j].active) {
-                var squeractivated = this.edges[i][j].Activate();
+        Game.prototype.EdgeClickFromServerByCoordinate = function (i, j) {
+            if(!this.Edges[i][j].active) {
+                var squeractivated = this.Edges[i][j].Activate();
                 this.opponentScore += squeractivated;
                 if(squeractivated == 0) {
                     this.NextRound();
@@ -285,11 +313,31 @@ var BoxR;
                 this.Draw();
             }
         };
+        Game.prototype.EdgeClickFromServerByEdge = function (edge) {
+            var _this = this;
+            if(!edge.active) {
+                var squeractivated = edge.Activate();
+                _this.opponentScore += squeractivated;
+                if(squeractivated == 0) {
+                    _this.Draw();
+                    return false;
+                } else {
+                    _this.UpdateScore();
+                    _this.Draw();
+                    return true;
+                }
+            }
+            return false;
+        };
         Game.prototype.UpdateScore = function () {
-            BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
-            BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
+            if(!this.IsSinglePlayer) {
+                BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
+                BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
+            }
             if(this.selfScore + this.opponentScore == this.n * this.n) {
-                BoxR.Manager.Hub.server.finishGame();
+                if(!this.IsSinglePlayer) {
+                    BoxR.Manager.Hub.server.finishGame();
+                }
                 if(this.selfScore > this.opponentScore) {
                     BoxR.Manager.Client.WinPopup();
                 } else {
@@ -300,7 +348,69 @@ var BoxR;
         };
         Game.prototype.NextRound = function () {
             IsSelfRound ^= true;
-            BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            if(!this.IsSinglePlayer) {
+                BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            } else {
+                if(!IsSelfRound) {
+                    this.MachineClick();
+                }
+            }
+        };
+        Game.prototype.MachineClick = function () {
+            var _this = this;
+            setTimeout(function () {
+                var nextEdge = _this.FourthClick() || _this.CleverClick(0);
+                var needContinue = _this.EdgeClickFromServerByEdge(nextEdge);
+                if(needContinue) {
+                    _this.MachineClick();
+                } else {
+                    _this.NextRound();
+                }
+            }, 1000);
+        };
+        Game.prototype.CleverClick = function (activeEdges) {
+            var clicked = false;
+            var available = new Array();
+            for(var i = 0; i < this.Edges.length; i++) {
+                for(var j = 0; j < this.Edges[i].length; j++) {
+                    if(!this.Edges[i][j].active) {
+                        available.push(this.Edges[i][j]);
+                    }
+                }
+            }
+            while(!clicked && available.length > 0) {
+                var random = Math.floor(Math.random() * available.length);
+                var edge = available[random];
+                if(edge.squeres[0].EdgesChecked() <= activeEdges && (edge.squeres.length == 1 || edge.squeres[1].EdgesChecked() <= activeEdges)) {
+                    return edge;
+                    clicked = true;
+                }
+                available.splice(random, 1);
+            }
+            if(!clicked) {
+                return this.CleverClick(activeEdges + 1);
+            }
+        };
+        Game.prototype.FourthClick = function () {
+            var find = false;
+            var edge;
+            for(var i = 0; i < this.Squares.length && !find; i++) {
+                for(var j = 0; j < this.Squares[i].length && !find; j++) {
+                    var sq = this.Squares[i][j];
+                    if(sq.EdgesChecked() == 3) {
+                        for(var e = 0; e < sq.Edges.length; e++) {
+                            if(!sq.Edges[e].active) {
+                                edge = sq;
+                                find = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if(find) {
+                return edge;
+            }
+            return null;
         };
         return Game;
     })();

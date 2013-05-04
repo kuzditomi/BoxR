@@ -166,11 +166,6 @@
 
     function authenticate() {
         // Force a logout to make it easier to test with multiple Microsoft Accounts
-        logout().then(login).then(function () {
-            if (session === null) {
-                // Authentication failed, try again.
-                authenticate();
-            }
-        });
+        logout().then(login);
     }
 })();

@@ -9,7 +9,6 @@ using BoxR.Web.Models;
 
 namespace BoxR.Web.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -19,6 +18,12 @@ namespace BoxR.Web.Controllers
             return View();
         }
 
+        public ActionResult SinglePlayer()
+        {
+            return View();
+        }
+
+        [Authorize]
         public ActionResult StartGame(string name,string opponent,bool selfstart,double cwidth)
         {
             var model = new GameModel
@@ -29,6 +34,12 @@ namespace BoxR.Web.Controllers
                                 CanvasWidth = cwidth
                             };
             return View(model);
+        }
+
+        [Authorize]
+        public ActionResult Main()
+        {
+            return View();
         }
     }
 }

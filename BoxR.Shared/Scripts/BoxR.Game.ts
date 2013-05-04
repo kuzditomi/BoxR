@@ -4,6 +4,8 @@ module BoxR {
     var dummychars = "Ù";
     var IsSelfRound :bool = false;
     "use strict";
+
+    //#region "Drawables"
     export class Drawable {
         active: bool;
         ctx: CanvasRenderingContext2D;
@@ -27,22 +29,12 @@ module BoxR {
         }
     };
 
-    export class ClickResponse {
-        public EdgeActivated: bool;
-        public SquereActivated: number;
-
-        constructor(edgeActivated: bool, squereActivated: number) {
-            this.EdgeActivated = edgeActivated;
-            this.SquereActivated = squereActivated;
-        }
-    }
-
     export class Edge extends Drawable {
         private isHorizontal: bool;
         private radius: number;
         private width: number;
         private height: number;
-        private squeres: Squere[];
+        public squeres: Squere[];
         private mouseover: bool;
 
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, isHorizontal: bool) {
@@ -134,25 +126,33 @@ module BoxR {
     }
 
     export class Squere extends Drawable {
-        private edgesChecked: number;
+        public Edges: Edge[];
         private width: number;
         private animated: bool;
         private color: string;
 
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number, width: number) {
             super(ctx, x, y);
-            this.edgesChecked = 0;
             this.width = width;
             this.animated = false;
+            this.Edges = new Edge[];
         }
 
         public EdgeChecked(): bool {
-            this.edgesChecked++;
-            if (this.edgesChecked == 4) {
+            if (this.EdgesChecked() == 4) {
                 this.active = true;
+                this.color = IsSelfRound ? '27,161,226,' : '290,20,0,';
                 return true;
             }
             return false;
+        }
+
+        public EdgesChecked():number { 
+            var count = 0; 
+            for (var i = 0; i < this.Edges.length;i++){
+                count += this.Edges[i].active ? 1 : 0;
+            }
+            return count;
         }
 
         public Draw() {
@@ -196,31 +196,57 @@ module BoxR {
         }
     }
 
+    //#endregion
+    
+    //#region Models
+    export class ClickResponse {
+        public EdgeActivated: bool;
+        public SquereActivated: number;
+
+        constructor(edgeActivated: bool, squereActivated: number) {
+            this.EdgeActivated = edgeActivated;
+            this.SquereActivated = squereActivated;
+        }
+    }
+    
+    export class Coordinate{
+        x: number;
+        y: number;
+        constructor(x: number, y: number) {
+            this.x = x;
+            this.y = y;
+        };
+    }
+    //#endregion
+    
+    //#region Game class
     export class Game {
         ctx: CanvasRenderingContext2D;
-        private edges: Edge[][];
-        private squares: Squere[];
+        private Edges: Edge[][];
+        private Squares: Squere[][];
+        private IsSinglePlayer: bool;
 
-        n: number;
-        LeftOffset: number;
-        TopOffset: number;
-        Width: number;
-        selfScore: number;
-        opponentScore: number;
+        public n: number;
+        public LeftOffset: number;
+        public TopOffset: number;
+        public Width: number;
+        public selfScore: number;
+        public opponentScore: number;
 
 
-        constructor(canvas: HTMLElement) {
+        constructor(canvas: HTMLElement,issingleplayer:bool = false) {
             this.ctx = (<HTMLCanvasElement>canvas).getContext('2d');
             this.LeftOffset = canvas.offsetLeft; //canvas.getBoundingClientRect().left;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
+            this.IsSinglePlayer = issingleplayer;
         }
 
         public Init(n: number, selfstart: bool) {
             this.n = n;
             this.Clear();
-            this.edges = new Edge[][];
-            this.squares = new Squere[];
+            this.Edges = new Edge[][];
+            this.Squares = new Squere[][];
 
             var squereWidthToUnit = 7; // means 7:1
             //unit is the width of a 'corner' which is actually not drawn
@@ -241,19 +267,25 @@ module BoxR {
             var height = [unit, squereEdge];
 
             for (var i = 0; i < 2 * n + 1; i++) {
-                this.edges[i] = new Edge[];
+                this.Edges[i] = new Edge[];
+                this.Squares[i/2 - 1] = new Squere[];
                 var isAlternateRow = i % 2; // 0,2,4 is alternative, these are for the horizontal edges
                 var m = isAlternateRow == 0 ? n : n + 1;
                 for (var j = 0; j < m; j++) {
-                    this.edges[i][j] = new Edge(this.ctx, horizontalOffset[isAlternateRow] + j * (squereEdge + unit), verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit), width[isAlternateRow], height[isAlternateRow], isAlternateRow == 0);
+                    this.Edges[i][j] = new Edge(this.ctx, horizontalOffset[isAlternateRow] + j * (squereEdge + unit), verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit), width[isAlternateRow], height[isAlternateRow], isAlternateRow == 0);
 
                     if (isAlternateRow == 0 && i > 0) {
                         var sq = new Squere(this.ctx, horizontalOffset[0] + j * (unit + squereEdge) + unit / 2, verticalOffset[1] + (i - 2) / 2 * (squereEdge + unit) + unit / 2, squereEdge - unit);
-                        this.squares.push(sq);
-                        this.edges[i][j].AddSquere(sq);
-                        this.edges[i - 1][j + 1].AddSquere(sq);
-                        this.edges[i - 2][j].AddSquere(sq);
-                        this.edges[i - 1][j].AddSquere(sq);
+                        this.Squares[i/2 - 1][j] = sq;
+                        this.Edges[i][j].AddSquere(sq);
+                        this.Edges[i - 1][j + 1].AddSquere(sq);
+                        this.Edges[i - 2][j].AddSquere(sq);
+                        this.Edges[i - 1][j].AddSquere(sq);
+
+                        sq.Edges.push(this.Edges[i][j]);
+                        sq.Edges.push(this.Edges[i - 1][j + 1]);
+                        sq.Edges.push(this.Edges[i - 2][j]);
+                        sq.Edges.push(this.Edges[i - 1][j]);
                     }
                 }
             }
@@ -261,17 +293,21 @@ module BoxR {
             IsSelfRound = selfstart;
             this.selfScore = 0;
             this.opponentScore = 0;
-             BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            if(!this.IsSinglePlayer)
+                BoxR.Manager.Server.UpdateRound(IsSelfRound);
         }
+
         public Draw() {
             this.Clear();
-            this.edges.forEach(function (row) {
+            this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.Draw();
                 });
             });
-            this.squares.forEach(function (sq) {
-                sq.Draw();
+            this.Squares.forEach(function (row) {
+                row.forEach(function (sq) {
+                    sq.Draw();
+                });
             });
         }
 
@@ -292,11 +328,12 @@ module BoxR {
             }
 
             var _this = this;
-            this.edges.forEach(function (row, i) {
+            this.Edges.forEach(function (row, i) {
                 row.forEach(function (edge, j) {
                     var response = edge.Click(click_X, click_Y);
                     if (response.EdgeActivated) {
-                         BoxR.Manager.Hub.server.edgeClicked(i, j);
+                        if(!_this.IsSinglePlayer)
+                            BoxR.Manager.Hub.server.edgeClicked(i, j);
                         _this.selfScore += response.SquereActivated;
                         if (response.SquereActivated == 0)
                             _this.NextRound();
@@ -308,6 +345,7 @@ module BoxR {
                 });
             });
         }
+
         public MouseMove(e: MouseEvent) {
             if (!IsSelfRound)
                 return;
@@ -315,7 +353,7 @@ module BoxR {
             var x = e.clientX - this.LeftOffset;
             var y = e.clientY - this.TopOffset;
 
-            this.edges.forEach(function (row) {
+            this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.MouseOver(x, y);
                 });
@@ -323,9 +361,10 @@ module BoxR {
 
             this.Draw();
         }
-        public EdgeClickFromServer(i: number, j: number) {
-            if (!this.edges[i][j].active) {
-                var squeractivated = this.edges[i][j].Activate();
+
+        public EdgeClickFromServerByCoordinate(i: number, j: number) {
+            if (!this.Edges[i][j].active) {
+                var squeractivated = this.Edges[i][j].Activate();
                 this.opponentScore += squeractivated;
                 if (squeractivated == 0)
                     this.NextRound();
@@ -335,11 +374,32 @@ module BoxR {
             }
         }
 
+        public EdgeClickFromServerByEdge(edge: Edge) :bool {
+            var _this = this;
+            if (!edge.active) {
+                var squeractivated = edge.Activate();
+                _this.opponentScore += squeractivated;
+                if (squeractivated == 0) {
+                    _this.Draw();
+                    return false;
+                }
+                else {
+                    _this.UpdateScore();
+                    _this.Draw();
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private UpdateScore() {
-            BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
-            BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
+            if (!this.IsSinglePlayer) {
+                BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
+                BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
+            }
             if (this.selfScore + this.opponentScore == this.n * this.n) {
-                BoxR.Manager.Hub.server.finishGame();
+                if (!this.IsSinglePlayer)
+                    BoxR.Manager.Hub.server.finishGame();
                 if (this.selfScore > this.opponentScore)
                     BoxR.Manager.Client.WinPopup();
                 else
@@ -350,7 +410,75 @@ module BoxR {
 
         private NextRound() {
             IsSelfRound ^= true;
-            BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            if (!this.IsSinglePlayer)
+                BoxR.Manager.Server.UpdateRound(IsSelfRound);
+            else if(!IsSelfRound){
+                this.MachineClick();
+            }
         }
+
+        //#region Single player functions
+        // AI clicks now
+        private MachineClick() {
+            setTimeout(() => {
+                var nextEdge = this.FourthClick() || this.CleverClick(0);
+                var needContinue = this.EdgeClickFromServerByEdge(nextEdge);
+                if (needContinue)
+                    this.MachineClick();
+                else
+                    this.NextRound();
+            }, 1000);
+        }
+
+        // finds the squere with the lowest possible surrounding edge activated
+        private CleverClick(activeEdges : number): Edge{
+            var clicked = false;
+            var available = new Edge[];
+            for (var i = 0; i < this.Edges.length;i++){
+                for (var j = 0; j < this.Edges[i].length;j++){
+                    if (!this.Edges[i][j].active) {
+                        available.push(this.Edges[i][j]);
+                    }
+                }
+            }
+            while(!clicked && available.length > 0){
+                var random = Math.floor(Math.random() * available.length);
+                
+                var edge = available[random];
+                if(edge.squeres[0].EdgesChecked() <= activeEdges && (edge.squeres.length == 1 || edge.squeres[1].EdgesChecked() <= activeEdges)){
+                    return edge
+                    clicked = true;
+                }
+                available.splice(random, 1);
+            }
+            if(!clicked){
+                return this.CleverClick(activeEdges + 1);
+            }
+        }
+
+
+        // checks for any Squere with 3 surrounding edge, to finish it
+        private FourthClick() :Edge{
+            var find = false;
+            var edge;
+            for (var i = 0; i < this.Squares.length && !find;i++){
+                for (var j = 0; j < this.Squares[i].length && !find;j++){
+                    var sq = this.Squares[i][j];
+                    if(sq.EdgesChecked() == 3){
+                        for (var e = 0; e < sq.Edges.length;e++)
+                            if(!sq.Edges[e].active){
+                                edge = sq;
+                                find = true;
+                            }
+                    }
+                }
+            }
+            if(find){
+                return edge;
+            }
+            return null;
+        }
+        //#endregion
     }
+    //#endregion
 }

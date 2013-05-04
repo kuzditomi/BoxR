@@ -1,9 +1,7 @@
 ﻿"use strict";
-(function() {
-    window.onload = function() {
-        StartGame();
-    };
-})();
+$(function () {
+    StartGame();
+});
 
 function StartGame() {
     var size = getDocHeight() * 0.65;

@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "SinglePlayer";
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/game")
+}
+
+<header id="header">
+    <h1><img src="/Images/header_widelogo.png" alt="BoxR"/></h1>
+</header>
+<div id="container">
+    <canvas id="gameCanvas" ></canvas>
+    <aside>
+        <div class="selfcounter">
+            <div>
+                <div class="selfname">You</div>
+            </div>
+            <div class="selfscore" id="selfscore">0</div> 
+            <img src="~/Images/blueturn.png" width="0" height="120" id="blueturn" />
+        </div>
+    </aside>
+    <aside>
+        <div class="opponentcounter">
+            <div>
+                <div class="opponentname">Bob</div>
+            </div><div class="opponentscore" id="opponentscore">0</div>
+            <img src="~/Images/redturn.png" width="0" height="120" id="redturn"/>
+        </div>
+    </aside>
+</div>
+<div id="blanket" style="display:none">
+    <div id="bg"></div>
+    <div id="outer">
+        <div id="middle">
+            <div id="inner">
+                <section id="quitPopup" style="display:none;">
+                    <p>Are you sure? By quiting the game, your opponent will win.</p>
+                    <a class="deny button" href="#" onclick="location.reload(true)">Quit</a> 
+                    <a class="accept button" href="#" onclick="BoxR.Manager.Client.ClosePopup()">Cancel</a> 
+                </section>
+                <section id="winPopup" style="display:none;">
+                    <p>Congratulation, you have won the game!</p>
+                    <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
+                </section>
+                <section id="losePopup" style="display:none;">
+                    <p>You have just lost the game.</p>
+                    <a class="deny button" href="#" onclick="location.reload(true)">OK</a> 
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var size = getDocHeight() * 0.65;
+
+        var canvas = document.getElementById("gameCanvas");
+        canvas.height = size;
+        canvas.width = size;
+        BoxR.Manager.Client = new BoxR.WebClient();
+        BoxR.GameInstance = new BoxR.Game(canvas,true);
+        BoxR.GameInstance.Init(3, true);
+        BoxR.GameInstance.Draw();
+
+        canvas.addEventListener("click", function (e) { BoxR.GameInstance.Click(e); }, true);
+        canvas.addEventListener("mousemove", function (e) { BoxR.GameInstance.MouseMove(e); });
+    });
+
+    function getDocHeight() {
+        var d = document;
+        return Math.max(
+            Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
+            Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
+            Math.max(d.body.clientHeight, d.documentElement.clientHeight)
+        );
+    }
+</script>

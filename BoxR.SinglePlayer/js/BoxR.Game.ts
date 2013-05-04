@@ -282,7 +282,6 @@ module BoxR {
             IsSelfRound = selfstart;
             this.selfScore = 0;
             this.opponentScore = 0;
-            //BoxR.Manager.Server.UpdateRound(IsSelfRound);
         }
         public Draw() {
             this.Clear();
@@ -364,7 +363,6 @@ module BoxR {
                 }
             }
             return false;
-            
         }
 
         private UpdateScore() {
@@ -401,22 +399,39 @@ module BoxR {
 
         // AI clicks now
         private MachineClick() {
-            //var gameState = this.getGameState();
+            var _this = this;
+            var gameState = this.getGameState();
+            
+            // szinkron, debugra
             //var clickResult = {};
-            //var a = this.minimax(gameState, 3,clickResult);
-            //var needContinue = this.EdgeClickFromServer(this.edges[clickResult.i][clickResult.j]);
+            //var a = this.minimax(gameState, 4,clickResult);
+            //var needContinue = _this.EdgeClickFromServer(_this.edges[clickResult.i][clickResult.j]);
+            //    if (needContinue)
+            //        _this.MachineClick();
+            //    else
+            //        _this.NextRound();
+
+
+            // aszinkron
+            var myWorker = new Worker("/js/BoxR.MiniMax.js");
+            myWorker.postMessage({gameState: gameState,depth: 2});
+            myWorker.onmessage = function (e) {
+                var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
+                if (needContinue)
+                    _this.MachineClick();
+                else
+                    _this.NextRound();
+            };
+            
+            // egyszerubb algoritmussal
+            //setTimeout(() => {
+            //    var edge = this.FourthClick() || this.CleverClick(0);
+            //    var needContinue = this.EdgeClickFromServer(edge);
             //    if (needContinue)
             //        this.MachineClick();
             //    else
             //        this.NextRound();
-            setTimeout(() => {
-                var edge = this.FourthClick() || this.CleverClick(0);
-                var needContinue = this.EdgeClickFromServer(edge);
-                if (needContinue)
-                    this.MachineClick();
-                else
-                    this.NextRound();
-            }, 1500);
+            //}, 1500);
         }
 
         // finds the squere with the lowest possible surrounding edge activated
@@ -467,29 +482,16 @@ module BoxR {
             return null;
         }
 
-
-        // Minimix algorithm
-
-        public Clone():Game{
-            return JSON.parse(JSON.stringify(this, function (key, value) {
-                if (key == 'canvas' || key == 'squeres' || key == 'children') {
-                    return 2;
-                } else {
-                    return value;
-                };
-            }));
-        }
-
         //minimax algorithm
         private minimax(gameState: any, depth, click: any):number{
             console.log("minimax start, depth: " + depth);
             // if the game is finished, or max depth reached
-            if (gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
+            if (gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
                 console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
                 return this.valueOf(gameState);
             }
             else {
-                var alpha = -this.n * this.n - 1;
+                var alpha = -100;
                 // available edges to click next
                 var available = new any[];
                 for (var i = 0; i < gameState["edges"].length; i++) {
@@ -502,10 +504,10 @@ module BoxR {
 
                 for (var i = 0; i < available.length ; i++) {
                     var gameCopy = JSON.parse(JSON.stringify(gameState));
-                    console.log("click: " + available[i].i + ":" +  available[i].j);
+                    console.log("click in depth("+depth+"): " + available[i].i + ":" +  available[i].j);
                     this.EmulateClick(gameCopy, available[i]);
                     var bestclick = {};
-                    var res = this.minimax(gameCopy, depth - 1, bestclick);
+                    var res = - this.minimax(gameCopy, depth - 1, bestclick);
                     if(res > alpha){
                         alpha = res;
                         click.i = available[i].i;
@@ -517,7 +519,53 @@ module BoxR {
         }
 
         private valueOf(gameState:any):number {
-            return gameState.opponentScore - gameState.selfScore ; // AI's advantage
+            return (gameState.opponentScore) - gameState.selfScore ; // AI's advantage
+        }
+
+
+        private EmulateClick(gameState: any,move:any){
+            gameState["edges"][move.i][move.j] = true;
+            var squereActivated = false;
+            
+            if (move.i % 2 == 0) { // ha az el vizszintes
+                if(move.i < gameState.n * 2 ){ // also szomszedos negyzet ellenorzese, ha van
+                    gameState["squares"][move.i / 2][move.j] += 1;
+                    if (gameState["squares"][move.i / 2][move.j] == 4) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                        squereActivated = true;
+                    }
+                }
+                
+                if (move.i > 0) { // felso szomszedos negyzet ellenorzese, ha van
+                    gameState["squares"][move.i / 2 - 1][move.j] += 1;
+                    if (gameState["squares"][move.i / 2 - 1][move.j] == 4) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                        squereActivated = true;
+                    }
+                }
+            }
+            else{ // ha az el fuggoleges
+                if (move.j < gameState.n * 2) { // jobb oldali szomszedos negyzet ellenorzese, ha van
+                    gameState["squares"][(move.i - 1) / 2][move.j] += 1;
+                    if (gameState["squares"][(move.i - 1) / 2][move.j] == 4) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                        squereActivated = true;
+                    }
+                }
+                if (move.j > 0) { // bal oldali szomszedos negyzet ellenorzese, ha van
+                    gameState["squares"][(move.i - 1) / 2][move.j - 1] += 1;
+                    if (gameState["squares"][(move.i - 1) / 2][move.j - 1] == 4) {
+                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
+                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
+                        squereActivated = true;
+                    }
+                }
+            }
+            if(!squereActivated)
+                gameState["turn"] ^= true;
         }
 
         // create gameState object
@@ -550,42 +598,6 @@ module BoxR {
             gameState["turn"] = IsSelfRound;
 
             return gameState;
-        }
-
-        private EmulateClick(gameState: any,move:any){
-            gameState["edges"][move.i][move.j] = true;
-            // ha [i][j] vizszintes, akkor a szomszedos negyzetek:
-            // [2*i][j] es [2*i + 2][j]
-            if (move.i % 2 == 0) { // vizszintes 
-                if (move.i * 2 < move.n) {
-                    gameState["squares"][2 * move.i][move.j] += 1;
-                    if (gameState["squares"][2 * move.i][move.j] == 3) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                    }
-                }
-                if (move.i * 2 < move.n) {
-                    gameState["squares"][2 * move.i + 2][move.j] += 1;
-                    if (gameState["squares"][2 * move.i + 2][move.j] == 3) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                    }
-                }
-            }
-            // ha [i][j] fuggoleges, akkor a szomszedos negyzetek:
-            // [(i-1) / 2][j -1] es [(i-1) / 2][j]
-            else{
-                if ( move.i > 0 && move.j > 0 && gameState["squares"][(move.i - 1) / 2][move.j - 1] == 3){
-                    gameState["squares"][(move.i - 1) / 2][move.j - 1] += 1;
-                    gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                    gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                } 
-                if ( move.i > 0 && gameState["squares"][(move.i - 1) / 2][move.j] == 4){
-                    gameState["squares"][(move.i - 1) / 2][move.j] += 1;
-                    gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                    gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                }
-            }           
         }
     }
 }

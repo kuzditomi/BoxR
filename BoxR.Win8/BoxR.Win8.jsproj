@@ -109,6 +109,9 @@
     <Content Include="pages\about\about.html" />
     <Content Include="pages\choosenick\choosenick.html" />
     <Content Include="pages\choosenick\choosenick.js" />
+    <Content Include="pages\modepage\modepage.css" />
+    <Content Include="pages\modepage\modepage.html" />
+    <Content Include="pages\modepage\modepage.js" />
     <Content Include="pages\privacy\privacy.html" />
     <Content Include="pages\register\register.html" />
     <Content Include="pages\register\register.js" />

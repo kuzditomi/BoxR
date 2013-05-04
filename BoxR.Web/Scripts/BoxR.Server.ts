@@ -64,7 +64,7 @@ module BoxR {
             };
 
             BoxR.Manager.Hub.client.edgeClicked = function (i, j) {
-                BoxR.Manager.Game.EdgeClickFromServer(i, j);
+                BoxR.Manager.Game.EdgeClickFromServerByCoordinate(i, j);
             };
 
             BoxR.Manager.Hub.client.alertDisconnect = function () {

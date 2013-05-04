@@ -242,6 +242,8 @@
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>
     <Content Include="Scripts\BoxR.Server.ts" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\SinglePlayer.cshtml" />
     <TypeScriptCompile Include="Scripts\BoxR.WebClient.ts" />
     <Content Include="Scripts\BoxR.WebClient.js">
       <DependentUpon>BoxR.WebClient.ts</DependentUpon>
@@ -298,7 +300,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />

@@ -55,7 +55,7 @@
                 BoxR.Manager.Client.StartGame(selfStart, name, opponentname);
             };
             BoxR.Manager.Hub.client.edgeClicked = function (i, j) {
-                BoxR.Manager.Game.EdgeClickFromServer(i, j);
+                BoxR.Manager.Game.EdgeClickFromServerByCoordinate(i, j);
             };
             BoxR.Manager.Hub.client.alertDisconnect = function () {
                 BoxR.Manager.Client.DisconnectPopup();
