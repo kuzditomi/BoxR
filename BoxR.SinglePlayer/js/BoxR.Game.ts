@@ -1,4 +1,5 @@
 ﻿declare var $;
+var INFINITY = 300;
 module BoxR {
     var dummychars = "Ù";
     var IsSelfRound :bool = false;
@@ -352,15 +353,13 @@ module BoxR {
             if (!e.active) {
                 var squeractivated = e.Activate();
                 _this.opponentScore += squeractivated;
-                if (squeractivated == 0) {
-                    _this.Draw();
+                _this.UpdateScore();
+                _this.Draw();
+                
+                if (squeractivated == 0)
                     return false;
-                }
-                else {
-                    _this.UpdateScore();
-                    _this.Draw();
-                    return true;
-                }
+                
+                return true;
             }
             return false;
         }
@@ -400,42 +399,69 @@ module BoxR {
         // AI clicks now
         private MachineClick() {
             var _this = this;
-            var gameState = this.getGameState();
+            //var gameState = this.getGameState();
             
             // szinkron, debugra
-            //var clickResult = {};
-            //var a = this.minimax(gameState, 4,clickResult);
-            //var needContinue = _this.EdgeClickFromServer(_this.edges[clickResult.i][clickResult.j]);
+            //var nextMove = this.runMinimax(gameState, 4);
+            //var needContinue = _this.EdgeClickFromServer(_this.edges[nextMove.i][nextMove.j]);
+            //if (needContinue)
+            //    _this.MachineClick();
+            //else
+            //    _this.NextRound();
+
+
+            // aszinkron
+            //var myWorker = new Worker("/js/BoxR.MiniMax.js");
+            //myWorker.postMessage({gameState: gameState,depth: 5});
+            //myWorker.onmessage = function (e) {
+            //    var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
             //    if (needContinue)
             //        _this.MachineClick();
             //    else
             //        _this.NextRound();
-
-
-            // aszinkron
-            var myWorker = new Worker("/js/BoxR.MiniMax.js");
-            myWorker.postMessage({gameState: gameState,depth: 2});
-            myWorker.onmessage = function (e) {
-                var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
-                if (needContinue)
-                    _this.MachineClick();
-                else
-                    _this.NextRound();
-            };
+            //};
             
             // egyszerubb algoritmussal
-            //setTimeout(() => {
-            //    var edge = this.FourthClick() || this.CleverClick(0);
-            //    var needContinue = this.EdgeClickFromServer(edge);
-            //    if (needContinue)
-            //        this.MachineClick();
-            //    else
-            //        this.NextRound();
-            //}, 1500);
+            setTimeout(() => {
+                var fourthEdge = this.FourthClick();
+                var nextEdge = this.CleverClick(0) || this.CleverClick(1);
+                if (nextEdge) { // még van olyan, aminek csak a második élét húzom be
+                    if (fourthEdge) { // be lehet keríteni négyzetet, ilyenkor veszély nélkül
+                        _this.EdgeClickFromServer(fourthEdge);
+                        _this.MachineClick();
+                    } else {
+                        _this.EdgeClickFromServer(nextEdge);
+                        _this.NextRound();
+                    }
+                }
+                else { // minimax
+                    var gameState = this.getGameState();
+                    // egyszálon
+                    //var nextMove = this.runMinimax(gameState, 5);
+                    //var needContinue = _this.EdgeClickFromServer(_this.edges[nextMove.i][nextMove.j]);
+                    //if (needContinue)
+                    //    _this.MachineClick();
+                    //else
+                    //    _this.NextRound();
+                    //másik szálon
+                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                    myWorker.postMessage({gameState: gameState,depth: 6});
+                    myWorker.onmessage = function (e) {
+                        var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
+                        if (needContinue)
+                            _this.MachineClick();
+                        else
+                            _this.NextRound();
+                    };
+                }
+            }, 1000);
         }
 
         // finds the squere with the lowest possible surrounding edge activated
         private CleverClick(activeEdges : number) :Edge{
+            if (activeEdges == 2) {
+                return null;
+            }
             var clicked = false;
             var available = new Edge[];
             for (var i = 0; i < this.edges.length;i++){
@@ -456,7 +482,7 @@ module BoxR {
                 available.splice(random, 1);
             }
             if(!clicked){
-                return this.CleverClick(activeEdges + 1);
+                return null;
             }
         }
 
@@ -481,47 +507,6 @@ module BoxR {
             }
             return null;
         }
-
-        //minimax algorithm
-        private minimax(gameState: any, depth, click: any):number{
-            console.log("minimax start, depth: " + depth);
-            // if the game is finished, or max depth reached
-            if (gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
-                console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
-                return this.valueOf(gameState);
-            }
-            else {
-                var alpha = -100;
-                // available edges to click next
-                var available = new any[];
-                for (var i = 0; i < gameState["edges"].length; i++) {
-                    for (var j = 0; j < gameState["edges"][i].length; j++) {
-                        if (!gameState["edges"][i][j]) {
-                            available.push({ i: i, j: j });
-                        }
-                    }
-                }
-
-                for (var i = 0; i < available.length ; i++) {
-                    var gameCopy = JSON.parse(JSON.stringify(gameState));
-                    console.log("click in depth("+depth+"): " + available[i].i + ":" +  available[i].j);
-                    this.EmulateClick(gameCopy, available[i]);
-                    var bestclick = {};
-                    var res = - this.minimax(gameCopy, depth - 1, bestclick);
-                    if(res > alpha){
-                        alpha = res;
-                        click.i = available[i].i;
-                        click.j = available[i].j;
-                    }
-                }
-                return alpha;
-            }
-        }
-
-        private valueOf(gameState:any):number {
-            return (gameState.opponentScore) - gameState.selfScore ; // AI's advantage
-        }
-
 
         private EmulateClick(gameState: any,move:any){
             gameState["edges"][move.i][move.j] = true;
@@ -599,5 +584,77 @@ module BoxR {
 
             return gameState;
         }
+
+        //#region új kód
+        // copied from here: https://bitbucket.org/hal/dots-and-boxes-ai-assignment/src/7308e80bc128b622749bd6546ba82afa03283206/src/main/java/hal/dotsandboxes/decision/JavaMinimaxDecisionEngine.java
+        private runMinimax(gameState,depth) {
+            // find available moves
+            var available = [];
+            for (var i = 0; i < gameState["edges"].length; i++) {
+                for (var j = 0; j < gameState["edges"][i].length; j++) {
+                    if (!gameState["edges"][i][j]) {
+                        available.push({ i: i, j: j });
+                    }
+                }
+            }
+
+            // set a minimum value for best value
+            var best = -INFINITY;
+    
+            // fill the moves array with values of moves
+            var moves = [];
+            for (var i = 0; i < available.length; i++) {
+                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
+                this.EmulateClick(gameStateCopy,available[i]);
+                var score = this.minimax(gameStateCopy, depth - 1);
+                if(score > best) {
+                    best = score;
+                }
+                moves.push({ score:score, move: available[i] });
+            }
+
+            // find the best moves by score
+            var bestmoves = [];
+            for(var i = 0; i < moves.length ;i ++) {
+                if (moves[i].score == best)
+                    bestmoves.push(moves[i]);
+            }
+
+            // return a random one from best moves
+            return bestmoves[Math.floor(Math.random() * bestmoves.length)].move;
+        }
+
+        private minimax(gameState,depth) {
+            if (gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
+                //console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
+                return this.estimateValue(gameState);
+            }
+
+            var bestscore = gameState.turn ? +INFINITY : -INFINITY;// turn == false, if it's AI's turn, -INFINITY to favored player
+            // find available moves
+            var available = [];
+            for (var i = 0; i < gameState["edges"].length; i++) {
+                for (var j = 0; j < gameState["edges"][i].length; j++) {
+                    if (!gameState["edges"][i][j]) {
+                        available.push({ i: i, j: j });
+                    }
+                }
+            }
+    
+            // iterate on available moves
+            for (var i = 0; i < available.length; i++) {
+                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
+                this.EmulateClick(gameStateCopy,available[i]);
+                var score = this.minimax(gameStateCopy, depth - 1);
+
+                bestscore = gameState.turn ? Math.min(score, bestscore) : Math.max(score, bestscore);
+            }
+            return bestscore;
+        }
+
+        private estimateValue(gameState) {
+            return gameState.opponentScore - gameState.selfScore; //gameState.turn ? gameState.selfScore - gameState.opponentScore : gameState.opponentScore - gameState.selfScore;
+        }
+        //#endregion
     }
 }

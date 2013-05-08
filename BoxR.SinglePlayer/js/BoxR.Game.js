@@ -3,6 +3,7 @@
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+var INFINITY = 300;
 var BoxR;
 (function (BoxR) {
     var dummychars = "Ù";
@@ -304,14 +305,12 @@ var BoxR;
             if(!e.active) {
                 var squeractivated = e.Activate();
                 _this.opponentScore += squeractivated;
+                _this.UpdateScore();
+                _this.Draw();
                 if(squeractivated == 0) {
-                    _this.Draw();
                     return false;
-                } else {
-                    _this.UpdateScore();
-                    _this.Draw();
-                    return true;
                 }
+                return true;
             }
             return false;
         };
@@ -356,22 +355,40 @@ var BoxR;
         };
         Game.prototype.MachineClick = function () {
             var _this = this;
-            var gameState = this.getGameState();
-            var myWorker = new Worker("/js/BoxR.MiniMax.js");
-            myWorker.postMessage({
-                gameState: gameState,
-                depth: 2
-            });
-            myWorker.onmessage = function (e) {
-                var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
-                if(needContinue) {
-                    _this.MachineClick();
+            var _this = this;
+            setTimeout(function () {
+                var fourthEdge = _this.FourthClick();
+                var nextEdge = _this.CleverClick(0) || _this.CleverClick(1);
+                if(nextEdge) {
+                    if(fourthEdge) {
+                        _this.EdgeClickFromServer(fourthEdge);
+                        _this.MachineClick();
+                    } else {
+                        _this.EdgeClickFromServer(nextEdge);
+                        _this.NextRound();
+                    }
                 } else {
-                    _this.NextRound();
+                    var gameState = _this.getGameState();
+                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                    myWorker.postMessage({
+                        gameState: gameState,
+                        depth: 6
+                    });
+                    myWorker.onmessage = function (e) {
+                        var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
+                        if(needContinue) {
+                            _this.MachineClick();
+                        } else {
+                            _this.NextRound();
+                        }
+                    };
                 }
-            };
+            }, 1000);
         };
         Game.prototype.CleverClick = function (activeEdges) {
+            if(activeEdges == 2) {
+                return null;
+            }
             var clicked = false;
             var available = new Array();
             for(var i = 0; i < this.edges.length; i++) {
@@ -391,7 +408,7 @@ var BoxR;
                 available.splice(random, 1);
             }
             if(!clicked) {
-                return this.CleverClick(activeEdges + 1);
+                return null;
             }
         };
         Game.prototype.FourthClick = function () {
@@ -414,43 +431,6 @@ var BoxR;
                 return edge;
             }
             return null;
-        };
-        Game.prototype.minimax = function (gameState, depth, click) {
-            console.log("minimax start, depth: " + depth);
-            if(gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
-                console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
-                return this.valueOf(gameState);
-            } else {
-                var alpha = -100;
-                var available = new Array();
-                for(var i = 0; i < gameState["edges"].length; i++) {
-                    for(var j = 0; j < gameState["edges"][i].length; j++) {
-                        if(!gameState["edges"][i][j]) {
-                            available.push({
-                                i: i,
-                                j: j
-                            });
-                        }
-                    }
-                }
-                for(var i = 0; i < available.length; i++) {
-                    var gameCopy = JSON.parse(JSON.stringify(gameState));
-                    console.log("click in depth(" + depth + "): " + available[i].i + ":" + available[i].j);
-                    this.EmulateClick(gameCopy, available[i]);
-                    var bestclick = {
-                    };
-                    var res = -this.minimax(gameCopy, depth - 1, bestclick);
-                    if(res > alpha) {
-                        alpha = res;
-                        click.i = available[i].i;
-                        click.j = available[i].j;
-                    }
-                }
-                return alpha;
-            }
-        };
-        Game.prototype.valueOf = function (gameState) {
-            return (gameState.opponentScore) - gameState.selfScore;
         };
         Game.prototype.EmulateClick = function (gameState, move) {
             gameState["edges"][move.i][move.j] = true;
@@ -516,6 +496,67 @@ var BoxR;
             gameState["n"] = this.n;
             gameState["turn"] = IsSelfRound;
             return gameState;
+        };
+        Game.prototype.runMinimax = function (gameState, depth) {
+            var available = [];
+            for(var i = 0; i < gameState["edges"].length; i++) {
+                for(var j = 0; j < gameState["edges"][i].length; j++) {
+                    if(!gameState["edges"][i][j]) {
+                        available.push({
+                            i: i,
+                            j: j
+                        });
+                    }
+                }
+            }
+            var best = -INFINITY;
+            var moves = [];
+            for(var i = 0; i < available.length; i++) {
+                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
+                this.EmulateClick(gameStateCopy, available[i]);
+                var score = this.minimax(gameStateCopy, depth - 1);
+                if(score > best) {
+                    best = score;
+                }
+                moves.push({
+                    score: score,
+                    move: available[i]
+                });
+            }
+            var bestmoves = [];
+            for(var i = 0; i < moves.length; i++) {
+                if(moves[i].score == best) {
+                    bestmoves.push(moves[i]);
+                }
+            }
+            return bestmoves[Math.floor(Math.random() * bestmoves.length)].move;
+        };
+        Game.prototype.minimax = function (gameState, depth) {
+            if(gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
+                return this.estimateValue(gameState);
+            }
+            var bestscore = gameState.turn ? +INFINITY : -INFINITY;
+            var available = [];
+            for(var i = 0; i < gameState["edges"].length; i++) {
+                for(var j = 0; j < gameState["edges"][i].length; j++) {
+                    if(!gameState["edges"][i][j]) {
+                        available.push({
+                            i: i,
+                            j: j
+                        });
+                    }
+                }
+            }
+            for(var i = 0; i < available.length; i++) {
+                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
+                this.EmulateClick(gameStateCopy, available[i]);
+                var score = this.minimax(gameStateCopy, depth - 1);
+                bestscore = gameState.turn ? Math.min(score, bestscore) : Math.max(score, bestscore);
+            }
+            return bestscore;
+        };
+        Game.prototype.estimateValue = function (gameState) {
+            return gameState.opponentScore - gameState.selfScore;
         };
         return Game;
     })();
