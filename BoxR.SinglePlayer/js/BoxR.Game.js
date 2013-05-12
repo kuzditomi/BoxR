@@ -3,12 +3,16 @@
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var INFINITY = 300;
 var BoxR;
 (function (BoxR) {
-    var dummychars = "Ù";
-    var IsSelfRound = false;
     "use strict";
+    var dummychars = "Ù";
+    var INFINITY = 300;
+    var selfBoxColor = 'rgb(27,161,226)';
+    var opponentBoxColor = 'rgb(242,20,0)';
+    var backgroundColor = 'rgb(256,256,256)';
+    var activeColor = 'rgb(27,161,226)';
+    var IsSelfRound = false;
     var Drawable = (function () {
         function Drawable(ctx, x, y) {
             this.active = false;
@@ -46,12 +50,12 @@ var BoxR;
         Edge.prototype.Draw = function () {
             this.ctx.strokeStyle = "black";
             if(this.active) {
-                this.ctx.fillStyle = "darkslateblue";
+                this.ctx.fillStyle = activeColor;
             } else {
                 if(this.mouseover) {
-                    this.ctx.fillStyle = "rgb(27,161,226)";
+                    this.ctx.fillStyle = activeColor;
                 } else {
-                    this.ctx.fillStyle = "slateblue";
+                    this.ctx.fillStyle = backgroundColor;
                 }
             }
             this.ctx.beginPath();
@@ -126,7 +130,7 @@ var BoxR;
         Squere.prototype.EdgeChecked = function () {
             if(this.EdgesChecked() == 4) {
                 this.active = true;
-                this.color = IsSelfRound ? '27,161,226,' : '290,20,0,';
+                this.color = IsSelfRound ? selfBoxColor : opponentBoxColor;
                 return true;
             }
             return false;
@@ -145,29 +149,53 @@ var BoxR;
             if(!this.animated) {
                 var steps = 120;
                 var i = 0;
+                var mode = 0;
                 var _this = this;
+                _this.ctx.fillStyle = _this.color;
+                _this.ctx.strokeStyle = 'black';
+                _this.ctx.beginPath();
+                _this.ctx.rect(_this.x, _this.y, _this.width, _this.width);
+                _this.ctx.closePath();
+                _this.ctx.fill();
+                _this.ctx.stroke();
+                i++;
                 var interval = setInterval(function () {
-                    _this.ctx.fillStyle = 'rgba(' + _this.color + i / steps + ')';
-                    _this.ctx.strokeStyle = 'black';
-                    _this.ctx.beginPath();
-                    _this.ctx.rect(_this.x, _this.y, _this.width, _this.width);
-                    _this.ctx.closePath();
-                    _this.ctx.fill();
-                    _this.ctx.stroke();
-                    i++;
-                    if(i === steps) {
-                        clearInterval(interval);
+                    if(mode == 0) {
+                        _this.ctx.strokeStyle = 'black';
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x - 1, _this.y - 1, _this.width + 2, _this.width + 2);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = backgroundColor;
+                        _this.ctx.fill();
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x + i, _this.y, _this.width - (i * 2), _this.width);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = _this.color;
+                        _this.ctx.fill();
+                        i += 2;
+                        if(i >= _this.width / 2) {
+                            mode = 1;
+                        }
+                    } else {
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x + i, _this.y, _this.width - (i * 2), _this.width);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = _this.color;
+                        _this.ctx.fill();
+                        i -= 3;
+                        if(i <= 0) {
+                            clearInterval(interval);
+                        }
                     }
-                }, 30);
+                }, 10);
                 this.animated = true;
             } else {
-                this.ctx.fillStyle = 'rgba(' + this.color + '1)';
+                this.ctx.fillStyle = this.color;
                 this.ctx.strokeStyle = 'black';
                 this.ctx.beginPath();
                 this.ctx.rect(this.x, this.y, this.width, this.width);
                 this.ctx.closePath();
                 this.ctx.fill();
-                this.ctx.stroke();
             }
         };
         return Squere;
@@ -333,24 +361,8 @@ var BoxR;
         Game.prototype.NextRound = function () {
             IsSelfRound ^= true;
             if(!IsSelfRound) {
-                $("#redturn").animate({
-                    width: "120px",
-                    marginLeft: "0px"
-                });
-                $("#blueturn").animate({
-                    width: "0px",
-                    marginLeft: "0px"
-                });
                 this.MachineClick();
             } else {
-                $("#blueturn").animate({
-                    width: "120px",
-                    marginLeft: "0px"
-                });
-                $("#redturn").animate({
-                    width: "0px",
-                    marginLeft: "0px"
-                });
             }
         };
         Game.prototype.MachineClick = function () {
@@ -369,7 +381,7 @@ var BoxR;
                     }
                 } else {
                     var gameState = _this.getGameState();
-                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                    var myWorker = new Worker("js/BoxR.MiniMax.js");
                     myWorker.postMessage({
                         gameState: gameState,
                         depth: 6
@@ -432,48 +444,6 @@ var BoxR;
             }
             return null;
         };
-        Game.prototype.EmulateClick = function (gameState, move) {
-            gameState["edges"][move.i][move.j] = true;
-            var squereActivated = false;
-            if(move.i % 2 == 0) {
-                if(move.i < gameState.n * 2) {
-                    gameState["squares"][move.i / 2][move.j] += 1;
-                    if(gameState["squares"][move.i / 2][move.j] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-                if(move.i > 0) {
-                    gameState["squares"][move.i / 2 - 1][move.j] += 1;
-                    if(gameState["squares"][move.i / 2 - 1][move.j] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-            } else {
-                if(move.j < gameState.n * 2) {
-                    gameState["squares"][(move.i - 1) / 2][move.j] += 1;
-                    if(gameState["squares"][(move.i - 1) / 2][move.j] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-                if(move.j > 0) {
-                    gameState["squares"][(move.i - 1) / 2][move.j - 1] += 1;
-                    if(gameState["squares"][(move.i - 1) / 2][move.j - 1] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-            }
-            if(!squereActivated) {
-                gameState["turn"] ^= true;
-            }
-        };
         Game.prototype.getGameState = function () {
             var gameState = {
             };
@@ -496,67 +466,6 @@ var BoxR;
             gameState["n"] = this.n;
             gameState["turn"] = IsSelfRound;
             return gameState;
-        };
-        Game.prototype.runMinimax = function (gameState, depth) {
-            var available = [];
-            for(var i = 0; i < gameState["edges"].length; i++) {
-                for(var j = 0; j < gameState["edges"][i].length; j++) {
-                    if(!gameState["edges"][i][j]) {
-                        available.push({
-                            i: i,
-                            j: j
-                        });
-                    }
-                }
-            }
-            var best = -INFINITY;
-            var moves = [];
-            for(var i = 0; i < available.length; i++) {
-                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
-                this.EmulateClick(gameStateCopy, available[i]);
-                var score = this.minimax(gameStateCopy, depth - 1);
-                if(score > best) {
-                    best = score;
-                }
-                moves.push({
-                    score: score,
-                    move: available[i]
-                });
-            }
-            var bestmoves = [];
-            for(var i = 0; i < moves.length; i++) {
-                if(moves[i].score == best) {
-                    bestmoves.push(moves[i]);
-                }
-            }
-            return bestmoves[Math.floor(Math.random() * bestmoves.length)].move;
-        };
-        Game.prototype.minimax = function (gameState, depth) {
-            if(gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
-                return this.estimateValue(gameState);
-            }
-            var bestscore = gameState.turn ? +INFINITY : -INFINITY;
-            var available = [];
-            for(var i = 0; i < gameState["edges"].length; i++) {
-                for(var j = 0; j < gameState["edges"][i].length; j++) {
-                    if(!gameState["edges"][i][j]) {
-                        available.push({
-                            i: i,
-                            j: j
-                        });
-                    }
-                }
-            }
-            for(var i = 0; i < available.length; i++) {
-                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
-                this.EmulateClick(gameStateCopy, available[i]);
-                var score = this.minimax(gameStateCopy, depth - 1);
-                bestscore = gameState.turn ? Math.min(score, bestscore) : Math.max(score, bestscore);
-            }
-            return bestscore;
-        };
-        Game.prototype.estimateValue = function (gameState) {
-            return gameState.opponentScore - gameState.selfScore;
         };
         return Game;
     })();

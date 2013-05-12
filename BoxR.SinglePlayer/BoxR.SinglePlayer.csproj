@@ -59,7 +59,9 @@
   <ItemGroup>
     <Content Include="css\blueturn.png" />
     <Content Include="css\boxr.css" />
+    <Content Include="css\metro-bootstrap.css" />
     <Content Include="css\redturn.png" />
+    <Content Include="font\fontawesome-webfont.svg" />
     <Content Include="index.html" />
     <Content Include="js\BoxR.Game.js" />
     <Content Include="js\BoxR.Game.min.js" />
@@ -73,6 +75,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="font\fontawesome-webfont.eot" />
+    <Content Include="font\fontawesome-webfont.ttf" />
+    <Content Include="font\fontawesome-webfont.woff" />
+    <Content Include="font\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

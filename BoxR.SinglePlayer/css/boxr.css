@@ -1,233 +1,31 @@
-﻿* {
-     margin:0; 
-     padding:0;
-}
-body{
-    background: darkslateblue;
-    color: white;
-    font-family: 'Segoe UI Light';
-    overflow: no-content;
-}
-input {
-    font-family: 'Segoe UI Light';
-}
-.btn {
-    margin-top: 3px;
-    display: inline-block;
-    cursor: pointer;
-    border: none;
-    padding: 5px 10px;
-    text-align: center;
-    font-size: 14pt;
-    background: white;
-    color: slateblue;
-}
-.btn:hover {
-    background: #B9B9D9;
-    color: white;
-}
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right:0;
-    height: 100px;
-    width:auto;
-    text-align: center;
-}
-#left{
-    position:absolute;
-    left: 0;
-    top: 100px;
-    width: 240px;
-    height: 400px;   
-}
-#main{
-    position: absolute;
-    left: 300px;
-    right: 30px;
-    top: 160px;
-    height: 600px;
-}
-canvas {
-    background: slateblue;
+﻿.thumbnails > li.tile{
+	cursor: auto;
 }
 
-header h1{
-    font-weight: normal;
-    font-size: 40pt;
-    margin: 25px 0 10px 0;
+.thumbnails > li.tile.tile-blue {
+	opacity: 1;
+	background-color: #1BA4E2;
 }
 
-/******** Logout form ********/
-#logoff {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background: white;
-    color: darkslateblue;
-    z-index:10;
-}
-#logoutForm {
-    margin: 15px;
-}
-#logoutForm a {
-    text-decoration: none;
-}
-/**** Settings box ************/
-/*#settings {
-    position: absolute;
-    right: 114px;
-    padding: 15px;
-    bottom: 0;
-    background: white;
-    color: darkslateblue;
-    z-index:10;
-}*/
-#setting a {
-    text-decoration: none;
+.thumbnails > li.tile.tile-red {
+	opacity: 1;
+	background-color: #1821400;
 }
 
-/********** Quit game box ****************/
-#quitGame {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background: white;
-    color: darkslateblue;
-    z-index:10;
-}
-#quitGame .inner {
-    margin: 15px;
-}
-#quitGame .inner a{
-    text-decoration: none;
-}
-/******* Footer *******/
-footer {
-    position: absolute;
-    bottom: 10px;
-    text-align: center;
-    font-size: 12pt;
-    width: 100%;
-}
-/******** User List (Index) ********/
-#container {
-    height: 400px;
-    margin: 150px auto 0 auto;
-    text-align: center;
-}
-#userListcontainer {
-    width: 400px;
-    margin: 0 auto;
-    background: white;
-    border: 1px solid black;
-    color: darkslateblue;
-    height: 450px;
-}
-#userList {
-    overflow-y: auto;
-    height: 420px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+.thumbnails > li.tile > h2{
+	margin-top: -10px;
 }
 
-div.user {
-    font-size: 16pt;
-    width: 300px;
-    margin: 10px auto;
-    background: darkslateblue;
-    color: white;
+a{
+	color: black;
+	text-decoration:none;
 }
 
-div.user:hover{
-    background: slateblue;
-    cursor: pointer;
+a:hover{
+	color: #1BA4E2;
+	text-decoration:none;
 }
 
-div.user span {
-    display: block;
-    padding: 7px;
-}
-/********* game **********/
-#roundcounter {
-    font-size: 20pt;
-    color: red;   
-}
-
-aside {
-    color: white;
-    text-align: center;
-}
-
-aside .selfcounter {
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    left: 20px;
-    top: 150px;
-    background: #1BA1E2;
-}
-
-aside .opponentcounter {
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    right: 20px;
-    top: 150px;
-    background: #E51400;
-}
-aside img {
-    margin-top: 10px;
-}
-
-.selfscore, .opponentscore {
-    font-size: 40pt;
-}
-
-.selfname, .opponentname {
-    font-size: 16pt;
-    margin-top: 10px;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/****** Howto box **********/
-.howtoplay {
-    position: absolute;
-    left: 20px;
-    top: 300px;
-    background: #1BA1E2;
-    width: 300px;
-    height: 300px;
-}
-
-.howtoplay .title {
-    padding: 10px 0;
-}
-.howtoplay ul {
-    list-style-type:none;
-}
-
-.howtoplay ul li {
-    display:inline-block;
-}
-
-.howtoplay ul li a {
-    display: block;
-    width: 100px;
-    text-decoration: none;
-    padding: 10px 0;
-    background: white;
-    color: #1BA1E2;
-}
-.howtoplay ul li a:hover {
-    color: white;
-    background: #2CB2F3;
-}
 /******** CSS POPUP *******/
 #blanket{
     position:absolute;
@@ -289,7 +87,3 @@ aside img {
     {
         background: #AD103C;
     }
-/****** Error *****/
-.error {
-    color: red;
-}

@@ -1,9 +1,14 @@
 ﻿declare var $;
-var INFINITY = 300;
 module BoxR {
-    var dummychars = "Ù";
-    var IsSelfRound :bool = false;
     "use strict";
+    var dummychars = "Ù";
+
+    var INFINITY = 300;
+    var selfBoxColor = 'rgb(27,161,226)';
+    var opponentBoxColor = 'rgb(242,20,0)';
+    var backgroundColor = 'rgb(256,256,256)';
+    var activeColor = 'rgb(27,161,226)';
+    var IsSelfRound :bool = false;
     export class Drawable {
         active: bool;
         ctx: CanvasRenderingContext2D;
@@ -57,14 +62,14 @@ module BoxR {
         public Draw() {
             this.ctx.strokeStyle = "black";
             if (this.active) {
-                this.ctx.fillStyle = "darkslateblue";
+                this.ctx.fillStyle = activeColor;
             }
             else {
                 if (this.mouseover) {
-                    this.ctx.fillStyle = "rgb(27,161,226)";
+                    this.ctx.fillStyle = activeColor;
                 }
                 else {
-                    this.ctx.fillStyle = "slateblue";
+                    this.ctx.fillStyle = backgroundColor;
                 }
             }
             this.ctx.beginPath();
@@ -149,7 +154,7 @@ module BoxR {
         public EdgeChecked(): bool {
             if (this.EdgesChecked() == 4) {
                 this.active = true;
-                this.color = IsSelfRound ? '27,161,226,' : '290,20,0,';
+                this.color = IsSelfRound ? selfBoxColor : opponentBoxColor;
                 return true;
             }
             return false;
@@ -170,27 +175,59 @@ module BoxR {
             if (!this.animated) {
                 var steps = 120;
                 var i = 0;
+                var mode = 0; // used for animation
                 var _this = this;
 
-                var interval = setInterval(function () {
-                    _this.ctx.fillStyle = 'rgba(' + _this.color + i / steps + ')';
-                    _this.ctx.strokeStyle = 'black';
+                _this.ctx.fillStyle = _this.color;
+                _this.ctx.strokeStyle = 'black';
 
-                    _this.ctx.beginPath();
-                    _this.ctx.rect(_this.x, _this.y, _this.width, _this.width);
-                    _this.ctx.closePath();
+                _this.ctx.beginPath();
+                _this.ctx.rect(_this.x, _this.y, _this.width, _this.width);
+                _this.ctx.closePath();
 
-                    _this.ctx.fill();
-                    _this.ctx.stroke();
+                _this.ctx.fill();
+                _this.ctx.stroke();
                     i++;
-                    if (i === steps) {
-                        clearInterval(interval);
+                
+                var interval = setInterval(function () {
+                    if (mode == 0) {
+                        _this.ctx.strokeStyle = 'black';
+
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x-1, _this.y-1, _this.width+2, _this.width+2);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = backgroundColor;
+                        _this.ctx.fill();
+
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x + i, _this.y, _this.width - (i * 2), _this.width);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = _this.color;
+                        _this.ctx.fill();
+
+                        //_this.ctx.stroke();
+                        i+=2;
+                        if (i >= _this.width / 2) {
+                            mode = 1; // now the size is 0, has to revert
+                        }
+                    }else{
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x + i, _this.y, _this.width - (i * 2), _this.width);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = _this.color;
+                        _this.ctx.fill();
+
+                        //_this.ctx.stroke();
+                        i-=3;
+                        if (i <= 0) {
+                            clearInterval(interval);
+                        }
                     }
-                }, 30);
+                }, 10);
                 this.animated = true;
             }
             else {
-                this.ctx.fillStyle = 'rgba(' + this.color + '1)';
+                this.ctx.fillStyle = this.color;
                 this.ctx.strokeStyle = 'black';
 
                 this.ctx.beginPath();
@@ -198,7 +235,7 @@ module BoxR {
                 this.ctx.closePath();
 
                 this.ctx.fill();
-                this.ctx.stroke();
+                //this.ctx.stroke();
             }
         }
     }
@@ -386,42 +423,20 @@ module BoxR {
         private NextRound() {
             IsSelfRound ^= true;
             if(!IsSelfRound){
-                $("#redturn").animate({width:"120px",marginLeft:"0px"});
-                $("#blueturn").animate({width:"0px",marginLeft:"0px"});
+                //$("#redturn").animate({width:"120px",marginLeft:"0px"});
+                //$("#blueturn").animate({width:"0px",marginLeft:"0px"});
                 this.MachineClick();
             }
             else{
-                $("#blueturn").animate({width:"120px",marginLeft:"0px"});
-                $("#redturn").animate({width:"0px",marginLeft:"0px"});
+                //$("#blueturn").animate({width:"120px",marginLeft:"0px"});
+                //$("#redturn").animate({width:"0px",marginLeft:"0px"});
             }
         }
 
         // AI clicks now
         private MachineClick() {
             var _this = this;
-            //var gameState = this.getGameState();
-            
-            // szinkron, debugra
-            //var nextMove = this.runMinimax(gameState, 4);
-            //var needContinue = _this.EdgeClickFromServer(_this.edges[nextMove.i][nextMove.j]);
-            //if (needContinue)
-            //    _this.MachineClick();
-            //else
-            //    _this.NextRound();
 
-
-            // aszinkron
-            //var myWorker = new Worker("/js/BoxR.MiniMax.js");
-            //myWorker.postMessage({gameState: gameState,depth: 5});
-            //myWorker.onmessage = function (e) {
-            //    var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
-            //    if (needContinue)
-            //        _this.MachineClick();
-            //    else
-            //        _this.NextRound();
-            //};
-            
-            // egyszerubb algoritmussal
             setTimeout(() => {
                 var fourthEdge = this.FourthClick();
                 var nextEdge = this.CleverClick(0) || this.CleverClick(1);
@@ -436,15 +451,7 @@ module BoxR {
                 }
                 else { // minimax
                     var gameState = this.getGameState();
-                    // egyszálon
-                    //var nextMove = this.runMinimax(gameState, 5);
-                    //var needContinue = _this.EdgeClickFromServer(_this.edges[nextMove.i][nextMove.j]);
-                    //if (needContinue)
-                    //    _this.MachineClick();
-                    //else
-                    //    _this.NextRound();
-                    //másik szálon
-                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                    var myWorker = new Worker("js/BoxR.MiniMax.js");
                     myWorker.postMessage({gameState: gameState,depth: 6});
                     myWorker.onmessage = function (e) {
                         var needContinue = _this.EdgeClickFromServer(_this.edges[e.data.nextClick.i][e.data.nextClick.j]);
@@ -508,51 +515,6 @@ module BoxR {
             return null;
         }
 
-        private EmulateClick(gameState: any,move:any){
-            gameState["edges"][move.i][move.j] = true;
-            var squereActivated = false;
-            
-            if (move.i % 2 == 0) { // ha az el vizszintes
-                if(move.i < gameState.n * 2 ){ // also szomszedos negyzet ellenorzese, ha van
-                    gameState["squares"][move.i / 2][move.j] += 1;
-                    if (gameState["squares"][move.i / 2][move.j] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-                
-                if (move.i > 0) { // felso szomszedos negyzet ellenorzese, ha van
-                    gameState["squares"][move.i / 2 - 1][move.j] += 1;
-                    if (gameState["squares"][move.i / 2 - 1][move.j] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-            }
-            else{ // ha az el fuggoleges
-                if (move.j < gameState.n * 2) { // jobb oldali szomszedos negyzet ellenorzese, ha van
-                    gameState["squares"][(move.i - 1) / 2][move.j] += 1;
-                    if (gameState["squares"][(move.i - 1) / 2][move.j] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-                if (move.j > 0) { // bal oldali szomszedos negyzet ellenorzese, ha van
-                    gameState["squares"][(move.i - 1) / 2][move.j - 1] += 1;
-                    if (gameState["squares"][(move.i - 1) / 2][move.j - 1] == 4) {
-                        gameState["selfScore"] = gameState["turn"] ? gameState["selfScore"] + 1 : gameState["selfScore"];
-                        gameState["opponentScore"] = gameState["turn"] ? gameState["opponentScore"] : gameState["opponentScore"] + 1;
-                        squereActivated = true;
-                    }
-                }
-            }
-            if(!squereActivated)
-                gameState["turn"] ^= true;
-        }
-
         // create gameState object
         private getGameState(){
             var gameState = {};
@@ -584,77 +546,5 @@ module BoxR {
 
             return gameState;
         }
-
-        //#region új kód
-        // copied from here: https://bitbucket.org/hal/dots-and-boxes-ai-assignment/src/7308e80bc128b622749bd6546ba82afa03283206/src/main/java/hal/dotsandboxes/decision/JavaMinimaxDecisionEngine.java
-        private runMinimax(gameState,depth) {
-            // find available moves
-            var available = [];
-            for (var i = 0; i < gameState["edges"].length; i++) {
-                for (var j = 0; j < gameState["edges"][i].length; j++) {
-                    if (!gameState["edges"][i][j]) {
-                        available.push({ i: i, j: j });
-                    }
-                }
-            }
-
-            // set a minimum value for best value
-            var best = -INFINITY;
-    
-            // fill the moves array with values of moves
-            var moves = [];
-            for (var i = 0; i < available.length; i++) {
-                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
-                this.EmulateClick(gameStateCopy,available[i]);
-                var score = this.minimax(gameStateCopy, depth - 1);
-                if(score > best) {
-                    best = score;
-                }
-                moves.push({ score:score, move: available[i] });
-            }
-
-            // find the best moves by score
-            var bestmoves = [];
-            for(var i = 0; i < moves.length ;i ++) {
-                if (moves[i].score == best)
-                    bestmoves.push(moves[i]);
-            }
-
-            // return a random one from best moves
-            return bestmoves[Math.floor(Math.random() * bestmoves.length)].move;
-        }
-
-        private minimax(gameState,depth) {
-            if (gameState.n * gameState.n == gameState.opponentScore + gameState.selfScore || depth == 0) {
-                //console.log("return: opponent:" + gameState.opponentScore + " self:" + gameState.selfScore + " value:" + this.valueOf(gameState));
-                return this.estimateValue(gameState);
-            }
-
-            var bestscore = gameState.turn ? +INFINITY : -INFINITY;// turn == false, if it's AI's turn, -INFINITY to favored player
-            // find available moves
-            var available = [];
-            for (var i = 0; i < gameState["edges"].length; i++) {
-                for (var j = 0; j < gameState["edges"][i].length; j++) {
-                    if (!gameState["edges"][i][j]) {
-                        available.push({ i: i, j: j });
-                    }
-                }
-            }
-    
-            // iterate on available moves
-            for (var i = 0; i < available.length; i++) {
-                var gameStateCopy = JSON.parse(JSON.stringify(gameState));
-                this.EmulateClick(gameStateCopy,available[i]);
-                var score = this.minimax(gameStateCopy, depth - 1);
-
-                bestscore = gameState.turn ? Math.min(score, bestscore) : Math.max(score, bestscore);
-            }
-            return bestscore;
-        }
-
-        private estimateValue(gameState) {
-            return gameState.opponentScore - gameState.selfScore; //gameState.turn ? gameState.selfScore - gameState.opponentScore : gameState.opponentScore - gameState.selfScore;
-        }
-        //#endregion
     }
 }

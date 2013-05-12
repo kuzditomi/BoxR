@@ -2,15 +2,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>BoxR Singleplayer</title>
+<!--    <link rel="stylesheet" href="css/boxr.css"/>-->
+    <link rel="stylesheet" href="css/metro-bootstrap.css"/>
     <link rel="stylesheet" href="css/boxr.css"/>
     <script src="js/jquery-1.7.1.js"></script>
     <script src="js/BoxR.Init.js"></script>
     <script src="js/BoxR.Game.js"></script>
 </head>
     <body>
-        <header id="header">
-            <h1>BoxR</h1>
-        </header>
+        <div class="container">
+            <section>
+				<div class="row">
+					<div class="span6">
+						<canvas id="gameCanvas"></canvas>
+					</div>
+					<div class="span2">
+						<h1>dots and boxes</h1>
+						<ul class="thumbnails">
+							<li class="tile tile-blue">
+								<h2>You</h2>
+								<h1 id="selfscore">0</h1>
+							</li>
+							<li class="tile tile-red">
+								<h2>Bob</h2>
+								<h1 id="opponentscore">0</h1>
+							</li>
+						</ul>
+					</div>
+					<div class="span4">
+						<header>
+							<h2>how to play</h2>
+						</header>
+						<p>
+							Dots and Boxes (also known as Boxes, Squares, Paddocks, Pigs in a Pen, Square-it, Dots and Dashes, Dots, Smart Dots, Dot Boxing, or, simply, the Dot Game) is a pencil and paper game for two players (or sometimes, more than two) first published in 1889 by Édouard Lucas.
+						</p>
+						<p>
+							Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.
+						</p>
+						<p>
+							The board may be of any size. When short on time, 2×2 boxes (created by a square of 9 dots) is good for beginners, and 5×5 is good for experts.
+						</p>
+					</div>
+				</div>
+				<footer class="footer">
+					<p><a href="https://github.com/kuzditomi/boxr/tree/developer">BoxR on GitHub by Küzdi Tamás</a></p>
+				</footer>
+			</section>
+        </div>
         <div id="blanket" style="display:none">
             <div id="bg"></div>
             <div id="outer">
@@ -28,29 +66,5 @@
                 </div>
             </div>
         </div>
-        <div id="container">
-            <canvas id="gameCanvas"></canvas>
-            <aside>
-                <div class="selfcounter">
-                    <div>
-                        <div id="selfname" class="selfname">You</div>
-                    </div>
-                    <div class="selfscore" id="selfscore">0</div>
-                    <img src="css/blueturn.png" width="0" height="120" id="blueturn"/>
-                </div>
-            </aside>
-            <aside >
-                <div class="opponentcounter">
-                    <div>
-                        <div class="opponentname">Bob</div>
-                    </div>
-                    <div class="opponentscore" id="opponentscore">0</div>
-                    <img src="css/redturn.png" width="0" height="120" id="redturn"/>
-                </div>
-            </aside>
-        </div>
-        <footer>
-            Copyright © 2013 - Küzdi Tamás
-        </footer>
     </body>
 </html>
