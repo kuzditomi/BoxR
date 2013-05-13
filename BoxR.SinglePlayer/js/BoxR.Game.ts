@@ -1,8 +1,9 @@
-﻿declare var $;
+﻿declare var Popup;
+declare var $;
 module BoxR {
     "use strict";
     var dummychars = "Ù";
-
+    
     var INFINITY = 300;
     var selfBoxColor = 'rgb(27,161,226)';
     var opponentBoxColor = 'rgb(242,20,0)';
@@ -245,6 +246,7 @@ module BoxR {
         private edges: Edge[][];
         private squares: Squere[][];
         private finished = false;
+        private PopupControl: any;
 
         n: number;
         LeftOffset: number;
@@ -259,6 +261,7 @@ module BoxR {
             this.LeftOffset = canvas.offsetLeft; //canvas.getBoundingClientRect().left;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
+            this.PopupControl = new Popup(document.getElementById("popup"));
         }
 
         public Init(n: number, selfstart: bool) {
@@ -409,13 +412,11 @@ module BoxR {
             
             if (this.selfScore + this.opponentScore == this.n * this.n) {
                 this.finished = true;
-                var blanket = document.getElementById("blanket");
-                blanket.style.display = "table";
                 if (this.selfScore > this.opponentScore) {
-                    document.getElementById("winPopup").style.display = "block";
+                    this.PopupControl.Win();// document.getElementById("winPopup").style.display = "block";
                 }
                 else {
-                    document.getElementById("losePopup").style.display = "block";
+                    this.PopupControl.Lose(); //document.getElementById("losePopup").style.display = "block";
                 }
             }
         }

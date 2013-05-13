@@ -208,6 +208,7 @@ var BoxR;
             this.LeftOffset = canvas.offsetLeft;
             this.TopOffset = canvas.getBoundingClientRect().top;
             this.Width = canvas.clientWidth;
+            this.PopupControl = new Popup(document.getElementById("popup"));
         }
         Game.prototype.Init = function (n, selfstart) {
             this.n = n;
@@ -349,12 +350,10 @@ var BoxR;
             opponentScoreDiv.textContent = this.opponentScore.toString();
             if(this.selfScore + this.opponentScore == this.n * this.n) {
                 this.finished = true;
-                var blanket = document.getElementById("blanket");
-                blanket.style.display = "table";
                 if(this.selfScore > this.opponentScore) {
-                    document.getElementById("winPopup").style.display = "block";
+                    this.PopupControl.Win();
                 } else {
-                    document.getElementById("losePopup").style.display = "block";
+                    this.PopupControl.Lose();
                 }
             }
         };
