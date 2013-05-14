@@ -68,6 +68,7 @@
     <Content Include="js\BoxR.Game.ts" />
     <Content Include="js\BoxR.Init.js" />
     <Content Include="js\BoxR.MiniMax.js" />
+    <Content Include="js\Popup.js" />
     <Content Include="js\jquery-1.7.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>

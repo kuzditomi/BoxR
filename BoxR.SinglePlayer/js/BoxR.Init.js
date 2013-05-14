@@ -4,6 +4,7 @@ $(function () {
 });
 
 function StartGame() {
+    $('.container').css('height', getDocHeight());
     var size = $('canvas').parent().width(); //getDocHeight() * 0.65;
 
     var canvas = document.getElementById("gameCanvas");
