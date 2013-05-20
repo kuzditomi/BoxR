@@ -1,24 +1,27 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>BoxR</title>
         <link href="~/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="author" content="Küzdi Tamás">
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
+        <meta charset="utf-8" />
+        @Styles.Render("~/Content/bootstrap")
     </head>
     <body>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
+        <div class="container">
+            <section>
+                <div class="row">
+                    @RenderBody()
+                </div>
+                <footer>
+                    <p>Copyright © 2013 - Küzdi Tamás</p>
+                </footer>
             </section>
         </div>
-        <footer>
-            Copyright © 2013 - Küzdi Tamás
-        </footer>
+        <div id="popup"></div>
+        <div id="colors"></div>
+        @Scripts.Render("~/bundles/init")
         @RenderSection("scripts", required: false)
     </body>
 </html>

@@ -11,7 +11,7 @@ var BoxR;
     var selfBoxColor = 'rgb(27,161,226)';
     var opponentBoxColor = 'rgb(242,20,0)';
     var backgroundColor = 'rgb(256,256,256)';
-    var activeColor = 'rgb(27,161,226)';
+    BoxR.activeColor = 'rgb(27,161,226)';
     var IsSelfRound = false;
     var Drawable = (function () {
         function Drawable(ctx, x, y) {
@@ -50,10 +50,10 @@ var BoxR;
         Edge.prototype.Draw = function () {
             this.ctx.strokeStyle = "black";
             if(this.active) {
-                this.ctx.fillStyle = activeColor;
+                this.ctx.fillStyle = BoxR.activeColor;
             } else {
                 if(this.mouseover) {
-                    this.ctx.fillStyle = activeColor;
+                    this.ctx.fillStyle = BoxR.activeColor;
                 } else {
                     this.ctx.fillStyle = backgroundColor;
                 }

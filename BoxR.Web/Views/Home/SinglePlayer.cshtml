@@ -1,78 +1,63 @@
-﻿@{
-    ViewBag.Title = "SinglePlayer";
-}
-@section scripts
+﻿@section scripts
 {
-    @Scripts.Render("~/bundles/game")
+    @Scripts.Render("~/bundles/game")  
+    <script>
+        $(function() {
+            $('.container').css('height', getDocHeight());
+            var size = $('canvas').parent().width(); //getDocHeight() * 0.65;
+
+            var canvas = document.getElementById("gameCanvas");
+            canvas.height = size;
+            canvas.width = size;
+
+            BoxR.GameInstance = new BoxR.Game(canvas,true);
+            BoxR.GameInstance.Init(3, true);
+            BoxR.GameInstance.Draw();
+
+            canvas.addEventListener("click", function(e) { BoxR.GameInstance.Click(e); }, true);
+            canvas.addEventListener("mousemove", function (e) { BoxR.GameInstance.MouseMove(e); });
+            if (typeof (Storage) !== "undefined") {
+                var bgcolor = localStorage["BoxRbg"] || "rgba(255, 46, 18, .8)";
+                
+                BoxR.activeColor = bgcolor;
+                BoxR.GameInstance.Draw();
+            }
+        });
+        function getDocHeight() {
+            var d = document;
+            return Math.max(
+                Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
+                Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
+                Math.max(d.body.clientHeight, d.documentElement.clientHeight)
+            );
+        }
+    </script>
 }
 
-<header id="header">
-    <h1><img src="/Images/header_widelogo.png" alt="BoxR"/></h1>
-</header>
-<div id="container">
-    <canvas id="gameCanvas" ></canvas>
-    <aside>
-        <div class="selfcounter">
-            <div>
-                <div class="selfname">You</div>
-            </div>
-            <div class="selfscore" id="selfscore">0</div> 
-            <img src="~/Images/blueturn.png" width="0" height="120" id="blueturn" />
-        </div>
-    </aside>
-    <aside>
-        <div class="opponentcounter">
-            <div>
-                <div class="opponentname">Bob</div>
-            </div><div class="opponentscore" id="opponentscore">0</div>
-            <img src="~/Images/redturn.png" width="0" height="120" id="redturn"/>
-        </div>
-    </aside>
+<div class="span6">
+    <canvas id="gameCanvas"></canvas>
 </div>
-<div id="blanket" style="display:none">
-    <div id="bg"></div>
-    <div id="outer">
-        <div id="middle">
-            <div id="inner">
-                <section id="quitPopup" style="display:none;">
-                    <p>Are you sure? By quiting the game, your opponent will win.</p>
-                    <a class="deny button" href="#" onclick="location.reload(true)">Quit</a> 
-                    <a class="accept button" href="#" onclick="BoxR.Manager.Client.ClosePopup()">Cancel</a> 
-                </section>
-                <section id="winPopup" style="display:none;">
-                    <p>Congratulation, you have won the game!</p>
-                    <a class="accept button" href="#" onclick="location.reload(true)">OK</a> 
-                </section>
-                <section id="losePopup" style="display:none;">
-                    <p>You have just lost the game.</p>
-                    <a class="deny button" href="#" onclick="location.reload(true)">OK</a> 
-                </section>
-            </div>
-        </div>
-    </div>
+<div class="span2">
+    <h1 class="notranform"><b>BoxR</b></h1>
+    <ul class="thumbnails">
+        <li class="tile tile-blue noopacity">
+            <h1>You</h1>
+            <h1 id="selfscore">0</h1>
+        </li>
+        <li class="tile tile-red noopacity">
+            <h1>Bob</h1>
+            <h1 id="opponentscore">0</h1>
+        </li>
+    </ul>
 </div>
-<script>
-    $(function () {
-        var size = getDocHeight() * 0.65;
-
-        var canvas = document.getElementById("gameCanvas");
-        canvas.height = size;
-        canvas.width = size;
-        BoxR.Manager.Client = new BoxR.WebClient();
-        BoxR.GameInstance = new BoxR.Game(canvas,true);
-        BoxR.GameInstance.Init(3, true);
-        BoxR.GameInstance.Draw();
-
-        canvas.addEventListener("click", function (e) { BoxR.GameInstance.Click(e); }, true);
-        canvas.addEventListener("mousemove", function (e) { BoxR.GameInstance.MouseMove(e); });
-    });
-
-    function getDocHeight() {
-        var d = document;
-        return Math.max(
-            Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
-            Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
-            Math.max(d.body.clientHeight, d.documentElement.clientHeight)
-        );
-    }
-</script>
+<div class="span4">
+    <header>
+        <h2>how to play</h2>
+    </header>
+    <p>
+        Dots and Boxes (also known as Boxes, Squares, Paddocks, Pigs in a Pen, Square-it, Dots and Dashes, Dots, Smart Dots, Dot Boxing, or, simply, the Dot Game) is a pencil and paper game for two players (or sometimes, more than two) first published in 1889 by Édouard Lucas.
+    </p>
+    <p>
+        Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.
+    </p>
+</div>

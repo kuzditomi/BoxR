@@ -1,51 +1,20 @@
-﻿@using BoxR.Web.Managers
-@model BoxR.Web.Models.LoginModel
-
-@{
-    ViewBag.Title = "Bejelentkezés";
+﻿@model BoxR.Web.Models.LoginModel
+@section scripts
+{
+    <script src="/js/login.js" defer></script>
 }
-
-<section class="centersection">
-    <table>
-        <tr>
-            <td>
-                <div class="logincred">
-                    <img src="/Images/boxr.png" width="125" height="125"/>
-                    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <table>
-                            <tr>
-                                <td>@Html.LabelFor(m => m.UserName)</td>
-                                <td> @Html.TextBoxFor(m => m.UserName, new {@class = "username"})</td>
-                            </tr>
-                            <tr>
-                                <td>@Html.LabelFor(m => m.Password)</td>
-                                <td>@Html.PasswordFor(m => m.Password, new {@class = "password"})</td>
-                            </tr>
-                        </table>
-                        <div>
-                            @Html.ValidationSummary(true)
-                        </div>
-                    }
-                    <table id="loginbuttons">
-                        <tr>
-                            <td>
-                                @Html.ActionLink("Register", "Register", null, new {@class = "btn"})
-                            </td>
-                            <td>
-                                @Html.Action("ExternalLoginsList", new {ReturnUrl = ConfigHelper.WebsiteAddress})
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
-</section>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Styles.Render("~/Content/login")
-    @Scripts.Render("~/bundles/login")
-}
+<div class="span12">
+    <div class="row text-centered">
+        <div class="span4">
+            <img src="/Images/header_widelogo.png" alt="BoxR">
+        </div>
+    </div>
+     <div class="row">
+         <div class="span6" >
+             @Html.Partial("LoginPartial",Model)
+         </div>
+         <div class="span6" >
+             @Html.Action("Register")
+         </div>
+     </div>
+ </div>

@@ -42,15 +42,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Css\boxr.css" />
     <Content Include="Css\Error.css" />
     <Content Include="Css\Login.css" />
+    <Content Include="Css\metro-bootstrap.css" />
     <Content Include="Css\Site.css" />
+    <Content Include="Images\bg.png" />
     <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
     <Content Include="Images\fbbutton35.png" />
     <Content Include="Images\header_widelogo.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
+    <Content Include="Scripts\lib\jquery-1.9.1.js" />
     <None Include="Scripts\BoxR.Game.min.js.map">
       <DependentUpon>BoxR.Game.js</DependentUpon>
     </None>
@@ -62,9 +66,6 @@
     </None>
     <None Include="Scripts\BoxR.Server.min.js.map">
       <DependentUpon>BoxR.Server.js</DependentUpon>
-    </None>
-    <None Include="Scripts\lib\jquery-1.7.1.min.js.map">
-      <DependentUpon>jquery-1.7.1.js</DependentUpon>
     </None>
     <None Include="Scripts\lib\jquery.signalR-1.0.1.min.js.map">
       <DependentUpon>jquery.signalR-1.0.1.js</DependentUpon>
@@ -98,13 +99,9 @@
     <Content Include="Scripts\BoxR.Server.min.js">
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\lib\jquery-1.7.1.js" />
-    <Content Include="Scripts\lib\jquery-1.7.1.min.js" />
     <Content Include="Scripts\lib\jquery.d.ts" />
     <Content Include="Scripts\lib\jquery.signalR-1.0.1.js" />
     <Content Include="Scripts\lib\jquery.signalR-1.0.1.min.js" />
-    <Content Include="Scripts\lib\modernizr-2.5.3.js" />
-    <None Include="Scripts\lib\jquery-1.7.1.intellisense.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -112,9 +109,8 @@
 copy  "$(SolutionDir)BoxR.Shared\Css\" "$(SolutionDir)BoxR.Win8\css\"
 copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Web\Images\"
 copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Win8\Images\"
-copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\Scripts\"
-copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Win8\js\"
-copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Web\Scripts\lib\"
+copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\js\"
+copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Web\js\lib\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Win8\js\lib\"
 del "$(SolutionDir)BoxR.Win8\js\*.map"
 del "$(SolutionDir)BoxR.Win8\js\lib\*.map"</PostBuildEvent>

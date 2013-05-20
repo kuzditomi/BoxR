@@ -70,7 +70,7 @@ namespace BoxR.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return PartialView("RegisterPartial");
         }
 
         //

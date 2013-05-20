@@ -1,9 +1,16 @@
 ﻿/// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Server.ts"/>
+declare var Popup;
 module BoxR {
-    var dummychars = "Ù";
-    var IsSelfRound :bool = false;
     "use strict";
+    var dummychars = "Ù";
+    
+    var INFINITY = 300;
+    var selfBoxColor = 'rgb(27,161,226)';
+    var opponentBoxColor = 'rgb(242,20,0)';
+    var backgroundColor = 'rgb(256,256,256)';
+    export var activeColor = 'rgb(27,161,226)';
+    var IsSelfRound :bool = false;
 
     //#region "Drawables"
     export class Drawable {
@@ -34,7 +41,7 @@ module BoxR {
         private radius: number;
         private width: number;
         private height: number;
-        public squeres: Squere[];
+        public Squeres: Squere[];
         private mouseover: bool;
 
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, isHorizontal: bool) {
@@ -42,21 +49,21 @@ module BoxR {
             this.width = width;
             this.height = height;
             this.isHorizontal = isHorizontal;
-            this.squeres = new Squere[];
+            this.Squeres = new Squere[];
             this.mouseover = false;
         }
 
         public Draw() {
             this.ctx.strokeStyle = "black";
             if (this.active) {
-                this.ctx.fillStyle = "darkslateblue";
+                this.ctx.fillStyle = activeColor;
             }
             else {
                 if (this.mouseover) {
-                    this.ctx.fillStyle = "rgb(27,161,226)";
+                    this.ctx.fillStyle = activeColor;
                 }
                 else {
-                    this.ctx.fillStyle = "slateblue";
+                    this.ctx.fillStyle = backgroundColor;
                 }
             }
             this.ctx.beginPath();
@@ -100,7 +107,7 @@ module BoxR {
         }
 
         public AddSquere(squere: Squere) {
-            this.squeres.push(squere);
+            this.Squeres.push(squere);
         }
 
         public Click(x, y): ClickResponse {
@@ -116,7 +123,7 @@ module BoxR {
         public Activate(): number {
             this.active = true;
             var squereactivated = 0;
-            this.squeres.forEach(function (squere) {
+            this.Squeres.forEach(function (squere) {
                 if (squere.EdgeChecked())
                     squereactivated++;
             });
@@ -125,8 +132,8 @@ module BoxR {
         }
     }
 
-    export class Squere extends Drawable {
-        public Edges: Edge[];
+     export class Squere extends Drawable {
+        public edges: Edge[];
         private width: number;
         private animated: bool;
         private color: string;
@@ -135,13 +142,13 @@ module BoxR {
             super(ctx, x, y);
             this.width = width;
             this.animated = false;
-            this.Edges = new Edge[];
+            this.edges = new Edge[];
         }
 
         public EdgeChecked(): bool {
             if (this.EdgesChecked() == 4) {
                 this.active = true;
-                this.color = IsSelfRound ? '27,161,226,' : '290,20,0,';
+                this.color = IsSelfRound ? selfBoxColor : opponentBoxColor;
                 return true;
             }
             return false;
@@ -149,8 +156,8 @@ module BoxR {
 
         public EdgesChecked():number { 
             var count = 0; 
-            for (var i = 0; i < this.Edges.length;i++){
-                count += this.Edges[i].active ? 1 : 0;
+            for (var i = 0; i < this.edges.length;i++){
+                count += this.edges[i].active ? 1 : 0;
             }
             return count;
         }
@@ -160,30 +167,55 @@ module BoxR {
                 return;
 
             if (!this.animated) {
-                this.color = IsSelfRound ? '27,161,226,' : '290,20,0,';
                 var steps = 120;
                 var i = 0;
+                var mode = 0; // used for animation
                 var _this = this;
 
-                var interval = setInterval(function () {
-                    _this.ctx.fillStyle = 'rgba(' + _this.color + i / steps + ')';
-                    _this.ctx.strokeStyle = 'black';
+                _this.ctx.fillStyle = _this.color;
+                _this.ctx.strokeStyle = 'black';
 
-                    _this.ctx.beginPath();
-                    _this.ctx.rect(_this.x, _this.y, _this.width, _this.width);
-                    _this.ctx.closePath();
+                _this.ctx.beginPath();
+                _this.ctx.rect(_this.x, _this.y, _this.width, _this.width);
+                _this.ctx.closePath();
 
-                    _this.ctx.fill();
-                    _this.ctx.stroke();
+                _this.ctx.fill();
+                _this.ctx.stroke();
                     i++;
-                    if (i === steps) {
-                        clearInterval(interval);
+                
+                var interval = setInterval(function () {
+                    if (mode == 0) {
+                        _this.ctx.clearRect(_this.x -1 , _this.y -1 ,_this.width + 2, _this.width + 2);
+
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x + i, _this.y, _this.width - (i * 2), _this.width);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = _this.color;
+                        _this.ctx.fill();
+
+                        //_this.ctx.stroke();
+                        i+=2;
+                        if (i >= _this.width / 2) {
+                            mode = 1; // now the size is 0, has to revert
+                        }
+                    }else{
+                        _this.ctx.beginPath();
+                        _this.ctx.rect(_this.x + i, _this.y, _this.width - (i * 2), _this.width);
+                        _this.ctx.closePath();
+                        _this.ctx.fillStyle = _this.color;
+                        _this.ctx.fill();
+
+                        //_this.ctx.stroke();
+                        i-=3;
+                        if (i <= 0) {
+                            clearInterval(interval);
+                        }
                     }
-                }, 30);
+                }, 10);
                 this.animated = true;
             }
             else {
-                this.ctx.fillStyle = 'rgba(' + this.color + '1)';
+                this.ctx.fillStyle = this.color;
                 this.ctx.strokeStyle = 'black';
 
                 this.ctx.beginPath();
@@ -191,11 +223,10 @@ module BoxR {
                 this.ctx.closePath();
 
                 this.ctx.fill();
-                this.ctx.stroke();
+                //this.ctx.stroke();
             }
         }
     }
-
     //#endregion
     
     //#region Models
@@ -282,10 +313,10 @@ module BoxR {
                         this.Edges[i - 2][j].AddSquere(sq);
                         this.Edges[i - 1][j].AddSquere(sq);
 
-                        sq.Edges.push(this.Edges[i][j]);
-                        sq.Edges.push(this.Edges[i - 1][j + 1]);
-                        sq.Edges.push(this.Edges[i - 2][j]);
-                        sq.Edges.push(this.Edges[i - 1][j]);
+                        sq.edges.push(this.Edges[i][j]);
+                        sq.edges.push(this.Edges[i - 1][j + 1]);
+                        sq.edges.push(this.Edges[i - 2][j]);
+                        sq.edges.push(this.Edges[i - 1][j]);
                     }
                 }
             }
@@ -393,17 +424,30 @@ module BoxR {
         }
 
         private UpdateScore() {
+            var selfScoreDiv = document.getElementById('selfscore');
+            selfScoreDiv.textContent = this.selfScore.toString();
+            var opponentScoreDiv = document.getElementById('opponentscore');
+            opponentScoreDiv.textContent = this.opponentScore.toString();
+
             if (!this.IsSinglePlayer) {
                 BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
                 BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
             }
             if (this.selfScore + this.opponentScore == this.n * this.n) {
-                if (!this.IsSinglePlayer)
+                if (!this.IsSinglePlayer){
                     BoxR.Manager.Hub.server.finishGame();
-                if (this.selfScore > this.opponentScore)
-                    BoxR.Manager.Client.WinPopup();
-                else
-                    BoxR.Manager.Client.LosePopup();
+                    if (this.selfScore > this.opponentScore)
+                        BoxR.Manager.Client.WinPopup();
+                    else
+                        BoxR.Manager.Client.LosePopup();
+                }
+                else{
+                    var PopupControl = new Popup(document.getElementById("popup"));
+                    if (this.selfScore > this.opponentScore)
+                        PopupControl.Win();
+                    else
+                        PopupControl.Lose();
+                }
                 return;
             }
         }
@@ -420,18 +464,39 @@ module BoxR {
         //#region Single player functions
         // AI clicks now
         private MachineClick() {
+            var _this = this;
+
             setTimeout(() => {
-                var nextEdge = this.FourthClick() || this.CleverClick(0);
-                var needContinue = this.EdgeClickFromServerByEdge(nextEdge);
-                if (needContinue)
-                    this.MachineClick();
-                else
-                    this.NextRound();
+                var fourthEdge = this.FourthClick();
+                var nextEdge = this.CleverClick(0) || this.CleverClick(1);
+                if (nextEdge) { // még van olyan, aminek csak a második élét húzom be
+                    if (fourthEdge) { // be lehet keríteni négyzetet, ilyenkor veszély nélkül
+                        _this.EdgeClickFromServerByEdge(fourthEdge);
+                        _this.MachineClick();
+                    } else {
+                        _this.EdgeClickFromServerByEdge(nextEdge);
+                        _this.NextRound();
+                    }
+                }
+                else { // minimax
+                    var gameState = this.getGameState();
+                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                    myWorker.postMessage({gameState: gameState,depth: 6});
+                    myWorker.onmessage = function (e) {
+                        var needContinue = _this.EdgeClickFromServerByEdge(_this.Edges[e.data.nextClick.i][e.data.nextClick.j]);
+                        if (needContinue)
+                            _this.MachineClick();
+                        else
+                            _this.NextRound();
+                    };
+                }
             }, 1000);
         }
-
         // finds the squere with the lowest possible surrounding edge activated
-        private CleverClick(activeEdges : number): Edge{
+        private CleverClick(activeEdges : number) :Edge{
+            if (activeEdges == 2) {
+                return null;
+            }
             var clicked = false;
             var available = new Edge[];
             for (var i = 0; i < this.Edges.length;i++){
@@ -445,29 +510,28 @@ module BoxR {
                 var random = Math.floor(Math.random() * available.length);
                 
                 var edge = available[random];
-                if(edge.squeres[0].EdgesChecked() <= activeEdges && (edge.squeres.length == 1 || edge.squeres[1].EdgesChecked() <= activeEdges)){
-                    return edge
+                if(edge.Squeres[0].EdgesChecked() <= activeEdges && (edge.Squeres.length == 1 || edge.Squeres[1].EdgesChecked() <= activeEdges)){
+                    return edge;
                     clicked = true;
                 }
                 available.splice(random, 1);
             }
             if(!clicked){
-                return this.CleverClick(activeEdges + 1);
+                return null;
             }
         }
-
 
         // checks for any Squere with 3 surrounding edge, to finish it
         private FourthClick() :Edge{
             var find = false;
-            var edge;
+            var edge:Edge;
             for (var i = 0; i < this.Squares.length && !find;i++){
                 for (var j = 0; j < this.Squares[i].length && !find;j++){
                     var sq = this.Squares[i][j];
                     if(sq.EdgesChecked() == 3){
-                        for (var e = 0; e < sq.Edges.length;e++)
-                            if(!sq.Edges[e].active){
-                                edge = sq;
+                        for (var e = 0; e < sq.edges.length;e++)
+                            if(!sq.edges[e].active){
+                                edge = sq.edges[e];
                                 find = true;
                             }
                     }
@@ -477,6 +541,38 @@ module BoxR {
                 return edge;
             }
             return null;
+        }
+
+        // create gameState object
+        private getGameState(){
+            var gameState = {};
+            // add edges as booleans
+            gameState["edges"] = new bool[][];
+            for (var i = 0; i < this.Edges.length;i++){
+                gameState["edges"][i] = new bool[];
+                for (var j = 0; j < this.Edges[i].length; j++) {
+                    gameState["edges"][i][j] = this.Edges[i][j].active;
+                }
+            }
+
+            // add squares as booleans
+            gameState["squares"] = new number[][];
+            for (var i = 0; i < this.Squares.length;i++){
+                gameState["squares"][i] = new bool[];
+                for (var j = 0; j < this.Squares[i].length; j++) {
+                    gameState["squares"][i][j] = this.Squares[i][j].EdgesChecked();
+                }
+            }
+
+            // add the scores
+            gameState["opponentScore"] = this.opponentScore;
+            gameState["selfScore"] = this.selfScore;
+            gameState["n"] = this.n;
+
+            // who has the turn? false - AI, true - Player
+            gameState["turn"] = IsSelfRound;
+
+            return gameState;
         }
         //#endregion
     }

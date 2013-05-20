@@ -1,11 +1,6 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
-@section scripts
+﻿@section scripts
 {
-    <script src="~/Scripts/lib/jquery.signalR-1.0.1.min.js"></script>
     @Scripts.Render("~/bundles/game")
-    <script src="~/signalr/hubs"></script>
 }
 <header id="header">
     <h1><img src="/Images/header_widelogo.png" alt="BoxR"/></h1>
@@ -59,10 +54,6 @@
         <a href="#" id="quitBtn">Quit game</a>
     </div>
 </div>
-
-@*<div id="setting">
-    @Html.ActionLink("Settings","Manage","Account")
-</div>*@
 <div id="logoff">
     @if (Request.IsAuthenticated)
     {

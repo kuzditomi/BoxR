@@ -1,8 +1,12 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-@Html.ActionLink("Singleplayer", "SinglePlayer",null,new{@class="btn"})<br/>
-@Html.ActionLink("Multiplayer", "Main",null,new{@class="btn"})
+﻿<ul class="thumbnails">
+    <li class="span3 tile tile-double tile-blue">
+        <a href="@Url.Action("SinglePlayer")">
+            <h1 class="tile-text">SinglePlayer</h1>
+        </a>
+    </li>
+    <li class="span3 tile tile-double tile-red">
+        <a href="@Url.Action("Main")">
+            <h1 class="tile-text">MultiPlayer</h1>
+        </a>
+    </li>
+</ul>

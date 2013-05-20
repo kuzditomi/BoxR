@@ -1,0 +1,35 @@
+﻿@model BoxR.Web.Models.LoginModel
+@using BoxR.Web.Managers
+
+<h2>login</h2>
+<div class="form-horizontal well">
+    <div class="row">
+        <div class="span6">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <div class="control-group">
+                        @Html.LabelFor(m => m.UserName,new{@class="control-label",@for="username"})
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.UserName,new{@class="input-large focused username",id="username"})
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(m => m.Password,new{@class="control-label",@for="password"})
+                        <div class="controls">
+                            @Html.PasswordFor(m => m.Password,new{@class="input-large password",id="password"})
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" class="btn input-medium" value="Login"/>
+                            @Html.Action("ExternalLoginsList", new {ReturnUrl = ConfigHelper.WebsiteAddress})
+                        </div>
+                    </div>
+                </fieldset>
+                @Html.ValidationSummary(true)
+            }
+        </div>
+    </div>
+</div>

@@ -205,11 +205,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\boxr.css" />
     <Content Include="Content\Error.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\metro-bootstrap.css" />
     <Content Include="Content\nono.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\bg.png" />
     <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
     <Content Include="Images\favicon.ico" />
@@ -218,37 +221,44 @@
     <Content Include="Images\nono.jpg" />
     <Content Include="Images\redturn.png" />
     <Content Include="Images\header_widelogo.png" />
-    <Content Include="Scripts\BoxR.Game.js">
+    <Content Include="js\BoxR.Game.js">
       <DependentUpon>BoxR.Game.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.Game.min.js">
+    <Content Include="js\BoxR.Game.min.js">
       <DependentUpon>BoxR.Game.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.Game.ts" />
-    <Content Include="Scripts\BoxR.IClient.js">
+    <Content Include="js\BoxR.Game.ts" />
+    <Content Include="js\BoxR.IClient.js">
       <DependentUpon>BoxR.IClient.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.IClient.min.js">
+    <Content Include="js\BoxR.IClient.min.js">
       <DependentUpon>BoxR.IClient.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.IClient.ts" />
-    <Content Include="Scripts\BoxR.Manager.js" />
-    <Content Include="Scripts\BoxR.Manager.min.js" />
-    <Content Include="Scripts\BoxR.Manager.ts" />
-    <Content Include="Scripts\BoxR.Server.js">
+    <Content Include="js\BoxR.IClient.ts" />
+    <Content Include="js\BoxR.Manager.js" />
+    <Content Include="js\BoxR.Manager.min.js" />
+    <Content Include="js\BoxR.Manager.ts" />
+    <Content Include="js\BoxR.MiniMax.js" />
+    <Content Include="js\BoxR.Server.js">
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.Server.min.js">
+    <Content Include="js\BoxR.Server.min.js">
       <DependentUpon>BoxR.Server.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.Server.ts" />
+    <Content Include="js\BoxR.Server.ts" />
+    <Content Include="js\BoxR.InitBackground.js" />
+    <None Include="js\lib\jquery.intellisense.js" />
+    <Content Include="js\lib\jquery-1.9.1.js" />
+    <Content Include="js\BoxR.Popup.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SinglePlayer.cshtml" />
-    <TypeScriptCompile Include="Scripts\BoxR.WebClient.ts" />
-    <Content Include="Scripts\BoxR.WebClient.js">
+    <Content Include="Views\Account\LoginPartial.cshtml" />
+    <Content Include="Views\Account\RegisterPartial.cshtml" />
+    <TypeScriptCompile Include="js\BoxR.WebClient.ts" />
+    <Content Include="js\BoxR.WebClient.js">
       <DependentUpon>BoxR.WebClient.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BoxR.WebClient.min.js">
+    <Content Include="js\BoxR.WebClient.min.js">
       <DependentUpon>BoxR.WebClient.ts</DependentUpon>
     </Content>
     <Content Include="appsettings.config">
@@ -256,33 +266,16 @@
     </Content>
     <None Include="Properties\PublishProfiles\boxr - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\boxr - Web Deploy.pubxml" />
-    <Content Include="Scripts\BoxR.Game.min.js.map" />
-    <Content Include="Scripts\BoxR.IClient.min.js.map" />
-    <Content Include="Scripts\BoxR.Manager.min.js.map" />
-    <Content Include="Scripts\BoxR.Server.min.js.map" />
-    <None Include="Scripts\lib\jquery-1.7.1.intellisense.js" />
-    <Content Include="Scripts\lib\jquery.d.js" />
-    <Content Include="Scripts\lib\jquery.d.ts" />
-    <Content Include="Scripts\lib\jquery.signalR-1.0.1.js" />
-    <Content Include="Scripts\lib\jquery.signalR-1.0.1.min.js" />
-    <Content Include="Scripts\lib\jquery-1.7.1.js" />
-    <Content Include="Scripts\lib\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\lib\jquery-ui-1.8.20.js" />
-    <Content Include="Scripts\lib\jquery-ui-1.8.20.min.js" />
-    <Content Include="Scripts\lib\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\lib\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\lib\jquery-1.7.1.min.js.map" />
-    <Content Include="Scripts\lib\jquery.signalR-1.0.1.min.js.map" />
-    <None Include="Scripts\lib\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\lib\jquery.validate.js" />
-    <Content Include="Scripts\lib\jquery.validate.min.js" />
-    <Content Include="Scripts\lib\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\lib\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\lib\knockout-2.1.0.debug.js" />
-    <Content Include="Scripts\lib\knockout-2.1.0.js" />
-    <Content Include="Scripts\lib\modernizr-2.5.3.js" />
-    <Content Include="Scripts\lib\_references.js" />
-    <Content Include="Scripts\login.js" />
+    <Content Include="js\BoxR.Game.min.js.map" />
+    <Content Include="js\BoxR.IClient.min.js.map" />
+    <Content Include="js\BoxR.Manager.min.js.map" />
+    <Content Include="js\BoxR.Server.min.js.map" />
+    <Content Include="js\lib\jquery.d.ts" />
+    <Content Include="js\lib\jquery.signalR-1.0.1.js" />
+    <Content Include="js\lib\jquery.signalR-1.0.1.min.js" />
+    <Content Include="js\lib\jquery.signalR-1.0.1.min.js.map" />
+    <Content Include="js\lib\_references.js" />
+    <Content Include="js\login.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

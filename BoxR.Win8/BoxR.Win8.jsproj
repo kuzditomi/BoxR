@@ -97,6 +97,7 @@
     <Content Include="js\lib\jquery-1.7.1.intellisense.js" />
     <Content Include="js\lib\jquery-1.7.1.js" />
     <Content Include="js\lib\jquery-1.7.1.min.js" />
+    <Content Include="js\lib\jquery-1.9.1.js" />
     <Content Include="js\lib\jquery.d.ts" />
     <Content Include="js\lib\jquery.signalR-1.0.1.js" />
     <Content Include="js\lib\jquery.signalR-1.0.1.min.js" />
