@@ -15,6 +15,21 @@ body > * {
     line-height: 25px;
 }
 
+/*back button*/
+.backbutton {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 32pt;
+    vertical-align: central;
+    font-family: 'Segoe UI Light';
+}
+.backbutton:hover {
+    cursor: pointer;
+    color: black;
+}
 /* bootstrap override */
 .container {
     position: relative;
@@ -45,23 +60,64 @@ body > * {
 .well {
     background: white;
     color: black;
+    padding: 19px 19px 0 19px;
+}
+
+.btnfacebook {
+    height: 35px;
+    width: 102px !important;
+    background: url('../Images/fbbutton35.png') 0 0 no-repeat;
+    font-size: 0;
+    cursor: pointer;
+    display: inline-block;
+    border:none;
+}
+
+.btnmicrosoft {
+    background: url('../Images/micrososftlogin35.png') 0 0 no-repeat;
+    height: 35px;
+    font-size: 0;
+    width: 123px  !important;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+}
+
+.help-inline {
+    margin-bottom: 10px !important;
+    padding-left: 20px !important;
+}
+@media (min-width: 1200px){
+    .help-inline {
+        padding-left: 40px !important;
+    }
+}
+span.errorMsg {
+    display: block;
+    color: red;
 }
 
 /*footer*/
 
 footer {
-    margin-top: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
     font-size: 10pt;
     text-align: center;
+}
+footer p {
+    margin: 0;
 }
 
 /* Colors on the bottom right */
 #colors {
-    z-index: 2;
     position: absolute;
     bottom: 0;
-    right: 0;
-    padding-right: 10px;
+    right: 10px;
+    z-index: 2;
 }
 
 /* Tiles  */

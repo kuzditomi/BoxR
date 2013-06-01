@@ -1,4 +1,5 @@
-﻿@model BoxR.Web.Models.LoginModel
+﻿@using BoxR.Web.Managers
+@model BoxR.Web.Models.AccountModel
 @section scripts
 {
     <script src="/js/login.js" defer></script>
@@ -9,12 +10,12 @@
             <img src="/Images/header_widelogo.png" alt="BoxR">
         </div>
     </div>
-     <div class="row">
-         <div class="span6" >
-             @Html.Partial("LoginPartial",Model)
-         </div>
-         <div class="span6" >
-             @Html.Action("Register")
-         </div>
-     </div>
+    <div class="row">
+        <div class="span6" >
+            @Html.Partial("LoginPartial",Model.LoginModel)
+        </div>
+        <div class="span6" >
+            @Html.Partial("RegisterPartial",Model.RegisterModel)
+        </div>
+    </div>
  </div>

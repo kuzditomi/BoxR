@@ -71,12 +71,12 @@ namespace BoxR.Web.Models
     {
         [Required]
         [Display(Name = "User name")]
-        public string UserName { get; set; }
+        public string LoginUserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "LoginPassword")]
+        public string LoginPassword { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
@@ -86,18 +86,18 @@ namespace BoxR.Web.Models
     {
         [Required]
         [Display(Name = "User name")]
-        public string UserName { get; set; }
+        public string RegisterUserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string RegisterPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Compare("RegisterPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        public string RegisterConfirmPassword { get; set; }
     }
 
     public class ExternalLogin
@@ -117,5 +117,16 @@ namespace BoxR.Web.Models
         public string locale { get; set; }
         public string link { get; set; }
         public string username { get; set; }
+    }
+
+    public class AccountModel
+    {
+        public RegisterModel RegisterModel { get; set; }
+        public LoginModel LoginModel { get; set; }
+        public AccountModel()
+        {
+            this.LoginModel = new LoginModel();
+            this.RegisterModel = new RegisterModel();
+        }
     }
 }

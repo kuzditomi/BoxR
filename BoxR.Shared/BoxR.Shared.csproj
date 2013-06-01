@@ -43,8 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Css\boxr.css" />
-    <Content Include="Css\Error.css" />
-    <Content Include="Css\Login.css" />
     <Content Include="Css\metro-bootstrap.css" />
     <Content Include="Css\Site.css" />
     <Content Include="Images\bg.png" />

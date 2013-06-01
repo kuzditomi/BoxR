@@ -206,12 +206,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\boxr.css" />
-    <Content Include="Content\Error.css" />
-    <Content Include="Content\Login.css" />
     <Content Include="Content\metro-bootstrap.css" />
-    <Content Include="Content\nono.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\back_black.png" />
+    <Content Include="Images\back_white.png" />
     <Content Include="Images\bg.png" />
     <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
@@ -250,6 +249,12 @@
     <None Include="js\lib\jquery.intellisense.js" />
     <Content Include="js\lib\jquery-1.9.1.js" />
     <Content Include="js\BoxR.Popup.js" />
+    <None Include="js\lib\jquery.validate-vsdoc.js" />
+    <Content Include="js\lib\jquery.validate.js" />
+    <Content Include="js\lib\jquery.validate.min.js" />
+    <Content Include="js\lib\jquery.validate.unobtrusive.js" />
+    <Content Include="js\lib\jquery.validate.unobtrusive.min.js" />
+    <Content Include="js\login.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SinglePlayer.cshtml" />
     <Content Include="Views\Account\LoginPartial.cshtml" />
@@ -275,7 +280,6 @@
     <Content Include="js\lib\jquery.signalR-1.0.1.min.js" />
     <Content Include="js\lib\jquery.signalR-1.0.1.min.js.map" />
     <Content Include="js\lib\_references.js" />
-    <Content Include="js\login.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -295,7 +299,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\StartGame.cshtml" />

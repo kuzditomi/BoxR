@@ -15,9 +15,12 @@ namespace BoxR.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static log4net.ILog BoxRLogger; 
+
         protected void Application_Start()
         {
             log4net.Config.XmlConfigurator.Configure();
+            BoxRLogger = log4net.LogManager.GetLogger("LogFileAppender");
             RouteTable.Routes.MapHubs();
             AreaRegistration.RegisterAllAreas();
 
@@ -28,6 +31,11 @@ namespace BoxR.Web
             AuthConfig.RegisterAuth();
 
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            BoxRLogger.Error(Server.GetLastError().Message);
         }
     }
 }

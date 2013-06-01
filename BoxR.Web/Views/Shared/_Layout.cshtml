@@ -9,6 +9,7 @@
         @Styles.Render("~/Content/bootstrap")
     </head>
     <body>
+        <div class="backbutton"><span style="font-family:'Segoe UI Symbol';">&#xE071;</span>back</div>
         <div class="container">
             <section>
                 <div class="row">
@@ -16,11 +17,12 @@
                 </div>
                 <footer>
                     <p>Copyright © 2013 - Küzdi Tamás</p>
+                    
                 </footer>
             </section>
         </div>
-        <div id="popup"></div>
         <div id="colors"></div>
+        <div id="popup"></div>
         @Scripts.Render("~/bundles/init")
         @RenderSection("scripts", required: false)
     </body>

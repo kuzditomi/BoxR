@@ -23,7 +23,7 @@ namespace BoxR.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(new AccountModel());
         }
 
         //
@@ -34,14 +34,15 @@ namespace BoxR.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            //var model = amodel.LoginModel;
+            if (ModelState.IsValid && WebSecurity.Login(model.LoginUserName, model.LoginPassword, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
+            return View(new AccountModel{LoginModel = model});
         }
 
         [HttpPost]
@@ -86,8 +87,8 @@ namespace BoxR.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.RegisterUserName, model.RegisterPassword);
+                    WebSecurity.Login(model.RegisterUserName, model.RegisterPassword);
                     return RedirectToAction("Main", "Home");
                 }
                 catch (MembershipCreateUserException e)
@@ -97,7 +98,7 @@ namespace BoxR.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("Login",new AccountModel{RegisterModel=model});
         }
 
         //

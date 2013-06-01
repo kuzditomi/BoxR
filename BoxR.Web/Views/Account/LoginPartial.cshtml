@@ -4,32 +4,37 @@
 <h2>login</h2>
 <div class="form-horizontal well">
     <div class="row">
+        <p class="help-inline">You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</p>
         <div class="span6">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
-            {
+            @using (Html.BeginForm("Login","Account",new { ReturnUrl = ViewBag.ReturnUrl })) {
                 @Html.AntiForgeryToken()
-                <fieldset>
-                    <div class="control-group">
-                        @Html.LabelFor(m => m.UserName,new{@class="control-label",@for="username"})
-                        <div class="controls">
-                            @Html.TextBoxFor(m => m.UserName,new{@class="input-large focused username",id="username"})
-                        </div>
+                <div class="control-group error">
+                    @if (ViewData.ModelState.ContainsKey("LoginUserName") || ViewData.ModelState.ContainsKey("LoginPassword"))
+                    {
+                        foreach (var error in ViewData.ModelState[""].Errors)
+                        {
+                            <span class="errorMsg">@error.ErrorMessage</span>
+                        }
+                    }
+                </div>
+                <div class="control-group @(ViewData.ModelState.ContainsKey("LoginUserName") && ViewData.ModelState["LoginUserName"].Errors.Any() ? "error" : "")">
+                    @Html.LabelFor(m => m.LoginUserName,new{@class="control-label",@for="username"})
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.LoginUserName,new{@class="input-large focused username",id="username"})
                     </div>
-                    <div class="control-group">
-                        @Html.LabelFor(m => m.Password,new{@class="control-label",@for="password"})
-                        <div class="controls">
-                            @Html.PasswordFor(m => m.Password,new{@class="input-large password",id="password"})
-                        </div>
+                </div>
+                <div class="control-group @(ViewData.ModelState.ContainsKey("LoginPassword") && ViewData.ModelState["LoginPassword"].Errors.Any() ? "error" : "")">
+                    @Html.LabelFor(m => m.LoginPassword,new{@class="control-label",@for="password"})
+                    <div class="controls">
+                        @Html.PasswordFor(m => m.LoginPassword,new{@class="input-large password",id="password"})
                     </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <input type="submit" class="btn input-medium" value="Login"/>
-                            @Html.Action("ExternalLoginsList", new {ReturnUrl = ConfigHelper.WebsiteAddress})
-                        </div>
-                    </div>
-                </fieldset>
-                @Html.ValidationSummary(true)
+                </div>
             }
+            <div class="control-group">
+                <div class="controls">
+                    @Html.Action("ExternalLoginsList", new {ReturnUrl = ConfigHelper.WebsiteAddress})
+                </div>
+            </div>
         </div>
     </div>
 </div>

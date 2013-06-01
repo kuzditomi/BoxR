@@ -1,6 +1,6 @@
 ﻿$(function () {
     if (typeof (Storage) !== "undefined") {
-        $('body').css("background-color", localStorage["BoxRbg"] || "white");
+        $('body').css("background-color", localStorage["BoxRbg"] || "#16a085");
     }
     $('.container').css('height', $(window).height());
     var $colorDiv = $('#colors');
@@ -9,12 +9,11 @@
         "27ae60",			
         "2980b9",
         "8e44ad",
-        "2c3e50",
         "f39c12",
         "d35400",
         "c0392b",
-        "bdc3c7",
-        "7f8c8d"
+        "7f8c8d",
+        "2c3e50"
     ];
     for (var i = 0; i < colors.length; i++) {
         var $box = $('<div/>').css({
@@ -39,4 +38,10 @@
     $(window).resize(function () {
         $('.container').css('height', $(window).height());
     });
+    var $backbutton = $('.backbutton');
+    if($backbutton) {
+        $backbutton.on('click', function() {
+            window.history.go(-1);
+        });
+    }
 });
