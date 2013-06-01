@@ -209,8 +209,6 @@
     <Content Include="Content\metro-bootstrap.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Images\back_black.png" />
-    <Content Include="Images\back_white.png" />
     <Content Include="Images\bg.png" />
     <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
@@ -250,9 +248,7 @@
     <Content Include="js\lib\jquery-1.9.1.js" />
     <Content Include="js\BoxR.Popup.js" />
     <None Include="js\lib\jquery.validate-vsdoc.js" />
-    <Content Include="js\lib\jquery.validate.js" />
     <Content Include="js\lib\jquery.validate.min.js" />
-    <Content Include="js\lib\jquery.validate.unobtrusive.js" />
     <Content Include="js\lib\jquery.validate.unobtrusive.min.js" />
     <Content Include="js\login.js" />
     <Content Include="Views\Home\Index.cshtml" />

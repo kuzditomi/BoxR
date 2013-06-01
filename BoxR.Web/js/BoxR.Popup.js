@@ -83,11 +83,11 @@
         self.SetText("Congratulation, you have won the game!");
         self.Show();
     };
-    self.Lose = function() {
+    self.Lose = function () {
         var btnSettings = [{
             text: "Ok",
             background: "red",
-            click: function() {
+            click: function () {
                 window.location.reload();
             }
         }];
@@ -95,6 +95,46 @@
         self.SetText("You have lost the game.");
         self.Show();
     };
+    self.Invite = function (username) {
+        var btnSettings = [
+            {
+                text: "Accept",
+                background: "green",
+                click: function () {
+                    BoxR.Manager.Hub.server.inviteAccepted();
+                    self.Hide();
+                }
+            },
+            {
+                text: "Deny",
+                background: "red",
+                click: function () {
+                    BoxR.Manager.Hub.server.inviteDenied();
+                    self.Hide();
+                }
+            }
+        ];
+        self.SetBtn(btnSettings);
+        self.SetText(username + " has challenged you!");
+        self.Show();
+    };
+    self.Wait = function (username) {
+        var btnSettings = [
+            {
+                text: "Cancel",
+                background: "red",
+                click: function () {
+                    BoxR.Manager.Hub.server.inviteDenied();
+                    self.Hide();
+                }
+            }
+        ];
+        self.SetBtn(btnSettings);
+        self.SetText("You have challenged " + username + ", please wait for the response.");
+        self.Show();
+    };
+    
+   
 
     self.Init(_element);
     return self;

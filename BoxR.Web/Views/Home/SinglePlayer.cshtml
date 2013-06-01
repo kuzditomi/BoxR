@@ -22,7 +22,13 @@
                 BoxR.activeColor = bgcolor;
                 BoxR.GameInstance.Draw();
             }
-            $('.backbutton').show();
+            var $backbutton = $('.backbutton');
+            if ($backbutton) {
+                $backbutton.on('click', function () {
+                    document.location.href = "/";
+                });
+                $backbutton.show();
+            }
         });
         function getDocHeight() {
             var d = document;

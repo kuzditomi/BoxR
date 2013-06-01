@@ -38,10 +38,4 @@
     $(window).resize(function () {
         $('.container').css('height', $(window).height());
     });
-    var $backbutton = $('.backbutton');
-    if($backbutton) {
-        $backbutton.on('click', function() {
-            window.history.go(-1);
-        });
-    }
 });

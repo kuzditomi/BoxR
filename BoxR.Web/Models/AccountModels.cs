@@ -75,7 +75,7 @@ namespace BoxR.Web.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "LoginPassword")]
+        [Display(Name = "Password")]
         public string LoginPassword { get; set; }
 
         [Display(Name = "Remember me?")]

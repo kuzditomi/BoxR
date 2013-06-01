@@ -1,4 +1,4 @@
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
@@ -11,6 +11,7 @@ var BoxR;
         function WebClient() {
                 _super.call(this);
             this.Blanket = document.getElementById("blanket");
+            BoxR.Manager.PopupControl = new Popup(document.getElementById("popup"));
         }
         WebClient.prototype.StartGame = function (selfStart, name, opponentName) {
             var _this = this;
@@ -46,18 +47,10 @@ var BoxR;
             });
         };
         WebClient.prototype.InvitedPopup = function (user) {
-            if(this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("inviterName").innerHTML = user.UserName;
-                document.getElementById("invitedPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Invite(user.UserName);
         };
         WebClient.prototype.WaitPopup = function (username) {
-            if(this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("invitedName").innerHTML = username;
-                document.getElementById("waitPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Wait(username);
         };
         WebClient.prototype.QuitPopup = function () {
             if(this.Blanket.style.display == "none") {
@@ -84,12 +77,7 @@ var BoxR;
             }
         };
         WebClient.prototype.ClosePopup = function () {
-            var inner = document.getElementById("inner");
-            var popupSections = inner.getElementsByTagName("section");
-            for(var i = 0; i < popupSections.length; i++) {
-                (popupSections[i]).style.display = "none";
-            }
-            this.Blanket.style.display = "none";
+            BoxR.Manager.PopupControl.Hide();
         };
         return WebClient;
     })(BoxR.ClientBase);

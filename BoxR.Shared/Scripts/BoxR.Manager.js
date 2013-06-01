@@ -7,6 +7,7 @@
         Manager.Server;
         Manager.Client;
         Manager.Game;
+        Manager.PopupControl;
     })(BoxR.Manager || (BoxR.Manager = {}));
     var Manager = BoxR.Manager;
 })(BoxR || (BoxR = {}));

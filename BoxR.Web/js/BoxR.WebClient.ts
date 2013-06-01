@@ -3,7 +3,7 @@
 /// <reference path="BoxR.Server.ts"/>
 /// <reference path="BoxR.Manager.ts"/>
 /// <reference path="lib/jquery.d.ts"/>
-
+declare var Popup;
 module BoxR {
     "use strict";
     export class WebClient extends ClientBase {
@@ -12,6 +12,7 @@ module BoxR {
         constructor() {
             super();
             this.Blanket = document.getElementById("blanket");
+            BoxR.Manager.PopupControl = new Popup(document.getElementById("popup"));
         }
 
         public StartGame(selfStart: bool, name: string, opponentName: string) {
@@ -46,18 +47,10 @@ module BoxR {
             });
         }
         public InvitedPopup(user) {
-            if (this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("inviterName").innerHTML = user.UserName;
-                document.getElementById("invitedPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Invite(user.UserName);
         }
         public WaitPopup(username: string) {
-            if (this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("invitedName").innerHTML = username;
-                document.getElementById("waitPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Wait(username);
         }
         public QuitPopup() {
             if (this.Blanket.style.display == "none") {
@@ -84,12 +77,7 @@ module BoxR {
             }
         }
         public ClosePopup() {
-            var inner = document.getElementById("inner");
-            var popupSections = inner.getElementsByTagName("section");
-            for (var i = 0; i < popupSections.length; i++) {
-                (<HTMLElement>popupSections[i]).style.display = "none";
-            }
-            this.Blanket.style.display = "none";
+            BoxR.Manager.PopupControl.Hide();
         }
     }
 }

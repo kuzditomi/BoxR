@@ -1,6 +1,5 @@
 ﻿/// <reference path="BoxR.IClient.ts"/>
 /// <reference path="BoxR.Server.ts"/>
-declare var Popup;
 module BoxR {
     "use strict";
     var dummychars = "Ù";
@@ -18,7 +17,6 @@ module BoxR {
         ctx: CanvasRenderingContext2D;
         x: number;
         y: number;
-         
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number) {
             this.active = false;
             this.ctx = ctx;
@@ -442,11 +440,10 @@ module BoxR {
                         BoxR.Manager.Client.LosePopup();
                 }
                 else{
-                    var PopupControl = new Popup(document.getElementById("popup"));
                     if (this.selfScore > this.opponentScore)
-                        PopupControl.Win();
+                        BoxR.Manager.PopupControl.Win();
                     else
-                        PopupControl.Lose();
+                        BoxR.Manager.PopupControl.Lose();
                 }
                 return;
             }
