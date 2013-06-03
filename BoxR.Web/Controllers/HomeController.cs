@@ -33,7 +33,7 @@ namespace BoxR.Web.Controllers
                                 SelfStart = selfstart,
                                 CanvasWidth = cwidth
                             };
-            return View(model);
+            return PartialView(model);
         }
 
         [Authorize]

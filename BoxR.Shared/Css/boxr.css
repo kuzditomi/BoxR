@@ -16,7 +16,7 @@ body > * {
 }
 
 /*back button*/
-.backbutton {
+#backbutton {
     display: none;
     z-index: 3;
     position: absolute;
@@ -26,7 +26,7 @@ body > * {
     vertical-align: central;
     font-family: 'Segoe UI Light';
 }
-.backbutton:hover {
+#backbutton:hover {
     cursor: pointer;
     color: black;
 }
@@ -96,6 +96,9 @@ span.errorMsg {
     display: block;
     color: red;
 }
+.btn-small {
+    padding: 5px !important;
+}
 
 /*footer*/
 
@@ -116,20 +119,32 @@ footer p {
 }
 
 /* Tiles  */
+ul.thumbnails {
+    margin-top: 15px;
+}
+.thumbnails > li {
+    margin-bottom: 17px;
+}
 .thumbnails > li.tile{
 	cursor: auto;
+    width: 120px;
+    height: 120px;
 }
 
-.thumbnails > li.tile.tile-blue {
+.thumbnails > li.tile.tile-blue{
 	background-color: #1BA4E2;
 }
 
-.thumbnails > li.tile.tile-red {
+.thumbnails > li.tile.tile-red{
 	background-color: #e51400;
 }
 
 .thumbnails > li.tile > h2{
-	margin-top: -10px;
+	margin-top: 10px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    background: inherit;
+    padding-top: 2px;
 }
 
 a{
@@ -167,13 +182,14 @@ a:hover{
 }
 .user {
     width: 80%;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.3);
     text-align: center;
     padding: 10px;
     font-size: 20pt;
 }
 .user:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,1);
+    color: black;
     cursor: pointer;
 }
 /******** CSS POPUP *******/
@@ -239,4 +255,17 @@ a:hover{
 #inner .deny
 {
     background: #AD103C;
+}
+
+/*** other helper classes ***/
+.truncate {
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+.truncate:hover {
+    overflow: visible;
 }

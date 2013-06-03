@@ -133,6 +133,41 @@
         self.SetText("You have challenged " + username + ", please wait for the response.");
         self.Show();
     };
+    self.Disconnect = function () {
+        var btnSettings = [
+            {
+                text: "Ok",
+                background: "green",
+                click: function () {
+                    window.location.reload();
+                }
+            }
+        ];
+        self.SetBtn(btnSettings);
+        self.SetText("Your opponent has disconnected.");
+        self.Show();
+    };
+    self.Quit = function () {
+        var btnSettings = [
+            {
+                text: "Yes",
+                background: "red",
+                click: function () {
+                    window.location.reload();
+                }
+            },
+            {
+                text: "No",
+                background: "red",
+                click: function () {
+                    self.Hide();
+                }
+            }
+        ];
+        self.SetBtn(btnSettings);
+        self.SetText("Are you sure you want to leave the game?");
+        self.Show();
+    };
     
    
 

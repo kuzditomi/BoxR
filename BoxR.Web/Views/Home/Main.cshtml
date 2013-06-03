@@ -13,9 +13,9 @@
             $.connection.hub.start().done(function () {
                 BoxR.Manager.Server.UpdateUsers();
             });
-            var $backbutton = $('.backbutton');
+            var $backbutton = $('#backbutton');
             if ($backbutton) {
-                $backbutton.on('click', function () {
+                $backbutton.click(function () {
                     document.location.href = "/";
                     $('#logoutForm').submit();
                 });
@@ -31,7 +31,7 @@
             Welcome, @Context.User.Identity.Name !
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="innerContainer">
         <div class="span4" >
             <div id="userListcontainer">
                 <h2>Online players</h2>
@@ -62,12 +62,6 @@
         </div>
     </div>
  </div>
-
-<div id="quitGame" style="display: none">
-    <div class="inner">
-        <a href="#" id="quitBtn">Quit game</a>
-    </div>
-</div>
 
 @if (Request.IsAuthenticated)
 {

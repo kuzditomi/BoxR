@@ -17,7 +17,7 @@
     });
     $('.backbutton').show();
     
-    var $backbutton = $('.backbutton');
+    var $backbutton = $('#backbutton');
     if ($backbutton) {
         $backbutton.on('click', function () {
             document.location.href = "/";

@@ -10,19 +10,20 @@
             canvas.height = size;
             canvas.width = size;
 
-            BoxR.GameInstance = new BoxR.Game(canvas,true);
-            BoxR.GameInstance.Init(3, true);
-            BoxR.GameInstance.Draw();
+            BoxR.Manager.Game = new BoxR.Game(canvas, true);
+            BoxR.Manager.Client = new BoxR.WebClient();
+            BoxR.Manager.Game.Init(3, true);
+            BoxR.Manager.Game.Draw();
 
-            canvas.addEventListener("click", function(e) { BoxR.GameInstance.Click(e); }, true);
-            canvas.addEventListener("mousemove", function (e) { BoxR.GameInstance.MouseMove(e); });
+            canvas.addEventListener("click", function (e) { BoxR.Manager.Game.Click(e); }, true);
+            canvas.addEventListener("mousemove", function (e) { BoxR.Manager.Game.MouseMove(e); });
             if (typeof (Storage) !== "undefined") {
                 var bgcolor = localStorage["BoxRbg"] || "rgba(255, 46, 18, .8)";
                 
                 BoxR.activeColor = bgcolor;
-                BoxR.GameInstance.Draw();
+                BoxR.Manager.Game.Draw();
             }
-            var $backbutton = $('.backbutton');
+            var $backbutton = $('#backbutton');
             if ($backbutton) {
                 $backbutton.on('click', function () {
                     document.location.href = "/";
@@ -48,11 +49,11 @@
     <h1 class="notranform"><b>BoxR</b></h1>
     <ul class="thumbnails">
         <li class="tile tile-blue noopacity">
-            <h1>You</h1>
+            <h2>You</h2>
             <h1 id="selfscore">0</h1>
         </li>
         <li class="tile tile-red noopacity">
-            <h1>Bob</h1>
+            <h2>Bob</h2>
             <h1 id="opponentscore">0</h1>
         </li>
     </ul>

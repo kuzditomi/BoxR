@@ -19,12 +19,9 @@ module BoxR {
             var _this = this;
             var game;
             this.ClosePopup();
-            var quitButton = document.getElementById("quitGame");
-            quitButton.style.display = "block";
 
             var height = $(this.Blanket).height() * 0.65;
-
-            var container = document.getElementById("container");
+            var container = document.getElementById("innerContainer");
 
             $.ajax("/Home/StartGame", {
                 data: {
@@ -36,6 +33,10 @@ module BoxR {
             }).done(function (res) {
                 container.innerHTML = res;
                 var canvas = <HTMLCanvasElement>container.getElementsByTagName("canvas")[0];
+                var size = $('canvas').parent().width(); //getDocHeight() * 0.65;
+
+                canvas.height = size;
+                canvas.width = size;
                 game = new BoxR.Game(canvas);
                 BoxR.Manager.Game = game;
                 game.Init(3, selfStart);
@@ -43,7 +44,17 @@ module BoxR {
 
                 canvas.addEventListener("click", function (e) { game.Click(<MouseEvent>e); }, true);
                 canvas.addEventListener("mousemove", function (e) { game.MouseMove(<MouseEvent>e); });
-                document.getElementById("quitBtn").onclick = () => _this.QuitPopup();
+                var $turnDiv = $(container).find('#turnDiv');
+                if($turnDiv){
+                    $turnDiv.html('<h1>'+(selfStart? 'blue turn' : 'red turn')+'</h1>');
+                    $turnDiv.addClass(selfStart ? 'tile-blue' : 'tile-red');
+                }
+                var backbutton = document.getElementById('backbutton');
+                backbutton.onclick = null;
+                $(backbutton).on('click', function () {
+                    _this.QuitPopup();
+                });
+                
             });
         }
         public InvitedPopup(user) {
@@ -53,28 +64,16 @@ module BoxR {
             BoxR.Manager.PopupControl.Wait(username);
         }
         public QuitPopup() {
-            if (this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("quitPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Quit();
         }
         public DisconnectPopup() {
-            if (this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("disconnectPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Disconnect();
         }
         public WinPopup() {
-            if (this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("winPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Win();
         }
         public LosePopup() {
-            if (this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("losePopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Lose();
         }
         public ClosePopup() {
             BoxR.Manager.PopupControl.Hide();

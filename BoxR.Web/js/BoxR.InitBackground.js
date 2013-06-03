@@ -1,6 +1,11 @@
 ﻿$(function () {
     if (typeof (Storage) !== "undefined") {
         $('body').css("background-color", localStorage["BoxRbg"] || "#16a085");
+        if (window.BoxR && BoxR.activeColor) {
+            BoxR.activeColor = localStorage["BoxRbg"] || "#16a085";
+            if (BoxR.Manager && BoxR.Manager.Game)
+                BoxR.Manager.Game.Draw();
+        }
     }
     $('.container').css('height', $(window).height());
     var $colorDiv = $('#colors');
@@ -25,9 +30,10 @@
             cursor: 'pointer'
         }).click(function() {
             $('body').css("background-color", $(this).css('background-color'));
-            if (window.BoxR && BoxR.activeColor && BoxR.GameInstance) {
+            if (window.BoxR && BoxR.activeColor) {
                 BoxR.activeColor = $(this).css('background-color');
-                BoxR.GameInstance.Draw();
+                if(BoxR.Manager && BoxR.Manager.Game)
+                    BoxR.Manager.Game.Draw();
             }
             if (typeof (Storage) !== "undefined") {
                 localStorage["BoxRbg"] = $(this).css('background-color');
@@ -38,4 +44,22 @@
     $(window).resize(function () {
         $('.container').css('height', $(window).height());
     });
+    $('body').on('mouseenter','.truncate',
+        function () {
+            var scrollWidth = this.scrollWidth;
+            $(this).animate({
+                width: scrollWidth,
+                paddingRight: '5px'
+            },200);
+        }
+    );
+    $('body').on('mouseleave', '.truncate',
+        function () {
+            $(this).animate({
+                width: '120px',
+                paddingRight: '0px'
+            }, 200);
+            
+        }
+    );
 });

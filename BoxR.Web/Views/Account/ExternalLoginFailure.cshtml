@@ -1,7 +1,19 @@
 ﻿@{
     ViewBag.Title = "Login Failure";
 }
-
+@section scripts{
+    <script>
+        $(function() {
+            var $backbutton = $('#backbutton');
+            if ($backbutton) {
+                $backbutton.on('click', function() {
+                    history.back();
+                });
+                $backbutton.show();
+            }
+        });
+    </script>
+}
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>Unsuccessful login with service.</h2>

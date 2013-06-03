@@ -371,9 +371,9 @@ var BoxR;
                     }
                 } else {
                     if(this.selfScore > this.opponentScore) {
-                        BoxR.Manager.PopupControl.Win();
+                        BoxR.Manager.Client.WinPopup();
                     } else {
-                        BoxR.Manager.PopupControl.Lose();
+                        BoxR.Manager.Client.LosePopup();
                     }
                 }
                 return;
@@ -383,10 +383,28 @@ var BoxR;
             IsSelfRound ^= true;
             if(!this.IsSinglePlayer) {
                 BoxR.Manager.Server.UpdateRound(IsSelfRound);
+                this.AnimateTurn();
             } else {
                 if(!IsSelfRound) {
                     this.MachineClick();
                 }
+            }
+        };
+        Game.prototype.AnimateTurn = function () {
+            var $turnDiv = $('#turnDiv');
+            if($turnDiv) {
+                var originalMarginLeft = $turnDiv.css('marginLeft');
+                $turnDiv.animate({
+                    width: '0',
+                    marginLeft: (parseInt(originalMarginLeft) + 60) + 'px'
+                }, 100, function () {
+                    $(this).removeClass(IsSelfRound ? 'tile-red' : 'tile-blue').addClass(IsSelfRound ? 'tile-blue' : 'tile-red');
+                    $(this).html('<h1>' + (IsSelfRound ? 'blue turn' : 'red turn') + '</h1>');
+                    $(this).animate({
+                        width: '120px',
+                        marginLeft: originalMarginLeft
+                    }, 100);
+                });
             }
         };
         Game.prototype.MachineClick = function () {

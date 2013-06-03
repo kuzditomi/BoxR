@@ -17,10 +17,8 @@ var BoxR;
             var _this = this;
             var game;
             this.ClosePopup();
-            var quitButton = document.getElementById("quitGame");
-            quitButton.style.display = "block";
             var height = $(this.Blanket).height() * 0.65;
-            var container = document.getElementById("container");
+            var container = document.getElementById("innerContainer");
             $.ajax("/Home/StartGame", {
                 data: {
                     name: name,
@@ -31,6 +29,9 @@ var BoxR;
             }).done(function (res) {
                 container.innerHTML = res;
                 var canvas = container.getElementsByTagName("canvas")[0];
+                var size = $('canvas').parent().width();
+                canvas.height = size;
+                canvas.width = size;
                 game = new BoxR.Game(canvas);
                 BoxR.Manager.Game = game;
                 game.Init(3, selfStart);
@@ -41,9 +42,16 @@ var BoxR;
                 canvas.addEventListener("mousemove", function (e) {
                     game.MouseMove(e);
                 });
-                document.getElementById("quitBtn").onclick = function () {
-                    return _this.QuitPopup();
-                };
+                var $turnDiv = $(container).find('#turnDiv');
+                if($turnDiv) {
+                    $turnDiv.html('<h1>' + (selfStart ? 'blue turn' : 'red turn') + '</h1>');
+                    $turnDiv.addClass(selfStart ? 'tile-blue' : 'tile-red');
+                }
+                var backbutton = document.getElementById('backbutton');
+                backbutton.onclick = null;
+                $(backbutton).on('click', function () {
+                    _this.QuitPopup();
+                });
             });
         };
         WebClient.prototype.InvitedPopup = function (user) {
@@ -53,28 +61,16 @@ var BoxR;
             BoxR.Manager.PopupControl.Wait(username);
         };
         WebClient.prototype.QuitPopup = function () {
-            if(this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("quitPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Quit();
         };
         WebClient.prototype.DisconnectPopup = function () {
-            if(this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("disconnectPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Disconnect();
         };
         WebClient.prototype.WinPopup = function () {
-            if(this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("winPopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Win();
         };
         WebClient.prototype.LosePopup = function () {
-            if(this.Blanket.style.display == "none") {
-                this.Blanket.style.display = "table";
-                document.getElementById("losePopup").style.display = "block";
-            }
+            BoxR.Manager.PopupControl.Lose();
         };
         WebClient.prototype.ClosePopup = function () {
             BoxR.Manager.PopupControl.Hide();
