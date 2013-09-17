@@ -1,6 +1,7 @@
-﻿var Popup = function (_element) {
+﻿var Popup = function(_element) {
     "use strict";
     var self = this;
+
     self.Init = function(element) {
         self.element = element;
 
@@ -44,7 +45,6 @@
         self.element.appendChild(bg);
         self.element.appendChild(outer);
     };
-
     self.Show = function() {
         if (self.element.style.display == "none")
             self.element.style.display = "table";
@@ -70,12 +70,11 @@
     self.SetText = function(text) {
         self.p.textContent = text;
     };
-
-    self.Win = function () {
+    self.Win = function() {
         var btnSettings = [{
             text: "Ok",
             background: "green",
-            click:function() {
+            click: function() {
                 window.location.reload();
             }
         }];
@@ -83,11 +82,11 @@
         self.SetText("Congratulation, you have won the game!");
         self.Show();
     };
-    self.Lose = function () {
+    self.Lose = function() {
         var btnSettings = [{
             text: "Ok",
             background: "red",
-            click: function () {
+            click: function() {
                 window.location.reload();
             }
         }];
@@ -95,12 +94,12 @@
         self.SetText("You have lost the game.");
         self.Show();
     };
-    self.Invite = function (username) {
+    self.Invite = function(username) {
         var btnSettings = [
             {
                 text: "Accept",
                 background: "green",
-                click: function () {
+                click: function() {
                     BoxR.Manager.Hub.server.inviteAccepted();
                     self.Hide();
                 }
@@ -108,7 +107,7 @@
             {
                 text: "Deny",
                 background: "red",
-                click: function () {
+                click: function() {
                     BoxR.Manager.Hub.server.inviteDenied();
                     self.Hide();
                 }
@@ -118,12 +117,12 @@
         self.SetText(username + " has challenged you!");
         self.Show();
     };
-    self.Wait = function (username) {
+    self.Wait = function(username) {
         var btnSettings = [
             {
                 text: "Cancel",
                 background: "red",
-                click: function () {
+                click: function() {
                     BoxR.Manager.Hub.server.inviteDenied();
                     self.Hide();
                 }
@@ -133,12 +132,12 @@
         self.SetText("You have challenged " + username + ", please wait for the response.");
         self.Show();
     };
-    self.Disconnect = function () {
+    self.Disconnect = function() {
         var btnSettings = [
             {
                 text: "Ok",
                 background: "green",
-                click: function () {
+                click: function() {
                     window.location.reload();
                 }
             }
@@ -147,19 +146,19 @@
         self.SetText("Your opponent has disconnected.");
         self.Show();
     };
-    self.Quit = function () {
+    self.Quit = function() {
         var btnSettings = [
             {
                 text: "Yes",
                 background: "red",
-                click: function () {
+                click: function() {
                     window.location.reload();
                 }
             },
             {
                 text: "No",
-                background: "red",
-                click: function () {
+                background: "green",
+                click: function() {
                     self.Hide();
                 }
             }
@@ -168,8 +167,6 @@
         self.SetText("Are you sure you want to leave the game?");
         self.Show();
     };
-    
-   
 
     self.Init(_element);
     return self;

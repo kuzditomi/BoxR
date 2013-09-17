@@ -25,11 +25,11 @@
                     networkInfo.addEventListener("networkstatuschanged", onNetworkStatusChange);
                 }
                 catch (e) {
-                    print("An unexpected exception occured: " + e.name + ": " + e.message);
+                    //print("An unexpected exception occured: " + e.name + ": " + e.message);
                 }
-                // connect to Hub and set the static Hub and static Connection
-                initConnection();
+                // init ads
                 initAds();
+                
                 // create the populcontrol for the Client
                 var popupDiv = document.getElementById('popupdiv');
                 var popupControl = new BoxR.UI.PopupControl(popupDiv);
@@ -37,22 +37,22 @@
                 // create client and set the static Client
                 var client = new BoxR.WinRTClient(popupControl);
                 BoxR.Manager.Client = client;
-
-                // create server and set the static Server
-                var server = new BoxR.Server();
-                BoxR.Manager.Server = server;
-
-                BoxR.Manager.Connection.start(function () {
-                    console.log('connection started!');
-                }).done(function () {
-                    setTimeout(function () {
-                        WinJS.Navigation.navigate("/pages/login/login.html");
-                    }, 1500);
-                }).fail(function () {
-                    notifyConnectionError();
-                    //WinJS.Navigation.navigate("/pages/login/login.html");
-                });
-
+                
+                var colors = [
+                    "16a085",			
+                    "27ae60",			
+                    "2980b9",
+                    "8e44ad",
+                    "f39c12",
+                    "d35400",
+                    "c0392b",
+                    "7f8c8d",
+                    "2c3e50"
+                ];
+                // bg color
+                BoxR.activeColor = '#'+colors[1];
+                $('body').css("background-color", BoxR.activeColor);
+               
             } else {
                 // TODO: This application has been reactivated from suspension.
                 // store logged in state?
@@ -81,8 +81,8 @@
         if (BoxR.Manager.Hub && BoxR.Manager.Hub.server && BoxR.Manager.Connection && BoxR.Manager.Connection.id)
             BoxR.Manager.Hub.server.logout();
         
-        WinJS.Navigation.navigate("/pages/login/login.html");
-        initConnection();
+        WinJS.Navigation.navigate("/pages/main/main.html");
+        //initConnection();
     }
 
     app.oncheckpoint = function (args) {
@@ -168,17 +168,6 @@ function notifyConnectionIsBack() {
     var toastNotifier = notifications.ToastNotificationManager.createToastNotifier();
     toastNotifier.show(toast);
 };
-
-function initConnection() {
-    // connect to hub
-    var connection = $.connection.hub;
-    connection.url = localSettings.values["connectionURL"] + 'signalr';
-    BoxR.Manager.Connection = connection;
-
-    // create hub and set the static Hub
-    var hub = $.connection.game;
-    BoxR.Manager.Hub = hub;
-}
 
 function initAds() {
     var currentApp = Windows.ApplicationModel.Store.CurrentApp;

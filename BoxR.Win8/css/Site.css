@@ -52,6 +52,7 @@ header {
 }
 canvas {
     background: slateblue;
+    -webkit-tap-highlight-color: transparent;
 }
 
 header h1{

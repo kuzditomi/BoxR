@@ -57,7 +57,7 @@
                         click: function () {
                             BoxR.Manager.Hub.server.quitGame();
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }, 
                     {
@@ -80,7 +80,7 @@
                         background: this.greenColor,
                         click: function () {
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }
                 ],
@@ -96,7 +96,7 @@
                         background: this.greenColor,
                         click: function () {
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }
                 ],
@@ -112,7 +112,7 @@
                         background: this.redColor,
                         click: function () {
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }
                 ],

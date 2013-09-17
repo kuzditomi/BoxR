@@ -61,7 +61,7 @@ module BoxR {
                         click: () => {
                             BoxR.Manager.Hub.server.quitGame();
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     },
                     {
@@ -83,7 +83,7 @@ module BoxR {
                         background: this.greenColor,
                         click: () => {
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }],
                 text: "Your opponent has quit the game."
@@ -98,7 +98,7 @@ module BoxR {
                         background: this.greenColor,
                         click: () => {
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }],
                 text: "Congratulation, you have won the game!"
@@ -113,7 +113,7 @@ module BoxR {
                         background: this.redColor,
                         click: () => {
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                         }
                     }],
                 text: "You have just lost the game."

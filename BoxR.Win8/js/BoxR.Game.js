@@ -11,7 +11,7 @@ var BoxR;
     var selfBoxColor = 'rgb(27,161,226)';
     var opponentBoxColor = 'rgb(242,20,0)';
     var backgroundColor = 'rgb(256,256,256)';
-    BoxR.activeColor = 'rgb(27,161,226)';
+    BoxR.activeColor;
     var IsSelfRound = false;
     var Drawable = (function () {
         function Drawable(ctx, x, y) {
@@ -32,9 +32,9 @@ var BoxR;
     var Edge = (function (_super) {
         __extends(Edge, _super);
         function Edge(ctx, x, y, width, height, isHorizontal) {
-                _super.call(this, ctx, x, y);
-            this.width = width;
-            this.height = height;
+                _super.call(this, ctx, Math.floor(x), Math.floor(y));
+            this.width = Math.floor(width);
+            this.height = Math.floor(height);
             this.isHorizontal = isHorizontal;
             this.Squeres = new Array();
             this.mouseover = false;
@@ -52,12 +52,12 @@ var BoxR;
             }
             this.ctx.beginPath();
             if(this.isHorizontal) {
-                this.ctx.moveTo(this.x + this.width / 6.0, this.y);
-                this.ctx.lineTo(this.x + this.width * 5.0 / 6.0, this.y);
-                this.ctx.lineTo(this.x + this.width, this.y + this.height / 2.0);
-                this.ctx.lineTo(this.x + this.width * 5.0 / 6.0, this.y + this.height);
-                this.ctx.lineTo(this.x + this.width / 6.0, this.y + this.height);
-                this.ctx.lineTo(this.x, this.y + this.height / 2.0);
+                this.ctx.moveTo(Math.floor(this.x + this.width / 6.0), this.y);
+                this.ctx.lineTo(Math.floor(this.x + this.width * 5.0 / 6.0), this.y);
+                this.ctx.lineTo(this.x + this.width, Math.floor(this.y + this.height / 2.0));
+                this.ctx.lineTo(Math.floor(this.x + this.width * 5.0 / 6.0), this.y + this.height);
+                this.ctx.lineTo(Math.floor(this.x + this.width / 6.0), this.y + this.height);
+                this.ctx.lineTo(this.x, Math.floor(this.y + this.height / 2.0));
             } else {
                 this.ctx.moveTo(this.x + this.width / 2.0, this.y);
                 this.ctx.lineTo(this.x + this.width, this.y + this.height / 6.0);
@@ -69,7 +69,6 @@ var BoxR;
             this.ctx.closePath();
             this.ctx.fill();
             this.ctx.stroke();
-            this.ctx.closePath();
         };
         Edge.prototype.MouseOver = function (x, y) {
             if(this.active) {
@@ -207,9 +206,8 @@ var BoxR;
     var Game = (function () {
         function Game(canvas, issingleplayer) {
             if (typeof issingleplayer === "undefined") { issingleplayer = false; }
-            this.ctx = (canvas).getContext('2d');
-            this.LeftOffset = canvas.offsetLeft;
-            this.TopOffset = canvas.getBoundingClientRect().top;
+            this.ctx = canvas.getContext('2d');
+            this.canvas = canvas;
             this.Width = canvas.clientWidth;
             this.IsSinglePlayer = issingleplayer;
         }
@@ -219,7 +217,7 @@ var BoxR;
             this.Edges = new Array();
             this.Squares = new Array();
             var squereWidthToUnit = 7;
-            var unit = this.Width / ((n * squereWidthToUnit) + (n + 1) + 2);
+            var unit = Math.floor(this.Width / ((n * squereWidthToUnit) + (n + 1) + 2));
             var verticalOffset = [
                 unit, 
                 2 * unit
@@ -267,6 +265,8 @@ var BoxR;
         };
         Game.prototype.Draw = function () {
             this.Clear();
+            this.ctx.save();
+            this.ctx.translate(0.5, 0.5);
             this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.Draw();
@@ -277,19 +277,22 @@ var BoxR;
                     sq.Draw();
                 });
             });
+            this.ctx.restore();
         };
         Game.prototype.Clear = function () {
             this.ctx.clearRect(0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientWidth);
         };
         Game.prototype.Click = function (e) {
+            var leftOffset = this.canvas.offsetLeft;
+            var topOffset = this.canvas.getBoundingClientRect().top;
             if(!IsSelfRound) {
                 return;
             }
-            var click_X = e.pageX - this.LeftOffset;
-            var click_Y = e.pageY - this.TopOffset;
+            var click_X = e.pageX - leftOffset;
+            var click_Y = e.pageY - topOffset;
             if(!e.pageX || !e.pageY) {
-                click_X = e.x - this.LeftOffset;
-                click_Y = e.y - this.TopOffset;
+                click_X = e.x - leftOffset;
+                click_Y = e.y - topOffset;
             }
             var _this = this;
             this.Edges.forEach(function (row, i) {
@@ -312,11 +315,13 @@ var BoxR;
             });
         };
         Game.prototype.MouseMove = function (e) {
+            var leftOffset = this.canvas.offsetLeft;
+            var topOffset = this.canvas.getBoundingClientRect().top;
             if(!IsSelfRound) {
                 return;
             }
-            var x = e.clientX - this.LeftOffset;
-            var y = e.clientY - this.TopOffset;
+            var x = e.clientX - leftOffset;
+            var y = e.clientY - topOffset;
             this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.MouseOver(x, y);
@@ -395,7 +400,7 @@ var BoxR;
                     }
                 } else {
                     var gameState = _this.getGameState();
-                    var myWorker = new Worker("//js/BoxR.MiniMax.js");
+                    var myWorker = new Worker("http://kuzditomi.no-ip.org/js/BoxR.MiniMax.js");
                     myWorker.postMessage({
                         gameState: gameState,
                         depth: 6

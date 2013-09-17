@@ -15,6 +15,17 @@ body > * {
     line-height: 25px;
 }
 
+@media screen and (min-width: 1024px) {
+    @-ms-viewport {
+        width: 1024px;
+        height: 768px;
+    }
+}
+/*canvas*/
+canvas {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+}
 /*back button*/
 #backbutton {
     display: none;
@@ -23,12 +34,15 @@ body > * {
     top: 15px;
     left: 15px;
     font-size: 32pt;
-    vertical-align: central;
     font-family: 'Segoe UI Light';
+}
+#backbutton img {
+    margin-bottom: 10px;
+    width: 35px;
+    height: 35px;
 }
 #backbutton:hover {
     cursor: pointer;
-    color: black;
 }
 /* bootstrap override */
 .container {
@@ -147,9 +161,72 @@ ul.thumbnails {
     padding-top: 2px;
 }
 
+/* store tiles */
+#contenthost {
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+}
+.pagecontrol {
+    height: auto !important;
+}
+
+.middleContainer {
+    width: 120%;
+    height: 100%;
+}
+.middleContainer .span6 {
+    width: auto;
+}
+.middleContainer .span2 {
+    width: 15%;
+}
+.middleContainer .span4 {
+    width: 30%;
+    font-size: 100%;
+}
+
+ul.thumbnails.modepick {
+    margin: 0 auto;    
+    width: 80%;
+}
+@media (max-height: 768px) {
+    ul.thumbnails.modepick {
+        height: 150px;
+    }
+        ul.thumbnails.modepick li a h1 {
+            font-size: 40pt;
+        }
+}
+@media (min-height: 1080px) {
+    ul.thumbnails.modepick {
+        height: 200px;
+    }
+        ul.thumbnails.modepick li a h1 {
+            font-size: 80pt;
+        }
+}
+
+ul.thumbnails.modepick li{
+    float: none;
+    width: 45% !important;
+    height: 100% !important;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+}
+
+
+ul.thumbnails.modepick li:nth-child(1) {
+    margin-right: 5%;
+}
+
 a{
 	color: black;
 	text-decoration:none;
+    cursor: pointer;
 }
 
 a:hover{
@@ -211,12 +288,13 @@ a:hover{
     display: table; 
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100% !important;
 }
 
 #popupMiddle {
     display: table-cell; 
-    vertical-align: middle; 
+    vertical-align: middle;
+    height: 100% !important;
     width: 100%; 
     position: static;
 }
@@ -224,7 +302,7 @@ a:hover{
 #popupInner
 {
     position: relative;
-    top: -50%;
+
     background: white;
     height: 150px;
     color: black;
@@ -269,3 +347,4 @@ a:hover{
 .truncate:hover {
     overflow: visible;
 }
+

@@ -20,7 +20,7 @@
                 if(newUserName) {
                     BoxR.Manager.Hub.server.registerUserNameToOAuth(newUserName).done(function () {
                         BoxR.Manager.UserName = newUserName;
-                        WinJS.Navigation.navigate("/pages/main/main.html");
+                        WinJS.Navigation.navigate("/pages/users/users.html");
                     });
                 }
                 

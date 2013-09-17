@@ -8,7 +8,7 @@ module BoxR {
     var selfBoxColor = 'rgb(27,161,226)';
     var opponentBoxColor = 'rgb(242,20,0)';
     var backgroundColor = 'rgb(256,256,256)';
-    export var activeColor = 'rgb(27,161,226)';
+    export var activeColor; //= 'rgb(27,161,226)';
     var IsSelfRound :bool = false;
 
     //#region "Drawables"
@@ -17,6 +17,7 @@ module BoxR {
         ctx: CanvasRenderingContext2D;
         x: number;
         y: number;
+         
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number) {
             this.active = false;
             this.ctx = ctx;
@@ -43,9 +44,9 @@ module BoxR {
         private mouseover: bool;
 
         constructor(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, isHorizontal: bool) {
-            super(ctx, x, y);
-            this.width = width;
-            this.height = height;
+            super(ctx, Math.floor(x), Math.floor(y));
+            this.width = Math.floor(width);
+            this.height = Math.floor(height);
             this.isHorizontal = isHorizontal;
             this.Squeres = new Squere[];
             this.mouseover = false;
@@ -66,12 +67,12 @@ module BoxR {
             }
             this.ctx.beginPath();
             if (this.isHorizontal) {
-                this.ctx.moveTo(this.x + this.width / 6.0, this.y);
-                this.ctx.lineTo(this.x + this.width * 5.0 / 6.0, this.y);
-                this.ctx.lineTo(this.x + this.width, this.y + this.height / 2.0);
-                this.ctx.lineTo(this.x + this.width * 5.0 / 6.0, this.y + this.height);
-                this.ctx.lineTo(this.x + this.width / 6.0, this.y + this.height);
-                this.ctx.lineTo(this.x, this.y + this.height / 2.);
+                this.ctx.moveTo(Math.floor(this.x + this.width / 6.0), this.y);
+                this.ctx.lineTo(Math.floor(this.x + this.width * 5.0 / 6.0), this.y);
+                this.ctx.lineTo(this.x + this.width, Math.floor(this.y + this.height / 2.0));
+                this.ctx.lineTo(Math.floor(this.x + this.width * 5.0 / 6.0), this.y + this.height);
+                this.ctx.lineTo(Math.floor(this.x + this.width / 6.0), this.y + this.height);
+                this.ctx.lineTo(this.x, Math.floor(this.y + this.height / 2.0));
             }
             else {
                 this.ctx.moveTo(this.x + this.width / 2.0, this.y);
@@ -84,8 +85,6 @@ module BoxR {
             this.ctx.closePath();
             this.ctx.fill();
             this.ctx.stroke();
-
-            this.ctx.closePath();
         }
 
         public MouseOver(x: number, y: number) {
@@ -250,23 +249,21 @@ module BoxR {
     
     //#region Game class
     export class Game {
-        ctx: CanvasRenderingContext2D;
+        private ctx: CanvasRenderingContext2D;
+        private canvas: HTMLCanvasElement;
         private Edges: Edge[][];
         private Squares: Squere[][];
         private IsSinglePlayer: bool;
 
         public n: number;
-        public LeftOffset: number;
-        public TopOffset: number;
         public Width: number;
         public selfScore: number;
         public opponentScore: number;
 
 
-        constructor(canvas: HTMLElement,issingleplayer:bool = false) {
-            this.ctx = (<HTMLCanvasElement>canvas).getContext('2d');
-            this.LeftOffset = canvas.offsetLeft; //canvas.getBoundingClientRect().left;
-            this.TopOffset = canvas.getBoundingClientRect().top;
+        constructor(canvas: HTMLCanvasElement,issingleplayer:bool = false) {
+            this.ctx = canvas.getContext('2d');
+            this.canvas = canvas;
             this.Width = canvas.clientWidth;
             this.IsSinglePlayer = issingleplayer;
         }
@@ -279,7 +276,7 @@ module BoxR {
 
             var squereWidthToUnit = 7; // means 7:1
             //unit is the width of a 'corner' which is actually not drawn
-            var unit = this.Width / ((n * squereWidthToUnit) + (n + 1) + 2);
+            var unit = Math.floor(this.Width / ((n * squereWidthToUnit) + (n + 1) + 2));
 
             // simple offset, alternate_offset
             var verticalOffset = [unit, 2 * unit];
@@ -328,6 +325,8 @@ module BoxR {
 
         public Draw() {
             this.Clear();
+            this.ctx.save();
+            this.ctx.translate(0.5, 0.5); // blury vonalak miatt
             this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
                     edge.Draw();
@@ -338,6 +337,7 @@ module BoxR {
                     sq.Draw();
                 });
             });
+            this.ctx.restore();
         }
 
         public Clear() {
@@ -345,15 +345,17 @@ module BoxR {
         }
 
         public Click(e: MouseEvent) {
+            var leftOffset = this.canvas.offsetLeft;
+            var topOffset = this.canvas.getBoundingClientRect().top;
             if (!IsSelfRound)
                 return;
 
-            var click_X = e.pageX - this.LeftOffset;
-            var click_Y = e.pageY - this.TopOffset;
+            var click_X = e.pageX - leftOffset;
+            var click_Y = e.pageY - topOffset;
 
             if (!e.pageX || !e.pageY) {
-                click_X = e.x - this.LeftOffset;
-                click_Y = e.y - this.TopOffset;
+                click_X = e.x - leftOffset;
+                click_Y = e.y - topOffset;
             }
 
             var _this = this;
@@ -376,11 +378,13 @@ module BoxR {
         }
 
         public MouseMove(e: MouseEvent) {
+            var leftOffset = this.canvas.offsetLeft;
+            var topOffset = this.canvas.getBoundingClientRect().top;
             if (!IsSelfRound)
                 return;
 
-            var x = e.clientX - this.LeftOffset;
-            var y = e.clientY - this.TopOffset;
+            var x = e.clientX - leftOffset;
+            var y = e.clientY - topOffset;
 
             this.Edges.forEach(function (row) {
                 row.forEach(function (edge) {
@@ -422,58 +426,27 @@ module BoxR {
         }
 
         private UpdateScore() {
-            var selfScoreDiv = document.getElementById('selfscore');
-            selfScoreDiv.textContent = this.selfScore.toString();
-            var opponentScoreDiv = document.getElementById('opponentscore');
-            opponentScoreDiv.textContent = this.opponentScore.toString();
-
             if (!this.IsSinglePlayer) {
                 BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
                 BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
             }
             if (this.selfScore + this.opponentScore == this.n * this.n) {
-                if (!this.IsSinglePlayer){
+                if (!this.IsSinglePlayer)
                     BoxR.Manager.Hub.server.finishGame();
-                    if (this.selfScore > this.opponentScore)
-                        BoxR.Manager.Client.WinPopup();
-                    else
-                        BoxR.Manager.Client.LosePopup();
-                }
-                else{
-                    if (this.selfScore > this.opponentScore)
-                        BoxR.Manager.Client.WinPopup();
-                    else
-                        BoxR.Manager.Client.LosePopup();
-                }
+                if (this.selfScore > this.opponentScore)
+                    BoxR.Manager.Client.WinPopup();
+                else
+                    BoxR.Manager.Client.LosePopup();
                 return;
             }
         }
 
         private NextRound() {
             IsSelfRound ^= true;
-            if (!this.IsSinglePlayer) {
+            if (!this.IsSinglePlayer)
                 BoxR.Manager.Server.UpdateRound(IsSelfRound);
-                this.AnimateTurn();
-            }
-            else if (!IsSelfRound) {
+            else if(!IsSelfRound){
                 this.MachineClick();
-            }
-        }
-        private AnimateTurn(){
-            var $turnDiv = $('#turnDiv');
-            if ($turnDiv) {
-                var originalMarginLeft = $turnDiv.css('marginLeft');
-                $turnDiv.animate({
-                    width: '0',
-                    marginLeft: (parseInt(originalMarginLeft)+60)+'px'
-                }, 100, function () {
-                    $(this).removeClass(IsSelfRound ? 'tile-red' : 'tile-blue').addClass(IsSelfRound ? 'tile-blue' : 'tile-red' );
-                    $(this).html('<h1>' + (IsSelfRound ? 'blue turn' : 'red turn') + '</h1>');
-                    $(this).animate({
-                        width: '120px',
-                        marginLeft: originalMarginLeft
-                    }, 100);
-                });
             }
         }
 
@@ -496,7 +469,7 @@ module BoxR {
                 }
                 else { // minimax
                     var gameState = this.getGameState();
-                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                    var myWorker = new Worker("http://kuzditomi.no-ip.org/js/BoxR.MiniMax.js");
                     myWorker.postMessage({gameState: gameState,depth: 6});
                     myWorker.onmessage = function (e) {
                         var needContinue = _this.EdgeClickFromServerByEdge(_this.Edges[e.data.nextClick.i][e.data.nextClick.j]);

@@ -71,7 +71,7 @@
                                 switch (loginresult.Result) {
                                     case 0: // Success
                                         BoxR.Manager.UserName = loginresult.UserName;
-                                        WinJS.Navigation.navigate("/pages/main/main.html");
+                                        WinJS.Navigation.navigate("/pages/users/users.html");
                                         break;
                                     case 1: // Need to choose nickname
                                         WinJS.Navigation.navigate("/pages/choosenick/choosenick.html",{ provider:"facebook" });
@@ -104,7 +104,7 @@
         BoxR.Manager.Hub.server.login(username, password).done(function (success) {
             if (success) {
                 BoxR.Manager.UserName = success;
-                WinJS.Navigation.navigate("/pages/main/main.html");
+                WinJS.Navigation.navigate("/pages/users/users.html");
             } else {
                 displayError("Error with authentication.");
             }
@@ -144,7 +144,7 @@
                     switch (loginresult.Result) {
                         case 0: // Success
                             BoxR.Manager.UserName = loginresult.UserName;
-                            WinJS.Navigation.navigate("/pages/main/main.html");
+                            WinJS.Navigation.navigate("/pages/users/users.html");
                             break;
                         case 1: // Need to choose nickname
                             WinJS.Navigation.navigate("/pages/choosenick/choosenick.html", { provider: "microsoft" });

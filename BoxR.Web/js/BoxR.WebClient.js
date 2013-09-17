@@ -47,9 +47,9 @@ var BoxR;
                     $turnDiv.html('<h1>' + (selfStart ? 'blue turn' : 'red turn') + '</h1>');
                     $turnDiv.addClass(selfStart ? 'tile-blue' : 'tile-red');
                 }
-                var backbutton = document.getElementById('backbutton');
-                backbutton.onclick = null;
-                $(backbutton).on('click', function () {
+                var $backbutton = $('#backbutton');
+                $backbutton.off('click');
+                $backbutton.on('click', function () {
                     _this.QuitPopup();
                 });
             });

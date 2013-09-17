@@ -107,7 +107,8 @@
 copy  "$(SolutionDir)BoxR.Shared\Css\" "$(SolutionDir)BoxR.Win8\css\"
 copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Web\Images\"
 copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Win8\Images\"
-copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\js\"
+copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\js\
+copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Win8\js\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Web\js\lib\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\lib\" "$(SolutionDir)BoxR.Win8\js\lib\"
 del "$(SolutionDir)BoxR.Win8\js\*.map"
