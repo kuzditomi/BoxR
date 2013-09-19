@@ -61,7 +61,7 @@
     <Content Include="css\Login.css" />
     <Content Include="css\metro-bootstrap.css" />
     <Content Include="css\micrososftlogin35.png" />
-    <Content Include="css\Site.css" />
+    <Content Include="css\style.css" />
     <Content Include="default.html" />
     <Content Include="Images\bg.png" />
     <Content Include="Images\blueturn.png" />

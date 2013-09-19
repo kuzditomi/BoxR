@@ -15,12 +15,6 @@ body > * {
     line-height: 25px;
 }
 
-@media screen and (min-width: 1024px) {
-    @-ms-viewport {
-        width: 1024px;
-        height: 768px;
-    }
-}
 /*canvas*/
 canvas {
     outline: none;
