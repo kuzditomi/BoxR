@@ -352,16 +352,14 @@ var BoxR;
                 } else {
                     _this.UpdateScore();
                     _this.Draw();
-                    return true;
+                    return this.selfScore + this.opponentScore == this.n * this.n;
                 }
             }
             return false;
         };
         Game.prototype.UpdateScore = function () {
-            if(!this.IsSinglePlayer) {
-                BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
-                BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
-            }
+            BoxR.Manager.Client.UpdateSelfScore(this.selfScore);
+            BoxR.Manager.Client.UpdateOpponentScore(this.opponentScore);
             if(this.selfScore + this.opponentScore == this.n * this.n) {
                 if(!this.IsSinglePlayer) {
                     BoxR.Manager.Hub.server.finishGame();
@@ -400,7 +398,7 @@ var BoxR;
                     }
                 } else {
                     var gameState = _this.getGameState();
-                    var myWorker = new Worker("http://kuzditomi.no-ip.org/js/BoxR.MiniMax.js");
+                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
                     myWorker.postMessage({
                         gameState: gameState,
                         depth: 6

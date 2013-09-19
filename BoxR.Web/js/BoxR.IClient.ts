@@ -13,6 +13,9 @@ module BoxR {
         WinPopup();
         LosePopup();
         ClosePopup();        
+
+        UpdateSelfScore(score);
+        UpdateOpponentScore(score);
     }
 
     export class ClientBase implements IClient {
@@ -40,5 +43,15 @@ module BoxR {
         ClosePopup(){ 
             throw new Error('abstract method, override in derived class');
         } 
+
+        UpdateSelfScore(score) {
+            var selfScoreDiv = document.getElementById('selfscore');
+            selfScoreDiv.textContent = score;
+        }
+
+        UpdateOpponentScore(score) {
+            var opponentScoreDiv = document.getElementById('opponentscore');
+            opponentScoreDiv.textContent = score;
+        }
     }
 }

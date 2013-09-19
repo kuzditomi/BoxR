@@ -44,7 +44,6 @@
   <ItemGroup>
     <Content Include="Css\boxr.css" />
     <Content Include="Css\metro-bootstrap.css" />
-    <Content Include="Css\Site.css" />
     <Content Include="Images\bg.png" />
     <Content Include="Images\blueturn.png" />
     <Content Include="Images\boxr.png" />
@@ -52,6 +51,7 @@
     <Content Include="Images\header_widelogo.png" />
     <Content Include="Images\micrososftlogin35.png" />
     <Content Include="Images\nono.jpg" />
+    <Content Include="Scripts\BoxR.MiniMax.js" />
     <Content Include="Scripts\lib\jquery-1.9.1.js" />
     <None Include="Scripts\BoxR.Game.min.js.map">
       <DependentUpon>BoxR.Game.js</DependentUpon>
@@ -103,9 +103,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy  "$(SolutionDir)BoxR.Shared\Css\" "$(SolutionDir)BoxR.Web\Content\"
-copy  "$(SolutionDir)BoxR.Shared\Css\" "$(SolutionDir)BoxR.Win8\css\"
-copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Web\Images\"
+    <PostBuildEvent>copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Web\Images\"
 copy  "$(SolutionDir)BoxR.Shared\Images\" "$(SolutionDir)BoxR.Win8\Images\"
 copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Web\js\
 copy  "$(SolutionDir)BoxR.Shared\Scripts\" "$(SolutionDir)BoxR.Win8\js\"

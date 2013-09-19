@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>singleplayer</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+    
+    <link href="singleplayer.css" rel="stylesheet" />
+    <script src="singleplayer.js"></script>
+</head>
+    <body>
+        <button 
+            data-win-control="WinJS.UI.BackButton">
+        </button>
+        <div id="container">
+            <section id="canvas-container">
+                <canvas id="gameCanvas"></canvas>
+            </section>
+            <section id="score-container">
+                <h1 class="notranform">BoxR</h1>
+                <ul class="scores">
+                    <li class="tile-blue">
+                        <h2>You</h2>
+                        <h1 id="selfscore">0</h1>
+                    </li>
+                    <li class="tile-red">
+                        <h2>Bob</h2>
+                        <h1 id="opponentscore">0</h1>
+                    </li>
+                </ul>
+            </section>
+            <section id="text-container">
+                <header>
+                    <h2>how to play</h2>
+                </header>
+                <p>
+                    Dots and Boxes (also known as Boxes, Squares, Paddocks, Pigs in a Pen, Square-it, Dots and Dashes, Dots, Smart Dots, Dot Boxing, or, simply, the Dot Game) is a pencil and paper game for two players (or sometimes, more than two) first published in 1889 by Édouard Lucas.
+                </p>
+                <p>
+                    Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.
+                </p>
+            </section>
+        </div>
+    </body>
+</html>

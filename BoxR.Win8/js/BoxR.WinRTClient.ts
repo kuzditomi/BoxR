@@ -8,6 +8,7 @@ module BoxR {
     "use strict";
     var dummychars = "Ù";
     export class WinRTClient extends ClientBase {
+        public IsSinglePlayer: bool;
         private popupHelper: BoxR.Popups;
         private popupControl: any;
 
@@ -57,19 +58,19 @@ module BoxR {
             this.popupControl.Show();
         }
         DisconnectPopup() {
-            var setting = this.popupHelper.Disconnect();
+            var setting = this.popupHelper.Disconnect(this.IsSinglePlayer);
             this.popupControl.SetBtn(setting.buttons);
             this.popupControl.SetText(setting.text);
             this.popupControl.Show();
         }
         WinPopup() {
-            var setting = this.popupHelper.Win();
+            var setting = this.popupHelper.Win(this.IsSinglePlayer);
             this.popupControl.SetBtn(setting.buttons);
             this.popupControl.SetText(setting.text);
             this.popupControl.Show();
         }
         LosePopup() {
-            var setting = this.popupHelper.Lost();
+            var setting = this.popupHelper.Lost(this.IsSinglePlayer);
             this.popupControl.SetBtn(setting.buttons);
             this.popupControl.SetText(setting.text);
             this.popupControl.Show();

@@ -71,7 +71,7 @@
                 text: "Are you sure? By quiting the game, your opponent will win."
             };
         };
-        Popups.prototype.Disconnect = function () {
+        Popups.prototype.Disconnect = function (isSinglePlayer) {
             var _this = this;
             return {
                 buttons: [
@@ -80,14 +80,14 @@
                         background: this.greenColor,
                         click: function () {
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/users/users.html");
+                            WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }
                 ],
                 text: "Your opponent has quit the game."
             };
         };
-        Popups.prototype.Win = function () {
+        Popups.prototype.Win = function (isSinglePlayer) {
             var _this = this;
             return {
                 buttons: [
@@ -96,14 +96,14 @@
                         background: this.greenColor,
                         click: function () {
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/users/users.html");
+                            WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }
                 ],
                 text: "Congratulation, you have won the game!"
             };
         };
-        Popups.prototype.Lost = function () {
+        Popups.prototype.Lost = function (isSinglePlayer) {
             var _this = this;
             return {
                 buttons: [
@@ -112,7 +112,7 @@
                         background: this.redColor,
                         click: function () {
                             _this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/users/users.html");
+                            WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }
                 ],

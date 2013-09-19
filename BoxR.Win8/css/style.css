@@ -1,0 +1,31 @@
+﻿body {
+    background-image: url(../Images/bg.png);
+    background-position: top left;
+    background-repeat: repeat;
+    color: white;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+body > * {
+    z-index: 1;
+    font-size: 10pt;
+    line-height: 25px;
+}
+#contenthost {
+    height: 768px !important;
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    padding: 0;
+    overflow-x: auto;
+}
+.pagecontrol {
+    height: auto !important;
+    width: auto !important;
+    margin: 0 auto;
+}
+
+.clear {
+    clear: both;
+}

@@ -28,6 +28,14 @@
         ClientBase.prototype.ClosePopup = function () {
             throw new Error('abstract method, override in derived class');
         };
+        ClientBase.prototype.UpdateSelfScore = function (score) {
+            var selfScoreDiv = document.getElementById('selfscore');
+            selfScoreDiv.textContent = score;
+        };
+        ClientBase.prototype.UpdateOpponentScore = function (score) {
+            var opponentScoreDiv = document.getElementById('opponentscore');
+            opponentScoreDiv.textContent = score;
+        };
         return ClientBase;
     })();
     BoxR.ClientBase = ClientBase;    

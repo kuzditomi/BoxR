@@ -57,9 +57,6 @@
     </AppxManifest>
     <None Include="BoxR.Win8_StoreKey.pfx" />
     <Content Include="css\boxr.css" />
-    <Content Include="css\Error.css" />
-    <Content Include="css\Login.css" />
-    <Content Include="css\metro-bootstrap.css" />
     <Content Include="css\micrososftlogin35.png" />
     <Content Include="css\style.css" />
     <Content Include="default.html" />
@@ -83,6 +80,7 @@
     <Content Include="js\BoxR.Manager.js" />
     <Content Include="js\BoxR.Manager.min.js" />
     <Content Include="js\BoxR.Manager.ts" />
+    <Content Include="js\BoxR.MiniMax.js" />
     <Content Include="js\BoxR.Popups.js" />
     <Content Include="js\BoxR.Popups.min.js" />
     <Content Include="js\BoxR.Popups.ts" />
@@ -115,11 +113,13 @@
     <Content Include="pages\choosenick\choosenick.js" />
     <Content Include="pages\main\main.html" />
     <Content Include="pages\main\main.js" />
+    <Content Include="pages\main\main.css" />
     <Content Include="pages\privacy\privacy.html" />
     <Content Include="pages\register\register.html" />
     <Content Include="pages\register\register.js" />
     <Content Include="pages\report\report.html" />
     <Content Include="pages\report\report.js" />
+    <Content Include="pages\singleplayer\singleplayer.css" />
     <Content Include="pages\singleplayer\singleplayer.html" />
     <Content Include="pages\singleplayer\singleplayer.js" />
     <Content Include="pages\splash\splash.html" />

@@ -59,19 +59,19 @@ var BoxR;
             this.popupControl.Show();
         };
         WinRTClient.prototype.DisconnectPopup = function () {
-            var setting = this.popupHelper.Disconnect();
+            var setting = this.popupHelper.Disconnect(this.IsSinglePlayer);
             this.popupControl.SetBtn(setting.buttons);
             this.popupControl.SetText(setting.text);
             this.popupControl.Show();
         };
         WinRTClient.prototype.WinPopup = function () {
-            var setting = this.popupHelper.Win();
+            var setting = this.popupHelper.Win(this.IsSinglePlayer);
             this.popupControl.SetBtn(setting.buttons);
             this.popupControl.SetText(setting.text);
             this.popupControl.Show();
         };
         WinRTClient.prototype.LosePopup = function () {
-            var setting = this.popupHelper.Lost();
+            var setting = this.popupHelper.Lost(this.IsSinglePlayer);
             this.popupControl.SetBtn(setting.buttons);
             this.popupControl.SetText(setting.text);
             this.popupControl.Show();

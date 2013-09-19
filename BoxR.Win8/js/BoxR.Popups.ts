@@ -75,7 +75,7 @@ module BoxR {
             };
         }
 
-        Disconnect(): any {
+        Disconnect(isSinglePlayer:bool): any {
             return {
                 buttons: [
                     {
@@ -83,14 +83,14 @@ module BoxR {
                         background: this.greenColor,
                         click: () => {
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/users/users.html");
+                            WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }],
                 text: "Your opponent has quit the game."
             };
         }
 
-        Win(): any {
+        Win(isSinglePlayer:bool): any {
             return {
                 buttons: [
                     {
@@ -98,14 +98,14 @@ module BoxR {
                         background: this.greenColor,
                         click: () => {
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/users/users.html");
+                            WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }],
                 text: "Congratulation, you have won the game!"
             };
         }
 
-        Lost(): any {
+        Lost(isSinglePlayer:bool): any {
             return {
                 buttons: [
                     {
@@ -113,7 +113,7 @@ module BoxR {
                         background: this.redColor,
                         click: () => {
                             this.popupControl.Hide();
-                            WinJS.Navigation.navigate("/pages/users/users.html");
+                            WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }],
                 text: "You have just lost the game."

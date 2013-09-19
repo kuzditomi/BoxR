@@ -77,24 +77,14 @@ module BoxR {
         }
 
         UpdateRound(selfround) {
-            if(!selfround){
-                $("#redturn").animate({width:"120px",marginLeft:"0px"});
-                $("#blueturn").animate({width:"0px",marginLeft:"0px"});
+            if (!selfround) {
+                $("#redturn").animate({ width: "120px", marginLeft: "0px" });
+                $("#blueturn").animate({ width: "0px", marginLeft: "0px" });
             }
-            else{
-                $("#blueturn").animate({width:"120px",marginLeft:"0px"});
-                $("#redturn").animate({width:"0px",marginLeft:"0px"});
+            else {
+                $("#blueturn").animate({ width: "120px", marginLeft: "0px" });
+                $("#redturn").animate({ width: "0px", marginLeft: "0px" });
             }
-       }
-
-        UpdateSelfScore(score) {
-            var selfScoreDiv = document.getElementById('selfscore');
-            selfScoreDiv.textContent = score;
-        }
-
-        UpdateOpponentScore(score) {
-            var opponentScoreDiv = document.getElementById('opponentscore');
-            opponentScoreDiv.textContent = score;
         }
          
         displayError(error,logerror) {

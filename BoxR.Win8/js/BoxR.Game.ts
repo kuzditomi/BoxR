@@ -419,17 +419,17 @@ module BoxR {
                 else {
                     _this.UpdateScore();
                     _this.Draw();
-                    return true;
+                    return !(this.selfScore + this.opponentScore == this.n * this.n);
                 }
             }
             return false;
         }
 
         private UpdateScore() {
-            if (!this.IsSinglePlayer) {
-                BoxR.Manager.Server.UpdateSelfScore(this.selfScore);
-                BoxR.Manager.Server.UpdateOpponentScore(this.opponentScore);
-            }
+            //if (!this.IsSinglePlayer) {
+                BoxR.Manager.Client.UpdateSelfScore(this.selfScore);
+                BoxR.Manager.Client.UpdateOpponentScore(this.opponentScore);
+            //}
             if (this.selfScore + this.opponentScore == this.n * this.n) {
                 if (!this.IsSinglePlayer)
                     BoxR.Manager.Hub.server.finishGame();
@@ -469,7 +469,7 @@ module BoxR {
                 }
                 else { // minimax
                     var gameState = this.getGameState();
-                    var myWorker = new Worker("http://kuzditomi.no-ip.org/js/BoxR.MiniMax.js");
+                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
                     myWorker.postMessage({gameState: gameState,depth: 6});
                     myWorker.onmessage = function (e) {
                         var needContinue = _this.EdgeClickFromServerByEdge(_this.Edges[e.data.nextClick.i][e.data.nextClick.j]);

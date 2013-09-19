@@ -85,14 +85,6 @@
                 });
             }
         };
-        Server.prototype.UpdateSelfScore = function (score) {
-            var selfScoreDiv = document.getElementById('selfscore');
-            selfScoreDiv.textContent = score;
-        };
-        Server.prototype.UpdateOpponentScore = function (score) {
-            var opponentScoreDiv = document.getElementById('opponentscore');
-            opponentScoreDiv.textContent = score;
-        };
         Server.prototype.displayError = function (error, logerror) {
             var errorDiv = document.getElementById('error');
             errorDiv.textContent = error;

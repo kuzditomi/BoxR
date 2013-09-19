@@ -1,0 +1,41 @@
+﻿ul.modepick {
+    width: 800px;
+    margin: 0 auto;
+}
+
+ul.modepick li {
+    list-style: none;
+    float: left;
+    width: 380px;
+    height: 200px;
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+ul.modepick li:hover {
+    opacity: 1;
+}
+
+#btnsp {
+	background-color: #1BA4E2;
+    margin-right: 40px;
+}
+
+#btnmp {
+	background-color: #e51400;
+}
+
+ul.modepick li a {
+    text-decoration: none;
+    color: white;
+    font-size: 40pt;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+}
+ul.modepick li a:hover {
+    text-decoration: none;
+    color: white;
+}
