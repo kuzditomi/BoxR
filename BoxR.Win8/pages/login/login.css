@@ -1,0 +1,114 @@
+﻿.loginback {
+    margin-left: 0 !important;
+}
+#logincontainer {
+    display: -ms-grid;
+    -ms-grid-columns: 500px 500px;
+    -ms-grid-rows: auto auto;
+}
+
+    #logincontainer .logo {
+        -ms-grid-row: 1;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 2;
+        -ms-grid-column-align: center;
+        margin-bottom: 50px;
+    }
+    #logincontainer .login {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+        height: 100%;
+        width: 500px;
+        margin-bottom: 50px;
+        margin-left: -10px;
+    }
+    #logincontainer .register {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        width: 500px;
+        height: 100%;
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+
+.form {
+    background: white;
+    color: black;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.registerform {
+    display: -ms-grid;
+    -ms-grid-columns: 140px 120px 150px;
+    -ms-grid-rows: 40px 40px 40px 40px;
+    margin-top: 20px;
+}
+.loginform {
+    display: -ms-grid;
+    -ms-grid-columns: 100px 120px 150px;
+    -ms-grid-rows: 40px 40px 40px;
+    margin-top: 20px;
+    margin-left: 0;
+    padding-bottom: 15px;
+}
+    .loginform input,.registerform input {
+        border: 1px solid grey;
+    }
+    .loginform input:focus,.registerform input:focus {
+        border: 1px solid black;
+    }
+    .loginform input:hover,.registerform input:hover{
+        border: 1px solid grey;
+    }
+    .loginform label.username,.registerform label.username {
+        -ms-grid-row: 1;
+        -ms-grid-column: 1;
+        -ms-grid-row-align: center;
+        display: block;
+    }
+    .loginform input.username,.registerform input.username {
+        -ms-grid-row: 1;
+        -ms-grid-column: 2;
+        width: 243px;
+    }
+    .loginform label.password,.registerform label.password{
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+        -ms-grid-row-align: center;
+        display: block;
+    }
+    .loginform input.password,.registerform input.password{
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        width: 243px;
+    }
+    .loginform input.fblogin{
+        -ms-grid-row: 3;
+        -ms-grid-column: 2;
+        background: url('/Images/fbbutton35.png');
+        height: 35px;
+        width: 102px;
+        border: none;
+        margin-top: 15px;
+    }
+    .loginform input.mslogin{
+        -ms-grid-row: 3;
+        -ms-grid-column: 3;
+        background: url('/Images/micrososftlogin35.png');
+        height: 35px;
+        width: 123px;
+        border: none;
+        margin-top: 15px;
+    }
+.registerform label.confirm-password {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+    display: block;
+}
+.registerform input.confirm-password {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+    width: 243px;
+}
