@@ -26,13 +26,9 @@
          
             BoxR.Manager.Game.Draw();
             
-            var $backbutton = $('#backbutton');
-            if ($backbutton) {
-                $backbutton.on('click', function () {
-                    document.location.href = "/";
-                });
-                $backbutton.show();
-            }
+            $('#back').on('click', function () {
+                WinJS.Navigation.back();
+            });
         },
 
         unload: function () {

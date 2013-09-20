@@ -352,7 +352,7 @@ var BoxR;
                 } else {
                     _this.UpdateScore();
                     _this.Draw();
-                    return this.selfScore + this.opponentScore == this.n * this.n;
+                    return !(this.selfScore + this.opponentScore == this.n * this.n);
                 }
             }
             return false;

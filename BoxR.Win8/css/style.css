@@ -26,6 +26,19 @@ body > * {
     margin: 0 auto;
 }
 
+#back {
+    height: 100%;
+    display: -ms-grid;
+    -ms-grid-columns: 120px 1fr;
+    -ms-grid-rows: 1fr;
+    cursor: pointer;
+    margin-left: 40px;
+}
+#back h1 {
+    margin-left: 45px;
+    font-size: 26pt;
+}
+
 .clear {
     clear: both;
 }

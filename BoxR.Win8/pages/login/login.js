@@ -30,6 +30,17 @@
                 WL.init();
                 authenticate();
             });
+            
+            $('#back').on('click', function () {
+                WinJS.Navigation.back();
+            });
+
+            BoxR.Manager.Hub = $.connection.game;
+            BoxR.Manager.Server = new BoxR.Server();
+
+            $.connection.hub.start().done(function () {
+                var a = 3;
+            });
         },
 
         unload: function () {

@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="BoxR.Win8_StoreKey.pfx" />
-    <Content Include="css\boxr.css" />
     <Content Include="css\micrososftlogin35.png" />
     <Content Include="css\style.css" />
     <Content Include="default.html" />
@@ -111,6 +110,7 @@
     <Content Include="pages\about\about.html" />
     <Content Include="pages\choosenick\choosenick.html" />
     <Content Include="pages\choosenick\choosenick.js" />
+    <Content Include="pages\login\login.css" />
     <Content Include="pages\main\main.html" />
     <Content Include="pages\main\main.js" />
     <Content Include="pages\main\main.css" />

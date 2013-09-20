@@ -52,7 +52,6 @@
                 // bg color
                 BoxR.activeColor = '#'+colors[1];
                 $('body').css("background-color", BoxR.activeColor);
-               
             } else {
                 // TODO: This application has been reactivated from suspension.
                 // store logged in state?
