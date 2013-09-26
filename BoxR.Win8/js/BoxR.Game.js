@@ -11,7 +11,7 @@ var BoxR;
     var selfBoxColor = 'rgb(27,161,226)';
     var opponentBoxColor = 'rgb(242,20,0)';
     var backgroundColor = 'rgb(256,256,256)';
-    BoxR.activeColor;
+    BoxR.activeColor = 'rgb(27,161,226)';
     var IsSelfRound = false;
     var Drawable = (function () {
         function Drawable(ctx, x, y) {

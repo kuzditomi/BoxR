@@ -8,7 +8,7 @@ module BoxR {
     var selfBoxColor = 'rgb(27,161,226)';
     var opponentBoxColor = 'rgb(242,20,0)';
     var backgroundColor = 'rgb(256,256,256)';
-    export var activeColor; //= 'rgb(27,161,226)';
+    export var activeColor = 'rgb(27,161,226)';
     var IsSelfRound :bool = false;
 
     //#region "Drawables"

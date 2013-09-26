@@ -78,12 +78,20 @@ module BoxR {
 
         UpdateRound(selfround) {
             if (!selfround) {
-                $("#redturn").animate({ width: "120px", marginLeft: "0px" });
-                $("#blueturn").animate({ width: "0px", marginLeft: "0px" });
+                $("#turnDiv").animate({ width: "0px", marginLeft: "80px" },300,
+                    function () {
+                        $("#turnDiv").addClass('tile-red').removeClass('tile-blue');
+                        $("#turnDiv h1").text("red turn");
+                        $("#turnDiv").animate({ width: "120px", marginLeft: "30px" });
+                    });
             }
             else {
-                $("#blueturn").animate({ width: "120px", marginLeft: "0px" });
-                $("#redturn").animate({ width: "0px", marginLeft: "0px" });
+                $("#turnDiv").animate({ width: "0px", marginLeft: "80px" },300,
+                    function () {
+                        $("#turnDiv").addClass('tile-blue').removeClass('tile-red');
+                        $("#turnDiv h1").text("blue turn");
+                        $("#turnDiv").animate({ width: "120px", marginLeft: "30px" });
+                    });
             }
         }
          
