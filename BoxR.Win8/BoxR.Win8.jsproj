@@ -127,6 +127,7 @@
     <Content Include="pages\splash\splash.js" />
     <Content Include="pages\game\game.html" />
     <Content Include="pages\game\game.js" />
+    <Content Include="pages\users\users.css" />
     <Content Include="pages\users\users.html" />
     <Content Include="pages\users\users.js" />
     <Content Include="pages\login\login.html" />

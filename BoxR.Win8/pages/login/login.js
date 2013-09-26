@@ -14,19 +14,19 @@
             $(".username").keydown(function (event) {
                 $(".error").html("&nbsp;");
                 if (event.which == 13) {
-                    launchformauth($('.username').val(), $('.password').val());
+                    launchformauth($('input.username').val(), $('input.password').val());
                 }
             });
             $(".password").keydown(function (event) {
                 $(".error").html("&nbsp;");
                 if (event.which == 13) {
-                    launchformauth($('.username').val(), $('.password').val());
+                    launchformauth($('input.username').val(), $('input.password').val());
                 }
             });
-            $(".btnfacebook").click(function() {
+            $(".fblogin").click(function () {
                 launchFacebookWebAuth();
             });
-            $(".btnmicrosoft").click(function () {
+            $(".mslogin").click(function () {
                 WL.init();
                 authenticate();
             });
@@ -35,11 +35,26 @@
                 WinJS.Navigation.back();
             });
 
-            BoxR.Manager.Hub = $.connection.game;
-            BoxR.Manager.Server = new BoxR.Server();
 
-            $.connection.hub.start().done(function () {
-                var a = 3;
+            var connection = $.connection.hub;
+            connection.url = localSettings.values["connectionURL"] + 'signalr';
+            BoxR.Manager.Connection = connection;
+
+            // create hub and set the static Hub
+            var hub = $.connection.game;
+            BoxR.Manager.Hub = hub;
+            
+            // create server and set the static Server
+            var server = new BoxR.Server();
+            BoxR.Manager.Server = server;
+
+            BoxR.Manager.Connection.start(function () {
+                console.log('connection started!');
+            }).done(function () {
+                $('#waitDiv').hide();
+            }).fail(function () {
+                notifyConnectionError();
+                //WinJS.Navigation.navigate("/pages/login/login.html");
             });
         },
 
@@ -125,7 +140,10 @@
     }
     
     function displayError(error, logerror) {
-        $(".error").text(error);
+        //$(".error").text(error);
+        
+        var msg = new Windows.UI.Popups.MessageDialog(error, "Error");
+        msg.showAsync();
         console.log(logerror || error);
     }
     
@@ -144,8 +162,7 @@
             });
         });
     };
-
-
+    
     function login() {
         $("#progressRing").show();
         return new WinJS.Promise(function (complete) {

@@ -1,0 +1,60 @@
+﻿.usersback {
+    margin-left: 40px !important;
+}
+#pagecontainer {
+    display: -ms-grid;
+    -ms-grid-columns: 400px 400px 400px;
+    -ms-grid-rows: auto auto;
+    position: relative;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+    #pagecontainer .logo {
+        -ms-grid-row: 1;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 3;
+        -ms-grid-column-align: center;
+        margin-bottom: 50px;
+    }
+    #pagecontainer .users {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+        height: 100%;
+        margin-bottom: 50px;
+        margin-left: -10px;
+    }
+    #pagecontainer .howtoplay {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        height: 100%;
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+
+    #pagecontainer .about {
+        -ms-grid-row: 2;
+        -ms-grid-column: 3;
+        height: 100%;
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+
+#userList {
+    width: 80%;
+    padding-right: 20px;
+    height: 300px;
+    overflow-y: auto;
+}
+#userList .user {
+    background: rgba(255,255,255,0.3);
+    text-align: center;
+    padding: 10px;
+    font-size: 20pt;
+}
+#userList .user:hover {
+    background: rgba(255,255,255,1);
+    color: black;
+    cursor: pointer;
+}

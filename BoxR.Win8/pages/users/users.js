@@ -8,7 +8,7 @@
         // populates the page elements with the app's data.
         ready: function (element) {
             BoxR.Manager.Server.UpdateUsers();
-            $("#welcome").html("Welcome, " + BoxR.Manager.UserName + "!");
+            //$("#welcome").html("Welcome, " + BoxR.Manager.UserName + "!");
         },
 
         unload: function () {
