@@ -9,6 +9,11 @@
         ready: function (element) {
             BoxR.Manager.Server.UpdateUsers();
             //$("#welcome").html("Welcome, " + BoxR.Manager.UserName + "!");
+            
+            $('#back').on('click', function () {
+                BoxR.Manager.Hub.server.logout();
+                WinJS.Navigation.back();
+            });
         },
 
         unload: function () {

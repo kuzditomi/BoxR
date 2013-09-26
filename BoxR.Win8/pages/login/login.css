@@ -113,6 +113,14 @@
     -ms-grid-column: 2;
     width: 243px;
 }
+.registerform .regbutton {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+    height: 30px;
+    width: 100px;
+    border: 1px solid gray;
+    color: black;
+}
 
 #waitDiv {
     position: absolute;

@@ -115,8 +115,6 @@
     <Content Include="pages\main\main.js" />
     <Content Include="pages\main\main.css" />
     <Content Include="pages\privacy\privacy.html" />
-    <Content Include="pages\register\register.html" />
-    <Content Include="pages\register\register.js" />
     <Content Include="pages\report\report.html" />
     <Content Include="pages\report\report.js" />
     <Content Include="pages\singleplayer\singleplayer.css" />

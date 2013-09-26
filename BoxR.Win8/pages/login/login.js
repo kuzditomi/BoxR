@@ -6,6 +6,8 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
+            BoxR.Manager.Client.IsSinglePlayer = false;
+            
             $('#regbtn').click(function() {
                 WinJS.Navigation.navigate("/pages/register/register.html");
             });
@@ -138,15 +140,7 @@
             $("#progressRing").hide();
         });
     }
-    
-    function displayError(error, logerror) {
-        //$(".error").text(error);
-        
-        var msg = new Windows.UI.Popups.MessageDialog(error, "Error");
-        msg.showAsync();
-        console.log(logerror || error);
-    }
-    
+   
     /********** live auth *************/
     var session = null;
     
@@ -196,4 +190,43 @@
         // Force a logout to make it easier to test with multiple Microsoft Accounts
         logout().then(login);
     }
+    
 })();
+function register() {
+    var username = $(".registerform input.username").val();
+    var password = $(".registerform input.password").val();
+    var passwordAgain = $("input.confirm-password").val();
+
+    if (!username) {
+        displayError("Please give your choosen username.");
+        return;
+    }
+    if (!password) {
+        displayError("Please give your choosen password.");
+        return;
+    }
+
+    if (password != passwordAgain) {
+        displayError("Given passwords does not match.");
+        return;
+    }
+
+    BoxR.Manager.Hub.server.register(username, password).done(function (message) {
+        if (message == "true") {
+            // copied from login page js
+            BoxR.Manager.Hub.server.login(username, password).done(function (success) {
+                if (success) {
+                    BoxR.Manager.UserName = success;
+                    WinJS.Navigation.navigate("/pages/users/users.html");
+                } else {
+                    displayError("Error with authentication.");
+                }
+            });
+        }
+        else {
+            displayError(message);
+        }
+    }).fail(function (message) {
+        displayError(message);
+    });
+}

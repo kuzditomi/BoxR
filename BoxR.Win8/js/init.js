@@ -131,12 +131,15 @@ function onNetworkStatusChange(sender) {
     // check if the current profile is connected to internet
     if (internetProfile.getNetworkConnectivityLevel() != Windows.Networking.Connectivity.NetworkConnectivityLevel.internetAccess) {
         notifyConnectionError();
-        WinJS.Navigation.navigate("/pages/login/login.html");
+        if (!BoxR.Manager.Client.IsSinglePlayer) {
+            WinJS.Navigation.navigate("/pages/main/main.html");
+        }
     }
     else {
-        initConnection();
-        notifyConnectionIsBack();
-        WinJS.Navigation.navigate("/pages/login/login.html");
+        if (!BoxR.Manager.Client.IsSinglePlayer) {
+            notifyConnectionIsBack();
+            WinJS.Navigation.navigate("/pages/login/login.html");
+        }
     }
 }
 
@@ -181,4 +184,12 @@ function initAds() {
             });
         myAdControl.isAutoRefreshEnabled = true;
     }
+}
+
+function displayError(error, logerror) {
+    //$(".error").text(error);
+
+    var msg = new Windows.UI.Popups.MessageDialog(error, "Error");
+    msg.showAsync();
+    console.log(logerror || error);
 }
