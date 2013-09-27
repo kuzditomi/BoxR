@@ -134,6 +134,7 @@
     <None Include="BoxR.Win8_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="AdDuplexWindows, Version=8.0.4.0" />
     <SDKReference Include="LiveSDKHTML, Version=5.0" />
     <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />
     <SDKReference Include="MSAdvertisingJS, Version=6.1" />

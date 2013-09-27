@@ -181,6 +181,11 @@ function initAds() {
                 adUnitId: '127760'
             });
         myAdControl.isAutoRefreshEnabled = true;
+        myAdControl._onErrorOccurred = function() {
+            adDuplexAd.winControl.setup();
+            $(adDiv).hide();
+        };
+        
     }
 }
 

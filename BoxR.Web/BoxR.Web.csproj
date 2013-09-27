@@ -256,8 +256,6 @@
     <Content Include="Views\Home\SinglePlayer.cshtml" />
     <Content Include="Views\Account\LoginPartial.cshtml" />
     <Content Include="Views\Account\RegisterPartial.cshtml" />
-    <None Include="Properties\PublishProfiles\boxrtest - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\boxrtest - Web Deploy.pubxml" />
     <TypeScriptCompile Include="js\BoxR.WebClient.ts" />
     <Content Include="js\BoxR.WebClient.js">
       <DependentUpon>BoxR.WebClient.ts</DependentUpon>

@@ -18,6 +18,10 @@
       <VisualElements DisplayName="BoxR" Logo="Images\logo.png" SmallLogo="Images\smalllogo.png" Description="BoxR is an implementation of the game known as dots and boxes." ForegroundText="light" BackgroundColor="darkSlateBlue" ToastCapable="true">
         <DefaultTile ShowName="allLogos" WideLogo="Images\widelogo.png" ShortName="BoxR" />
         <SplashScreen Image="Images\splashscreen.png" BackgroundColor="darkSlateBlue" />
+        <InitialRotationPreference>
+          <Rotation Preference="landscape" />
+          <Rotation Preference="landscapeFlipped" />
+        </InitialRotationPreference>
       </VisualElements>
     </Application>
   </Applications>

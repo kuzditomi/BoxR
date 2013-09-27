@@ -9,41 +9,32 @@
     <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
 
-    <link href="/css/Login.css" rel="stylesheet" />
     <script src="choosenick.js"></script>
 </head>
-<body>
-    <section class="centersection" >
+    <body>
+        <div id="back" style="margin-left: 0">
+            <button class="win-backbutton">Back</button>
+            <h1>Back</h1>
+        </div>
+        <h1>BoxR</h1>
+        <h2>Associate your <span id="provider"></span> account.</h2>
         <table>
             <tr>
-                <td>
-                    <div class="logincred">
-                        <h1>BoxR</h1>
-                        <h2>Associate your <span id="provider"></span> account.</h2>
-                        <table>
-                            <tr>
-                                <td colspan="2">
-                                    <p>
-                                        You've successfully authenticated with <span id="provider2"></span>.
-                                        Please enter a user name below to finish logging in.
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Username</td>
-                                <td><input type="text" id="username" class="username"/></td>
-                            </tr>
-                            <tr>
-                                <td><a id="btnBackToLogin" href="#" class="btn">Back to login</a></td>
-                                <td><input type="button" id="btnRegister" value="Register" class="btn"/></td>
-                            </tr>
-                        </table>
-                        <!--<div class="error">
-                        </div>-->
-                    </div>
+                <td colspan="2">
+                    <p>
+                        You've successfully authenticated with <span id="provider2"></span>.
+                        Please enter a user name below to finish logging in.
+                    </p>
                 </td>
             </tr>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" id="username" class="username"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="btnRegister" value="Register" class="btn"/></td>
+            </tr>
         </table>
-    </section>
-</body>
+    </body>
 </html>

@@ -41,13 +41,13 @@
 
 .registerform {
     display: -ms-grid;
-    -ms-grid-columns: 140px 120px 150px;
+    -ms-grid-columns: 140px 120px 150px 100px;
     -ms-grid-rows: 40px 40px 40px 40px;
     margin-top: 20px;
 }
 .loginform {
     display: -ms-grid;
-    -ms-grid-columns: 100px 120px 150px;
+    -ms-grid-columns: 100px 120px 150px 100px;
     -ms-grid-rows: 40px 40px 40px;
     margin-top: 20px;
     margin-left: 0;
@@ -102,6 +102,14 @@
         border: none;
         margin-top: 15px;
     }
+    .loginform .win-ring,.registerform .win-ring {
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 3;
+        -ms-grid-column: 4;
+        color: gray;
+        margin-top: 5px;
+    }
+
 .registerform label.confirm-password {
     -ms-grid-row: 3;
     -ms-grid-column: 1;

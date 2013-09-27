@@ -9,7 +9,6 @@
     <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
     <script src="///LiveSDKHTML/js/wl.js" defer="defer"></script>
-    
     <!-- BoxR styles -->
     <!--<link href="/css/metro-bootstrap.css" rel="stylesheet" />-->
     <!--<link href="css/boxr.css" rel="stylesheet"/>-->
@@ -33,19 +32,23 @@
     <script src="js/BoxR.Manager.js" ></script>
     <script src="js/init.js"></script>
     <script src="/MSAdvertisingJS/ads/ad.js"></script>
-
+    <script src="AdDuplex/js/AdControl.js"></script>
 </head>
     <body>
         <div data-win-control="WinJS.UI.ViewBox">
-              <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/main/main.html'}" style="width: 100%;height: 100%;"></div>
-        <!--         <div id="appbar" data-win-control="WinJS.UI.AppBar">
-                         <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmd', label:'Command', icon:'placeholder'}" type="button"></button>
-                     </div> -->
+            <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/main/main.html'}" style="width: 100%;height: 100%;"></div>
+            <!--<div id="appbar" data-win-control="WinJS.UI.AppBar">
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmd', label:'Command', icon:'placeholder'}" type="button"></button>
+            </div>-->
         </div>
-              <div id="popupdiv" style="display:none"></div>
+        <div id="popupdiv" style="display:none"></div>
         
-              <div id="adContainer" style="position: absolute;bottom: 0;left: 0">
-                  <div id="myAd" style="width: 728px;height: 90px;"></div>
-              </div>
+        <div id="adContainer"   style="position: absolute;bottom: 0;left: 0;z-index: 1000;width: 728px;height: 90px;">
+            <div id="adDuplexAd"
+                 data-win-control="AdDuplexJs.Controls.AdControl" 
+                 data-win-options="{appId: '56347', size:'728x90'}"/> 
+            <div id="myAd" style="width: 728px;height: 90px;"></div>
+        </div>
+        
     </body>
 </html>

@@ -7,6 +7,8 @@
         // populates the page elements with the app's data.
         ready: function (element, options) {
             BoxR.Manager.Client.IsSinglePlayer = false;
+            $('#loginprogress').hide();
+            $("#registerprogress").hide();
             
             $('#regbtn').click(function() {
                 WinJS.Navigation.navigate("/pages/register/register.html");
@@ -41,7 +43,7 @@
             });
             
             $('#back').on('click', function () {
-                WinJS.Navigation.back();
+                WinJS.Navigation.navigate("/pages/main/main.html");
             });
 
 
@@ -79,7 +81,7 @@
     });
     /********* oauth ************/
     function launchFacebookWebAuth() {
-        $("#progressRing").show();
+        $("#loginprogress").show();
         var facebookURL = "https://www.facebook.com/dialog/oauth?client_id=";
 
         var clientID = localSettings.values.fbclientid;
@@ -131,11 +133,11 @@
             }, function (err) {
                 displayError("Error with facebook authentication.", err.message);
             });
-        $("#progressRing").hide();
+        $("#loginprogress").hide();
     }
     /************ form auth ***************/
     function launchformauth(username, password) {
-        //$("#progressRing").show();
+        $("#loginprogress").show();
         BoxR.Manager.Hub.server.login(username, password).done(function (success) {
             if (success) {
                 BoxR.Manager.UserName = success;
@@ -144,7 +146,7 @@
                 displayError("Error with authentication.");
             }
             
-            //$("#progressRing").hide();
+            $("#loginprogress").hide();
         });
     }
    
@@ -165,7 +167,7 @@
     };
     
     function login() {
-        $("#progressRing").show();
+        $("#loginprogress").show();
         return new WinJS.Promise(function (complete) {
             WL.login({ scope: "wl.basic" }).then(function (result) {
                 var token = result.session.access_token;
@@ -183,12 +185,12 @@
                             break;
                     }
                 });
-                $("#progressRing").hide();
+                $("#loginprogress").hide();
             }, function (error) {
                 session = null;
                 var dialog = new Windows.UI.Popups.MessageDialog("You must log in.", "Login Required");
                 dialog.showAsync().done(complete);
-                $("#progressRing").hide();
+                $("#loginprogress").hide();
             });
         });
     }
@@ -217,8 +219,9 @@ function register() {
         displayError("Given passwords does not match.");
         return;
     }
-
+    $("#registerprogress").show();
     BoxR.Manager.Hub.server.register(username, password).done(function (message) {
+        $("#registerprogress").hide();
         if (message == "true") {
             // copied from login page js
             BoxR.Manager.Hub.server.login(username, password).done(function (success) {

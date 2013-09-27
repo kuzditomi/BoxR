@@ -25,6 +25,10 @@
                 }
                 
             };
+            
+            $('#back').on('click', function () {
+                WinJS.Navigation.navigate("/pages/login/login.html");
+            });
 
             // TODO: Initialize the page here.
         },
