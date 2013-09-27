@@ -10,6 +10,25 @@
             $('#back').on('click', function () {
                 BoxR.Manager.Client.QuitPopup();
             });
+            
+            $('body').on('mouseenter', '.truncate',
+                function () {
+                    var scrollWidth = this.scrollWidth;
+                    $(this).animate({
+                        width: scrollWidth,
+                        paddingRight: '5px'
+                    }, 200);
+                }
+            );
+            $('body').on('mouseleave', '.truncate',
+                function () {
+                    $(this).animate({
+                        width: '140px',
+                        paddingRight: '0px'
+                    }, 200);
+
+                }
+            );
         },
 
         unload: function () {

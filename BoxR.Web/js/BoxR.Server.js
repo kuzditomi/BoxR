@@ -35,10 +35,10 @@
             };
             BoxR.Manager.Hub.client.removeUser = function (connectionId) {
                 var userList = document.getElementById("userList");
-                if(!userList) {
+                var user = document.getElementById(connectionId);
+                if(!userList || !user) {
                     return;
                 }
-                var user = document.getElementById(connectionId);
                 userList.removeChild(user);
             };
             BoxR.Manager.Hub.client.invited = function (user) {

@@ -42,9 +42,10 @@ module BoxR {
 
             BoxR.Manager.Hub.client.removeUser = function (connectionId) {
                 var userList = document.getElementById("userList");
-                if(!userList)
-                    return;
                 var user = document.getElementById(connectionId);
+                if(!userList || !user)
+                    return;
+
                 userList.removeChild(user);
             };
 

@@ -11,18 +11,25 @@
             $('#regbtn').click(function() {
                 WinJS.Navigation.navigate("/pages/register/register.html");
             });
-            $(".username").focus();
+            $(".login input.username").focus();
 
-            $(".username").keydown(function (event) {
+            $(".login input.username").keydown(function (event) {
                 $(".error").html("&nbsp;");
                 if (event.which == 13) {
                     launchformauth($('input.username').val(), $('input.password').val());
+                    return false;
                 }
             });
-            $(".password").keydown(function (event) {
+            $(".login input.password").keydown(function (event) {
                 $(".error").html("&nbsp;");
                 if (event.which == 13) {
                     launchformauth($('input.username').val(), $('input.password').val());
+                    return false;
+                }
+            });
+            $(".register *").keydown(function (event) {
+                if (event.which == 13) {
+                    return false;
                 }
             });
             $(".fblogin").click(function () {
@@ -128,7 +135,7 @@
     }
     /************ form auth ***************/
     function launchformauth(username, password) {
-        $("#progressRing").show();
+        //$("#progressRing").show();
         BoxR.Manager.Hub.server.login(username, password).done(function (success) {
             if (success) {
                 BoxR.Manager.UserName = success;
@@ -137,7 +144,7 @@
                 displayError("Error with authentication.");
             }
             
-            $("#progressRing").hide();
+            //$("#progressRing").hide();
         });
     }
    

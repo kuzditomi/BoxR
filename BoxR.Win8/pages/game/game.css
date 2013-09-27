@@ -58,6 +58,7 @@ ul.scores li h2 {
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
+    background: inherit;
 }
 .truncate:hover {
     overflow: visible;

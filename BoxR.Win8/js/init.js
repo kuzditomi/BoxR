@@ -38,19 +38,12 @@
                 var client = new BoxR.WinRTClient(popupControl);
                 BoxR.Manager.Client = client;
                 
-                var colors = [
-                    "16a085",			
-                    "27ae60",			
-                    "2980b9",
-                    "8e44ad",
-                    "f39c12",
-                    "d35400",
-                    "c0392b",
-                    "7f8c8d",
-                    "2c3e50"
-                ];
+                var applicationData = Windows.Storage.ApplicationData.current;
+                var localSettings = applicationData.localSettings;
+                var bgcolor = localSettings.values["bgColor"] || '#16a085';
+                
                 // bg color
-                BoxR.activeColor = '#'+colors[1];
+                BoxR.activeColor = bgcolor;
                 $('body').css("background-color", BoxR.activeColor);
             } else {
                 // TODO: This application has been reactivated from suspension.
@@ -98,7 +91,12 @@
 
 
     app.onsettings = function (e) {
-        e.detail.applicationcommands = { "about": { title: "About", href: "/pages/about/about.html" }, "privacy": { title: "Privacy Policy", href: "/pages/privacy/privacy.html" }, "report" : { title: "Error Report", href: "/pages/report/report.html"} };
+        e.detail.applicationcommands = {
+            "about": { title: "About", href: "/pages/about/about.html" },
+            "privacy": { title: "Privacy Policy", href: "/pages/privacy/privacy.html" },
+            "report": { title: "Error Report", href: "/pages/report/report.html" },
+            "settings": { title: "Settings", href: "/pages/settings/settings.html"}
+    };
         WinJS.UI.SettingsFlyout.populateSettings(e);
     };
 

@@ -118,12 +118,12 @@
     <Content Include="pages\privacy\privacy.html" />
     <Content Include="pages\report\report.html" />
     <Content Include="pages\report\report.js" />
+    <Content Include="pages\settings\settings.css" />
+    <Content Include="pages\settings\settings.html" />
+    <Content Include="pages\settings\settings.js" />
     <Content Include="pages\singleplayer\singleplayer.css" />
     <Content Include="pages\singleplayer\singleplayer.html" />
     <Content Include="pages\singleplayer\singleplayer.js" />
-    <Content Include="pages\splash\splash.html" />
-    <Content Include="pages\splash\splash.css" />
-    <Content Include="pages\splash\splash.js" />
     <Content Include="pages\game\game.html" />
     <Content Include="pages\game\game.js" />
     <Content Include="pages\users\users.css" />
