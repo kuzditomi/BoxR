@@ -6,6 +6,9 @@
 module BoxR {
     var dummychars = "Ù";
     export class Server {
+        private turnDivWidth: number;
+        private turnDivMargin: number;
+
         constructor() {
             var _this = this;
 
@@ -77,12 +80,17 @@ module BoxR {
         }
 
         UpdateRound(selfround) {
+            this.turnDivWidth = this.turnDivWidth || $("#turnDiv").width();
+            this.turnDivMargin = this.turnDivMargin || $("#turnDiv").css('margin-left');
+
+            var turnDivWidth = this.turnDivWidth;
+            var turnDivMargin = this.turnDivMargin;
             if (!selfround) {
                 $("#turnDiv").animate({ width: "0px", marginLeft: "80px" },300,
                     function () {
                         $("#turnDiv").addClass('tile-red').removeClass('tile-blue');
                         $("#turnDiv h1").text("red turn");
-                        $("#turnDiv").animate({ width: "120px", marginLeft: "30px" });
+                        $("#turnDiv").animate({ width: turnDivWidth, marginLeft: turnDivMargin });
                     });
             }
             else {
@@ -90,7 +98,7 @@ module BoxR {
                     function () {
                         $("#turnDiv").addClass('tile-blue').removeClass('tile-red');
                         $("#turnDiv h1").text("blue turn");
-                        $("#turnDiv").animate({ width: "120px", marginLeft: "30px" });
+                        $("#turnDiv").animate({ width: turnDivWidth, marginLeft: turnDivMargin });
                     });
             }
         }

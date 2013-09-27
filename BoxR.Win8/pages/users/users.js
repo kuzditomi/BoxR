@@ -12,7 +12,7 @@
             
             $('#back').on('click', function () {
                 BoxR.Manager.Hub.server.logout();
-                WinJS.Navigation.back();
+                WinJS.Navigation.navigate("/pages/login/login.html");
             });
         },
 

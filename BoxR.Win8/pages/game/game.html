@@ -8,38 +8,74 @@
     <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
     <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
-
+    
+    <link href="game.css" rel="stylesheet" />
     <script src="game.js"></script>
 </head>
     <body>
-        <header>
-            <h1><img src="/Images/header_widelogo.png" alt="BoxR"/></h1>
-            <span id="welcome"></span>
-        </header>
+        <div id="back">
+            <button class="win-backbutton">Back</button>
+            <h1>Back</h1>
+        </div>
         <div id="container">
-            <canvas id="gameCanvas" width="1" height="1"></canvas>
-            <aside>
-                <div class="selfcounter">
-                    <div>
-                        <div class="selfname" id="selfname">&nbsp;</div>
+            <section id="canvas-container">
+                <canvas id="gameCanvas"></canvas>
+            </section>
+            <section id="score-container">
+                <ul class="scores">
+                    <li class="tile-blue">
+                        <h2 id="selfname" class="truncate"></h2>
+                        <h1 id="selfscore">0</h1>
+                    </li>
+                    <li id="turnDiv" class="tile noopacity" style="overflow: hidden">
+                        <h1>blue turn</h1>
+                    </li>
+                    <li class="tile-red">
+                        <h2 id="opponentname" class="truncate"></h2>
+                        <h1 id="opponentscore">0</h1>
+                    </li>
+                </ul>
+            </section>
+            <section id="text-container">
+                <header>
+                    <h2>how to play</h2>
+                </header>
+                <p>
+                    Dots and Boxes (also known as Boxes, Squares, Paddocks, Pigs in a Pen, Square-it, Dots and Dashes, Dots, Smart Dots, Dot Boxing, or, simply, the Dot Game) is a pencil and paper game for two players (or sometimes, more than two) first published in 1889 by Édouard Lucas.
+                </p>
+                <p>
+                    Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.
+                </p>
+            </section>
+        </div>
+        <!--<header>
+                <h1><img src="/Images/header_widelogo.png" alt="BoxR"/></h1>
+                <span id="welcome"></span>
+            </header>
+            <div id="container">
+                <canvas id="gameCanvas" width="1" height="1"></canvas>
+                <aside>
+                    <div class="selfcounter">
+                        <div>
+                            <div class="selfname" id="selfname">&nbsp;</div>
+                        </div>
+                        <div class="selfscore" id="selfscore">0</div>
+                        <img src="/Images/blueturn.png" width="0" height="120" id="blueturn" />  
+                    </div>             
+                </aside>
+                <aside>
+                    <div class="opponentcounter">
+                        <div>
+                            <div class="opponentname" id="opponentname">&nbsp;</div>
+                        </div><div class="opponentscore" id="opponentscore">0</div>
+                        <img src="/Images/redturn.png" width="0" height="120" id="redturn"/>
                     </div>
-                    <div class="selfscore" id="selfscore">0</div>
-                    <img src="/Images/blueturn.png" width="0" height="120" id="blueturn" />  
-                </div>             
-            </aside>
-            <aside>
-                <div class="opponentcounter">
-                    <div>
-                        <div class="opponentname" id="opponentname">&nbsp;</div>
-                    </div><div class="opponentscore" id="opponentscore">0</div>
-                    <img src="/Images/redturn.png" width="0" height="120" id="redturn"/>
-                </div>
-            </aside>
-        </div>
-        <div id="quitGame">
-            <div class="inner">
-                <a href="#" id="quitBtn">Quit game</a>
+                </aside>
             </div>
-        </div>
+            <div id="quitGame">
+                <div class="inner">
+                    <a href="#" id="quitBtn">Quit game</a>
+                </div>
+            </div>-->
     </body>
 </html>

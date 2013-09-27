@@ -36,7 +36,7 @@ module BoxR {
                     canvas.addEventListener("mousemove", function (e) { game.MouseMove(<MouseEvent>e); });
                     document.getElementById("selfname").innerHTML = name;
                     document.getElementById("opponentname").innerHTML = opponentName;
-                    document.getElementById("welcome").innerHTML = "Welcome " + name;
+                    //document.getElementById("welcome").innerHTML = "Welcome " + name;
                 });          
         }
         InvitedPopup(user) {

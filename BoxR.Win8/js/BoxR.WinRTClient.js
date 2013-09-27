@@ -37,7 +37,6 @@ var BoxR;
                 });
                 document.getElementById("selfname").innerHTML = name;
                 document.getElementById("opponentname").innerHTML = opponentName;
-                document.getElementById("welcome").innerHTML = "Welcome " + name;
             });
         };
         WinRTClient.prototype.InvitedPopup = function (user) {

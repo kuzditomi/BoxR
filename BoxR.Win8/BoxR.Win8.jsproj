@@ -110,6 +110,7 @@
     <Content Include="pages\about\about.html" />
     <Content Include="pages\choosenick\choosenick.html" />
     <Content Include="pages\choosenick\choosenick.js" />
+    <Content Include="pages\game\game.css" />
     <Content Include="pages\login\login.css" />
     <Content Include="pages\main\main.html" />
     <Content Include="pages\main\main.js" />
