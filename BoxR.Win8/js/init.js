@@ -51,11 +51,10 @@
                     var snapped = Windows.UI.ViewManagement.ApplicationViewState.snapped;
 
                     if (currentViewState === snapped) {
-                        $(".fullview").hide();
-                        $(".snapview").show();//view.layout = new WinJS.UI.ListLayout();
+                        $(".fullview").addClass('snapview').removeClass('fullview');
+                        //$(".snapview").show();//view.layout = new WinJS.UI.ListLayout();
                     } else {
-                        $(".fullview").show();
-                        $(".snapview").hide();
+                        $(".snapview").addClass('fullview').removeClass('snapview');
                         //view.lastViewState = new WinJS.UI.GridLayout();
                     }
                 };

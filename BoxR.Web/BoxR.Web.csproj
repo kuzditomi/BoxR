@@ -233,8 +233,12 @@
       <DependentUpon>BoxR.IClient.ts</DependentUpon>
     </Content>
     <Content Include="js\BoxR.IClient.ts" />
-    <Content Include="js\BoxR.Manager.js" />
-    <Content Include="js\BoxR.Manager.min.js" />
+    <Content Include="js\BoxR.Manager.js">
+      <DependentUpon>BoxR.Manager.ts</DependentUpon>
+    </Content>
+    <Content Include="js\BoxR.Manager.min.js">
+      <DependentUpon>BoxR.Manager.ts</DependentUpon>
+    </Content>
     <Content Include="js\BoxR.Manager.ts" />
     <Content Include="js\BoxR.MiniMax.js" />
     <Content Include="js\BoxR.Server.js">
@@ -268,10 +272,6 @@
     </Content>
     <None Include="Properties\PublishProfiles\boxr - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\boxr - Web Deploy.pubxml" />
-    <Content Include="js\BoxR.Game.min.js.map" />
-    <Content Include="js\BoxR.IClient.min.js.map" />
-    <Content Include="js\BoxR.Manager.min.js.map" />
-    <Content Include="js\BoxR.Server.min.js.map" />
     <Content Include="js\lib\jquery.d.ts" />
     <Content Include="js\lib\jquery.signalR-1.0.1.js" />
     <Content Include="js\lib\jquery.signalR-1.0.1.min.js" />

@@ -14,81 +14,58 @@
     <script src="login.js"></script>
 </head>
     <body>
-        <div id="back" class="loginback">
-            <button class="win-backbutton">Back</button>
-            <h1>Back</h1>
-        </div>
-        <section id="logincontainer">
-            <div id="waitDiv">
-                <span>Please wait while connecting to the server.</span><br/>
-                <progress class="win-ring win-large" />
+        <div class="fullview">
+            
+        
+            <div id="back" class="loginback">
+                <button class="win-backbutton">Back</button>
+                <h1>Back</h1>
             </div>
-            <section class="logo">
-                <img src="/Images/header_widelogo.png"/>
-            </section>
-            <section class="login">
-                <h1>login</h1>
-                <div class="form">
-                    <span>You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</span>
-                    <div class="loginform">
-                        <label class="username">User name</label>
-                        <input type="text" class="username"/>
-                        <label class="password">Password</label>
-                        <input type="password" class="password"/>
-                        <input type="button" class="mslogin"/>
-                        <input type="button" class="fblogin"/>
-                        <progress id="loginprogress" class="win-ring win-large" />
-                    </div>
+            <section id="logincontainer">
+                <div id="waitDiv">
+                    <span>Please wait while connecting to the server.</span><br/>
+                    <progress class="win-ring win-large" />
                 </div>
-            </section>
-            <section class="register">
-                <h1>register</h1>
-                <div class="form">
-                    <span>If you have no account so far, you can register by providing a username and your password.</span>
-                    <div class="registerform">
-                        <label class="username">User name</label>
-                        <input type="text" class="username"/>
-                        <label class="password">Password</label>
-                        <input type="password" class="password"/>
-                        <label class="confirm-password">Confirm Password</label>
-                        <input type="password" class="confirm-password"/>
-                        <input type="button" class="regbutton" onclick="register()" value="Register"/>
-                        <progress id="registerprogress" class="win-ring win-large" />
+                <section class="logo">
+                    <img src="/Images/header_widelogo.png"/>
+                </section>
+                <section class="login">
+                    <h1>login</h1>
+                    <div class="form">
+                        <span>You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</span>
+                        <div class="loginform">
+                            <label class="username">User name</label>
+                            <input type="text" class="username"/>
+                            <label class="password">Password</label>
+                            <input type="password" class="password"/>
+                            <input type="button" class="mslogin"/>
+                            <input type="button" class="fblogin"/>
+                            <progress id="loginprogress" class="win-ring win-large" />
+                        </div>
                     </div>
+                </section>
+                <section class="register">
+                    <h1>register</h1>
+                    <div class="form">
+                        <span>If you have no account so far, you can register by providing a username and your password.</span>
+                        <div class="registerform">
+                            <label class="username">User name</label>
+                            <input type="text" class="username"/>
+                            <label class="password">Password</label>
+                            <input type="password" class="password"/>
+                            <label class="confirm-password">Confirm Password</label>
+                            <input type="password" class="confirm-password"/>
+                            <input type="button" class="regbutton" onclick="register()" value="Register"/>
+                            <progress id="registerprogress" class="win-ring win-large" />
+                        </div>
                     
-                </div>
+                    </div>
+                </section>
+            
             </section>
-            <!--                <div class="logincred">
-                                    <h1><img src="/Images/boxr.png" width="150" height="150"/><progress id="progressRing" class="win-ring win-medium"></progress></h1>
-                                    <table>
-                                        <tr>
-                                            <td>Username</td>
-                                            <td><input type="text" id="username" class="username"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Password</td>
-                                            <td><input type="password" id="password" class="password" /></td>
-                                        </tr>
-                                    </table>
-                                    <section id="loginError"></section>
-                                    <table id="loginbuttons">
-                                        <tr>
-                                            <td>
-                                                <a id="regbtn" class="btn">Register</a>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btnfacebook" title="Log in using your Facebook account">&nbsp;</a>   
-                                                <a href="#" class="btnmicrosoft" title="Log in using your Microsoft account">&nbsp;</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="error">&nbsp;</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                -->
-        </section>
+        </div>
+        <div class="snapview">
+            
+        </div>
     </body>
 </html>

@@ -2,7 +2,7 @@
     margin: 0 auto;
     padding: 0;
 }
-ul.modepick.fullview {
+.fullview ul.modepick {
     width: 800px;
 }
 
@@ -16,11 +16,11 @@ ul.modepick li {
     cursor: pointer;
 }
 
-ul.modepick.fullview li {
+.fullview ul.modepick li {
     float: left;
     width: 380px;
 }
-ul.modepick.snapview li {
+.snapview ul.modepick li {
     margin-bottom: 20px;
 }
 ul.modepick li:hover {
