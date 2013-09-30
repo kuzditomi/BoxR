@@ -24,7 +24,7 @@ body > * {
     height: auto !important;
     width: auto !important;
     margin: 0 auto;
-    position: relative;
+    /*position: relative;*/
 }
 
 #back {
