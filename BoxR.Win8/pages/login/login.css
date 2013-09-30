@@ -19,14 +19,12 @@
         -ms-grid-row: 2;
         -ms-grid-column: 1;
         height: 100%;
-        width: 500px;
         margin-bottom: 50px;
         margin-left: -10px;
     }
     #logincontainer .register {
         -ms-grid-row: 2;
         -ms-grid-column: 2;
-        width: 500px;
         height: 100%;
         margin-bottom: 50px;
         margin-left: 10px;
@@ -154,4 +152,20 @@
     display: block;
     margin: 0 auto;
     color: white;
+}
+
+/*snapview*/
+.snapview #logincontainer {
+    display: block;
+    position: relative;
+}
+.snapview #logincontainer .login, .snapview #logincontainer .register{
+    display: block;
+    margin: 10px 0 0 0;
+}
+.snapview #logincontainer h1 {
+    margin-left: 10px;
+}
+.snapview .loginform, .snapview .registerform {
+    display: block;
 }

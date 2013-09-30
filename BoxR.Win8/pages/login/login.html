@@ -1,71 +1,64 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Login</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>Login</title>
     
-    <!-- WinJS references -->
-    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
-    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
-    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
-    <!-- Styles -->
-    <link href="login.css" rel="stylesheet" />
-    <!-- Scripts -->
-    <script src="login.js"></script>
-</head>
+        <!-- WinJS references -->
+        <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+        <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+        <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+        <!-- Styles -->
+        <link href="login.css" rel="stylesheet" />
+        <!-- Scripts -->
+        <script src="login.js"></script>
+    </head>
     <body>
-        <div class="fullview">
-            
-        
-            <div id="back" class="loginback">
-                <button class="win-backbutton">Back</button>
-                <h1>Back</h1>
+        <div id="back" class="loginback">
+            <button class="win-backbutton">Back</button>
+            <h1>Back</h1>
+        </div>
+        <section id="logincontainer">
+            <div id="waitDiv">
+                <span>Please wait while connecting to the server.</span><br/>
+                <progress class="win-ring win-large" />
             </div>
-            <section id="logincontainer">
-                <div id="waitDiv">
-                    <span>Please wait while connecting to the server.</span><br/>
-                    <progress class="win-ring win-large" />
-                </div>
-                <section class="logo">
-                    <img src="/Images/header_widelogo.png"/>
-                </section>
-                <section class="login">
-                    <h1>login</h1>
-                    <div class="form">
-                        <span>You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</span>
-                        <div class="loginform">
-                            <label class="username">User name</label>
-                            <input type="text" class="username"/>
-                            <label class="password">Password</label>
-                            <input type="password" class="password"/>
-                            <input type="button" class="mslogin"/>
-                            <input type="button" class="fblogin"/>
-                            <progress id="loginprogress" class="win-ring win-large" />
-                        </div>
-                    </div>
-                </section>
-                <section class="register">
-                    <h1>register</h1>
-                    <div class="form">
-                        <span>If you have no account so far, you can register by providing a username and your password.</span>
-                        <div class="registerform">
-                            <label class="username">User name</label>
-                            <input type="text" class="username"/>
-                            <label class="password">Password</label>
-                            <input type="password" class="password"/>
-                            <label class="confirm-password">Confirm Password</label>
-                            <input type="password" class="confirm-password"/>
-                            <input type="button" class="regbutton" onclick="register()" value="Register"/>
-                            <progress id="registerprogress" class="win-ring win-large" />
-                        </div>
-                    
-                    </div>
-                </section>
-            
+            <section class="logo">
+                <img src="/Images/header_widelogo.png"/>
             </section>
-        </div>
-        <div class="snapview">
+            <section class="login">
+                <h1>login</h1>
+                <div class="form">
+                    <span>You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</span>
+                    <div class="loginform">
+                        <label class="username">User name</label>
+                        <input type="text" class="username"/>
+                        <label class="password">Password</label>
+                        <input type="password" class="password"/>
+                        <input type="button" class="mslogin"/>
+                        <input type="button" class="fblogin"/>
+                        <progress id="loginprogress" class="win-ring win-large" />
+                    </div>
+                </div>
+            </section>
+            <section class="register">
+                <h1>register</h1>
+                <div class="form">
+                    <span>If you have no account so far, you can register by providing a username and your password.</span>
+                    <div class="registerform">
+                        <label class="username">User name</label>
+                        <input type="text" class="username"/>
+                        <label class="password">Password</label>
+                        <input type="password" class="password"/>
+                        <label class="confirm-password">Confirm Password</label>
+                        <input type="password" class="confirm-password"/>
+                        <input type="button" class="regbutton" onclick="register()" value="Register"/>
+                        <progress id="registerprogress" class="win-ring win-large" />
+                    </div>
+                    
+                </div>
+            </section>
             
-        </div>
+        </section>
     </body>
 </html>

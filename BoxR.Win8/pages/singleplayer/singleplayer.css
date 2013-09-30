@@ -53,14 +53,15 @@ ul.scores li h2 {
 }
 
 /*snapview*/
-.snapview #canvas-container, .snapview #score-container,.snapview #text-container {
-    display: block;
-    margin: 0 10px;
-}
 .snapview #container {
     display: block;
     position: relative;
+    margin: 0 10px;
 }
+.snapview #canvas-container, .snapview #score-container,.snapview #text-container {
+    display: block;
+}
+
 .snapview ul.scores li {
     list-style: none;
     width: 145px;
