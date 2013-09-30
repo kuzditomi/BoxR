@@ -263,6 +263,48 @@ var BoxR;
                 BoxR.Manager.Server.UpdateRound(IsSelfRound);
             }
         };
+        Game.prototype.Resize = function (newwidth) {
+            this.canvas.width = newwidth;
+            this.canvas.height = newwidth;
+            this.Width = newwidth;
+            var n = this.n;
+            var squereWidthToUnit = 7;
+            var unit = Math.floor(this.Width / ((n * squereWidthToUnit) + (n + 1) + 2));
+            var verticalOffset = [
+                unit, 
+                2 * unit
+            ];
+            var horizontalOffset = [
+                2 * unit, 
+                unit
+            ];
+            var squereEdge = squereWidthToUnit * unit;
+            var width = [
+                squereEdge, 
+                unit
+            ];
+            var height = [
+                unit, 
+                squereEdge
+            ];
+            for(var i = 0; i < 2 * n + 1; i++) {
+                var isAlternateRow = i % 2;
+                var m = isAlternateRow == 0 ? n : n + 1;
+                for(var j = 0; j < m; j++) {
+                    var currentEdge = this.Edges[i][j];
+                    currentEdge.x = horizontalOffset[isAlternateRow] + j * (squereEdge + unit);
+                    currentEdge.y = verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit);
+                    currentEdge.width = width[isAlternateRow];
+                    currentEdge.height = height[isAlternateRow];
+                    if(isAlternateRow == 0 && i > 0) {
+                        var currentSquere = this.Squares[i / 2 - 1][j];
+                        currentSquere.x = horizontalOffset[0] + j * (unit + squereEdge) + unit / 2;
+                        currentSquere.y = verticalOffset[1] + (i - 2) / 2 * (squereEdge + unit) + unit / 2;
+                        currentSquere.width = squereEdge - unit;
+                    }
+                }
+            }
+        };
         Game.prototype.Draw = function () {
             this.Clear();
             this.ctx.save();
@@ -283,7 +325,7 @@ var BoxR;
             this.ctx.clearRect(0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientWidth);
         };
         Game.prototype.Click = function (e) {
-            var leftOffset = this.canvas.offsetLeft;
+            var leftOffset = this.canvas.getBoundingClientRect().left;
             var topOffset = this.canvas.getBoundingClientRect().top;
             if(!IsSelfRound) {
                 return;
@@ -315,7 +357,7 @@ var BoxR;
             });
         };
         Game.prototype.MouseMove = function (e) {
-            var leftOffset = this.canvas.offsetLeft;
+            var leftOffset = this.canvas.getBoundingClientRect().left;
             var topOffset = this.canvas.getBoundingClientRect().top;
             if(!IsSelfRound) {
                 return;

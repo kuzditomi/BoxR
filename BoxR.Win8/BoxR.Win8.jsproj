@@ -118,7 +118,6 @@
     <Content Include="pages\privacy\privacy.html" />
     <Content Include="pages\report\report.html" />
     <Content Include="pages\report\report.js" />
-    <Content Include="pages\settings\settings.css" />
     <Content Include="pages\settings\settings.html" />
     <Content Include="pages\settings\settings.js" />
     <Content Include="pages\singleplayer\singleplayer.css" />

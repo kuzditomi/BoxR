@@ -49,12 +49,30 @@
                 var onResize = function() {
                     var currentViewState = Windows.UI.ViewManagement.ApplicationView.value;
                     var snapped = Windows.UI.ViewManagement.ApplicationViewState.snapped;
-
+                    var canvas = document.getElementById("gameCanvas");
                     if (currentViewState === snapped) {
                         $(".fullview").addClass('snapview').removeClass('fullview');
+                        if (BoxR && BoxR.Manager && BoxR.Manager.Game && canvas) {
+                            canvas.height = 0;
+                            canvas.width = 0;
+                            var size = $('canvas').parent().width();
+                            canvas.height = size;
+                            canvas.width = size;
+                            
+                            BoxR.Manager.Game.Resize(size);
+                        }
                         //$(".snapview").show();//view.layout = new WinJS.UI.ListLayout();
                     } else {
                         $(".snapview").addClass('fullview').removeClass('snapview');
+                        if (BoxR && BoxR.Manager && BoxR.Manager.Game && canvas) {
+                            canvas.height = 0;
+                            canvas.width = 0;
+                            var size = $('canvas').parent().width();
+                            canvas.height = size;
+                            canvas.width = size;
+
+                            BoxR.Manager.Game.Resize(size);
+                        }
                         //view.lastViewState = new WinJS.UI.GridLayout();
                     }
                 };

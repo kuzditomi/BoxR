@@ -30,6 +30,12 @@
                 });
                 $backbutton.show();
             }
+            $(window).resize(function () {
+                $('.container').css('height', getDocHeight());
+                var newWidth = $('canvas').parent().width();
+                BoxR.Manager.Game.Resize(newWidth);
+                BoxR.Manager.Game.Draw();
+            });
         });
         function getDocHeight() {
             var d = document;

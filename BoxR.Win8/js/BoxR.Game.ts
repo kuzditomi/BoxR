@@ -38,8 +38,8 @@ module BoxR {
     export class Edge extends Drawable {
         private isHorizontal: bool;
         private radius: number;
-        private width: number;
-        private height: number;
+        public width: number;
+        public height: number;
         public Squeres: Squere[];
         private mouseover: bool;
 
@@ -131,7 +131,7 @@ module BoxR {
 
      export class Squere extends Drawable {
         public edges: Edge[];
-        private width: number;
+        public width: number;
         private animated: bool;
         private color: string;
 
@@ -323,6 +323,45 @@ module BoxR {
                 BoxR.Manager.Server.UpdateRound(IsSelfRound);
         }
 
+        // copy from init
+        public Resize(newwidth: number) { 
+            // new width
+            this.canvas.width = newwidth;
+            this.canvas.height = newwidth;
+            this.Width = newwidth;
+
+            // copy from init, comments removed
+            var n = this.n;
+            var squereWidthToUnit = 7; 
+            var unit = Math.floor(this.Width / ((n * squereWidthToUnit) + (n + 1) + 2));
+            var verticalOffset = [unit, 2 * unit];
+            var horizontalOffset = [2 * unit, unit];
+            var squereEdge = squereWidthToUnit * unit;
+            var width = [squereEdge, unit];
+            var height = [unit, squereEdge];
+
+            for (var i = 0; i < 2 * n + 1; i++) {
+                //this.Edges[i] = new Edge[];
+                //this.Squares[i/2 - 1] = new Squere[];
+                var isAlternateRow = i % 2; // 0,2,4 is alternative, these are for the horizontal edges
+                var m = isAlternateRow == 0 ? n : n + 1;
+                for (var j = 0; j < m; j++) {
+                    var currentEdge = this.Edges[i][j];
+                    currentEdge.x = horizontalOffset[isAlternateRow] + j * (squereEdge + unit);
+                    currentEdge.y =verticalOffset[isAlternateRow] + Math.floor(i / 2) * (squereEdge + unit);
+                    currentEdge.width =width[isAlternateRow];
+                    currentEdge.height =height[isAlternateRow];
+
+                    if (isAlternateRow == 0 && i > 0) {
+                        var currentSquere = this.Squares[i/2 - 1][j];
+                        currentSquere.x = horizontalOffset[0] + j * (unit + squereEdge) + unit / 2;
+                        currentSquere.y = verticalOffset[1] + (i - 2) / 2 * (squereEdge + unit) + unit / 2;
+                        currentSquere.width = squereEdge - unit;
+                    }
+                }
+            }
+        }
+
         public Draw() {
             this.Clear();
             this.ctx.save();
@@ -345,7 +384,7 @@ module BoxR {
         }
 
         public Click(e: MouseEvent) {
-            var leftOffset = this.canvas.offsetLeft;
+            var leftOffset = this.canvas.getBoundingClientRect().left;//this.canvas.offsetLeft;
             var topOffset = this.canvas.getBoundingClientRect().top;
             if (!IsSelfRound)
                 return;
@@ -378,7 +417,7 @@ module BoxR {
         }
 
         public MouseMove(e: MouseEvent) {
-            var leftOffset = this.canvas.offsetLeft;
+            var leftOffset = this.canvas.getBoundingClientRect().left;//this.canvas.offsetLeft;
             var topOffset = this.canvas.getBoundingClientRect().top;
             if (!IsSelfRound)
                 return;
