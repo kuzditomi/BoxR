@@ -8,10 +8,10 @@
         // populates the page elements with the app's data.
         ready: function (element, options) {
             // TODO: Initialize the page here.
-            $('#btnsp').click(function() {
+            $('.btnsp').click(function() {
                 WinJS.Navigation.navigate("/pages/singleplayer/singleplayer.html");
             });
-            $('#btnmp').click( function () {
+            $('.btnmp').click( function () {
                 WinJS.Navigation.navigate("/pages/login/login.html");
             });
         },

@@ -437,6 +437,7 @@ namespace BoxR.Web.Hubs
                 }
                 UserManager.RemoveUser(Context.ConnectionId);
                 WebSecurity.Logout();
+                Clients.Others.removeUser(Context.ConnectionId);
             }
         }
 

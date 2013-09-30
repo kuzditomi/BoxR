@@ -1,12 +1,14 @@
 ﻿ul.modepick {
-    width: 800px;
     margin: 0 auto;
+    padding: 0;
+}
+ul.modepick.fullview {
+    width: 800px;
 }
 
 ul.modepick li {
     list-style: none;
-    float: left;
-    width: 380px;
+    width: 100%;
     height: 200px;
     display: -ms-flexbox;
     -ms-flex-align: center;
@@ -14,16 +16,23 @@ ul.modepick li {
     cursor: pointer;
 }
 
+ul.modepick.fullview li {
+    float: left;
+    width: 380px;
+}
+ul.modepick.snapview li {
+    margin-bottom: 20px;
+}
 ul.modepick li:hover {
     opacity: 1;
 }
 
-#btnsp {
+.btnsp {
 	background-color: #1BA4E2;
     margin-right: 40px;
 }
 
-#btnmp {
+.btnmp {
 	background-color: #e51400;
 }
 

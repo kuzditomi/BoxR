@@ -42,3 +42,7 @@ body > * {
 .clear {
     clear: both;
 }
+
+.snapview {
+    display: none;
+}

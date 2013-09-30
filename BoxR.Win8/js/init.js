@@ -45,6 +45,21 @@
                 // bg color
                 BoxR.activeColor = bgcolor;
                 $('body').css("background-color", BoxR.activeColor);
+                
+                var onResize = function() {
+                    var currentViewState = Windows.UI.ViewManagement.ApplicationView.value;
+                    var snapped = Windows.UI.ViewManagement.ApplicationViewState.snapped;
+
+                    if (currentViewState === snapped) {
+                        $(".fullview").hide();
+                        $(".snapview").show();//view.layout = new WinJS.UI.ListLayout();
+                    } else {
+                        $(".fullview").show();
+                        $(".snapview").hide();
+                        //view.lastViewState = new WinJS.UI.GridLayout();
+                    }
+                };
+                window.addEventListener('resize', onResize, false);
             } else {
                 // TODO: This application has been reactivated from suspension.
                 // store logged in state?
@@ -181,7 +196,8 @@ function initAds() {
                 adUnitId: '127760'
             });
         myAdControl.isAutoRefreshEnabled = true;
-        myAdControl._onErrorOccurred = function() {
+        myAdControl._onErrorOccurred = function () {
+            myAdControl.isAutoRefreshEnabled = false;
             adDuplexAd.winControl.setup();
             $(adDiv).hide();
         };
