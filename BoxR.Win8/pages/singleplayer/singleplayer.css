@@ -1,4 +1,4 @@
-﻿#container {
+﻿#spcontainer {
     display: -ms-grid;
     -ms-grid-columns: 530px 260px 430px;
     -ms-grid-rows: 1fr;
@@ -53,35 +53,36 @@ ul.scores li h2 {
 }
 
 /*snapview*/
-.snapview #container {
+.snapview #spcontainer {
     display: block;
     position: relative;
     margin: 0 10px;
 }
 .snapview #canvas-container, .snapview #score-container,.snapview #text-container {
     display: block;
+    margin: 0;
 }
 
-.snapview ul.scores li {
+.snapview #spcontainer ul.scores li {
     list-style: none;
     width: 145px;
     height: 145px;
     display: inline-block;
 }
-.snapview ul.scores li h2 {
+.snapview #spcontainer ul.scores li h2 {
     font-size: 32pt;
     margin-top: 10px;
 }
-.snapview ul.scores li h1 {
+.snapview #spcontainer ul.scores li h1 {
     font-size: 40pt;
 }
-.snapview ul.scores {
+.snapview #spcontainer ul.scores {
     margin: 0 auto;
 }
-.snapview h1.notranform {
+.snapview #spcontainer h1.notranform {
     display: none;
 }
-.snapview header h2 {
+.snapview #spcontainer header h2 {
     margin-top: 20px;
     font-size: 24pt;
 }

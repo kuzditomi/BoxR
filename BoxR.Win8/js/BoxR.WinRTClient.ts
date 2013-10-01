@@ -22,11 +22,14 @@ module BoxR {
             var _this = this;
             WinJS.Navigation.navigate("/pages/game/game.html", { selfStart: selfStart, name: name, opponentname: opponentName })
                 .done(function () {
+                    var size = $('canvas').parent().width();
+                    $('.span2').css('height', size);
+
                     var height = window.outerHeight;
                     var newsize = height * 0.65;
 
                     var canvas = <HTMLCanvasElement>document.getElementById("gameCanvas");
-                    canvas.width = canvas.height = newsize;
+                    canvas.width = canvas.height = size;
                     var game = new BoxR.Game(canvas);
                     BoxR.Manager.Game = game;
                     game.Init(3, selfStart);

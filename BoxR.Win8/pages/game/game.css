@@ -10,7 +10,7 @@
     -ms-grid-column: 1;
     margin-left: 30px;
 }
-#score-container {
+.fullview #score-container {
     -ms-grid-row: 1;
     -ms-grid-column: 2;
     margin-left: 30px;
@@ -27,7 +27,7 @@ ul.scores {
     margin: 0;
     padding: 0;
 }
-ul.scores li{
+.fullview ul.scores li{
     width: 140px;
     height: 140px;
     list-style: none;
@@ -62,4 +62,21 @@ ul.scores li h2 {
 }
 .truncate:hover {
     overflow: visible;
+}
+/*snapview*/
+.snapview #container {
+    display: block;
+    position: relative;
+}
+.snapview #container #canvas-container,
+.snapview #container #score-container,
+.snapview #container #text-container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.snapview ul.scores li {
+    float: none;
+    display: block;
+    width: 145px;
+    height: 145px;
 }
