@@ -81,11 +81,8 @@ module BoxR {
         }
 
         UpdateRound(selfround) {
-            this.turnDivWidth = this.turnDivWidth || $("#turnDiv").width();
-            this.turnDivMargin = this.turnDivMargin || $("#turnDiv").css('margin-left');
-
-            var turnDivWidth = this.turnDivWidth;
-            var turnDivMargin = this.turnDivMargin;
+            var turnDivWidth = $("#turnDiv").width();
+            var turnDivMargin = $("#turnDiv").css('margin-left');
             if (!selfround) {
                 $("#turnDiv").animate({ width: "0px", marginLeft: "80px" },300,
                     function () {

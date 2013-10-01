@@ -76,7 +76,30 @@ ul.scores li h2 {
 }
 .snapview ul.scores li {
     float: none;
-    display: block;
+    display: inline-block;
     width: 145px;
     height: 145px;
+}
+
+.snapview #container #turnDiv {
+    display: block;
+    width: 292px;
+    margin-top: 2px;
+}
+
+.snapview #container ul.scores li h2 {
+    padding-top: 25px;
+    font-size: 18pt;
+    margin-top: 0;
+}
+.snapview #container ul.scores li h1 {
+    font-size: 40pt;
+}
+.snapview #turnDiv h1{
+    margin: 0;
+    padding: 0;
+}
+.snapview #turnDiv h2 {
+    margin-top: 40px;
+    font-size: 40pt;
 }
