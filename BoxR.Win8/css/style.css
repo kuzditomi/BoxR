@@ -48,7 +48,11 @@ body > * {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
-    margin: 70px 0px;
+    margin: 0px;
+    margin-bottom: 200px;
+    display: block;
+    height: 100% !important;
+    margin-top: 50px;
 }
 .snapview .pagecontrol {
     position: absolute;

@@ -1,4 +1,7 @@
-﻿(function () {
+﻿var adduplexadvert;
+
+
+(function () {
     "use strict";
 
     WinJS.Binding.optimizeBindingReferences = true;
@@ -51,9 +54,17 @@
                     var currentViewState = Windows.UI.ViewManagement.ApplicationView.value;
                     var snapped = Windows.UI.ViewManagement.ApplicationViewState.snapped;
                     var canvas = document.getElementById("gameCanvas");
-                    if (currentViewState === snapped) {
+                    var $turnDiv = $("#turnDiv");
+                    var currentApp = Windows.ApplicationModel.Store.CurrentApp;
+                    // Get the license info
+                    var licenseInformation = currentApp.licenseInformation;
+                    
+                    if (currentViewState === snapped) {// change into snap view
+                        // change the outer class for css
                         $(".fullview").addClass('snapview').removeClass('fullview');
-                        if (BoxR && BoxR.Manager && BoxR.Manager.Game && canvas) { // change into snap view
+                        
+                        // resize game canvas 
+                        if (BoxR && BoxR.Manager && BoxR.Manager.Game && canvas) { 
                             canvas.height = 0;
                             canvas.width = 0;
                             var size = $('canvas').parent().width();
@@ -62,15 +73,50 @@
                             
                             BoxR.Manager.Game.Resize(size);
                             BoxR.Manager.Game.Draw();
-                            var $turnDiv = $("#turnDiv");
+                            
                             if($turnDiv) {
                                 $turnDiv.css('width', '292px');
                                 $turnDiv.css('margin-left', '0');
                             }
                         }
-                    } else {
+                        // change ad
+                        if (licenseInformation.isTrial) {
+                            $(".snapview").css('height', ($(window).height() - 300) + 'px');
+                            adContainer.style.width = adContainer.style.height = '250px';
+                            adDuplexAd.style.width = adDuplexAd.style.height = '250px';
+                            pubCenterAd.style.width = pubCenterAd.style.height = '250px';
+                            
+                            if(pubCenterAd.winControl) {
+                                pubCenterAd.winControl.dispose();
+                                pubCenterAd.innerHtml = "";
+                                
+                                var mySnapAdControl = new MicrosoftNSJS.Advertising.AdControl(pubCenterAd,
+                                    {
+                                        applicationId: 'c7d93e9f-0ef7-4436-8bf3-59368e6c5034',
+                                        adUnitId: '126195'
+                                    });
+                                mySnapAdControl.isAutoRefreshEnabled = true;
+                                mySnapAdControl._onErrorOccurred = function () {
+                                    if (adDuplexAd.winControl)
+                                        adDuplexAd.winControl.dispose();
+                                    adDuplexAd.innerHTML = "";
+                                    new AdDuplexJs.Controls.AdControl(adDuplexAd, { appId: '56899', size: '250x250' });
+                                };
+                            }
+                            else {
+                                if (adDuplexAd.winControl)
+                                    adDuplexAd.winControl.dispose();
+                                adDuplexAd.innerHTML = "";
+                                new AdDuplexJs.Controls.AdControl(adDuplexAd, { appId: '56899', size: '250x250' });
+                            }
+                            
+                        }
+                    } else {// change into fullview
+                        // change the outer class for css
                         $(".snapview").addClass('fullview').removeClass('snapview');
-                        if (BoxR && BoxR.Manager && BoxR.Manager.Game && canvas) { // change into fullview
+                        
+                        // resize game canvas 
+                        if (BoxR && BoxR.Manager && BoxR.Manager.Game && canvas) { 
                             canvas.height = 0;
                             canvas.width = 0;
                             var size = $('canvas').parent().width();
@@ -79,8 +125,42 @@
 
                             BoxR.Manager.Game.Resize(size);
                             BoxR.Manager.Game.Draw();
+                            if ($turnDiv) {
+                                $turnDiv.css('width', '145px');
+                                $turnDiv.css('margin-left', '10px');
+                            }
                         }
-                        //view.lastViewState = new WinJS.UI.GridLayout();
+                        // change ad
+                        if (licenseInformation.isTrial) {
+                            $(".fullview").css('height', '100%');
+                            adContainer.style.width = '728px';adContainer.style.height = '90px';
+                            adDuplexAd.style.width = '728px'; adDuplexAd.style.height = '90px';
+                            pubCenterAd.style.width = '728px'; pubCenterAd.style.height = '90px';
+
+                            if (pubCenterAd.winControl) {
+                                pubCenterAd.winControl.dispose();
+                                pubCenterAd.innerHtml = "";
+
+                                var mySnapAdControl = new MicrosoftNSJS.Advertising.AdControl(pubCenterAd,
+                                    {
+                                        applicationId: 'c7d93e9f-0ef7-4436-8bf3-59368e6c5034',
+                                        adUnitId: '127760'
+                                    });
+                                mySnapAdControl.isAutoRefreshEnabled = true;
+                                mySnapAdControl._onErrorOccurred = function () {
+                                    if (adDuplexAd.winControl)
+                                        adDuplexAd.winControl.dispose();
+                                    adDuplexAd.innerHTML = "";
+                                    new AdDuplexJs.Controls.AdControl(adDuplexAd, { appId: '56899', size: '728x90' });
+                                };
+                            }
+                            else {
+                                if (adDuplexAd.winControl)
+                                    adDuplexAd.winControl.dispose();
+                                adDuplexAd.innerHTML = "";
+                                new AdDuplexJs.Controls.AdControl(adDuplexAd, { appId: '56899', size: '728x90' });
+                            }
+                        }
                     }
                 };
                 window.addEventListener('resize', onResize, false);
@@ -213,8 +293,7 @@ function initAds() {
     // Get the license info
     var licenseInformation = currentApp.licenseInformation;
     if (licenseInformation.isTrial) {
-        var adDiv = document.getElementById("myAd");
-        var myAdControl = new MicrosoftNSJS.Advertising.AdControl(adDiv,
+        var myAdControl = new MicrosoftNSJS.Advertising.AdControl(pubCenterAd,
             {
                 applicationId: 'c7d93e9f-0ef7-4436-8bf3-59368e6c5034',
                 adUnitId: '127760'
@@ -222,11 +301,12 @@ function initAds() {
         myAdControl.isAutoRefreshEnabled = true;
         myAdControl._onErrorOccurred = function () {
             myAdControl.isAutoRefreshEnabled = false;
-            adDuplexAd.winControl.setup();
-            $(adDiv).hide();
+            myAdControl.dispose();
+            pubCenterAd.innerHtml = "";
+            
+            var ad = new AdDuplexJs.Controls.AdControl(adDuplexAd, { appId: '56899', size: '728x90' });
         };
-        
-    }
+    };
 }
 
 function displayError(error, logerror) {

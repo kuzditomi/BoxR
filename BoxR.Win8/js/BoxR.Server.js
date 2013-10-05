@@ -65,14 +65,12 @@
             BoxR.Manager.Hub.server.getUsers();
         };
         Server.prototype.UpdateRound = function (selfround) {
-            this.turnDivWidth = this.turnDivWidth || $("#turnDiv").width();
-            this.turnDivMargin = this.turnDivMargin || $("#turnDiv").css('margin-left');
-            var turnDivWidth = this.turnDivWidth;
-            var turnDivMargin = this.turnDivMargin;
+            var turnDivWidth = $("#turnDiv").width();
+            var turnDivMargin = $("#turnDiv").css('margin-left');
             if(!selfround) {
                 $("#turnDiv").animate({
                     width: "0px",
-                    marginLeft: "80px"
+                    marginLeft: turnDivMargin + turnDivWidth / 2
                 }, 300, function () {
                     $("#turnDiv").addClass('tile-red').removeClass('tile-blue');
                     $("#turnDiv h1").text("red turn");
@@ -84,7 +82,7 @@
             } else {
                 $("#turnDiv").animate({
                     width: "0px",
-                    marginLeft: "80px"
+                    marginLeft: turnDivMargin + turnDivWidth / 2
                 }, 300, function () {
                     $("#turnDiv").addClass('tile-blue').removeClass('tile-red');
                     $("#turnDiv h1").text("blue turn");

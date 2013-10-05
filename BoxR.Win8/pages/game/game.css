@@ -56,8 +56,6 @@ ul.scores li h2 {
     white-space: nowrap;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
     background: inherit;
 }
 .truncate:hover {
@@ -98,8 +96,6 @@ ul.scores li h2 {
 .snapview #turnDiv h1{
     margin: 0;
     padding: 0;
-}
-.snapview #turnDiv h2 {
-    margin-top: 40px;
+    padding-top: 30px;
     font-size: 40pt;
 }
