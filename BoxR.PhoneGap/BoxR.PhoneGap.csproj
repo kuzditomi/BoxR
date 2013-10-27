@@ -57,15 +57,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="www\js\start.html" />
-    <Content Include="www\pages\start.html" />
-    <Content Include="www\js\init.js" />
+    <Content Include="www\css\metro-bootstrap.css" />
+    <Content Include="www\img\bg.png" />
+    <Content Include="www\pages\multiplayer\multiplayer.html" />
+    <Content Include="www\pages\singleplayer\singleplayer.html" />
+    <Content Include="www\pages\start\start.css" />
+    <Content Include="www\pages\start\start.html" />
     <Content Include="www\config.xml" />
-    <Content Include="www\css\index.css" />
+    <Content Include="www\css\style.css" />
     <Content Include="www\icon.png" />
     <Content Include="www\img\logo.png" />
     <Content Include="www\index.html" />
@@ -112,17 +112,18 @@
     <Content Include="www\res\screen\ios\screen-iphone-portrait.png" />
     <Content Include="www\res\screen\webos\screen-64.png" />
     <Content Include="www\res\screen\windows-phone\screen-portrait.jpg" />
-    <Content Include="www\spec.html" />
     <Content Include="www\spec\helper.js" />
     <Content Include="www\spec\index.js" />
     <Content Include="www\spec\lib\jasmine-1.2.0\jasmine-html.js" />
     <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.css" />
     <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.js" />
-    <Content Include="www\start.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\res\screen\tizen\README.md" />
     <Content Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -149,6 +150,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

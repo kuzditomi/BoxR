@@ -1,0 +1,39 @@
+﻿body {
+}
+/* Tiles  */
+ul.thumbnails {
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -137px;
+}
+.thumbnails > li {
+    margin-bottom: 17px;
+}
+.thumbnails > li.tile{
+	cursor: auto;
+    width: 120px;
+    height: 120px;
+}
+
+.thumbnails > li.tile.tile-blue{
+	background-color: #1BA4E2;
+}
+
+.thumbnails > li.tile.tile-red{
+	background-color: #e51400;
+}
+
+.thumbnails > li.tile > h2{
+	margin-top: 10px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    background: inherit;
+    padding-top: 2px;
+}
+
+.thumbnails > li.tile.tile-double {
+    width: 300px;
+}

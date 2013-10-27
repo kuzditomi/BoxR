@@ -37,7 +37,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        app.loadPage('pages/start.html');
+        app.loadPage('pages/start/start.html');
         //document.getElementById('container').innerHTML = "szia";
 
         //listeningElement.setAttribute('style', 'display:none;');
