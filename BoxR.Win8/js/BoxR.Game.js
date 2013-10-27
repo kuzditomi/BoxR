@@ -204,12 +204,14 @@ var BoxR;
     })();
     BoxR.Coordinate = Coordinate;    
     var Game = (function () {
-        function Game(canvas, issingleplayer) {
+        function Game(canvas, issingleplayer, noWebWorker) {
             if (typeof issingleplayer === "undefined") { issingleplayer = false; }
+            if (typeof noWebWorker === "undefined") { noWebWorker = false; }
             this.ctx = canvas.getContext('2d');
             this.canvas = canvas;
             this.Width = canvas.clientWidth;
             this.IsSinglePlayer = issingleplayer;
+            this._noWebWorker = noWebWorker;
         }
         Game.prototype.Init = function (n, selfstart) {
             this.n = n;
@@ -439,20 +441,31 @@ var BoxR;
                         _this.NextRound();
                     }
                 } else {
-                    var gameState = _this.getGameState();
-                    var myWorker = new Worker("/js/BoxR.MiniMax.js");
-                    myWorker.postMessage({
-                        gameState: gameState,
-                        depth: 6
-                    });
-                    myWorker.onmessage = function (e) {
-                        var needContinue = _this.EdgeClickFromServerByEdge(_this.Edges[e.data.nextClick.i][e.data.nextClick.j]);
-                        if(needContinue) {
+                    if(_this._noWebWorker) {
+                        var nextEdge = _this.CleverClick(2) || _this.CleverClick(3);
+                        if(fourthEdge) {
+                            _this.EdgeClickFromServerByEdge(fourthEdge);
                             _this.MachineClick();
                         } else {
+                            _this.EdgeClickFromServerByEdge(nextEdge);
                             _this.NextRound();
                         }
-                    };
+                    } else {
+                        var gameState = _this.getGameState();
+                        var myWorker = new Worker("/js/BoxR.MiniMax.js");
+                        myWorker.postMessage({
+                            gameState: gameState,
+                            depth: 6
+                        });
+                        myWorker.onmessage = function (e) {
+                            var needContinue = _this.EdgeClickFromServerByEdge(_this.Edges[e.data.nextClick.i][e.data.nextClick.j]);
+                            if(needContinue) {
+                                _this.MachineClick();
+                            } else {
+                                _this.NextRound();
+                            }
+                        };
+                    }
                 }
             }, 1000);
         };

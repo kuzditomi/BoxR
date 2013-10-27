@@ -254,6 +254,7 @@ module BoxR {
         private Edges: Edge[][];
         private Squares: Squere[][];
         private IsSinglePlayer: bool;
+        private _noWebWorker: bool;
 
         public n: number;
         public Width: number;
@@ -261,11 +262,12 @@ module BoxR {
         public opponentScore: number;
 
 
-        constructor(canvas: HTMLCanvasElement,issingleplayer:bool = false) {
+        constructor(canvas: HTMLCanvasElement,issingleplayer:bool = false,noWebWorker:bool = false) {
             this.ctx = canvas.getContext('2d');
             this.canvas = canvas;
             this.Width = canvas.clientWidth;
             this.IsSinglePlayer = issingleplayer;
+            this._noWebWorker = noWebWorker;
         }
 
         public Init(n: number, selfstart: bool) {
@@ -498,6 +500,16 @@ module BoxR {
                 var fourthEdge = this.FourthClick();
                 var nextEdge = this.CleverClick(0) || this.CleverClick(1);
                 if (nextEdge) { // még van olyan, aminek csak a második élét húzom be
+                    if (fourthEdge) { // be lehet keríteni négyzetet, ilyenkor veszély nélkül
+                        _this.EdgeClickFromServerByEdge(fourthEdge);
+                        _this.MachineClick();
+                    } else {
+                        _this.EdgeClickFromServerByEdge(nextEdge);
+                        _this.NextRound();
+                    }
+                }
+                else if(this._noWebWorker){
+                    var nextEdge = this.CleverClick(2) || this.CleverClick(3);
                     if (fourthEdge) { // be lehet keríteni négyzetet, ilyenkor veszély nélkül
                         _this.EdgeClickFromServerByEdge(fourthEdge);
                         _this.MachineClick();

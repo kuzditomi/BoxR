@@ -42,10 +42,10 @@ var app = {
 
         //listeningElement.setAttribute('style', 'display:none;');
         //receivedElement.setAttribute('style', 'display:block;');
-
+        //navigator.notification.alert("ok");
         console.log('Received Event: ' + id);
     },
-    loadPage: function (url) {
+    loadPage: function (url,onready) {
         var xmlhttp = new XMLHttpRequest();
 
         // Callback function when XMLHttpRequest is ready
@@ -53,10 +53,18 @@ var app = {
             if (xmlhttp.readyState === 4) {
                 if (xmlhttp.status === 200) {
                     document.getElementById('container').innerHTML = xmlhttp.responseText;
+                    if (onready)
+                        onready();
                 }
             }
         };
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
+        //if(window.Worker)
+            
     }
 };
+
+function loadSinglePlayer() {
+    app.loadPage('pages/singleplayer/singleplayer.html', initSinglePlayer);
+}

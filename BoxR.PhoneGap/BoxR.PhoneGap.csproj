@@ -60,8 +60,35 @@
     <Content Include="index.html" />
     <Content Include="www\css\metro-bootstrap.css" />
     <Content Include="www\img\bg.png" />
+    <Content Include="www\js\BoxR.Game.js" />
+    <Content Include="www\js\BoxR.Game.min.js" />
+    <Content Include="www\js\BoxR.Game.ts" />
+    <Content Include="www\js\BoxR.IClient.js" />
+    <Content Include="www\js\BoxR.IClient.min.js" />
+    <Content Include="www\js\BoxR.IClient.ts" />
+    <Content Include="www\js\BoxR.Manager.js" />
+    <Content Include="www\js\BoxR.Manager.min.js" />
+    <Content Include="www\js\BoxR.Manager.ts" />
+    <Content Include="www\js\BoxR.MiniMax.js" />
+    <Content Include="www\js\BoxR.Popup.js" />
+    <Content Include="www\js\BoxR.Server.js" />
+    <Content Include="www\js\BoxR.Server.min.js" />
+    <Content Include="www\js\BoxR.Server.ts" />
+    <CodeAnalysisDictionary Include="www\js\BoxR.WebClient.ts" />
+    <Content Include="www\js\BoxR.WebClient.js">
+      <DependentUpon>BoxR.WebClient.ts</DependentUpon>
+    </Content>
+    <Content Include="www\js\BoxR.WebClient.min.js">
+      <DependentUpon>BoxR.WebClient.ts</DependentUpon>
+    </Content>
+    <Content Include="www\js\lib\jquery-1.9.1.js" />
+    <Content Include="www\js\lib\jquery.d.ts" />
+    <Content Include="www\js\lib\jquery.signalR-1.0.1.js" />
+    <Content Include="www\js\lib\jquery.signalR-1.0.1.min.js" />
     <Content Include="www\pages\multiplayer\multiplayer.html" />
     <Content Include="www\pages\singleplayer\singleplayer.html" />
+    <Content Include="www\pages\singleplayer\singleplayer.js" />
+    <Content Include="www\pages\singleplayer\singleplayer.css" />
     <Content Include="www\pages\start\start.css" />
     <Content Include="www\pages\start\start.html" />
     <Content Include="www\config.xml" />
@@ -124,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\js\BoxR.Game.min.js.map" />
+    <Content Include="www\js\BoxR.IClient.min.js.map" />
+    <Content Include="www\js\BoxR.Manager.min.js.map" />
+    <Content Include="www\js\BoxR.Server.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\js\lib\jquery.signalR-1.0.1.min.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

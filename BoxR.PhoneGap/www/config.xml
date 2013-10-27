@@ -8,6 +8,7 @@
         Tamás Küzdi
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
+    <plugin name="Notification" value="org.apache.cordova.Notification"/>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
