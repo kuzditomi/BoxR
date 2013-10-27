@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxR.Shared", "BoxR.Shared\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxR.SinglePlayer", "BoxR.SinglePlayer\BoxR.SinglePlayer.csproj", "{D2BB728B-790B-4CCC-A749-B562F0A70AA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxR.PhoneGap", "BoxR.PhoneGap\BoxR.PhoneGap.csproj", "{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,16 @@ Global
 		{D2BB728B-790B-4CCC-A749-B562F0A70AA1}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D2BB728B-790B-4CCC-A749-B562F0A70AA1}.Release|x64.ActiveCfg = Release|Any CPU
 		{D2BB728B-790B-4CCC-A749-B562F0A70AA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Release|x64.ActiveCfg = Release|Any CPU
+		{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

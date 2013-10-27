@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D2BB728B-790B-4CCC-A749-B562F0A70AA1}</ProjectGuid>
+    <ProjectGuid>{E9AFDB42-B0D7-4B88-B0EE-0E93DA1F7B34}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BoxR.SinglePlayer</RootNamespace>
-    <AssemblyName>BoxR.SinglePlayer</AssemblyName>
+    <RootNamespace>BoxR.PhoneGap</RootNamespace>
+    <AssemblyName>BoxR.PhoneGap</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -57,37 +57,72 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.xml" />
-    <Content Include="css\blueturn.png" />
-    <Content Include="css\boxr.css" />
-    <Content Include="css\metro-bootstrap.css" />
-    <Content Include="css\redturn.png" />
-    <Content Include="font\fontawesome-webfont.svg" />
-    <Content Include="icon.png" />
-    <Content Include="index.html" />
-    <Content Include="js\BoxR.Game.js" />
-    <Content Include="js\BoxR.Game.min.js" />
-    <Content Include="js\BoxR.Game.ts" />
-    <Content Include="js\BoxR.Init.js" />
-    <Content Include="js\BoxR.MiniMax.js" />
-    <Content Include="js\Popup.js" />
-    <Content Include="js\jquery-1.7.1.js" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="font\fontawesome-webfont.eot" />
-    <Content Include="font\fontawesome-webfont.ttf" />
-    <Content Include="font\fontawesome-webfont.woff" />
-    <Content Include="font\FontAwesome.otf" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <Content Include="index.html" />
+    <Content Include="www\js\start.html" />
+    <Content Include="www\pages\start.html" />
+    <Content Include="www\js\init.js" />
+    <Content Include="www\config.xml" />
+    <Content Include="www\css\index.css" />
+    <Content Include="www\icon.png" />
+    <Content Include="www\img\logo.png" />
+    <Content Include="www\index.html" />
+    <Content Include="www\js\index.js" />
+    <Content Include="www\res\icon\android\icon-36-ldpi.png" />
+    <Content Include="www\res\icon\android\icon-48-mdpi.png" />
+    <Content Include="www\res\icon\android\icon-72-hdpi.png" />
+    <Content Include="www\res\icon\android\icon-96-xhdpi.png" />
+    <Content Include="www\res\icon\bada-wac\icon-48-type5.png" />
+    <Content Include="www\res\icon\bada-wac\icon-50-type3.png" />
+    <Content Include="www\res\icon\bada-wac\icon-80-type4.png" />
+    <Content Include="www\res\icon\bada\icon-128.png" />
+    <Content Include="www\res\icon\blackberry\icon-80.png" />
+    <Content Include="www\res\icon\ios\icon-57-2x.png" />
+    <Content Include="www\res\icon\ios\icon-57.png" />
+    <Content Include="www\res\icon\ios\icon-72-2x.png" />
+    <Content Include="www\res\icon\ios\icon-72.png" />
+    <Content Include="www\res\icon\tizen\icon-128.png" />
+    <Content Include="www\res\icon\webos\icon-64.png" />
+    <Content Include="www\res\icon\windows-phone\icon-173-tile.png" />
+    <Content Include="www\res\icon\windows-phone\icon-48.png" />
+    <Content Include="www\res\icon\windows-phone\icon-62-tile.png" />
+    <Content Include="www\res\screen\android\screen-hdpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-hdpi-portrait.png" />
+    <Content Include="www\res\screen\android\screen-ldpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-ldpi-portrait.png" />
+    <Content Include="www\res\screen\android\screen-mdpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-mdpi-portrait.png" />
+    <Content Include="www\res\screen\android\screen-xhdpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-xhdpi-portrait.png" />
+    <Content Include="www\res\screen\bada-wac\screen-type3.png" />
+    <Content Include="www\res\screen\bada-wac\screen-type4.png" />
+    <Content Include="www\res\screen\bada-wac\screen-type5.png" />
+    <Content Include="www\res\screen\bada\screen-portrait.png" />
+    <Content Include="www\res\screen\blackberry\screen-225.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-landscape-2x.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-landscape.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-portrait-2x.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-portrait.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-landscape-2x.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-landscape.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-portrait-2x.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-portrait-568h-2x.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-portrait.png" />
+    <Content Include="www\res\screen\webos\screen-64.png" />
+    <Content Include="www\res\screen\windows-phone\screen-portrait.jpg" />
+    <Content Include="www\spec.html" />
+    <Content Include="www\spec\helper.js" />
+    <Content Include="www\spec\index.js" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\jasmine-html.js" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.css" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.js" />
+    <Content Include="www\start.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\res\screen\tizen\README.md" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -104,7 +139,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4275/</IISUrl>
+          <IISUrl>http://localhost:26543/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

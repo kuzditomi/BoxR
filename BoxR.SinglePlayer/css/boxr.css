@@ -110,3 +110,8 @@ a:hover{
     height: 100%;
     width: 100%;
 }
+
+canvas {
+    margin-left: -10px;
+    -webkit-tap-highlight-color: transparent;
+}

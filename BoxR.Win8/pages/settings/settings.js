@@ -42,7 +42,6 @@
                     return false;
                 }); 
             }
-            asdsd
         },
 
         unload: function () {
