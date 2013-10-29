@@ -15,25 +15,25 @@
     </head>
     <body>
         <div id="back" class="loginback">
-            <button class="win-backbutton">Back</button>
-            <h1>Back</h1>
+            <button class="win-backbutton"></button>
+            <h1 data-win-res="{back_button: 'back_button'}"></h1>
         </div>
         <section id="logincontainer">
             <div id="waitDiv">
-                <span>Please wait while connecting to the server.</span><br/>
+                <span data-win-res="{textContent: 'login_wait'}"></span><br/>
                 <progress class="win-ring win-large" />
             </div>
             <section class="logo">
                 <img src="/Images/header_widelogo.png"/>
             </section>
             <section class="login">
-                <h1>login</h1>
+                <h1 data-win-res="{textContent: 'login'}"></h1>
                 <div class="form">
-                    <span>You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</span>
+                    <span data-win-res="{textContent: 'login_desc'}"></span>
                     <div class="loginform">
-                        <label class="username">User name</label>
+                        <label class="username" data-win-res="{textContent: 'login_username'}"></label>
                         <input type="text" class="username"/>
-                        <label class="password">Password</label>
+                        <label class="password" data-win-res="{textContent: 'login_pass'}"></label>
                         <input type="password" class="password"/>
                         <input type="button" class="mslogin"/>
                         <input type="button" class="fblogin"/>
@@ -42,23 +42,21 @@
                 </div>
             </section>
             <section class="register">
-                <h1>register</h1>
+                <h1 data-win-res="{textContent: 'login_reg'}"></h1>
                 <div class="form">
-                    <span>If you have no account so far, you can register by providing a username and your password.</span>
+                    <span data-win-res="{textContent: 'login_reg_desc'}"></span>
                     <div class="registerform">
-                        <label class="username">User name</label>
+                        <label class="username" data-win-res="{textContent: 'login_username'}"></label>
                         <input type="text" class="username"/>
-                        <label class="password">Password</label>
+                        <label class="password" data-win-res="{textContent: 'login_pass'}"></label>
                         <input type="password" class="password"/>
-                        <label class="confirm-password">Confirm Password</label>
+                        <label class="confirm-password" data-win-res="{textContent: 'login_reg_confirm'}"></label>
                         <input type="password" class="confirm-password"/>
-                        <input type="button" class="regbutton" onclick="register()" value="Register"/>
+                        <input type="button" class="regbutton" onclick="register()" data-win-res="{value: 'login_reg'}"/>
                         <progress id="registerprogress" class="win-ring win-large" />
                     </div>
-                    
                 </div>
             </section>
-            
         </section>
     </body>
 </html>

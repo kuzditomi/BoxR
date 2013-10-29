@@ -57,9 +57,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
     <Content Include="www\css\metro-bootstrap.css" />
     <Content Include="www\img\bg.png" />
+    <Content Include="www\img\fbbutton35.png" />
+    <Content Include="www\img\header_widelogo.png" />
+    <Content Include="www\img\micrososftlogin35.png" />
     <Content Include="www\js\BoxR.Game.js" />
     <Content Include="www\js\BoxR.Game.min.js" />
     <Content Include="www\js\BoxR.Game.ts" />
@@ -85,7 +87,10 @@
     <Content Include="www\js\lib\jquery.d.ts" />
     <Content Include="www\js\lib\jquery.signalR-1.0.1.js" />
     <Content Include="www\js\lib\jquery.signalR-1.0.1.min.js" />
+    <Content Include="www\js\settings.js" />
+    <Content Include="www\pages\multiplayer\multiplayer.css" />
     <Content Include="www\pages\multiplayer\multiplayer.html" />
+    <Content Include="www\pages\multiplayer\multiplayer.js" />
     <Content Include="www\pages\singleplayer\singleplayer.html" />
     <Content Include="www\pages\singleplayer\singleplayer.js" />
     <Content Include="www\pages\singleplayer\singleplayer.css" />

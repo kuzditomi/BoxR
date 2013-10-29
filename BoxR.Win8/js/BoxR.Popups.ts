@@ -18,7 +18,7 @@ module BoxR {
             return {
                 buttons: [
                     {
-                        text: "Accept",
+                        text:  WinJS.Resources.getString("accept").value,
                         background: this.greenColor,
                         click: () => {
                             BoxR.Manager.Hub.server.inviteAccepted();
@@ -26,14 +26,14 @@ module BoxR {
                         }
                     },
                     {
-                        text: "Deny",
+                        text: WinJS.Resources.getString("deny").value,
                         background: this.redColor,
                         click: () => {
                             BoxR.Manager.Hub.server.inviteDenied();
                             this.popupControl.Hide();
                         }
                     }],
-                text: name + " has challanged you!"
+                text: name + WinJS.Resources.getString("challengedyou").value
             };
         }
 
@@ -41,14 +41,14 @@ module BoxR {
             return {
                 buttons: [
                     {
-                        text: "Suspend invite",
+                        text: WinJS.Resources.getString("suspend").value,
                         background: this.redColor,
                         click: () => {
                             BoxR.Manager.Hub.server.inviteDenied();
                             this.popupControl.Hide();
                         }
                     }],
-                text: "You have challanged " + name + ". Please wait for his response!"
+                text: WinJS.Resources.getString("youchallanged").value + name + ". " + WinJS.Resources.getString("pleasewait").value
             };
         }
 
@@ -56,7 +56,7 @@ module BoxR {
             return {
                 buttons: [
                     {
-                        text: "Quit",
+                        text: WinJS.Resources.getString("quit").value,
                         background: this.redColor,
                         click: () => {
                             BoxR.Manager.Hub.server.quitGame();
@@ -65,13 +65,13 @@ module BoxR {
                         }
                     },
                     {
-                        text: "Cancel",
+                        text: WinJS.Resources.getString("cancel").value,
                         background: this.greenColor,
                         click: () => {
                             this.popupControl.Hide();
                         }
                     }],
-                text: "Are you sure? By quiting the game, your opponent will win."
+                text: WinJS.Resources.getString("quitquestion").value
             };
         }
 
@@ -86,7 +86,7 @@ module BoxR {
                             WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }],
-                text: "Your opponent has quit the game."
+                text: WinJS.Resources.getString("opponentquit").value
             };
         }
 
@@ -101,7 +101,7 @@ module BoxR {
                             WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }],
-                text: "Congratulation, you have won the game!"
+                text: WinJS.Resources.getString("wingame").value
             };
         }
 
@@ -116,7 +116,7 @@ module BoxR {
                             WinJS.Navigation.navigate(isSinglePlayer ? "/pages/main/main.html" : "/pages/users/users.html");
                         }
                     }],
-                text: "You have just lost the game."
+                text: WinJS.Resources.getString("lostgame").value
             };
         }
     }

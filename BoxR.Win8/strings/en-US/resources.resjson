@@ -1,0 +1,92 @@
+﻿// For details on localizing a Windows app, see: http://go.microsoft.com/fwlink/?LinkId=212836
+// angol
+
+{
+    "back_button"   : "Back",
+    "error"         : "Error",
+
+    //about charm
+    "about"         : "About",
+    "about_boxr"    : "About BoxR",
+    "about_first"   : "BoxR is an implementation of the game known as \"dots and boxes\". You can also play the game online at ",
+    "about_second"  : "The project is Open Source, you can find it on GitHub under",
+    
+    //privacy policy charm
+    "privacy_policy"                : "Privacy Policy",
+    "privacy_policy_personal_title" : "Personal data collection",
+    "privacy_policy_personal_text"  : "We collect but do not link personal and activity data.You can request to see your personal data.We may keep data indefinitely.",
+    "privacy_policy_share_title"    : "Share of personal data",
+    "privacy_policy_share_text"     : "We don't share your personal data with other companies.No ad companies collect data through our service.Service providers access data on our behalf.We take steps to protect personal information.Special situations may require disclosure of your data.",
+    "privacy_policy_loc_title"      : "Locations",
+    "privacy_policy_loc_text"       : "We do not store or share your precise location.",
+    "privacy_policy_q_title"        : "Questions",
+    "privacy_policy_q_text"         : "You can ask privacy questions by sending an email to kuzditomi@live.com.",
+
+    //error report charm
+    "error_report"            : "Error report",
+    "error_report_latest"     : "Latest errors:",
+    "error_report_report"     : "Report",
+    "error_report_error"      : "Some error occured recently. Would you like to report it to developers?",
+    "error_report_no_error"   : "No error happened recently.",
+    
+    //settings charm
+    "settings"      : "Settings",
+    "settings_bg"   : "Background color:",
+
+    //main page
+    "main_single" : "SinglePlayer",
+    "main_multi"  : "MultiPlayer",
+
+    //single player page
+    "single_you" : "You",
+    "single_howto" : "how to play",
+    "single_howto_first" : "Dots and Boxes (also known as Boxes, Squares, Paddocks, Pigs in a Pen, Square-it, Dots and Dashes, Dots, Smart Dots, Dot Boxing, or, simply, the Dot Game) is a pencil and paper game for two players (or sometimes, more than two) first published in 1889 by Édouard Lucas.",
+    "single_howto_second" : "Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.",
+
+    //login page
+    "login" : "login",
+    "login_reg" : "register",
+    "login_reg_confirm" : "Confirm Password",
+    "login_wait" : "Please wait while connecting to the server.",
+    "login_desc" : "You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.",
+    "login_reg_desc" : "If you have no account so far, you can register by providing a username and your password.",
+    "login_username" : "User name",
+    "login_pass" : "Password",
+    "login_fb_error" : "Error with facebook authentication.",
+    "login_auth_error" : "Error with authentication.",
+    "login_ms_error" : "Error with microsoft authentication.",
+    "login_must_login" : "You mush log in.",
+    "login_req" : "Log in is required.",
+    "login_no_username" : "Please give your choosen username.",
+    "login_no_pass" : "Please give your choosen password.",
+    "login_fail_passconf" : "Given passwords does not match.",
+
+    //choosenick page
+    "choosenick_associate" : "Associate your ",
+    "choosenick_account" : " account.",
+    "choosenick_succ_auth" : "You've successfully authenticated with",
+    "choosenick_choose_name" : "Please enter a user name below to finish logging in.",
+
+    //users page
+    "users_online"      : "users online",
+    "users_about"      : "about",
+    "users_opensource"      : "BoxR is an Open Source project available in ",
+    "users_specialthanks"      : "Special thanks to ",
+    "users_balassy"      : "György Balássy ",
+    "users_tech"      : " for technical support.",
+
+    //popup
+    "accept"    : "Accept",
+    "deny"    : "Deny",
+    "challengedyou"    : " has challenged you!",
+    "suspend"    : "Suspend invite",
+    "youchallanged"    : "You have challaneged ",
+    "pleasewait"    : "Please wait for the response.",
+    "quit"    : "Quit",
+    "cancel"    : "Cancel",
+    "quitquestion"    : "Are you sure? By quiting the game, your opponent will win.",
+    "opponentquit"    : "Your opponent has quit the game.",
+    "wingame"    : "Congratulation, you have won the game!",
+    "lostgame"    : "You have lost the game!"
+
+}

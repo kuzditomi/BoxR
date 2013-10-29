@@ -6,6 +6,7 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
+            WinJS.Resources.processAll();
             BoxR.Manager.Client.IsSinglePlayer = false;
             $('#loginprogress').hide();
             $("#registerprogress").hide();
@@ -114,24 +115,24 @@
                                         WinJS.Navigation.navigate("/pages/choosenick/choosenick.html",{ provider:"facebook" });
                                         break;
                                     case 2: // Error
-                                        displayError("Error with facebook authentication.");
+                                        displayError(WinJS.Resources.getString("login_fb_error").value);
                                         break;
                                 }
                             });
                         }
                         else {
-                            displayError("Error with facebook authentication.");
+                            displayError(WinJS.Resources.getString("login_fb_error").value);
                         }
                         break;
                     case Windows.Security.Authentication.Web.WebAuthenticationStatus.userCancel:
                         //displayError("User cancelled the authentication to Facebook.");
                         break;
                     case Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp:
-                        displayError("Error with facebook authentication..");
+                        displayError(WinJS.Resources.getString("login_fb_error").value);
                         break;
                 }
             }, function (err) {
-                displayError("Error with facebook authentication.", err.message);
+                displayError(WinJS.Resources.getString("login_fb_error").value, err.message);
             });
         $("#loginprogress").hide();
     }
@@ -143,7 +144,7 @@
                 BoxR.Manager.UserName = success;
                 WinJS.Navigation.navigate("/pages/users/users.html");
             } else {
-                displayError("Error with authentication.");
+                displayError(WinJS.Resources.getString("login_auth_error").value);
             }
             
             $("#loginprogress").hide();
@@ -181,14 +182,14 @@
                             WinJS.Navigation.navigate("/pages/choosenick/choosenick.html", { provider: "microsoft" });
                             break;
                         case 2: // Error
-                            displayError("Error with microsoft authentication.");
+                            displayError(WinJS.Resources.getString("login_ms_error").value);
                             break;
                     }
                 });
                 $("#loginprogress").hide();
             }, function (error) {
                 session = null;
-                var dialog = new Windows.UI.Popups.MessageDialog("You must log in.", "Login Required");
+                var dialog = new Windows.UI.Popups.MessageDialog(WinJS.Resources.getString("login_mush_login").value, WinJS.Resources.getString("login_req").value);
                 dialog.showAsync().done(complete);
                 $("#loginprogress").hide();
             });
@@ -207,16 +208,16 @@ function register() {
     var passwordAgain = $("input.confirm-password").val();
 
     if (!username) {
-        displayError("Please give your choosen username.");
+        displayError(WinJS.Resources.getString("login_no_username").value);
         return;
     }
     if (!password) {
-        displayError("Please give your choosen password.");
+        displayError(WinJS.Resources.getString("login_no_pass").value);
         return;
     }
 
     if (password != passwordAgain) {
-        displayError("Given passwords does not match.");
+        displayError(WinJS.Resources.getString("login_fail_passconf").value);
         return;
     }
     $("#registerprogress").show();
@@ -229,7 +230,7 @@ function register() {
                     BoxR.Manager.UserName = success;
                     WinJS.Navigation.navigate("/pages/users/users.html");
                 } else {
-                    displayError("Error with authentication.");
+                    displayError(WinJS.Resources.getString("login_auth_error").value);
                 }
             });
         }

@@ -1,0 +1,22 @@
+﻿label {
+    color: black;
+}
+.btnfacebook {
+    height: 35px;
+    width: 102px !important;
+    background: url('/img/fbbutton35.png') 0 0 no-repeat;
+    font-size: 0;
+    cursor: pointer;
+    display: inline-block;
+    border:none;
+}
+
+.btnmicrosoft {
+    background: url('/img/micrososftlogin35.png') 0 0 no-repeat;
+    height: 35px;
+    font-size: 0;
+    width: 123px  !important;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+}

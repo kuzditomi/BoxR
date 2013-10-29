@@ -68,3 +68,6 @@ var app = {
 function loadSinglePlayer() {
     app.loadPage('pages/singleplayer/singleplayer.html', initSinglePlayer);
 }
+function loadMultiPlayer() {
+    app.loadPage('pages/multiplayer/multiplayer.html', initMultiPlayer);
+}

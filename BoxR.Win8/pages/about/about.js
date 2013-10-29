@@ -3,18 +3,11 @@
 (function () {
     "use strict";
 
-    WinJS.UI.Pages.define("/pages/main/main.html", {
+    WinJS.UI.Pages.define("/pages/about/about.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
             WinJS.Resources.processAll();
-            // TODO: Initialize the page here.
-            $('.btnsp').click(function() {
-                WinJS.Navigation.navigate("/pages/singleplayer/singleplayer.html");
-            });
-            $('.btnmp').click( function () {
-                WinJS.Navigation.navigate("/pages/login/login.html");
-            });
         },
 
         unload: function () {

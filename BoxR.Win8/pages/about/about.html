@@ -9,13 +9,14 @@
             padding: 0;
         }
     </style>
+    <script src="about.js"></script>
 </head>
 <body>
     <div data-win-control="WinJS.UI.SettingsFlyout" aria-label="About section flyout" data-win-options="{settingsCommandId:'about',width:'narrow'}">
         <!-- Use either 'win-ui-light' or 'win-ui-dark' depending on the contrast between the header title and background color -->
         <div class="win-ui-dark win-header" style="background-color:darkslateblue"> <!-- Background color reflects app's personality -->
             <button type="button" onclick="WinJS.UI.SettingsFlyout.show()" class="win-backbutton"></button>
-            <div class="win-label">About BoxR</div>
+            <div class="win-label" data-win-res="{textContent: 'about_boxr'}"></div>
             <img src="/Images/logo.png" width="40" height="40" style="position: absolute; right: 40px;"/>
         </div>
         <div class="win-content ">
@@ -23,9 +24,8 @@
                 <h1>BoxR v2.0</h1>
                 <br/>
                 <p>Copyright &copy; 2013 <br/> Küzdi Tamás</p>
-                <p>BoxR is an implementation of the game known as "dots and boxes". You can also play the game online at <br/><a href="http://boxr.azurewebsites.net">http://boxr.azurewebsites.net</a></p>
-                <p> The project is Open Source, you can find it on GitHub under <a href="https://github.com/kuzditomi/BoxR">kuzditomi/BoxR</a>.<br/> All suggestions are welcomed.</p>
-                <p></p>
+                <p data-win-res="{textContent: 'about_first'}"><p/><a href="http://boxr.azurewebsites.net">http://boxr.azurewebsites.net</a>
+                <p><span data-win-res="{textContent: 'about_second'}"></span> <a href="https://github.com/kuzditomi/BoxR">kuzditomi/BoxR</a> .<br/></p>
             </div>
         </div>
     </div>

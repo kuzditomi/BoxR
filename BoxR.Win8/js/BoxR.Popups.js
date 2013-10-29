@@ -12,7 +12,7 @@
             return {
                 buttons: [
                     {
-                        text: "Accept",
+                        text: WinJS.Resources.getString("accept").value,
                         background: this.greenColor,
                         click: function () {
                             BoxR.Manager.Hub.server.inviteAccepted();
@@ -20,7 +20,7 @@
                         }
                     }, 
                     {
-                        text: "Deny",
+                        text: WinJS.Resources.getString("deny").value,
                         background: this.redColor,
                         click: function () {
                             BoxR.Manager.Hub.server.inviteDenied();
@@ -28,7 +28,7 @@
                         }
                     }
                 ],
-                text: name + " has challanged you!"
+                text: name + WinJS.Resources.getString("challengedyou").value
             };
         };
         Popups.prototype.Wait = function (name) {
@@ -36,7 +36,7 @@
             return {
                 buttons: [
                     {
-                        text: "Suspend invite",
+                        text: WinJS.Resources.getString("suspend").value,
                         background: this.redColor,
                         click: function () {
                             BoxR.Manager.Hub.server.inviteDenied();
@@ -44,7 +44,7 @@
                         }
                     }
                 ],
-                text: "You have challanged " + name + ". Please wait for his response!"
+                text: WinJS.Resources.getString("youchallanged").value + name + ". " + WinJS.Resources.getString("pleasewait").value
             };
         };
         Popups.prototype.Quit = function () {
@@ -52,7 +52,7 @@
             return {
                 buttons: [
                     {
-                        text: "Quit",
+                        text: WinJS.Resources.getString("quit").value,
                         background: this.redColor,
                         click: function () {
                             BoxR.Manager.Hub.server.quitGame();
@@ -61,14 +61,14 @@
                         }
                     }, 
                     {
-                        text: "Cancel",
+                        text: WinJS.Resources.getString("cancel").value,
                         background: this.greenColor,
                         click: function () {
                             _this.popupControl.Hide();
                         }
                     }
                 ],
-                text: "Are you sure? By quiting the game, your opponent will win."
+                text: WinJS.Resources.getString("quitquestion").value
             };
         };
         Popups.prototype.Disconnect = function (isSinglePlayer) {
@@ -84,7 +84,7 @@
                         }
                     }
                 ],
-                text: "Your opponent has quit the game."
+                text: WinJS.Resources.getString("opponentquit").value
             };
         };
         Popups.prototype.Win = function (isSinglePlayer) {
@@ -100,7 +100,7 @@
                         }
                     }
                 ],
-                text: "Congratulation, you have won the game!"
+                text: WinJS.Resources.getString("wingame").value
             };
         };
         Popups.prototype.Lost = function (isSinglePlayer) {
@@ -116,7 +116,7 @@
                         }
                     }
                 ],
-                text: "You have just lost the game."
+                text: WinJS.Resources.getString("lostgame").value
             };
         };
         return Popups;

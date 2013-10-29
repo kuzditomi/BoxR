@@ -1,0 +1,91 @@
+﻿// For details on localizing a Windows app, see: http://go.microsoft.com/fwlink/?LinkId=212836
+// angol
+
+{
+    "back_button"   : "Vissza",
+    "error"         : "Hiba",
+
+    //about charm
+    "about"         : "Leírás",
+    "about_boxr"    : "A játékról",
+    "about_first"   : "A BoxR egy négyzetrácsos papírról ismert logikai játék. Böngészőből is játszható a következő címen:",
+    "about_second"  : "A program nyílt forráskodú, elérhető a GitHub oldalon:",
+    
+    //privacy policy charm
+    "privacy_policy"                : "Adatvédelmi nyilatkozat",
+    "privacy_policy_personal_title" : "Adatkezelés",
+    "privacy_policy_personal_text"  : "A felhasználó által megadandó adatok esetén az adatkezelés célja a felhasználó beazonosítása, jogosultságának ellenőrzése. ",
+    "privacy_policy_share_title"    : "Személy adatok megosztásáról",
+    "privacy_policy_share_text"     : "Személyes adatokat harmadik személynek csak a felhasználó előzetes és kifejezett hozzájárulása esetén adunk ki.",
+    "privacy_policy_loc_title"      : "Helymeghatározás",
+    "privacy_policy_loc_text"       : "A használat helyszínét az alkalmazás nem tárolja.",
+    "privacy_policy_q_title"        : "Egyéb kérdés",
+    "privacy_policy_q_text"         : "Minden egyébként kérdéssel kapcsolatban a kuzditomi@live.com címhez lehet fordulni.",
+
+    //error report charm
+    "error_report"            : "Hiba bejelentés",
+    "error_report_latest"     : "Felmerült hibák:",
+    "error_report_report"     : "Jelentés",
+    "error_report_error"      : "Előfordult néhány hiba az alkalmazás futása során. Szeretné jelenteni ezt a fejlesztőnek?",
+    "error_report_no_error"   : "Nem történt hiba az elmúlt időszakban.",
+    
+    //settings charm
+    "settings"      : "Beállítások",
+    "settings_bg"   : "Háttér színe:",
+
+    //main page
+    "main_single" : "Egy játékos",
+    "main_multi"  : "Több játékos",
+
+    //single player page
+    "single_you" : "Ön",
+    "single_howto" : "játékszabály",
+    "single_howto_first" : "A BoxR játék egy ceruzával papíron játszott két- vagy néha többszemélyes logikai játék. Először 1889-ben Édouard Lucas publikált róla.",
+    "single_howto_second" : "Üres ráccsal kezdve a játékosok egymást követve húznak be függőleges és vízszintes vonalakat. Az a játék, aki először bekerít egy 1x1-es négyzetet, kap egy pontot, és kötelező jelleggel ő követketik ismét. A játék addig tart, amíg már nem lehet új élet behúzni, a nyertes pedig az, akinek több pontja van a játék végére.",
+
+    //login page
+    "login" : "bejentkezés",
+    "login_reg" : "regisztráció",
+    "login_reg_confirm" : "Jelszó újra",
+    "login_wait" : "Kérem várjon, kapcsolódás a szerverhez.",
+    "login_desc" : "Használhatja meglévő Facebook vagy Microsoft accountját az alábbi gombokkal, vagy gépelje be a regisztrált adatait és nyomja meg az Enter gombot.",
+    "login_reg_desc" : "Ha még nem rendelkezik felhasználóval, itt regisztrálhat a felhasználónév és jelszó megadásával.",
+    "login_username" : "Felhasználónév",
+    "login_pass" : "Jelszó",
+    "login_fb_error" : "Hiba a facebook-ba való bejelentkezéskor.",
+    "login_auth_error" : "Hibás adatok.",
+    "login_ms_error" : "Hiba a microsoft accountba bejelentkezéskor.",
+    "login_must_login" : "Be kell jelentkeznie.",
+    "login_req" : "A bejelentkezés kötelező.",
+    "login_no_username" : "Kérem, adjon meg felhasználónevet.",
+    "login_no_pass" : "Kérem, adjon meg jelszót.",
+    "login_fail_passconf" : "A megadott jelszavak nem egyeznek.",
+
+    //choosenick page
+    "choosenick_associate" : "Társítsa a ",
+    "choosenick_account" : "  felhasználóját.",
+    "choosenick_succ_auth" : "Sikeresen belépett a következő accountba:",
+    "choosenick_choose_name" : "Kérem adjon meg egy választott felhasználónevet a belépéshez.",
+
+    //users page
+    "users_online"      : "elérhető játékos",
+    "users_about"      : "leírás",
+    "users_opensource"      : "A BoxR egy nyilt forráskódú program, elérés: ",
+    "users_specialthanks"      : "Külön köszönetet érdemel ",
+    "users_balassy"      : "Balássy György ",
+    "users_tech"      : " ,szakmai támogatásért.",
+
+    //popup
+    "accept"    : "Rendben",
+    "deny"    : "Elutasítás",
+    "challengedyou"    : " kihívott egy játékra!",
+    "suspend"    : "Mégsem",
+    "youchallanged"    : "Felkérés folyamatban: ",
+    "pleasewait"    : "Kérem várjon a válaszra.",
+    "quit"    : "Kilépés",
+    "cancel"    : "Mégsem",
+    "quitquestion"    : "Biztos benne? Így az ellenfele megnyeri a játékot.",
+    "opponentquit"    : "Az ellenfele kilépett a játékból.",
+    "wingame"    : "Gratulálok, Ön nyert!",
+    "lostgame"    : "Sajnos elvesztette a játékot!"
+}

@@ -108,6 +108,7 @@
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="packages.config" />
     <Content Include="pages\about\about.html" />
+    <Content Include="pages\about\about.js" />
     <Content Include="pages\choosenick\choosenick.html" />
     <Content Include="pages\choosenick\choosenick.js" />
     <Content Include="pages\game\game.css" />
@@ -116,6 +117,7 @@
     <Content Include="pages\main\main.js" />
     <Content Include="pages\main\main.css" />
     <Content Include="pages\privacy\privacy.html" />
+    <Content Include="pages\privacy\privacy.js" />
     <Content Include="pages\report\report.html" />
     <Content Include="pages\report\report.js" />
     <Content Include="pages\settings\settings.html" />
@@ -140,6 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppPackages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="strings\en-US\resources.resjson" />
+    <PRIResource Include="strings\hu-HU\resources.resjson" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

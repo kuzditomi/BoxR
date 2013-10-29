@@ -19,39 +19,34 @@
             font-size: 14pt;
         }
     </style>
+    <script src="privacy.js"></script>
 </head>
 <body>
     <div data-win-control="WinJS.UI.SettingsFlyout" aria-label="Pivacy Policy flyout" data-win-options="{settingsCommandId:'privacy',width:'narrow'}">
         <!-- Use either 'win-ui-light' or 'win-ui-dark' depending on the contrast between the header title and background color -->
         <div class="win-ui-dark win-header" style="background-color:darkslateblue"> <!-- Background color reflects app's personality -->
             <button type="button" onclick="WinJS.UI.SettingsFlyout.show()" class="win-backbutton"></button>
-            <div class="win-label">Privacy Policy</div>
+            <div class="win-label" data-win-res="{textContent: 'privacy_policy'}"></div>
             <img src="/Images/logo.png" width="40" height="40" style="position: absolute; right: 40px;"/>
         </div>
         <div class="win-content ">
             <div class="win-settings-section" style="color: darkslateblue">
                 <ul>
                     <li>
-                        <h2>Personal data collection</h2>
-                        We collect but do not link personal and activity data.
-                        You can request to see your personal data.
-                        We may keep data indefinitely.
+                        <h2 data-win-res="{textContent: 'privacy_policy_personal_title'}"></h2>
+                        <span data-win-res="{textContent: 'privacy_policy_personal_text'}"></span>
                     </li>
                     <li>
-                        <h2>Share of personal data</h2>
-                        We don't share your personal data with other companies.
-                        No ad companies collect data through our service.
-                        Service providers access data on our behalf.
-                        We take steps to protect personal information.
-                        Special situations may require disclosure of your data.
+                        <h2 data-win-res="{textContent: 'privacy_policy_share_title'}"></h2>
+                        <span data-win-res="{textContent: 'privacy_policy_share_text'}"></span>
                     </li>
                     <li>
-                        <h2>Locations</h2>
-                        We do not store or share your precise location.
+                        <h2 data-win-res="{textContent: 'privacy_policy_loc_title'}"></h2>
+                        <span data-win-res="{textContent: 'privacy_policy_loc_text'}"></span>
                     </li>
                     <li>
-                        <h2>Questions</h2>
-                        You can ask privacy questions by sending an email to kuzditomi@live.com.
+                        <h2 data-win-res="{textContent: 'privacy_policy_q_title'}"></h2>
+                        <span data-win-res="{textContent: 'privacy_policy_q_text'}"></span>
                     </li>
                 </ul>
             </div>

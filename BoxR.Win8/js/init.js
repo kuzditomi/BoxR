@@ -21,6 +21,7 @@
                 // TODO: This application has been newly launched. Initialize
                 // your application here.
                 // subscribe for connection events
+                WinJS.Resources.processAll();
                 var networkInfo = Windows.Networking.Connectivity.NetworkInformation;
 
                 try {
@@ -105,11 +106,11 @@
 
     app.onsettings = function (e) {
         e.detail.applicationcommands = {
-            "about": { title: "About", href: "/pages/about/about.html" },
-            "privacy": { title: "Privacy Policy", href: "/pages/privacy/privacy.html" },
-            "report": { title: "Error Report", href: "/pages/report/report.html" },
-            "settings": { title: "Settings", href: "/pages/settings/settings.html"}
-    };
+            "about": { title: WinJS.Resources.getString("about").value, href: "/pages/about/about.html" },
+            "privacy": { title: WinJS.Resources.getString("privacy_policy").value, href: "/pages/privacy/privacy.html" },
+            "report": { title: WinJS.Resources.getString("error_report").value, href: "/pages/report/report.html" },
+            "settings": { title: WinJS.Resources.getString("settings").value, href: "/pages/settings/settings.html" }
+        };
         WinJS.UI.SettingsFlyout.populateSettings(e);
     };
 
@@ -206,7 +207,7 @@ function initAds() {
 function displayError(error, logerror) {
     //$(".error").text(error);
 
-    var msg = new Windows.UI.Popups.MessageDialog(error, "Error");
+    var msg = new Windows.UI.Popups.MessageDialog(error, WinJS.Resources.getString("error").value);
     msg.showAsync();
     console.log(logerror || error);
 }

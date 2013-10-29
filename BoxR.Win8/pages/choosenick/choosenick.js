@@ -7,6 +7,7 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
+            WinJS.Resources.processAll();
             document.getElementById("provider").textContent = options.provider;
             document.getElementById("provider2").textContent = options.provider;
 
