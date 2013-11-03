@@ -7,7 +7,6 @@
     canvas.width = size;
 
     BoxR.Manager.Game = new BoxR.Game(canvas, true, true);
-    BoxR.Manager.Client = new BoxR.WebClient();
     BoxR.Manager.Game.Init(3, true);
     BoxR.Manager.Game.Draw();
 

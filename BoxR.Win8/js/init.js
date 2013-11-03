@@ -32,7 +32,7 @@
                     //print("An unexpected exception occured: " + e.name + ": " + e.message);
                 }
                 // init ads
-                initAds();
+                //initAds();
                 
                 // create the populcontrol for the Client
                 var popupDiv = document.getElementById('popupdiv');

@@ -12,10 +12,11 @@ ul.thumbnails {
 .thumbnails > li {
     margin-bottom: 17px;
 }
-.thumbnails > li.tile{
-	cursor: auto;
-    width: 120px;
-    height: 120px;
+
+@media (max-width: 300px) {
+    .thumbnails > li.tile a{
+	    font-size: 24pt;
+    }
 }
 
 .thumbnails > li.tile.tile-blue{

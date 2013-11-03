@@ -6,30 +6,24 @@
 var BoxR;
 (function (BoxR) {
     "use strict";
-    var WebClient = (function (_super) {
-        __extends(WebClient, _super);
-        function WebClient() {
+    var PhoneGapClient = (function (_super) {
+        __extends(PhoneGapClient, _super);
+        function PhoneGapClient() {
                 _super.call(this);
             this.Blanket = document.getElementById("blanket");
             BoxR.Manager.PopupControl = new Popup(document.getElementById("popup"));
         }
-        WebClient.prototype.StartGame = function (selfStart, name, opponentName) {
+        PhoneGapClient.prototype.StartGame = function (selfStart, name, opponentName) {
             var _this = this;
             var game;
             this.ClosePopup();
             var height = $(this.Blanket).height() * 0.65;
             var container = document.getElementById("innerContainer");
-            $.ajax("/Home/StartGame", {
-                data: {
-                    name: name,
-                    opponent: opponentName,
-                    selfstart: selfStart,
-                    cwidth: height
-                }
-            }).done(function (res) {
-                container.innerHTML = res;
-                var canvas = container.getElementsByTagName("canvas")[0];
+            app.loadPage('pages/game/game.html', function () {
+                var canvas = $("canvas")[0];
                 var size = $('canvas').parent().width();
+                $('#selfname').text(name);
+                $('#opponentname').text(opponentName);
                 canvas.height = size;
                 canvas.width = size;
                 game = new BoxR.Game(canvas);
@@ -54,28 +48,28 @@ var BoxR;
                 });
             });
         };
-        WebClient.prototype.InvitedPopup = function (user) {
+        PhoneGapClient.prototype.InvitedPopup = function (user) {
             BoxR.Manager.PopupControl.Invite(user.UserName);
         };
-        WebClient.prototype.WaitPopup = function (username) {
+        PhoneGapClient.prototype.WaitPopup = function (username) {
             BoxR.Manager.PopupControl.Wait(username);
         };
-        WebClient.prototype.QuitPopup = function () {
+        PhoneGapClient.prototype.QuitPopup = function () {
             BoxR.Manager.PopupControl.Quit();
         };
-        WebClient.prototype.DisconnectPopup = function () {
+        PhoneGapClient.prototype.DisconnectPopup = function () {
             BoxR.Manager.PopupControl.Disconnect();
         };
-        WebClient.prototype.WinPopup = function () {
+        PhoneGapClient.prototype.WinPopup = function () {
             BoxR.Manager.PopupControl.Win();
         };
-        WebClient.prototype.LosePopup = function () {
+        PhoneGapClient.prototype.LosePopup = function () {
             BoxR.Manager.PopupControl.Lose();
         };
-        WebClient.prototype.ClosePopup = function () {
+        PhoneGapClient.prototype.ClosePopup = function () {
             BoxR.Manager.PopupControl.Hide();
         };
-        return WebClient;
+        return PhoneGapClient;
     })(BoxR.ClientBase);
-    BoxR.WebClient = WebClient;    
+    BoxR.PhoneGapClient = PhoneGapClient;    
 })(BoxR || (BoxR = {}));

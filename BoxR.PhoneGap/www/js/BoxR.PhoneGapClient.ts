@@ -4,9 +4,11 @@
 /// <reference path="BoxR.Manager.ts"/>
 /// <reference path="lib/jquery.d.ts"/>
 declare var Popup;
+declare var app;
+declare var initGame;
 module BoxR {
     "use strict";
-    export class WebClient extends ClientBase {
+    export class PhoneGapClient extends ClientBase {
         private Blanket: HTMLElement;
 
         constructor() {
@@ -23,18 +25,11 @@ module BoxR {
             var height = $(this.Blanket).height() * 0.65;
             var container = document.getElementById("innerContainer");
 
-            $.ajax("/Home/StartGame", {
-                data: {
-                    name: name,
-                    opponent: opponentName,
-                    selfstart: selfStart,
-                    cwidth: height,
-                }
-            }).done(function (res) {
-                container.innerHTML = res;
-                var canvas = <HTMLCanvasElement>container.getElementsByTagName("canvas")[0];
+            app.loadPage('pages/game/game.html', function () {
+                var canvas = <HTMLCanvasElement>$("canvas")[0];
                 var size = $('canvas').parent().width(); //getDocHeight() * 0.65;
-
+                $('#selfname').text(name);
+                $('#opponentname').text(opponentName);
                 canvas.height = size;
                 canvas.width = size;
                 game = new BoxR.Game(canvas);
@@ -54,7 +49,6 @@ module BoxR {
                 $backbutton.on('click', function () {
                     _this.QuitPopup();
                 });
-                
             });
         }
         public InvitedPopup(user) {

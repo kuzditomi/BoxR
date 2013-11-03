@@ -55,3 +55,69 @@ footer {
     margin: 0 auto;
     overflow-y: auto;
 }
+
+/******** CSS POPUP *******/
+#popupBackground
+{
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    -moz-opacity: 0.65;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+}
+#popupOuter {
+    z-index: 2;
+    display: table; 
+    position: relative;
+    width: 100%;
+    height: 100% !important;
+}
+
+#popupMiddle {
+    display: table-cell; 
+    vertical-align: middle;
+    height: 100% !important;
+    width: 100%; 
+    position: static;
+}
+
+#popupInner
+{
+    position: relative;
+
+    background: white;
+    height: 150px;
+    color: black;
+    font-size: 16pt;
+    text-align: center;
+}
+#popupInner p
+{
+    font-size: 16pt;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+#popupInner .button
+{
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    margin: 0 10px;
+}
+#popupInner .button:hover {
+    cursor: pointer;
+}
+
+#inner .accept
+{
+    background: #77B900;
+}
+#inner .deny
+{
+    background: #AD103C;
+}

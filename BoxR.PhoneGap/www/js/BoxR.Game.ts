@@ -111,9 +111,12 @@ module BoxR {
             if (this.active)
                 return new ClickResponse(false, 0);
 
-            if (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height) {
+            if( 
+            	x >= this.x + (this.isHorizontal ? 0 : -10) && x <= this.x + this.width + (this.isHorizontal ? 0 : 10) && 
+            	y >= this.y + (this.isHorizontal ? -10 : 0) && y <= this.y + this.height + (this.isHorizontal ? 10 : 0)
+        	)    
                 return new ClickResponse(true, this.Activate());
-            }
+            
 
             return new ClickResponse(false, 0);
         }
@@ -450,7 +453,7 @@ module BoxR {
 
         public EdgeClickFromServerByEdge(edge: Edge) :bool {
             var _this = this;
-            if (!edge.active) {
+            if ( edge && !edge.active) {
                 var squeractivated = edge.Activate();
                 _this.opponentScore += squeractivated;
                 if (squeractivated == 0) {

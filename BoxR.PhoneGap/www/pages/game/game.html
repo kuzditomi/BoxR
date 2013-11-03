@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>singleplayer</title>
+    <link rel="stylesheet" href="pages/game/game.css"/>
+</head>
+    <body>
+        <div class="span6">
+            <canvas id="gameCanvas" ></canvas>
+        </div>
+        <div class="span2">
+            <ul class="thumbnails">
+                <li class="tile tile-blue noopacity">
+                    <h2 class="truncate notranform" id="selfname"></h2>
+                    <h1 id="selfscore">0</h1>
+                </li>
+                <li class="tile tile-red noopacity">
+                    <h2 class="truncate  notranform" id="opponentname"></h2>
+                    <h1 id="opponentscore">0</h1>
+                </li>
+                <li id="turnDiv" class="tile noopacity" style="overflow: hidden">
+                    <h1>blue turn</h1>
+                </li>
+            </ul>
+        </div>
+        <div class="span4">
+            <header>
+                <h2>how to play</h2>
+            </header>
+            <p>
+                Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.
+            </p>
+        </div>
+    </body>
+</html>

@@ -1,35 +1,14 @@
-﻿@section scripts
-{
-    @Scripts.Render("~/bundles/game")
-    <script src="~/js/lib/jquery.signalR-1.0.1.js"></script>    
-    <script src="~/signalr/hubs"></script>
-    <script>
-        $(function () {
-            "use strict";
-            BoxR.Manager.Hub = $.connection.game;
-
-            BoxR.Manager.Client = new BoxR.WebClient();
-            BoxR.Manager.Server = new BoxR.Server();
-
-            $.connection.hub.start().done(function () {
-                BoxR.Manager.Server.UpdateUsers();
-            });
-            var $backbutton = $('#backbutton');
-            if ($backbutton) {
-                $backbutton.click(function () {
-                    document.location.href = "/";
-                    $('#logoutForm').submit();
-                });
-                $backbutton.show();
-            }
-        });
-    </script>
-}
-<div class="span12">
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="pages/users/users.css"/>
+</head>
+<body>
+    <div class="span12">
     <div class="row text-centered">
         <div class="span4">
-            <img src="/Images/header_widelogo.png" alt="BoxR">
-            Welcome, @Context.User.Identity.Name !
+            <img src="/img/header_widelogo.png" alt="BoxR">
         </div>
     </div>
     <div class="row" id="innerContainer">
@@ -55,7 +34,7 @@
                 Dots and Boxes (also known as Boxes, Squares, Paddocks, Pigs in a Pen, Square-it, Dots and Dashes, Dots, Smart Dots, Dot Boxing, or, simply, the Dot Game) is a pencil and paper game for two players (or sometimes, more than two) first published in 1889 by Édouard Lucas.
             </p>
             <p>
-                BoxR is an Open Source project available in <a href="https://github.com/kuzditomi/BoxR/tree/developer">GitHub</a>. If you have Windows8 installed, you can get the application free from <a href="http://apps.microsoft.com/windows/en-us/app/boxr/eecf0832-e2e4-4cb8-8ac2-92348a3d4e97">Windows Store</a>.
+                BoxR is an Open Source project available in <a href="https://github.com/kuzditomi/BoxR/tree/developer">GitHub</a>. If you have Windows8 installed, you can get the application free from <a href="http://apps.microsoft.com/windows/en-us/app/box/5183c685-a8ee-4b9e-b716-9509ebde9a52">Windows Store</a>.
             </p>
             <p>
                 Special thanks to <a href="http://gyorgybalassy.wordpress.com/">György Balássy</a> for technical support.
@@ -63,11 +42,5 @@
         </div>
     </div>
  </div>
-
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-    {
-        @Html.AntiForgeryToken()
-    }
-}
+</body>
+</html>

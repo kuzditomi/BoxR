@@ -72,22 +72,26 @@
     <Content Include="www\js\BoxR.Manager.min.js" />
     <Content Include="www\js\BoxR.Manager.ts" />
     <Content Include="www\js\BoxR.MiniMax.js" />
+    <Content Include="www\js\BoxR.PhoneGapClient.js">
+      <DependentUpon>BoxR.PhoneGapClient.ts</DependentUpon>
+    </Content>
+    <Content Include="www\js\BoxR.PhoneGapClient.min.js">
+      <DependentUpon>BoxR.PhoneGapClient.ts</DependentUpon>
+    </Content>
     <Content Include="www\js\BoxR.Popup.js" />
     <Content Include="www\js\BoxR.Server.js" />
     <Content Include="www\js\BoxR.Server.min.js" />
     <Content Include="www\js\BoxR.Server.ts" />
-    <CodeAnalysisDictionary Include="www\js\BoxR.WebClient.ts" />
-    <Content Include="www\js\BoxR.WebClient.js">
-      <DependentUpon>BoxR.WebClient.ts</DependentUpon>
-    </Content>
-    <Content Include="www\js\BoxR.WebClient.min.js">
-      <DependentUpon>BoxR.WebClient.ts</DependentUpon>
-    </Content>
+    <CodeAnalysisDictionary Include="www\js\BoxR.PhoneGapClient.ts" />
+    <Content Include="www\js\hubs.js" />
     <Content Include="www\js\lib\jquery-1.9.1.js" />
     <Content Include="www\js\lib\jquery.d.ts" />
     <Content Include="www\js\lib\jquery.signalR-1.0.1.js" />
     <Content Include="www\js\lib\jquery.signalR-1.0.1.min.js" />
     <Content Include="www\js\settings.js" />
+    <Content Include="www\pages\game\game.css" />
+    <Content Include="www\pages\game\game.html" />
+    <Content Include="www\pages\game\game.js" />
     <Content Include="www\pages\multiplayer\multiplayer.css" />
     <Content Include="www\pages\multiplayer\multiplayer.html" />
     <Content Include="www\pages\multiplayer\multiplayer.js" />
@@ -102,6 +106,9 @@
     <Content Include="www\img\logo.png" />
     <Content Include="www\index.html" />
     <Content Include="www\js\index.js" />
+    <Content Include="www\pages\users\users.css" />
+    <Content Include="www\pages\users\users.html" />
+    <Content Include="www\pages\users\users.js" />
     <Content Include="www\res\icon\android\icon-36-ldpi.png" />
     <Content Include="www\res\icon\android\icon-48-mdpi.png" />
     <Content Include="www\res\icon\android\icon-72-hdpi.png" />
