@@ -19,6 +19,7 @@ var BoxR;
             this.ClosePopup();
             var height = $(this.Blanket).height() * 0.65;
             var container = document.getElementById("innerContainer");
+            currentPage = "game";
             app.loadPage('pages/game/game.html', function () {
                 var canvas = $("canvas")[0];
                 var size = $('canvas').parent().width();

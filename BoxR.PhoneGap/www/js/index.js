@@ -79,6 +79,13 @@ var app = {
                 currentPage = "start";
                 app.loadPage('pages/start/start.html');
                 break;
+            case "users":
+                BoxR.Manager.Hub.server.logout();
+                currentPage = "start";
+                app.loadPage('pages/start/start.html');
+                break;
+            case "game":
+                BoxR.Manager.Client.QuitPopup();
             default:
                 navigator.app.exitApp();
         }

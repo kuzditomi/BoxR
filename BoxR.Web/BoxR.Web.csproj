@@ -249,6 +249,8 @@
     </Content>
     <Content Include="js\BoxR.Server.ts" />
     <Content Include="js\BoxR.InitBackground.js" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="js\lib\jquery.intellisense.js" />
     <Content Include="js\lib\jquery-1.9.1.js" />
     <Content Include="js\BoxR.Popup.js" />

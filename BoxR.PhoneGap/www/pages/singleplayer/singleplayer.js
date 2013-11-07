@@ -5,7 +5,6 @@
     var canvas = $('canvas')[0];
     canvas.height = size;
     canvas.width = size;
-    alert("WebWorker Supported?: " + !(window.Worker === undefined));
     BoxR.Manager.Game = new BoxR.Game(canvas, true, window.Worker === undefined);
     BoxR.activeColor = 'rgb(39, 174, 96)';
     BoxR.Manager.Game.Init(3, true);

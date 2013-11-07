@@ -31,7 +31,7 @@
         console.log('connection successfull');
     }).fail(function () {
         console.log('connection fail');
-        alert('Nem lehet kapcsolódni a szerverhez. Próbálja később.');
+        alert('Cannot connect to server, please try again later.');
     });
 }
 
@@ -45,7 +45,7 @@ function auth() {
             loadUsers();
             //WinJS.Navigation.navigate("/pages/users/users.html");
         } else {
-            alert('Hibás adatok!');
+            alert('Wrong credentials!');
             //displayError(WinJS.Resources.getString("login_auth_error").value);
         }
 
@@ -54,5 +54,39 @@ function auth() {
 }
 
 function register() {
-    
+    var username = $("#regusername").val();
+    var password = $("#regpassword").val();
+    var passwordAgain = $("#confirmpassword").val();
+
+    if (!username) {
+        alert('Please provide a username!');
+        return;
+    }
+    if (!password) {
+        alert('Please provide a password!');
+        return;
+    }
+
+    if (password != passwordAgain) {
+        alert('Passwords does not match!');
+        return;
+    }
+    BoxR.Manager.Hub.server.register(username, password).done(function (message) {
+        if (message == "true") {
+            // copied from login page js
+            BoxR.Manager.Hub.server.login(username, password).done(function (success) {
+                if (success) {
+                    BoxR.Manager.UserName = success;
+                    loadUsers();
+                } else {
+                    alert('Wrong login credentials!');
+                }
+            });
+        }
+        else {
+            alert(message);
+        }
+    }).fail(function (message) {
+        alert(message);
+    });
 }

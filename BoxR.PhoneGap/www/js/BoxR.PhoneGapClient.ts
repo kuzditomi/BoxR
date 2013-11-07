@@ -6,6 +6,7 @@
 declare var Popup;
 declare var app;
 declare var initGame;
+declare var currentPage;
 module BoxR {
     "use strict";
     export class PhoneGapClient extends ClientBase {
@@ -24,7 +25,7 @@ module BoxR {
 
             var height = $(this.Blanket).height() * 0.65;
             var container = document.getElementById("innerContainer");
-
+            currentPage = "game";
             app.loadPage('pages/game/game.html', function () {
                 var canvas = <HTMLCanvasElement>$("canvas")[0];
                 var size = $('canvas').parent().width(); //getDocHeight() * 0.65;

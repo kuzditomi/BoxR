@@ -151,7 +151,8 @@
             {
                 text: "Yes",
                 background: "red",
-                click: function() {
+                click: function () {
+                    BoxR.Manager.Hub.server.logout();
                     window.location.reload();
                 }
             },
