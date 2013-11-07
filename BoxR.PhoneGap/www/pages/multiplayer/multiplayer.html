@@ -9,7 +9,7 @@
     <div class="span12">
         <div class="row text-centered">
             <div class="span4">
-                <img src="/img/header_widelogo.png" alt="BoxR">
+                <img src="img/header_widelogo.png" alt="BoxR">
             </div>
         </div>
         <div class="row">
@@ -17,30 +17,25 @@
                 <h2>login</h2>
                 <div class="form-horizontal well">
                     <div class="row">
-                        <p class="help-inline">You can use your existing Microsoft Live or Facebook account to log in by clicking the buttons below, or type your BoxR registered credentials and press Enter key.</p>
+                        <p class="help-inline">You can login by typing your BoxR registered credentials.</p>
                         <div class="span6">
-                            
-                                <div class="control-group">
-                                    <label for="username" class="control-label">Username</label>
-                                    <div class="controls">
-                                        <input type="text" class="input-large focused username" id="username" name="username" />
-                                    </div>
+                            <div class="control-group">
+                                <label for="username" class="control-label">Username</label>
+                                <div class="controls">
+                                    <input type="text" class="input-large focused username" id="username" name="username" />
                                 </div>
-                                <div class="control-group">
-                                    <label for="password" class="control-label">Password</label>
-                                    <div class="controls">
-                                        <input type="password" class="input-large focused password" id="password" name="password" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="password" class="control-label">Password</label>
+                                <div class="controls">
+                                    <input type="password" class="input-large focused password" id="password" name="password" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                            <input type="button" class="btnreg" value="login" name="login" title="Log in" onclick="auth()"/>   
-                                            <!--<input type="submit" class="btnfacebook" value="facebook" name="provider" title="Log in using your facebook account"/>   
-                                            <input type="submit" class="btnmicrosoft" value="microsoft" name="provider" title="Log in using your facebook account"/>   -->
-                                       
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                        <input type="button" class="btn" value="login" name="login" title="Log in" onclick="auth()"/>
                                 </div>
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,34 +46,29 @@
                     <div class="row">
                         <p class="help-inline">If you have no account so far, you can register by providing a username and your password.</p>
                         <div class="span6">
-                            <form>
-                                <div class="control-group error">
-                                    
+                            <div class="control-group">
+                                <label for="regusername" class="control-label">Username</label>
+                                <div class="controls">
+                                    <input type="text" class="input-large focused username" id="regusername" name="regusername" />
                                 </div>
-                                <div class="control-group">
-                                    <label for="regusername" class="control-label">Username</label>
-                                    <div class="controls">
-                                        <input type="text" class="input-large focused username" id="regusername" name="regusername" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="regpassword" class="control-label">Password</label>
+                                <div class="controls">
+                                    <input type="password" class="input-large focused password" id="regpassword" name="regpassword" />
                                 </div>
-                                <div class="control-group">
-                                    <label for="regpassword" class="control-label">Password</label>
-                                    <div class="controls">
-                                        <input type="password" class="input-large focused password" id="regpassword" name="regpassword" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="confirmpassword" class="control-label">Confirm password</label>
+                                <div class="controls">
+                                    <input type="password" class="input-large focused password" id="confirmpassword" name="confirmpassword" />
                                 </div>
-                                <div class="control-group">
-                                    <label for="confirmpassword" class="control-label">Confirm password</label>
-                                    <div class="controls">
-                                        <input type="password" class="input-large focused password" id="confirmpassword" name="confirmpassword" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="button" value="Register" class="btn" onclick="register()"/>
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input type="submit" value="Register" class="btn"/>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -5,19 +5,15 @@
     var canvas = $('canvas')[0];
     canvas.height = size;
     canvas.width = size;
-
-    BoxR.Manager.Game = new BoxR.Game(canvas, true, true);
+    alert("WebWorker Supported?: " + !(window.Worker === undefined));
+    BoxR.Manager.Game = new BoxR.Game(canvas, true, window.Worker === undefined);
+    BoxR.activeColor = 'rgb(39, 174, 96)';
     BoxR.Manager.Game.Init(3, true);
     BoxR.Manager.Game.Draw();
 
     canvas.addEventListener("click", function(e) { BoxR.Manager.Game.Click(e); }, true);
     canvas.addEventListener("mousemove", function(e) { BoxR.Manager.Game.MouseMove(e); });
-    if (typeof(Storage) !== "undefined") {
-        var bgcolor = localStorage["BoxRbg"] || "rgba(255, 46, 18, .8)";
-
-        BoxR.activeColor = bgcolor;
-        BoxR.Manager.Game.Draw();
-    }
+    
     var $backbutton = $('#backbutton');
     if ($backbutton) {
         $backbutton.on('click', function() {

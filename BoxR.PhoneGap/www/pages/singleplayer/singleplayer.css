@@ -1,7 +1,14 @@
 ﻿body {
 }
-
-.thumbnails > li.tile{
-    width: 115px !important;
-    height: 115px !important;
+.thumbnails > li.tile h2 {
+    margin-top: -13px;
+}
+@media (max-width: 300px) {
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: -20px;
+    }
+    .thumbnails > li.tile{
+	    width: 85px !important;
+        height: 85px !important;
+    }
 }

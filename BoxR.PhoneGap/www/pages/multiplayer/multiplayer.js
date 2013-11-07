@@ -1,18 +1,16 @@
 ﻿function initMultiPlayer() {
     //BoxR.Manager.Client.IsSinglePlayer = false;
     $(".login input.username").keydown(function (event) {
-        $(".error").html("&nbsp;");
         if (event.which == 13) {
             auth($('.login input.username').val(), $('.login input.password').val());
-            return false;
         }
+        return false;
     });
     $(".login input.password").keydown(function (event) {
-        $(".error").html("&nbsp;");
         if (event.which == 13) {
             auth();
-            return false;
         }
+        return false;
     });
     
     var connection = $.connection.hub;
@@ -53,4 +51,8 @@ function auth() {
 
         //$("#loginprogress").hide();
     });
+}
+
+function register() {
+    
 }

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var currentPage = '';
+var currentPage = 'start';
 var hub;
 var app = {
     // Application Constructor
@@ -63,9 +63,25 @@ var app = {
 
         // listeningElement.setAttribute('style', 'display:none;');
         // receivedElement.setAttribute('style', 'display:block;');
-		app.loadPage('pages/start/start.html');
+        document.addEventListener('backbutton', app.onBackButton, false);
+        app.loadPage('pages/start/start.html');
+        BoxR.Manager.Client = new BoxR.PhoneGapClient();
         console.log('Received Event: ' + id);
 		
+    },
+    onBackButton : function () {
+        switch (currentPage) {
+            case "start":
+                navigator.app.exitApp();
+                break;
+            case "single":
+            case "multi":
+                currentPage = "start";
+                app.loadPage('pages/start/start.html');
+                break;
+            default:
+                navigator.app.exitApp();
+        }
     }
 };
 
