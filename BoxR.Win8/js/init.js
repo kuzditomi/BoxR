@@ -123,7 +123,7 @@
             else
                 errors = [];
 
-            errors.push({ message: e.detail.message || e.detail.errorMessage, stack: e.detail.stack || e.detail.errorUrl, line: e.detail.errorLine });
+            errors.push({ message: e.detail.error.message || e.detail.error.errorMessage, stack: e.detail.error.stack || e.detail.error.errorUrl, line: e.detail.error.errorLine });
 
             localSettings.values["errors"] = JSON.stringify(errors);
         }

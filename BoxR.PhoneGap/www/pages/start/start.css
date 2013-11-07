@@ -2,21 +2,34 @@
 }
 /* Tiles  */
 ul.thumbnails {
-    width: 300px;
+    width: 360px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -150px;
+    margin-left: -170px;
     margin-top: -137px;
 }
 .thumbnails > li {
     margin-bottom: 17px;
 }
-
+.thumbnails > li.tile.tile-double {
+    width: 360px;
+}
 @media (max-width: 300px) {
-    .thumbnails > li.tile a{
-	    font-size: 24pt;
+    .thumbnails > li.tile a h1{
+	    font-size: 20pt;
     }
+	ul.thumbnails {
+		width: 240px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -120px;
+		margin-top: -137px;
+	}
+	.thumbnails > li.tile.tile-double {
+		width: 240px;
+	}
 }
 
 .thumbnails > li.tile.tile-blue{
@@ -35,6 +48,3 @@ ul.thumbnails {
     padding-top: 2px;
 }
 
-.thumbnails > li.tile.tile-double {
-    width: 300px;
-}

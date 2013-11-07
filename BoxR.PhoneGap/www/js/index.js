@@ -17,6 +17,7 @@
  * under the License.
  */
 var currentPage = '';
+var hub;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -28,8 +29,6 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('backbutton', this.onBackButton, false);
-
     },
     // deviceready Event Handler
     //
@@ -37,30 +36,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-    },
-    onBackButton: function (e) {
-        switch (currentPage) {
-            case "start":
-                break;
-            case "single":
-                app.loadPage('pages/start/start.html');
-                return false;
-            case "multi":
-                app.loadPage('pages/start/start.html');
-                return false;
-                break;
-        }
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        app.loadPage('pages/start/start.html');
-        currentPage = "start";
-        //document.getElementById('container').innerHTML = "szia";
-
-        //listeningElement.setAttribute('style', 'display:none;');
-        //receivedElement.setAttribute('style', 'display:block;');
-        //navigator.notification.alert("ok");
-        console.log('Received Event: ' + id);
     },
     loadPage: function (url,onready) {
         var xmlhttp = new XMLHttpRequest();
@@ -78,7 +53,19 @@ var app = {
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
         //if(window.Worker)
-        BoxR.Manager.Client = new BoxR.PhoneGapClient();
+        //BoxR.Manager.Client = new BoxR.PhoneGapClient();
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        // var parentElement = document.getElementById(id);
+        // var listeningElement = parentElement.querySelector('.listening');
+        // var receivedElement = parentElement.querySelector('.received');
+
+        // listeningElement.setAttribute('style', 'display:none;');
+        // receivedElement.setAttribute('style', 'display:block;');
+		app.loadPage('pages/start/start.html');
+        console.log('Received Event: ' + id);
+		
     }
 };
 
@@ -93,4 +80,12 @@ function loadMultiPlayer() {
 function loadUsers() {
     currentPage = "users";
     app.loadPage('pages/users/users.html', initUsers);
+}
+function gyerunk(){
+	hub.server.login('kuzditomi', 'kuzditomi').done(function (success) {
+        alert(success);
+        //$("#loginprogress").hide();
+    }).fail(function(hiba){
+		alert('hiba:'+hiba);
+	});;
 }

@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>singleplayer</title>
-    <link rel="stylesheet" href="pages/singleplayer/singleplayer.css"/>
 </head>
     <body>
+	    <link rel="stylesheet" href="pages/singleplayer/singleplayer.css"/>
         <div class="span6">
             <canvas id="gameCanvas"></canvas>
         </div>
@@ -14,6 +14,8 @@
                 <li class="tile tile-blue noopacity">
                     <h2>You</h2>
                     <h1 id="selfscore">0</h1>
+        <script type="text/javascript" src="pages/users/users.js" defer="defer"></script>
+        <script type="text/javascript" src="pages/game/game.js" defer="defer"></script>
                 </li>
                 <li class="tile tile-red noopacity">
                     <h2>Bob</h2>
@@ -32,5 +34,6 @@
                 Starting with an empty grid of dots, players take turns, adding a single horizontal or vertical line between two unjoined adjacent dots. A player who completes the fourth side of a 1×1 box earns one point and takes another turn. (The points are typically recorded by placing in the box an identifying mark of the player, such as an initial). The game ends when no more lines can be placed. The winner of the game is the player with the most points.
             </p>
         </div>
+		<script type="text/javascript" src="pages/singleplayer/singleplayer.js"></script>
     </body>
 </html>

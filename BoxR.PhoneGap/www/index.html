@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--
     Licensed to the Apache Software Foundation (ASF) under one
     or more contributor license agreements.  See the NOTICE file
@@ -30,14 +30,14 @@
         <div class="container">
             <section>
                 <div class="row" id="container">
-                    
+                    <input type="button" onclick="gyerunk()" value="gyerunk"/>
                 </div>
                 
             </section>
             
         </div>
-        <div id="popup"></div>
-        <script type="text/javascript" src="phonegap.js"></script>
+
+		<div id="popup"></div>
         <script type="text/javascript" src="js/settings.js"></script>
         <script type="text/javascript" src="js/lib/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="js/lib/jquery.signalR-1.0.1.min.js"></script>
@@ -50,12 +50,13 @@
         <script type="text/javascript" src="js/BoxR.Game.js"></script>
         <script type="text/javascript" src="js/BoxR.PhoneGapClient.js"></script>
 
-        <script type="text/javascript" src="js/index.js"></script>
-
         <script type="text/javascript" src="pages/singleplayer/singleplayer.js" defer="defer"></script>
         <script type="text/javascript" src="pages/multiplayer/multiplayer.js" defer="defer"></script>
         <script type="text/javascript" src="pages/users/users.js" defer="defer"></script>
         <script type="text/javascript" src="pages/game/game.js" defer="defer"></script>
+		
+		<script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>

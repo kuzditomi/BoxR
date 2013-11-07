@@ -1,14 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kuzditomi.boxr" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>BoxR</name>
+<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>HelloWorld</name>
     <description>
-      Boxr is a simple puzzle game, in which you can compete with your friends and have a short fun.
+        Hello World sample application that responds to the deviceready event.
     </description>
-    <author email="kuzditomi@live.com" href="http://boxr.azurewebsites.net">
-        Tamás Küzdi
+    <author email="support@phonegap.com" href="http://phonegap.com">
+        PhoneGap Team
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
-    <plugin name="Notification" value="org.apache.cordova.Notification"/>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />

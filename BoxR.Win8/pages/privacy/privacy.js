@@ -8,6 +8,7 @@
         // populates the page elements with the app's data.
         ready: function (element, options) {
             WinJS.Resources.processAll();
+            throw new DOMException("asdfasf");
         },
 
         unload: function () {

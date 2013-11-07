@@ -15,12 +15,12 @@
     "privacy_policy"                : "Adatvédelmi nyilatkozat",
     "privacy_policy_personal_title" : "Adatkezelés",
     "privacy_policy_personal_text"  : "A felhasználó által megadandó adatok esetén az adatkezelés célja a felhasználó beazonosítása, jogosultságának ellenőrzése. ",
-    "privacy_policy_share_title"    : "Személy adatok megosztásáról",
+    "privacy_policy_share_title"    : "Személyes adatok megosztásáról",
     "privacy_policy_share_text"     : "Személyes adatokat harmadik személynek csak a felhasználó előzetes és kifejezett hozzájárulása esetén adunk ki.",
     "privacy_policy_loc_title"      : "Helymeghatározás",
     "privacy_policy_loc_text"       : "A használat helyszínét az alkalmazás nem tárolja.",
     "privacy_policy_q_title"        : "Egyéb kérdés",
-    "privacy_policy_q_text"         : "Minden egyébként kérdéssel kapcsolatban a kuzditomi@live.com címhez lehet fordulni.",
+    "privacy_policy_q_text"         : "Minden egyéb kérdéssel kapcsolatban a kuzditomi@live.com címhez lehet fordulni.",
 
     //error report charm
     "error_report"            : "Hiba bejelentés",
@@ -41,10 +41,10 @@
     "single_you" : "Ön",
     "single_howto" : "játékszabály",
     "single_howto_first" : "A BoxR játék egy ceruzával papíron játszott két- vagy néha többszemélyes logikai játék. Először 1889-ben Édouard Lucas publikált róla.",
-    "single_howto_second" : "Üres ráccsal kezdve a játékosok egymást követve húznak be függőleges és vízszintes vonalakat. Az a játék, aki először bekerít egy 1x1-es négyzetet, kap egy pontot, és kötelező jelleggel ő követketik ismét. A játék addig tart, amíg már nem lehet új élet behúzni, a nyertes pedig az, akinek több pontja van a játék végére.",
+    "single_howto_second" : "Üres ráccsal kezdve a játékosok egymást követve húznak be függőleges és vízszintes vonalakat. Az a játékok, aki először bekerít egy 1x1-es négyzetet, kap egy pontot, és kötelező jelleggel ő követketik ismét. A játék addig tart, amíg már nem lehet új élet behúzni, a nyertes pedig az, akinek több pontja van a játék végére.",
 
     //login page
-    "login" : "bejentkezés",
+    "login" : "bejelentkezés",
     "login_reg" : "regisztráció",
     "login_reg_confirm" : "Jelszó újra",
     "login_wait" : "Kérem várjon, kapcsolódás a szerverhez.",
@@ -52,7 +52,7 @@
     "login_reg_desc" : "Ha még nem rendelkezik felhasználóval, itt regisztrálhat a felhasználónév és jelszó megadásával.",
     "login_username" : "Felhasználónév",
     "login_pass" : "Jelszó",
-    "login_fb_error" : "Hiba a facebook-ba való bejelentkezéskor.",
+    "login_fb_error" : "Hiba a facebookba való bejelentkezéskor.",
     "login_auth_error" : "Hibás adatok.",
     "login_ms_error" : "Hiba a microsoft accountba bejelentkezéskor.",
     "login_must_login" : "Be kell jelentkeznie.",

@@ -100,7 +100,9 @@
     <Content Include="www\pages\singleplayer\singleplayer.css" />
     <Content Include="www\pages\start\start.css" />
     <Content Include="www\pages\start\start.html" />
-    <Content Include="www\config.xml" />
+    <Content Include="www\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="www\css\style.css" />
     <Content Include="www\icon.png" />
     <Content Include="www\img\logo.png" />

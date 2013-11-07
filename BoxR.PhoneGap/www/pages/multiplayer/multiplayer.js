@@ -10,13 +10,9 @@
     $(".login input.password").keydown(function (event) {
         $(".error").html("&nbsp;");
         if (event.which == 13) {
-            auth($('.login input.username').val(), $('.login input.password').val());
+            auth();
             return false;
         }
-    });
-    $('.login form').submit(function() {
-        auth($('.login input.username').val(), $('.login input.password').val());
-        return false;
     });
     
     var connection = $.connection.hub;
@@ -34,21 +30,24 @@
     BoxR.Manager.Connection.start(function () {
         console.log('connection started!');
     }).done(function () {
-        $('#waitDiv').hide();
+        console.log('connection successfull');
     }).fail(function () {
-        //alert('ok');
-        //notifyConnectionError();
+        console.log('connection fail');
+        alert('Nem lehet kapcsolódni a szerverhez. Próbálja később.');
     });
 }
 
-function auth(username, password) {
-    $("#loginprogress").show();
+function auth() {
+    var username = $('#username').val();
+    var password = $('#password').val();
+    //$("#loginprogress").show();
     BoxR.Manager.Hub.server.login(username, password).done(function (success) {
         if (success) {
             BoxR.Manager.UserName = success;
             loadUsers();
             //WinJS.Navigation.navigate("/pages/users/users.html");
         } else {
+            alert('Hibás adatok!');
             //displayError(WinJS.Resources.getString("login_auth_error").value);
         }
 
